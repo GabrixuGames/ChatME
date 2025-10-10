@@ -1,0 +1,213 @@
+/* Estilos básicos */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+/* Contenedor principal */
+.container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    max-width: 1200px;
+}
+
+/* Sección de salas */
+.rooms {
+    width: 250px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-right: 2px solid #ccc;
+    box-sizing: border-box;
+    overflow-y: auto;
+    height: 100%;
+}
+
+.rooms h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.rooms ul {
+    list-style: none;
+    padding: 0;
+}
+
+.room-btn {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+    text-align: left;
+    cursor: pointer;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.room-btn:hover {
+    background-color: #dcdcdc;
+}
+
+/* Sección de chat */
+.chat {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    max-width: 100%; /* Asegura que la sección de chat no se expanda más allá de su contenedor */
+}
+
+#chatHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#chatHeader h3 {
+    margin: 0;
+}
+
+#roomName {
+    font-size: 16px;
+    color: #777;
+}
+
+/* Estilo para los mensajes */
+.messages {
+    height: 400px;
+    max-width: 100%; /* Limita el ancho al 100% del contenedor */
+    overflow-y: auto;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    background-color: #fafafa;
+    border-radius: 5px;
+    word-wrap: break-word; /* Rompe las palabras largas para que no se desborden */
+    overflow-wrap: break-word; /* Asegura que los textos largos no sobresalgan del contenedor */
+}
+
+/* Estilo para el cuadro de mensajes */
+.message-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 100%; /* Asegura que no se expanda más allá del contenedor */
+}
+
+.message-box input {
+    width: calc(100% - 120px); /* Ajusta el input para que ocupe el espacio disponible, restando el espacio de los botones */
+    max-width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box; /* Asegura que el padding no afecte el tamaño del input */
+}
+
+.message-box button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Botón de Enviar */
+.send-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.send-btn:hover {
+    background-color: #45a049;
+}
+
+/* Botón de Log out */
+.logout-btn {
+    background-color: #f44336;
+    color: white;
+    margin-left: 10px;
+}
+
+.logout-btn:hover {
+    background-color: #e53935;
+}
+
+/* Asegurarse de que los botones estén al lado */
+.message-box button {
+    margin-left: 10px;
+}
+
+/* Medios: Diseño para pantallas pequeñas (tabletas y móviles) */
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: column;
+        height: 100%;
+    }
+
+    /* Sección de salas */
+    .rooms {
+        width: 100%;
+        max-width: none;
+        border-right: none;
+        border-bottom: 2px solid #ccc;
+        padding: 15px;
+    }
+
+    /* Sección de chat */
+    .chat {
+        width: 100%;
+        padding: 15px;
+        overflow-y: auto;
+    }
+
+    .message-box input {
+        width: 70%;
+    }
+
+    .message-box button {
+        width: 25%;
+    }
+
+    /* Ajustar los botones para que se alineen correctamente */
+    .message-box button {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+/* Estilos para dispositivos muy pequeños (móviles) */
+@media (max-width: 480px) {
+    .rooms h2 {
+        font-size: 18px;
+    }
+
+    .room-btn {
+        font-size: 14px;
+    }
+
+    .message-box input {
+        width: 65%;
+    }
+
+    .message-box button {
+        width: 30%;
+    }
+
+    .rooms {
+        padding: 10px;
+    }
+
+    /* Ajustar la altura del chat para dispositivos móviles */
+    .messages {
+        height: 300px;
+    }
+}
