@@ -2,7 +2,9 @@
 
 ## 🎓 **Proyecto Fin de Grado**
 
-Aplicación de chat en tiempo real desarrollada con arquitectura moderna de capas, implementando patrones de diseño profesionales y mejores prácticas de desarrollo.
+# ChatME - Professional Chat Application
+
+A modern, real-time chat application built with React + TypeScript frontend and Flask + Socket.IO backend, featuring professional architecture patterns and comprehensive testing.
 
 ## 🏗️ **Arquitectura del Sistema**
 
@@ -115,8 +117,8 @@ database/
 
 ### **1. Clonar el repositorio**
 ```bash
-git clone https://github.com/TU_USUARIO/chatapp-main.git
-cd chatapp-main
+git clone https://github.com/TU_USUARIO/ChatME.git
+cd ChatME
 ```
 
 ### **2. Prerrequisitos**
