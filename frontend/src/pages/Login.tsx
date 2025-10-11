@@ -1,7 +1,8 @@
 import { useState } from "react";
+import BubbleBackground from "@/components/BubbleBackground";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
-import LoginForm from "@/components/LoginForm"; // Asegúrate de importar LoginForm correctamente
+import LoginForm from "@/components/LoginForm";
 
 export default function Login() {
   const { login } = useAuth();
@@ -14,12 +15,11 @@ export default function Login() {
       setError("Por favor ingresa tanto usuario como contraseña.");
       return;
     }
-
     try {
       setIsLoading(true);
-      setError(""); // Limpiar errores previos
+      setError("");
       const userData = await login(username, password);
-      navigate(`/chat/${userData.username}`); // Redirige a la página de chat usando el nombre de usuario
+      navigate(`/chat/${userData.username}`);
     } catch (err) {
       setError("Credenciales incorrectas. Por favor verifica tus datos.");
     } finally {
@@ -28,8 +28,8 @@ export default function Login() {
   };
 
   return (
-    <div>
-      <h1>Bienvenido a ChatME!</h1>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-purple-100 to-purple-300 relative overflow-hidden">
+      <BubbleBackground />
       <LoginForm onSubmit={handleLogin} error={error} isLoading={isLoading} />
     </div>
   );

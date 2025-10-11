@@ -6,16 +6,20 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 import { MessageCircle } from "lucide-react";
 
-export function ChatRoom() {
+type ChatRoomProps = {
+  openSidebar?: () => void;
+};
+
+export function ChatRoom({ openSidebar = () => {} }: ChatRoomProps) {
   const { user } = useAuth();
   const { messages, currentRoom, setCurrentRoom, rooms } = useChat();
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  
+
   // Filtrar mensajes para la sala actual
   const roomMessages = messages.filter(
     (message) => message.roomId === currentRoom?.id || message.room === currentRoom?.id
   );
-  
+
   // Función para hacer scroll hacia abajo
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -24,16 +28,10 @@ export function ChatRoom() {
   // Hacer scroll hacia abajo cuando los mensajes cambian
   useEffect(() => {
     scrollToBottom();
-  }, [roomMessages]);
+    // Pequeño delay para asegurar que los mensajes se hayan cargado
+    setTimeout(scrollToBottom, 100);
+  }, [roomMessages, currentRoom]);
 
-  // También hacer scroll cuando se cambia de sala
-  useEffect(() => {
-    if (currentRoom) {
-      // Pequeño delay para asegurar que los mensajes se hayan cargado
-      setTimeout(scrollToBottom, 100);
-    }
-  }, [currentRoom]);
-  
   if (!currentRoom) {
     return (
       <div className="flex-1 flex items-center justify-center p-8">
@@ -47,7 +45,7 @@ export function ChatRoom() {
               Selecciona una sala del panel izquierdo para comenzar a chatear
             </p>
           </div>
-          
+
           <div className="space-y-3">
             {rooms.map((room) => (
               <Button
@@ -57,9 +55,9 @@ export function ChatRoom() {
                 onClick={() => setCurrentRoom(room.id)}
               >
                 <h3 className="font-semibold text-sm">
-                  {room.id === "R1" && "💬"} 
-                  {room.id === "R2" && "🚀"} 
-                  {room.id === "R3" && "🎲"} 
+                  {room.id === "R1" && "💬"}
+                  {room.id === "R2" && "🚀"}
+                  {room.id === "R3" && "🎲"}
                   {" " + room.name}
                 </h3>
                 <p className="text-xs text-muted-foreground">{room.description}</p>
@@ -70,16 +68,27 @@ export function ChatRoom() {
       </div>
     );
   }
-  
+
   return (
-    <div className="flex flex-col h-full">
-      <div className="border-b p-4">
-        <h2 className="font-semibold text-lg">{currentRoom.name}</h2>
-        <p className="text-sm text-muted-foreground">{currentRoom.description}</p>
+    <div className="flex flex-col h-full w-full min-h-0">
+      <div className="border-b p-2 sm:p-4 sticky top-0 bg-white z-10 flex items-center">
+        {/* Botón menú flotante solo en móvil/tablet */}
+        {typeof window !== "undefined" && window.innerWidth < 640 && (
+          <button
+            className="mr-2 bg-purple-600 text-white rounded-full p-2 shadow-lg"
+            onClick={openSidebar}
+          >
+            <span className="sr-only">Abrir menú</span>
+            <MessageCircle className="h-5 w-5" />
+          </button>
+        )}
+        <h2 className="font-semibold text-base sm:text-lg">{currentRoom.name}</h2>
+        <p className="text-xs sm:text-sm text-muted-foreground ml-2">{currentRoom.description}</p>
       </div>
-      
-      <ScrollArea className="flex-1 p-4">
-        <div className="space-y-4">
+
+      {/* Mensajes scrollables, usando ScrollArea para compatibilidad móvil/tablet */}
+      <ScrollArea className="flex-1 min-h-0 w-full px-1 sm:px-4 py-0 max-h-full overflow-y-auto" style={{touchAction: 'pan-y', overscrollBehavior: 'contain'}}>
+        <div className="space-y-3 sm:space-y-4">
           {roomMessages.length === 0 ? (
             <div className="flex items-center justify-center h-full">
               <p className="text-muted-foreground">No messages yet. Start the conversation!</p>
