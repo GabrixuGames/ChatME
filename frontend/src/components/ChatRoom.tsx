@@ -8,16 +8,18 @@ import { MessageCircle } from "lucide-react";
 
 type ChatRoomProps = {
   openSidebar?: () => void;
+  roomId?: string | null;
 };
 
-export function ChatRoom({ openSidebar = () => {} }: ChatRoomProps) {
+export function ChatRoom({ openSidebar = () => {}, roomId }: ChatRoomProps) {
   const { user } = useAuth();
   const { messages, currentRoom, setCurrentRoom, rooms } = useChat();
+  const room = roomId ? rooms.find(r => r.id === roomId) : null;
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Filtrar mensajes para la sala actual
   const roomMessages = messages.filter(
-    (message) => message.roomId === currentRoom?.id || message.room === currentRoom?.id
+    (message) => message.roomId === room?.id || message.room === room?.id
   );
 
   // Función para hacer scroll hacia abajo
@@ -31,8 +33,15 @@ export function ChatRoom({ openSidebar = () => {} }: ChatRoomProps) {
     // Pequeño delay para asegurar que los mensajes se hayan cargado
     setTimeout(scrollToBottom, 100);
   }, [roomMessages, currentRoom]);
+  
+  // Join room when roomId changes
+  useEffect(() => {
+    if (roomId) {
+      setCurrentRoom(roomId);
+    }
+  }, [roomId, setCurrentRoom]);
 
-  if (!currentRoom) {
+  if (!room) {
     return (
       <div className="flex-1 flex items-center justify-center p-8">
         <div className="text-center max-w-md">
@@ -82,8 +91,8 @@ export function ChatRoom({ openSidebar = () => {} }: ChatRoomProps) {
             <MessageCircle className="h-5 w-5" />
           </button>
         )}
-        <h2 className="font-semibold text-base sm:text-lg">{currentRoom.name}</h2>
-        <p className="text-xs sm:text-sm text-muted-foreground ml-2">{currentRoom.description}</p>
+  <h2 className="font-semibold text-base sm:text-lg">{room.name}</h2>
+  <p className="text-xs sm:text-sm text-muted-foreground ml-2">{room.description}</p>
       </div>
 
       {/* Mensajes scrollables, usando ScrollArea para compatibilidad móvil/tablet */}

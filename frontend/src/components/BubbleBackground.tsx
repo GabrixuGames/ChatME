@@ -15,6 +15,9 @@ export default function BubbleBackground() {
       bubble.style.animationDuration = `${14 + Math.random() * 10}s`;
       bubble.style.opacity = `${0.3 + Math.random() * 0.5}`;
       bubble.style.width = bubble.style.height = `${18 + Math.random() * 32}px`;
+      // Posición vertical aleatoria (de 0% a 80% de la pantalla)
+      const startY = Math.random() * 80; // vh
+      bubble.style.bottom = `calc(${startY}vh - 60px)`;
       bubbles.push(bubble);
       container.appendChild(bubble);
     }
@@ -32,6 +35,9 @@ export default function BubbleBackground() {
           background: linear-gradient(135deg, #c4b5fd 60%, #a78bfa 100%);
           filter: blur(1px);
           animation: floatBubble linear infinite;
+        }
+        .dark .bubble {
+          background: linear-gradient(135deg, #312e81 60%, #6d28d9 100%);
         }
         @keyframes floatBubble {
           0% { transform: translateY(0) scale(1); }

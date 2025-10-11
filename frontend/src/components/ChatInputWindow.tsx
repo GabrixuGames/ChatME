@@ -1,40 +1,45 @@
-
-import { useState, FormEvent, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useAuth } from "@/contexts/AuthContext";
-import { useChat } from "@/contexts/ChatContext";
+import { io } from "socket.io-client";
 import { MessageCircle } from "lucide-react";
 
-type ChatInputProps = {
-  roomId?: string | null;
-};
+const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || "http://localhost:5000";
 
-export function ChatInput({ roomId }: ChatInputProps) {
+export function ChatInputWindow({ room }) {
   const [message, setMessage] = useState("");
   const { user } = useAuth();
-  const { sendMessage, currentRoom, rooms } = useChat();
-  const room = roomId ? rooms.find(r => r.id === roomId) : currentRoom;
+  const socketRef = useRef(null);
 
-  const handleSubmit = (e: FormEvent) => {
+  useEffect(() => {
+    socketRef.current = io(SOCKET_URL);
+    return () => {
+      socketRef.current.disconnect();
+    };
+  }, [room]);
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (!message.trim() || !user || !room) return;
-    sendMessage(message.trim(), user, room.id);
+    socketRef.current.emit("message", {
+      username: user,
+      room: room.id,
+      message: message.trim(),
+      timestamp: new Date().toISOString()
+    });
     setMessage("");
   };
-  
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+
+  const handleKeyDown = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleSubmit(e);
     }
   };
-  
-  // Detectar si es móvil
-  const isMobile = window.innerWidth < 640;
 
-  // Auto-expand textarea hasta 3 líneas
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
+  const textareaRef = useRef(null);
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto";
@@ -45,8 +50,8 @@ export function ChatInput({ roomId }: ChatInputProps) {
   return (
     <form
       onSubmit={handleSubmit}
-  className={isMobile ? "border-t p-2 bg-background w-full sticky bottom-0 z-20" : "border-t p-2 sm:p-4 bg-background"}
-  style={isMobile ? {maxWidth: '100vw'} : {}}
+      className={isMobile ? "border-t p-2 bg-background w-full sticky bottom-0 z-20" : "border-t p-2 sm:p-4 bg-background"}
+      style={isMobile ? {maxWidth: '100vw'} : {}}
     >
       <div className="flex items-end gap-2 w-full">
         <Textarea
@@ -64,7 +69,7 @@ export function ChatInput({ roomId }: ChatInputProps) {
           type="submit"
           size="icon"
           className={isMobile ? "h-9 w-9 rounded-full" : "h-10 w-10 sm:h-12 sm:w-12 rounded-full"}
-          disabled={!message.trim() || !currentRoom}
+          disabled={!message.trim() || !room}
         >
           <MessageCircle className="h-5 w-5 sm:h-6 sm:w-6" />
         </Button>

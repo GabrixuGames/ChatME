@@ -23,10 +23,10 @@ interface ChatContextType {
   messages: Message[];
   rooms: Room[];
   currentRoom: Room | null;
-  sendMessage: (content: string, username: string) => void; // Cambiado para usar username
+  sendMessage: (content: string, username: string, roomId?: string) => void;
   setCurrentRoom: (roomId: string) => void;
-  goToWelcome: () => void; // Nueva función para volver a la página de bienvenida
-  currentUserId: string;  // Añadimos el campo currentUserId
+  goToWelcome: () => void;
+  currentUserId: string;
 }
 
 // Crear las salas iniciales
@@ -125,30 +125,19 @@ export function ChatProvider({ children }: { children: ReactNode }) {
     };
   }, []); // Sin dependencias para que solo se ejecute una vez
 
-  const sendMessage = (content: string, username: string) => {
-    if (!currentRoom) {
-      console.error("No hay sala actual seleccionada");
+  const sendMessage = (content: string, username: string, roomId?: string) => {
+    const roomToSend = roomId ? rooms.find(r => r.id === roomId) : currentRoom;
+    if (!roomToSend) {
+      console.error("No hay sala seleccionada para enviar el mensaje");
       return;
     }
-
-    // Crear mensaje en formato que espera el backend
     const messageData = {
       username: username,
-      room: currentRoom.id,      // Cambiar roomId por room
-      message: content,          // Cambiar content por message
+      room: roomToSend.id,
+      message: content,
       timestamp: new Date().toISOString()
     };
-
-    console.log("=== ENVIANDO MENSAJE ===");
-    console.log("Sala actual:", currentRoom.id);
-    console.log("Username:", username);
-    console.log("Datos del mensaje:", messageData);
-    console.log("Estado de socket conectado:", socket.connected);
-
-    // Enviar el mensaje al servidor
     socket.emit("message", messageData);
-    
-    console.log("Mensaje enviado via socket.emit");
   };
 
   const switchRoom = (roomId: string) => {

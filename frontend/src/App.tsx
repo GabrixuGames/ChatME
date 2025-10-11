@@ -14,6 +14,9 @@ const queryClient = new QueryClient();
 
 import { FriendsProvider } from "./contexts/FriendsContext";
 
+import { useState } from "react";
+import { DarkModeProvider } from "./hooks/useDarkMode.tsx";
+
 function AppContent() {
   const location = useLocation();
   const showBubbles = location.pathname === "/" || location.pathname === "/login";
@@ -29,22 +32,26 @@ function AppContent() {
   );
 }
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <AuthProvider>
-        <ChatProvider>
-          <FriendsProvider>
-            <BrowserRouter>
-              <AppContent />
-            </BrowserRouter>
-          </FriendsProvider>
-        </ChatProvider>
-      </AuthProvider>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  return (
+    <DarkModeProvider>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <AuthProvider>
+            <ChatProvider>
+              <FriendsProvider>
+                <BrowserRouter>
+                  <AppContent />
+                </BrowserRouter>
+              </FriendsProvider>
+            </ChatProvider>
+          </AuthProvider>
+        </TooltipProvider>
+      </QueryClientProvider>
+    </DarkModeProvider>
+  );
+};
 
 export default App;

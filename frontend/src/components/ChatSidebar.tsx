@@ -1,28 +1,50 @@
-
-import * as React from "react";
-import { useIsMobile } from "@/hooks/use-mobile";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "@/contexts/AuthContext";
-import { useChat } from "@/contexts/ChatContext";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { MessageCircle, LogIn, User, Users } from "lucide-react";
+import { useChat } from "../contexts/ChatContext";
+import { useAuth } from "../contexts/AuthContext";
+import { useIsMobile } from "../hooks/use-mobile";
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/ui/tooltip";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { Sun, Moon, MessageCircle, User, Users, LogIn } from "lucide-react";
 import { FriendsPanel } from "./FriendsPanel";
 import { SidebarPopover } from "./SidebarPopover";
+import { useDarkMode } from "../hooks/useDarkMode.tsx";
 
 type ChatSidebarProps = {
   showMobileMenu?: boolean;
   setShowMobileMenu?: (open: boolean) => void;
+  initialCollapsed?: boolean;
+  onRoomSelect?: (roomId: string) => void;
 };
 
-export function ChatSidebar({ showMobileMenu = false, setShowMobileMenu = () => {} }: ChatSidebarProps) {
+function DarkModeToggle({ collapsed }: { collapsed: boolean }) {
+  const darkMode = useDarkMode();
+  return (
+    <Button
+      variant="ghost"
+      className={cn(
+        "w-full text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+        collapsed ? "flex items-center justify-center px-0 h-10" : "justify-start"
+      )}
+      onClick={darkMode.toggle}
+      aria-label="Toggle dark mode"
+    >
+      {darkMode.dark
+        ? <Sun className={cn("h-5 w-5", !collapsed && "mr-2")} />
+        : <Moon className={cn("h-5 w-5", !collapsed && "mr-2")} />}
+      {!collapsed && <span>{darkMode.dark ? "Modo claro" : "Modo oscuro"}</span>}
+    </Button>
+  );
+}
+
+export function ChatSidebar({ showMobileMenu = false, setShowMobileMenu = () => {}, initialCollapsed = false, onRoomSelect }: ChatSidebarProps) {
   const navigate = useNavigate();
   const { rooms, currentRoom, setCurrentRoom, goToWelcome } = useChat();
   const { user, logout } = useAuth();
   const isMobile = useIsMobile();
-  const [collapsed, setCollapsed] = React.useState(isMobile);
+  const [collapsed, setCollapsed] = React.useState(isMobile || initialCollapsed);
 
   const handleLogout = () => {
     logout();
@@ -38,7 +60,9 @@ export function ChatSidebar({ showMobileMenu = false, setShowMobileMenu = () => 
         className={cn(
           isMobile
             ? `fixed top-0 left-0 h-full w-64 bg-sidebar z-50 shadow-2xl transition-transform duration-300 ${showMobileMenu ? 'translate-x-0' : '-translate-x-full'}`
-            : "flex flex-col h-full bg-sidebar transition-all duration-300 border-r border-sidebar-border w-64 min-h-screen"
+            : collapsed
+              ? "flex flex-col h-full bg-sidebar transition-all duration-300 border-r border-sidebar-border w-14 min-h-screen"
+              : "flex flex-col h-full bg-sidebar transition-all duration-300 border-r border-sidebar-border w-64 min-h-screen"
         )}
         style={isMobile ? { touchAction: 'none' } : {}}
       >
@@ -116,7 +140,11 @@ export function ChatSidebar({ showMobileMenu = false, setShowMobileMenu = () => 
                           "w-full justify-start text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
                           currentRoom?.id === room.id && "bg-sidebar-accent text-sidebar-accent-foreground"
                         )}
-                        onClick={() => setCurrentRoom(room.id)}
+                        draggable
+                        onDragStart={e => {
+                          e.dataTransfer.setData('roomId', room.id);
+                        }}
+                        onClick={() => onRoomSelect ? onRoomSelect(room.id) : setCurrentRoom(room.id)}
                       >
                         <MessageCircle className="h-4 w-4" />
                         <span className="ml-2">{room.name}</span>
@@ -165,7 +193,9 @@ export function ChatSidebar({ showMobileMenu = false, setShowMobileMenu = () => 
         </div>
 
         {/* Footer */}
-        <div className={cn("p-4", collapsed && "flex justify-center")}> 
+        <div className={cn("p-4 flex flex-col gap-2", collapsed && "items-center justify-center")}> 
+          {/* Dark mode toggle */}
+          <DarkModeToggle collapsed={collapsed} />
           <Tooltip>
             <TooltipTrigger asChild>
               <Button
