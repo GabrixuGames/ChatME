@@ -1,17 +1,21 @@
+
 """
 Refactored Main Application
 Implementa arquitectura en capas con patrones profesionales
 """
 from datetime import datetime
-from flask import Flask, render_template, request, jsonify, session
+from flask import Flask, render_template, request, jsonify
 from flask_socketio import SocketIO, emit, join_room
 from flask_cors import CORS
 import os
+import jwt
+from functools import wraps
 from dotenv import load_dotenv
 
 # Importar nuestros servicios y middleware
 from services.auth_service import AuthService
 from services.chat_service import ChatService
+from services.friend_service import FriendService
 from middleware.logging_middleware import setup_logging, log_request_middleware, socketio_logger
 from utils.database import db_manager
 
@@ -23,16 +27,30 @@ logger = setup_logging()
 
 app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_SECRET_KEY', 'clave_secreta_cambiar_en_produccion')
+jwt_secret = os.getenv('JWT_SECRET', 'jwt_secret_dev')
 app.config.update(
     SESSION_COOKIE_SAMESITE='Lax',
-    SESSION_COOKIE_SECURE=False  # True si usas HTTPS
+    SESSION_COOKIE_SECURE=False  # Solo para desarrollo local, usar True en producción con HTTPS
 )
 
-# Configurar CORS
-CORS(app, origins="*", supports_credentials=False)
+# Configurar CORS - permitir credenciales y configurar orígenes específicos
+allowed_origins = [
+    "http://localhost:8080",
+    "http://172.20.10.10:8080",
+    "http://192.168.56.1:8080",
+    "http://172.24.144.1:8080"
+]
+
+CORS(app, 
+     origins=allowed_origins, 
+     supports_credentials=True,
+     allow_headers=["Content-Type", "Authorization"],
+     methods=["GET", "POST", "OPTIONS"])
 
 # Configurar Socket.IO
-socketio = SocketIO(app, cors_allowed_origins="*")
+socketio = SocketIO(app, 
+                   cors_allowed_origins=allowed_origins,
+                   cors_credentials=True)
 
 # Configurar middleware de logging
 log_request_middleware(app)
@@ -40,10 +58,108 @@ log_request_middleware(app)
 # Inicializar servicios
 auth_service = AuthService()
 chat_service = ChatService()
+friend_service = FriendService()
 
-# ============================================================================
-# RUTAS HTTP
-# ============================================================================
+## --- ENDPOINTS SISTEMA DE AMIGOS --- ##
+
+def require_jwt(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        auth_header = request.headers.get('Authorization', None)
+        if not auth_header or not auth_header.startswith('Bearer '):
+            return jsonify({'error': 'Token JWT requerido'}), 401
+        token = auth_header.split(' ')[1]
+        try:
+            payload = jwt.decode(token, jwt_secret, algorithms=["HS256"])
+            request.user_id = payload.get('user_id')
+            request.username = payload.get('username')
+        except Exception as e:
+            return jsonify({'error': 'Token JWT inválido'}), 401
+        return f(*args, **kwargs)
+    return decorated
+
+# Eliminar amigo
+@app.route('/friends/remove', methods=['POST'])
+@require_jwt
+def remove_friend():
+    data = request.get_json()
+    user_id = getattr(request, 'user_id', None)
+    friend_id = data.get('friend_id')
+    if not user_id or not friend_id:
+        return jsonify({'error': 'Faltan datos'}), 400
+    ok = friend_service.remove_friend(user_id, friend_id)
+    return jsonify({'success': ok}), 200 if ok else 400
+
+# Enviar solicitud de amistad
+@app.route('/friends/send_request', methods=['POST'])
+@require_jwt
+def send_friend_request():
+    data = request.get_json()
+    sender_id = getattr(request, 'user_id', None)
+    receiver_id = data.get('receiver_id')
+    if not sender_id or not receiver_id:
+        return jsonify({'error': 'Faltan datos'}), 400
+    req_id = friend_service.send_request(sender_id, receiver_id)
+    if req_id:
+        return jsonify({'message': 'Solicitud enviada', 'request_id': req_id}), 200
+    return jsonify({'error': 'No se pudo enviar solicitud'}), 400
+
+# Responder solicitud de amistad
+@app.route('/friends/respond_request', methods=['POST'])
+@require_jwt
+def respond_friend_request():
+    data = request.get_json()
+    request_id = data.get('request_id')
+    status = data.get('status')
+    if not request_id or status not in ['accepted', 'rejected']:
+        return jsonify({'error': 'Datos inválidos'}), 400
+    ok = friend_service.respond_request(request_id, status)
+    return jsonify({'success': ok}), 200 if ok else 400
+
+# Listar amigos
+@app.route('/friends/list', methods=['GET'])
+@require_jwt
+def list_friends():
+    user_id = getattr(request, 'user_id', None)
+    if not user_id:
+        return jsonify({'friends': []})
+    friends = friend_service.get_friends(user_id)
+    return jsonify({'friends': friends})
+
+# Listar solicitudes pendientes
+@app.route('/friends/pending', methods=['GET'])
+@require_jwt
+def list_pending_requests():
+    user_id = getattr(request, 'user_id', None)
+    if not user_id:
+        return jsonify({'pending_requests': []})
+    pending = friend_service.get_pending_requests(user_id)
+    return jsonify({'pending_requests': pending})
+
+# Listar solicitudes enviadas
+@app.route('/friends/sent', methods=['GET'])
+@require_jwt
+def list_sent_requests():
+    user_id = getattr(request, 'user_id', None)
+    if not user_id:
+        return jsonify({'sent_requests': []})
+    sent = friend_service.get_sent_requests(user_id)
+    return jsonify({'sent_requests': sent})
+
+# Buscar usuarios para añadir amigos
+@app.route('/friends/search', methods=['GET'])
+@require_jwt
+def search_users():
+    user_id = getattr(request, 'user_id', None)
+    query_str = request.args.get('query', '').strip()
+    print(f"🔎 Busqueda de amigos: user_id={user_id}, query='{query_str}'")
+    if not user_id or not query_str or len(query_str) < 3:
+        return jsonify({'users': []})
+    # Excluir el propio usuario y amigos actuales
+    friends = friend_service.get_friends(user_id)
+    exclude_ids = [user_id] + [f['id'] for f in friends]
+    users = friend_service.search_users(query_str, exclude_ids)
+    return jsonify({'users': users})
 
 @app.route("/")
 def home():
@@ -81,14 +197,16 @@ def procesar_login():
         user = auth_service.authenticate_user(username, password)
         
         if user:
-            # Guardar en sesión
-            session['username'] = user['username']
-            session['user_id'] = user['id']
-            
+            # Generar JWT
+            token = jwt.encode({
+                "user_id": user['id'],
+                "username": user['username']
+            }, jwt_secret, algorithm="HS256")
             logger.info(f"✅ Login exitoso: {username}")
             return jsonify({
                 "message": "Login exitoso",
-                "username": user['username']
+                "username": user['username'],
+                "token": token
             }), 200
         else:
             logger.warning(f"❌ Login fallido: {username}")
@@ -100,28 +218,18 @@ def procesar_login():
 
 @app.route('/logout', methods=['POST'])
 def logout():
-    """Cerrar sesión"""
-    try:
-        username = session.get('username', 'Unknown')
-        session.clear()
-        logger.info(f"👋 Logout: {username}")
-        return jsonify({"message": "Sesión cerrada"}), 200
-    except Exception as e:
-        logger.error(f"❌ Error en logout: {e}")
-        return jsonify({"error": "Error interno del servidor"}), 500
+    """Cerrar sesión (solo frontend, JWT)"""
+    return jsonify({"message": "Logout frontend, borra el token JWT"}), 200
 
 @app.route('/verificar_sesion', methods=['GET'])
+@require_jwt
 def verificar_sesion():
-    """Verificar si el usuario tiene sesión activa"""
-    try:
-        username = session.get('username')
-        if username:
-            return jsonify({"authenticated": True, "username": username}), 200
-        else:
-            return jsonify({"authenticated": False}), 401
-    except Exception as e:
-        logger.error(f"❌ Error verificando sesión: {e}")
-        return jsonify({"error": "Error interno del servidor"}), 500
+    """Verificar si el usuario tiene sesión activa (JWT)"""
+    username = getattr(request, 'username', None)
+    if username:
+        return jsonify({"authenticated": True, "username": username}), 200
+    else:
+        return jsonify({"authenticated": False}), 401
 
 # ============================================================================
 # EVENTOS SOCKET.IO

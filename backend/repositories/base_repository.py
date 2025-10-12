@@ -39,12 +39,15 @@ class BaseRepository(ABC):
             
             cursor.execute(query, params)
             
+            # Siempre hacer commit para operaciones de escritura (INSERT, UPDATE, DELETE)
+            if query.strip().upper().startswith(('INSERT', 'UPDATE', 'DELETE')):
+                connection.commit()
+                
             if fetch_one:
                 result = cursor.fetchone()
             elif fetch_all:
                 result = cursor.fetchall()
             else:
-                connection.commit()
                 result = cursor.rowcount
                 
             logger.debug(f"✅ Query executed successfully: {query[:50]}...")

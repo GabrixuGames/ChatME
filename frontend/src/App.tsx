@@ -11,6 +11,8 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
+import { FriendsProvider } from "./contexts/FriendsContext";
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
@@ -18,13 +20,15 @@ const App = () => (
       <Sonner />
       <AuthProvider>
         <ChatProvider>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Login />} />
-              <Route path="/chat/:username" element={<Chat />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
+          <FriendsProvider>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Login />} />
+                <Route path="/chat/:username" element={<Chat />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </BrowserRouter>
+          </FriendsProvider>
         </ChatProvider>
       </AuthProvider>
     </TooltipProvider>

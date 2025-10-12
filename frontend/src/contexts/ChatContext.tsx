@@ -134,8 +134,8 @@ export function ChatProvider({ children }: { children: ReactNode }) {
     // Crear mensaje en formato que espera el backend
     const messageData = {
       username: username,
-      roomId: currentRoom.id,
-      content: content,
+      room: currentRoom.id,      // Cambiar roomId por room
+      message: content,          // Cambiar content por message
       timestamp: new Date().toISOString()
     };
 
