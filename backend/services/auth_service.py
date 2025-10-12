@@ -13,6 +13,30 @@ class AuthService:
     Servicio de autenticación
     Encapsula la lógica de negocio para login, logout, etc.
     """
+
+    def register_user(self, username: str, email: str, password: str) -> Optional[str]:
+        """
+        Registrar usuario nuevo
+        Args:
+            username: Username del usuario
+            email: Email del usuario
+            password: Password en texto plano
+        Returns:
+            ID del usuario creado o None
+        """
+        try:
+            # TODO: Usar bcrypt en producción
+            password_hash = password
+            user_id = self.user_repository.create_user(username, email, password_hash)
+            if user_id:
+                logger.info(f"✅ Usuario registrado: {username}")
+                return user_id
+            else:
+                logger.error(f"❌ Error al registrar usuario: {username}")
+                return None
+        except Exception as e:
+            logger.error(f"❌ Error en registro: {e}")
+            return None
     
     def __init__(self):
         self.user_repository = UserRepository()

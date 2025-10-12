@@ -78,6 +78,44 @@ def require_jwt(f):
         return f(*args, **kwargs)
     return decorated
 
+# Endpoint de registro de usuario
+@app.route('/register', methods=['POST'])
+def register():
+    """
+    Registro de usuario nuevo
+    """
+    try:
+        if not request.is_json:
+            logger.warning("❌ Request sin JSON en registro")
+            return jsonify({"error": "Content-Type debe ser application/json"}), 400
+
+        data = request.get_json()
+        username = data.get('username', '').strip()
+        email = data.get('email', '').strip()
+        password = data.get('password', '')
+
+        if not username or not email or not password:
+            logger.warning("❌ Campos faltantes en registro")
+            return jsonify({"error": "Todos los campos son requeridos"}), 400
+
+        # Verificar si el usuario ya existe
+        user_exists = auth_service.get_user_by_username(username)
+        if user_exists:
+            logger.warning(f"❌ Usuario ya existe: {username}")
+            return jsonify({"error": "El usuario ya existe"}), 409
+
+        # Crear usuario usando AuthService
+        user_id = auth_service.register_user(username, email, password)
+        if user_id:
+            logger.info(f"✅ Usuario registrado: {username}")
+            return jsonify({"message": "Registro exitoso", "user_id": user_id}), 201
+        else:
+            logger.error(f"❌ Error al registrar usuario: {username}")
+            return jsonify({"error": "No se pudo registrar el usuario"}), 500
+    except Exception as e:
+        logger.error(f"❌ Error interno en registro: {e}")
+        return jsonify({"error": "Error interno del servidor"}), 500
+
 # Eliminar amigo
 @app.route('/friends/remove', methods=['POST'])
 @require_jwt
