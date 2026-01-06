@@ -1,0 +1,100 @@
+\doxysection{frontend/node\+\_\+modules/aria-\/hidden Directory Reference}
+\hypertarget{dir_3de6937ff41ecbda57f2c2e829e104a1}{}\label{dir_3de6937ff41ecbda57f2c2e829e104a1}\index{frontend/node\_modules/aria-\/hidden Directory Reference@{frontend/node\_modules/aria-\/hidden Directory Reference}}
+
+
+\doxysubsection{Detailed Description}
+\hypertarget{dir_3de6937ff41ecbda57f2c2e829e104a1_autotoc_md1338}{}\doxysubsection{\texorpdfstring{aria-\/hidden}{aria-\/hidden}}\label{dir_3de6937ff41ecbda57f2c2e829e104a1_autotoc_md1338}
+\href{https://nodei.co/npm/aria-hidden/}{\texttt{}}
+
+Hides from ARIA everything, except provided node(s).
+
+Helps to isolate modal dialogs and focused task -\/ the content will be not accessible using accessible tools.
+
+Now with \href{https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/inert}{\texttt{HTML inert}} support\hypertarget{dir_3de6937ff41ecbda57f2c2e829e104a1_autotoc_md1339}{}\doxysubsection{\texorpdfstring{API}{API}}\label{dir_3de6937ff41ecbda57f2c2e829e104a1_autotoc_md1339}
+Just call {\ttfamily hide\+Others} with DOM-\/node you want to keep, and it will {\itshape hide} everything else. {\ttfamily target\+Node} could be placed anywhere -\/ its siblings would be hidden, but it and its parents -\/ not.
+
+\begin{quote}
+"{}hidden"{} in terms or {\ttfamily aria-\/hidden} \end{quote}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ \{\ hideOthers\ \}\ from\ 'aria-\/hidden';}
+\DoxyCodeLine{}
+\DoxyCodeLine{const\ undo\ =\ hideOthers(exceptThisDOMnode);}
+\DoxyCodeLine{//\ everything\ else\ is\ "{}aria-\/hidden"{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{//\ undo\ changes}
+\DoxyCodeLine{undo();}
+
+\end{DoxyCode}
+
+
+you also may limit the effect spread by providing top level node as a second parameter
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{//\ keep\ only\ \`{}anotherNode`\ node\ visible\ in\ \#app}
+\DoxyCodeLine{//\ the\ rest\ of\ document\ will\ be\ untouched}
+\DoxyCodeLine{hideOthers(anotherNode,\ document.getElementById('app'));}
+
+\end{DoxyCode}
+
+
+\begin{quote}
+{\ttfamily parent\+Node} defaults to document.\+body \end{quote}
+\hypertarget{dir_3de6937ff41ecbda57f2c2e829e104a1_autotoc_md1340}{}\doxysubsection{\texorpdfstring{Inert}{Inert}}\label{dir_3de6937ff41ecbda57f2c2e829e104a1_autotoc_md1340}
+While {\ttfamily aria-\/hidden} played important role in the past and will play in the future -\/ the main use case always was around isolating content and making elements "{}transparent"{} not only for aria, but for user interaction as well.
+
+This is why you might consider using {\ttfamily inert\+Others}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ \{\ hideOthers,\ inertOthers,\ supportsInert\ \}\ from\ 'aria-\/hidden';}
+\DoxyCodeLine{}
+\DoxyCodeLine{//\ focus\ on\ element\ mean\ "{}hide\ others"{}.\ Ideally\ disable\ interactions}
+\DoxyCodeLine{const\ focusOnElement\ =\ (node)\ =>\ (supportsInert()\ ?\ inertOthers(node)\ :\ hideOthers(node));}
+
+\end{DoxyCode}
+
+
+the same function as above is already contructed and exported as
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ \{\ suppressOthers\ \}\ from\ 'aria-\/hidden';}
+\DoxyCodeLine{}
+\DoxyCodeLine{suppressOthers([keepThisNode,\ andThis]);}
+
+\end{DoxyCode}
+
+
+⚠️ Note -\/ inert {\bfseries{will disable any interactions}} with {\itshape suppressed} elements ⚠️\hypertarget{dir_3de6937ff41ecbda57f2c2e829e104a1_autotoc_md1341}{}\doxysubsubsubsection{\texorpdfstring{Suppressing interactivity without inert}{Suppressing interactivity without inert}}\label{dir_3de6937ff41ecbda57f2c2e829e104a1_autotoc_md1341}
+One can {\ttfamily marker}, the third argument to a function, to mark hidden elements. Later one can create a style matching given marker to apply {\ttfamily pointer-\/events\+:none}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{[hidden-\/node]\ \{}
+\DoxyCodeLine{\ \ pointer-\/events:\ none;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{hideOthers(notThisOne,\ undefined\ /*parent\ =\ document*/,\ 'hidden-\/node');}
+
+\end{DoxyCode}
+
+
+Generally speaking the same can be achieved by addressing {\ttfamily \mbox{[}aria-\/hidden\mbox{]}} nodes, but not all {\ttfamily aria-\/hidden} nodes are expected to be non-\/interactive. Hence, it\textquotesingle{}s better to separate concerns.\hypertarget{dir_3de6937ff41ecbda57f2c2e829e104a1_autotoc_md1342}{}\doxysubsection{\texorpdfstring{Inspiration}{Inspiration}}\label{dir_3de6937ff41ecbda57f2c2e829e104a1_autotoc_md1342}
+Based on \href{https://github.com/smooth-code/smooth-ui}{\texttt{smooth-\/ui}} modal dialogs.\hypertarget{dir_3de6937ff41ecbda57f2c2e829e104a1_autotoc_md1343}{}\doxysubsection{\texorpdfstring{See also}{See also}}\label{dir_3de6937ff41ecbda57f2c2e829e104a1_autotoc_md1343}
+
+\begin{DoxyItemize}
+\item \href{https://github.com/WICG/inert}{\texttt{inert}} -\/ The HTML attribute/property to mark parts of the DOM tree as "{}inert"{}.
+\item \href{https://github.com/theKashey/react-focus-lock}{\texttt{react-\/focus-\/lock}} to lock Focus inside modal.
+\item \href{https://github.com/theKashey/react-scroll-lock}{\texttt{react-\/scroll-\/lock}} to disable page scroll while modal is opened.
+\end{DoxyItemize}\hypertarget{dir_3de6937ff41ecbda57f2c2e829e104a1_autotoc_md1344}{}\doxysubsection{\texorpdfstring{Size}{Size}}\label{dir_3de6937ff41ecbda57f2c2e829e104a1_autotoc_md1344}
+Code is 30 lines long\hypertarget{dir_3de6937ff41ecbda57f2c2e829e104a1_autotoc_md1345}{}\doxysubsection{\texorpdfstring{Licence}{Licence}}\label{dir_3de6937ff41ecbda57f2c2e829e104a1_autotoc_md1345}
+MIT 

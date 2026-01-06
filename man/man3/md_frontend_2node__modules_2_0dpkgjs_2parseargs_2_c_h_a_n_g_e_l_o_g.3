@@ -1,0 +1,148 @@
+.TH "md_frontend_2node__modules_2_0dpkgjs_2parseargs_2_c_h_a_n_g_e_l_o_g" 3 "Version 0.1" "Chat-ME!" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md_frontend_2node__modules_2_0dpkgjs_2parseargs_2_c_h_a_n_g_e_l_o_g \- Changelog 
+.PP
+
+.SH "\fR0\&.11\&.0\fP (2022-10-08)"
+.PP
+.SS "Features"
+.IP "\(bu" 2
+add \fRdefault\fP option parameter (\fR#142\fP) (\fRcd20847\fP)
+.PP
+.SH "\fR0\&.10\&.0\fP (2022-07-21)"
+.PP
+.SS "Features"
+.IP "\(bu" 2
+add parsed meta-data to returned properties (\fR#129\fP) (\fR91bfb4d\fP)
+.PP
+.SH "\fR0\&.9\&.1\fP (2022-06-20)"
+.PP
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBruntime:\fP support node 14+ (\fR#135\fP) (\fR6a1c5a6\fP)
+.PP
+.SH "\fR0\&.9\&.0\fP (2022-05-23)"
+.PP
+.SS "⚠ BREAKING CHANGES"
+.IP "\(bu" 2
+drop handling of electron arguments (#121)
+.PP
+.SS "Code Refactoring"
+.IP "\(bu" 2
+drop handling of electron arguments (\fR#121\fP) (\fRa2ffd53\fP)
+.PP
+.SH "\fR0\&.8\&.0\fP (2022-05-16)"
+.PP
+.SS "⚠ BREAKING CHANGES"
+.IP "\(bu" 2
+switch type:string option arguments to greedy, but with error for suspect cases in strict mode (#88)
+.IP "\(bu" 2
+positionals now opt-in when strict:true (#116)
+.IP "\(bu" 2
+create result\&.values with null prototype (#111)
+.PP
+.SS "Features"
+.IP "\(bu" 2
+create result\&.values with null prototype (\fR#111\fP) (\fR9d539c3\fP)
+.IP "\(bu" 2
+positionals now opt-in when strict:true (\fR#116\fP) (\fR3643338\fP)
+.IP "\(bu" 2
+switch type:string option arguments to greedy, but with error for suspect cases in strict mode (\fR#88\fP) (\fRc2b5e72\fP)
+.PP
+.SS "\fR0\&.7\&.1\fP (2022-04-15)"
+.SS "Bug Fixes"
+.IP "\(bu" 2
+resist pollution (\fR#106\fP) (\fRecf2dec\fP)
+.PP
+.SH "\fR0\&.7\&.0\fP (2022-04-13)"
+.PP
+.SS "Features"
+.IP "\(bu" 2
+Add strict mode to parser (\fR#74\fP) (\fR8267d02\fP)
+.PP
+.SH "\fR0\&.6\&.0\fP (2022-04-11)"
+.PP
+.SS "⚠ BREAKING CHANGES"
+.IP "\(bu" 2
+rework results to remove redundant \fRflags\fP property and store value true for boolean options (#83)
+.IP "\(bu" 2
+switch to existing ERR_INVALID_ARG_VALUE (#97)
+.PP
+.SS "Code Refactoring"
+.IP "\(bu" 2
+rework results to remove redundant \fRflags\fP property and store value true for boolean options (\fR#83\fP) (\fRbe153db\fP)
+.IP "\(bu" 2
+switch to existing ERR_INVALID_ARG_VALUE (\fR#97\fP) (\fR084a23f\fP)
+.PP
+.SH "\fR0\&.5\&.0\fP (2022-04-10)"
+.PP
+.SS "⚠ BREAKING CHANGES"
+.IP "\(bu" 2
+Require type to be specified for each supplied option (#95)
+.PP
+.SS "Features"
+.IP "\(bu" 2
+Require type to be specified for each supplied option (\fR#95\fP) (\fR02cd018\fP)
+.PP
+.SH "\fR0\&.4\&.0\fP (2022-03-12)"
+.PP
+.SS "⚠ BREAKING CHANGES"
+.IP "\(bu" 2
+parsing, revisit short option groups, add support for combined short and value (#75)
+.IP "\(bu" 2
+restructure configuration to take options bag (#63)
+.PP
+.SS "Code Refactoring"
+.IP "\(bu" 2
+parsing, revisit short option groups, add support for combined short and value (\fR#75\fP) (\fRa92600f\fP)
+.IP "\(bu" 2
+restructure configuration to take options bag (\fR#63\fP) (\fRb412095\fP)
+.PP
+.SH "\fR0\&.3\&.0\fP (2022-02-06)"
+.PP
+.SS "Features"
+.IP "\(bu" 2
+\fBparser:\fP support short-option groups (\fR#59\fP) (\fR882067b\fP)
+.PP
+.SH "\fR0\&.2\&.0\fP (2022-02-05)"
+.PP
+.SS "Features"
+.IP "\(bu" 2
+basic support for shorts (\fR#50\fP) (\fRa2f36d7\fP)
+.PP
+.SS "Bug Fixes"
+.IP "\(bu" 2
+always store value for a=b (\fR#43\fP) (\fRa85e8dc\fP)
+.IP "\(bu" 2
+support single dash as positional (\fR#49\fP) (\fRd795bf8\fP)
+.PP
+.SS "\fR0\&.1\&.1\fP (2022-01-25)"
+.SS "Bug Fixes"
+.IP "\(bu" 2
+only use arrays in results for multiples (\fR#42\fP) (\fRc357584\fP)
+.PP
+.SH "0\&.1\&.0 (2022-01-22)"
+.PP
+.SS "Features"
+.IP "\(bu" 2
+expand scenarios covered by default arguments for environments (\fR#20\fP) (\fR582ada7\fP)
+.IP "\(bu" 2
+update readme and include contributing guidelines (\fR8edd6fc\fP)
+.PP
+.SS "Bug Fixes"
+.IP "\(bu" 2
+do not strip excess leading dashes on long option names (\fR#21\fP) (\fRf848590\fP)
+.IP "\(bu" 2
+name & readme (\fR3f057c1\fP)
+.IP "\(bu" 2
+package\&.json values (\fR9bac300\fP)
+.IP "\(bu" 2
+update readme name (\fR957d8d9\fP)
+.PP
+.SS "Build System"
+.IP "\(bu" 2
+first release as minor (\fR421c6e2\fP) 
+.PP
+

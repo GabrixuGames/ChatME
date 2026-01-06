@@ -1,5 +1,6 @@
-import { createContext, useContext, useState, ReactNode, useEffect } from "react";
-import { io } from "socket.io-client";
+import { createContext, useContext, useState, ReactNode, useEffect, useCallback } from "react";
+import { io, Socket } from "socket.io-client";
+import { useAuth } from "./AuthContext";
 
 // Define la estructura del mensaje
 export interface Message {
@@ -17,6 +18,15 @@ export interface Room {
   id: string;
   name: string;
   description: string;
+  room_type?: string;
+  is_temporary?: boolean;
+  other_username?: string;
+  other_user_id?: string;
+  last_message?: string;
+  last_message_at?: string;
+  last_message_username?: string;
+  unread_count?: number;
+  friend_removed_by?: string | null; // username de quien eliminó la amistad, null si son amigos
 }
 
 interface ChatContextType {
@@ -27,148 +37,297 @@ interface ChatContextType {
   setCurrentRoom: (roomId: string) => void;
   goToWelcome: () => void;
   currentUserId: string;
+  openIndividualChat: (friendUsername: string, isTemporary?: boolean) => Promise<string | undefined>;
+  markRoomAsRead: (roomId: string) => Promise<void>;
+  hideRoom: (roomId: string) => Promise<void>;
+  typingUsers: Record<string, string[]>; // roomId -> [usernames]
+  sendTyping: (roomId: string, username: string) => void;
+  sendStopTyping: (roomId: string, username: string) => void;
+  refreshRooms: () => Promise<void>;
 }
-
-// Crear las salas iniciales
-const initialRooms: Room[] = [
-  { id: "R1", name: "Sala General", description: "Conversación principal" },
-  { id: "R2", name: "Sala Desarrollo", description: "Para hablar de código" },
-  { id: "R3", name: "Sala Random", description: "Conversaciones casuales" }
-];
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined);
 
 // Configura la conexión con Socket.IO usando variables de entorno
 const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || "http://localhost:5000";
-const socket = io(SOCKET_URL);
+let socket: Socket | null = null;
 
 export function ChatProvider({ children }: { children: ReactNode }) {
   const [messages, setMessages] = useState<Message[]>([]);
-  const [rooms] = useState<Room[]>(initialRooms);
-  const [currentRoom, setCurrentRoom] = useState<Room | null>(null); // Cambiar a null
+  const [rooms, setRooms] = useState<Room[]>([]);
+  const [currentRoom, setCurrentRoomState] = useState<Room | null>(null);
   const [currentUserId] = useState<string>(sessionStorage.getItem("userId") || "defaultUserId");
+  const [typingUsers, setTypingUsers] = useState<Record<string, string[]>>({});
+  const { user, token } = useAuth();
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
+  // Conectar Socket.IO cuando el usuario está autenticado
   useEffect(() => {
-    // Establece la conexión para recibir mensajes en tiempo real
-    socket.on("connect", () => {
-      console.log("Conexión establecida con el servidor Socket.IO");
-    });
+    if (!user) return;
 
-    socket.on("message", (message) => {
-      console.log("=== MENSAJE RECIBIDO ===");
-      console.log("Mensaje completo:", message);
-      console.log("Sala del mensaje:", message.roomId || message.room);
-      console.log("Sala actual:", currentRoom?.id);
-      console.log("¿Es de la sala actual?", (message.roomId === currentRoom?.id || message.room === currentRoom?.id));
-      
-      // Convertir timestamp si viene como string
-      if (typeof message.timestamp === 'string') {
-        message.timestamp = new Date(message.timestamp);
-      }
-      
-      // Agregar mensaje al estado
-      setMessages((prevMessages) => {
-        console.log("Mensajes antes de agregar:", prevMessages.length);
-        
-        // Evitar duplicados basados en ID o timestamp
-        const isDuplicate = prevMessages.some(msg => 
-          msg.id === message.id || 
-          (msg.timestamp && message.timestamp && 
-           Math.abs(new Date(msg.timestamp).getTime() - new Date(message.timestamp).getTime()) < 1000)
-        );
-        
-        if (!isDuplicate) {
-          console.log("Agregando mensaje nuevo:", message);
-          const newMessages = [...prevMessages, message];
-          console.log("Total mensajes después de agregar:", newMessages.length);
-          return newMessages;
-        }
-        
-        console.log("Mensaje duplicado, no se agrega:", message);
-        return prevMessages;
+    if (!socket) {
+      socket = io(SOCKET_URL, {
+        query: { username: user }
       });
-    });
 
-    // Escucha los mensajes previos cuando el usuario entra en una sala
-    socket.on("previous_messages", (previousMessages: Message[]) => {
-      console.log("=== MENSAJES PREVIOS RECIBIDOS ===");
-      console.log("Cantidad de mensajes:", previousMessages.length);
-      console.log("Mensajes:", previousMessages);
-      
-      // Convertir timestamps
-      const processedMessages = previousMessages.map(msg => ({
-        ...msg,
-        timestamp: typeof msg.timestamp === 'string' ? new Date(msg.timestamp) : msg.timestamp
-      }));
-      
-      console.log("Mensajes procesados:", processedMessages);
-      setMessages(processedMessages);
-      console.log("Estado de mensajes actualizado");
-    });
+      socket.on("connect", () => {
+        console.log("Conexión establecida con el servidor Socket.IO");
+      });
 
-    // Escucha errores
-    socket.on("error", (error) => {
-      console.error("=== ERROR DE SOCKET.IO ===", error);
-    });
+      socket.on("connected", (data) => {
+        console.log("Server response:", data);
+      });
 
-    socket.on("connect_error", (error) => {
-      console.error("=== ERROR DE CONEXIÓN ===", error);
-    });
+      socket.on("message", (message) => {
+        console.log("=== MENSAJE RECIBIDO ===", message);
+        
+        // Convertir timestamp si viene como string
+        if (typeof message.timestamp === 'string') {
+          message.timestamp = new Date(message.timestamp);
+        }
 
-    // Cleanup function
-    return () => {
-      socket.off("message");
-      socket.off("previous_messages");
-      socket.off("connect");
-      socket.off("error");
-      socket.off("connect_error");
-    };
-  }, []); // Sin dependencias para que solo se ejecute una vez
+        setMessages((prev) => [...prev, message]);
+        
+        // Actualizar última mensaje en rooms
+        refreshRooms();
+      });
 
-  const sendMessage = (content: string, username: string, roomId?: string) => {
-    const roomToSend = roomId ? rooms.find(r => r.id === roomId) : currentRoom;
-    if (!roomToSend) {
-      console.error("No hay sala seleccionada para enviar el mensaje");
-      return;
+      socket.on("previous_messages", (msgs) => {
+        console.log(`📚 Recibidos ${msgs.length} mensajes históricos`);
+        const formattedMsgs = msgs.map((msg: Message) => ({
+          ...msg,
+          timestamp: typeof msg.timestamp === 'string' ? new Date(msg.timestamp) : msg.timestamp
+        }));
+        setMessages(formattedMsgs);
+      });
+
+      socket.on("user_joined", (data) => {
+        console.log(`👋 ${data.username} se unió a la sala`);
+      });
+
+      // Nuevo evento: cuando se crea un chat individual
+      socket.on("new_individual_chat", (data) => {
+        console.log("💬 Nuevo chat individual recibido:", data);
+        if (data.room) {
+          setRooms((prevRooms) => {
+            const exists = prevRooms.some(r => r.id === data.room.id);
+            if (!exists) {
+              return [...prevRooms, data.room];
+            }
+            return prevRooms;
+          });
+          
+          // Auto-join a la sala
+          if (socket) {
+            socket.emit('join', { room: data.room.id, username: user });
+          }
+        }
+      });
+
+      // Typing indicators
+      socket.on("user_typing", (data) => {
+        const { username, room } = data;
+        setTypingUsers((prev) => {
+          const current = prev[room] || [];
+          if (!current.includes(username)) {
+            return { ...prev, [room]: [...current, username] };
+          }
+          return prev;
+        });
+      });
+
+      socket.on("user_stop_typing", (data) => {
+        const { username, room } = data;
+        setTypingUsers((prev) => {
+          const current = prev[room] || [];
+          return { ...prev, [room]: current.filter(u => u !== username) };
+        });
+      });
+
+      // Eventos de solicitudes de amistad
+      socket.on("friend_request_received", (data) => {
+        console.log("📬 [ChatContext] Nueva solicitud de amistad recibida:", data);
+        // Disparar evento personalizado para que FriendsContext lo escuche
+        window.dispatchEvent(new CustomEvent('friendRequestReceived', { detail: data }));
+      });
+
+      socket.on("friend_request_accepted", (data) => {
+        console.log("🎉 [ChatContext] Solicitud de amistad aceptada:", data);
+        // Disparar evento personalizado para que FriendsContext lo escuche
+        window.dispatchEvent(new CustomEvent('friendRequestAccepted', { detail: data }));
+      });
+
+      socket.on("error", (error) => {
+        console.error("❌ Socket.IO error:", error);
+      });
     }
-    const messageData = {
-      username: username,
-      room: roomToSend.id,
-      message: content,
-      timestamp: new Date().toISOString()
+
+    return () => {
+      if (socket) {
+        socket.disconnect();
+        socket = null;
+      }
     };
-    socket.emit("message", messageData);
-  };
+  }, [user]);
+
+  // Cargar rooms al iniciar
+  useEffect(() => {
+    if (user && token) {
+      refreshRooms();
+    }
+  }, [user, token]);
+
+  const refreshRooms = useCallback(async () => {
+    if (!token) return;
+    
+    try {
+      const res = await fetch(`${API_URL}/chat/rooms`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+      });
+      const data = await res.json();
+      console.log("🔄 Rooms actualizados:", data.rooms);
+      setRooms(data.rooms || []);
+    } catch (err) {
+      console.error("Error al cargar rooms:", err);
+    }
+  }, [token, API_URL]);
 
   const switchRoom = (roomId: string) => {
     const room = rooms.find((r) => r.id === roomId);
     if (room) {
-      console.log("=== CAMBIANDO DE SALA ===");
-      console.log("Sala anterior:", currentRoom?.id);
-      console.log("Nueva sala:", room.id);
+      setCurrentRoomState(room);
+      setMessages([]); // Limpiar mensajes anteriores
+
+      if (socket && user) {
+        socket.emit("join", { room: roomId, username: user });
+      }
       
-      setCurrentRoom(room);
-      // Limpiar mensajes actuales antes de cargar los nuevos
-      setMessages([]);
-      
-      // Emitir join con formato correcto
-      const joinData = {
-        room: room.id,
-        roomId: room.id, // Por compatibilidad
-        username: sessionStorage.getItem("username") || "Invitado"
-      };
-      
-      console.log("Enviando join con datos:", joinData);
-      socket.emit("join", joinData);
-      console.log("Join enviado");
-    } else {
-      console.error("Sala no encontrada:", roomId);
+      // Marcar como leído
+      markRoomAsRead(roomId);
     }
   };
 
-  // Función para volver a la página de bienvenida
+  const openIndividualChat = async (friendUsername: string, isTemporary: boolean = false) => {
+    try {
+      const res = await fetch(`${API_URL}/chat/individual/create`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify({ username_2: friendUsername, is_temporary: isTemporary })
+      });
+      const data = await res.json();
+      if (data.room) {
+        await refreshRooms();
+        switchRoom(data.room.id);
+        return data.room.id;
+      }
+      return undefined;
+    } catch (err) {
+      console.error("Error abriendo chat individual:", err);
+      return undefined;
+    }
+  };
+
+  const sendMessage = (content: string, username: string, roomId?: string) => {
+    if (!socket) {
+      console.error("Socket no conectado");
+      return;
+    }
+
+    const targetRoom = roomId || currentRoom?.id;
+    if (!targetRoom) {
+      console.error("No hay sala seleccionada");
+      return;
+    }
+
+    socket.emit("message", {
+      username,
+      room: targetRoom,
+      message: content,
+    });
+  };
+
+  const sendTyping = (roomId: string, username: string) => {
+    if (socket) {
+      socket.emit("typing", { room: roomId, username });
+    }
+  };
+
+  const sendStopTyping = (roomId: string, username: string) => {
+    if (socket) {
+      socket.emit("stop_typing", { room: roomId, username });
+    }
+  };
+
+  const markRoomAsRead = async (roomId: string) => {
+    if (!token) {
+      console.warn("⚠️ No token disponible para marcar como leído");
+      return;
+    }
+    
+    try {
+      const response = await fetch(`${API_URL}/chat/mark_read`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify({ room_id: roomId })
+      });
+      
+      if (!response.ok) {
+        console.error(`❌ Error HTTP ${response.status} al marcar como leído`);
+        return;
+      }
+      
+      // Actualizar contador local solo si la petición fue exitosa
+      setRooms(prev => prev.map(r => 
+        r.id === roomId ? { ...r, unread_count: 0 } : r
+      ));
+      console.log("✅ Sala marcada como leída:", roomId);
+    } catch (err) {
+      console.error("❌ Error marcando como leído:", err);
+      // No relanzar el error para evitar romper el flujo
+    }
+  };
+
+  const hideRoom = async (roomId: string) => {
+    if (!token) return;
+    
+    try {
+      await fetch(`${API_URL}/chat/hide_room`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify({ room_id: roomId })
+      });
+      
+      // Remover de la lista local
+      setRooms(prev => prev.filter(r => r.id !== roomId));
+      
+      if (currentRoom?.id === roomId) {
+        setCurrentRoomState(null);
+      }
+    } catch (err) {
+      console.error("Error ocultando sala:", err);
+    }
+  };
+
+  const setCurrentRoom = (roomId: string) => {
+    switchRoom(roomId);
+  };
+
   const goToWelcome = () => {
-    setCurrentRoom(null);
+    setCurrentRoomState(null);
+    setMessages([]);
   };
 
   return (
@@ -178,9 +337,16 @@ export function ChatProvider({ children }: { children: ReactNode }) {
         rooms,
         currentRoom,
         sendMessage,
-        setCurrentRoom: switchRoom,
+        setCurrentRoom,
         goToWelcome,
-        currentUserId,  // Pasamos el currentUserId a los componentes que lo necesiten
+        currentUserId,
+        openIndividualChat,
+        markRoomAsRead,
+        hideRoom,
+        typingUsers,
+        sendTyping,
+        sendStopTyping,
+        refreshRooms
       }}
     >
       {children}
@@ -188,11 +354,8 @@ export function ChatProvider({ children }: { children: ReactNode }) {
   );
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
-export function useChat() {
+export const useChat = () => {
   const context = useContext(ChatContext);
-  if (context === undefined) {
-    throw new Error("useChat must be used within a ChatProvider");
-  }
+  if (!context) throw new Error("useChat must be used within a ChatProvider");
   return context;
-}
+};

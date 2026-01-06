@@ -1,0 +1,64 @@
+.TH "repositories.base_repository.BaseRepository" 3 "Version 0.1" "Chat-ME!" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+repositories.base_repository.BaseRepository
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits ABC\&.
+.PP
+Inherited by \fBrepositories\&.base_repository\&.MessageRepository\fP, \fBrepositories\&.base_repository\&.RoomRepository\fP, \fBrepositories\&.base_repository\&.UserRepository\fP, \fBrepositories\&.private_chat_repository\&.PrivateChatRepository\fP, and \fBrepositories\&.private_chat_repository\&.PrivateMessageRepository\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fB__init__\fP (self)"
+.br
+.ti -1c
+.RI "Optional[Any] \fBexecute_query\fP (self, str query, tuple params=None, bool fetch_one=False, bool fetch_all=False)"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBdb_manager\fP = db_manager"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+.nf
+Clase base para todos los repositorios
+Implementa operaciones CRUD básicas
+
+.fi
+.PP
+ 
+.SH "Member Function Documentation"
+.PP 
+.SS " Optional[Any] repositories\&.base_repository\&.BaseRepository\&.execute_query ( self, str query, tuple  params = \fRNone\fP, bool  fetch_one = \fRFalse\fP, bool  fetch_all = \fRFalse\fP)"
+
+.PP
+.nf
+Ejecutar una query con manejo de conexiones del pool
+
+Args:
+    query: SQL query to execute
+    params: Parameters for the query
+    fetch_one: Return single result
+    fetch_all: Return all results
+    
+Returns:
+    Query result or None
+
+.fi
+.PP
+ 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Chat-ME! from the source code\&.

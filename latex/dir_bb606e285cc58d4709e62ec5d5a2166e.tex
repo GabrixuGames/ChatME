@@ -1,0 +1,502 @@
+\doxysection{frontend/node\+\_\+modules/cmdk Directory Reference}
+\hypertarget{dir_bb606e285cc58d4709e62ec5d5a2166e}{}\label{dir_bb606e285cc58d4709e62ec5d5a2166e}\index{frontend/node\_modules/cmdk Directory Reference@{frontend/node\_modules/cmdk Directory Reference}}
+
+
+\doxysubsection{Detailed Description}
+
+
+ \hypertarget{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1799}{}\doxysubsection{\texorpdfstring{⌘K \href{https://www.npmjs.com/package/cmdk?activeTab=code}{\texttt{}} \href{https://www.npmjs.com/package/cmdk}{\texttt{}}}{⌘K \href{https://www.npmjs.com/package/cmdk?activeTab=code}{\texttt{}} \href{https://www.npmjs.com/package/cmdk}{\texttt{}}}}\label{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1799}
+⌘K is a command menu React component that can also be used as an accessible combobox. You render items, it filters and sorts them automatically. ⌘K supports a fully composable API \textsuperscript{\textsuperscript{How?}}, so you can wrap items in other components or even as static JSX.
+
+Demo and examples\+: \href{https://cmdk.paco.me}{\texttt{cmdk.\+paco.\+me}}\hypertarget{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1800}{}\doxysubsubsection{\texorpdfstring{Install}{Install}}\label{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1800}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{pnpm\ install\ cmdk}
+
+\end{DoxyCode}
+\hypertarget{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1801}{}\doxysubsubsection{\texorpdfstring{Use}{Use}}\label{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1801}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ \{\ Command\ \}\ from\ 'cmdk'}
+\DoxyCodeLine{}
+\DoxyCodeLine{const\ CommandMenu\ =\ ()\ =>\ \{}
+\DoxyCodeLine{\ \ return\ (}
+\DoxyCodeLine{\ \ \ \ <Command\ label="{}Command\ Menu"{}>}
+\DoxyCodeLine{\ \ \ \ \ \ <Command.Input\ />}
+\DoxyCodeLine{\ \ \ \ \ \ <Command.List>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <Command.Empty>No\ results\ found.</Command.Empty>}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <Command.Group\ heading="{}Letters"{}>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ <Command.Item>a</Command.Item>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ <Command.Item>b</Command.Item>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ <Command.Separator\ />}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ <Command.Item>c</Command.Item>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ </Command.Group>}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <Command.Item>Apple</Command.Item>}
+\DoxyCodeLine{\ \ \ \ \ \ </Command.List>}
+\DoxyCodeLine{\ \ \ \ </Command>}
+\DoxyCodeLine{\ \ )}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Or in a dialog\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ \{\ Command\ \}\ from\ 'cmdk'}
+\DoxyCodeLine{}
+\DoxyCodeLine{const\ CommandMenu\ =\ ()\ =>\ \{}
+\DoxyCodeLine{\ \ const\ [open,\ setOpen]\ =\ React.useState(false)}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ //\ Toggle\ the\ menu\ when\ ⌘K\ is\ pressed}
+\DoxyCodeLine{\ \ React.useEffect(()\ =>\ \{}
+\DoxyCodeLine{\ \ \ \ const\ down\ =\ (e)\ =>\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ if\ (e.key\ ===\ 'k'\ \&\&\ (e.metaKey\ ||\ e.ctrlKey))\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ e.preventDefault()}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ setOpen((open)\ =>\ !open)}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ document.addEventListener('keydown',\ down)}
+\DoxyCodeLine{\ \ \ \ return\ ()\ =>\ document.removeEventListener('keydown',\ down)}
+\DoxyCodeLine{\ \ \},\ [])}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ return\ (}
+\DoxyCodeLine{\ \ \ \ <Command.Dialog\ open=\{open\}\ onOpenChange=\{setOpen\}\ label="{}Global\ Command\ Menu"{}>}
+\DoxyCodeLine{\ \ \ \ \ \ <Command.Input\ />}
+\DoxyCodeLine{\ \ \ \ \ \ <Command.List>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <Command.Empty>No\ results\ found.</Command.Empty>}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <Command.Group\ heading="{}Letters"{}>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ <Command.Item>a</Command.Item>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ <Command.Item>b</Command.Item>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ <Command.Separator\ />}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ <Command.Item>c</Command.Item>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ </Command.Group>}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <Command.Item>Apple</Command.Item>}
+\DoxyCodeLine{\ \ \ \ \ \ </Command.List>}
+\DoxyCodeLine{\ \ \ \ </Command.Dialog>}
+\DoxyCodeLine{\ \ )}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1802}{}\doxysubsubsection{\texorpdfstring{Parts and styling}{Parts and styling}}\label{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1802}
+All parts forward props, including {\ttfamily ref}, to an appropriate element. Each part has a specific data-\/attribute (starting with {\ttfamily cmdk-\/}) that can be used for styling.\hypertarget{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1803}{}\doxysubsubsubsection{\texorpdfstring{Command {\ttfamily \mbox{[}cmdk-\/root\mbox{]}}}{Command {\ttfamily \mbox{[}cmdk-\/root\mbox{]}}}}\label{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1803}
+Render this to show the command menu inline, or use Dialog to render in a elevated context. Can be controlled with the {\ttfamily value} and {\ttfamily on\+Value\+Change} props.
+
+\begin{quote}
+{\bfseries{Note}}
+
+Values are always trimmed with the \href{https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim}{\texttt{trim()}} method. \end{quote}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{const\ [value,\ setValue]\ =\ React.useState('apple')}
+\DoxyCodeLine{}
+\DoxyCodeLine{return\ (}
+\DoxyCodeLine{\ \ <Command\ value=\{value\}\ onValueChange=\{setValue\}>}
+\DoxyCodeLine{\ \ \ \ <Command.Input\ />}
+\DoxyCodeLine{\ \ \ \ <Command.List>}
+\DoxyCodeLine{\ \ \ \ \ \ <Command.Item>Orange</Command.Item>}
+\DoxyCodeLine{\ \ \ \ \ \ <Command.Item>Apple</Command.Item>}
+\DoxyCodeLine{\ \ \ \ </Command.List>}
+\DoxyCodeLine{\ \ </Command>}
+\DoxyCodeLine{)}
+
+\end{DoxyCode}
+
+
+You can provide a custom {\ttfamily filter} function that is called to rank each item. Note that the value will be trimmed.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<Command}
+\DoxyCodeLine{\ \ filter=\{(value,\ search)\ =>\ \{}
+\DoxyCodeLine{\ \ \ \ if\ (value.includes(search))\ return\ 1}
+\DoxyCodeLine{\ \ \ \ return\ 0}
+\DoxyCodeLine{\ \ \}\}}
+\DoxyCodeLine{/>}
+
+\end{DoxyCode}
+
+
+A third argument, {\ttfamily keywords}, can also be provided to the filter function. Keywords act as aliases for the item value, and can also affect the rank of the item. Keywords are trimmed.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<Command}
+\DoxyCodeLine{\ \ filter=\{(value,\ search,\ keywords)\ =>\ \{}
+\DoxyCodeLine{\ \ \ \ const\ extendValue\ =\ value\ +\ '\ '\ +\ keywords.join('\ ')}
+\DoxyCodeLine{\ \ \ \ if\ (extendValue.includes(search))\ return\ 1}
+\DoxyCodeLine{\ \ \ \ return\ 0}
+\DoxyCodeLine{\ \ \}\}}
+\DoxyCodeLine{/>}
+
+\end{DoxyCode}
+
+
+Or disable filtering and sorting entirely\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<Command\ shouldFilter=\{false\}>}
+\DoxyCodeLine{\ \ <Command.List>}
+\DoxyCodeLine{\ \ \ \ \{filteredItems.map((item)\ =>\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ return\ (}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <Command.Item\ key=\{item\}\ value=\{item\}>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \{item\}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ </Command.Item>}
+\DoxyCodeLine{\ \ \ \ \ \ )}
+\DoxyCodeLine{\ \ \ \ \})\}}
+\DoxyCodeLine{\ \ </Command.List>}
+\DoxyCodeLine{</Command>}
+
+\end{DoxyCode}
+
+
+You can make the arrow keys wrap around the list (when you reach the end, it goes back to the first item) by setting the {\ttfamily loop} prop\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<Command\ loop\ />}
+
+\end{DoxyCode}
+\hypertarget{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1804}{}\doxysubsubsubsection{\texorpdfstring{Dialog {\ttfamily \mbox{[}cmdk-\/dialog\mbox{]}} {\ttfamily \mbox{[}cmdk-\/overlay\mbox{]}}}{Dialog {\ttfamily \mbox{[}cmdk-\/dialog\mbox{]}} {\ttfamily \mbox{[}cmdk-\/overlay\mbox{]}}}}\label{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1804}
+Props are forwarded to Command. Composes Radix UI\textquotesingle{}s Dialog component. The overlay is always rendered. See the \href{https://www.radix-ui.com/docs/primitives/components/dialog}{\texttt{Radix Documentation}} for more information. Can be controlled with the {\ttfamily open} and {\ttfamily on\+Open\+Change} props.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{const\ [open,\ setOpen]\ =\ React.useState(false)}
+\DoxyCodeLine{}
+\DoxyCodeLine{return\ (}
+\DoxyCodeLine{\ \ <Command.Dialog\ open=\{open\}\ onOpenChange=\{setOpen\}>}
+\DoxyCodeLine{\ \ \ \ ...}
+\DoxyCodeLine{\ \ </Command.Dialog>}
+\DoxyCodeLine{)}
+
+\end{DoxyCode}
+
+
+You can provide a {\ttfamily container} prop that accepts an HTML element that is forwarded to Radix UI\textquotesingle{}s Dialog Portal component to specify which element the Dialog should portal into (defaults to {\ttfamily body}). See the \href{https://www.radix-ui.com/docs/primitives/components/dialog\#portal}{\texttt{Radix Documentation}} for more information.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{const\ containerElement\ =\ React.useRef(null)}
+\DoxyCodeLine{}
+\DoxyCodeLine{return\ (}
+\DoxyCodeLine{\ \ <>}
+\DoxyCodeLine{\ \ \ \ <Command.Dialog\ container=\{containerElement.current\}\ />}
+\DoxyCodeLine{\ \ \ \ <div\ ref=\{containerElement\}\ />}
+\DoxyCodeLine{\ \ </>}
+\DoxyCodeLine{)}
+
+\end{DoxyCode}
+\hypertarget{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1805}{}\doxysubsubsubsection{\texorpdfstring{Input {\ttfamily \mbox{[}cmdk-\/input\mbox{]}}}{Input {\ttfamily \mbox{[}cmdk-\/input\mbox{]}}}}\label{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1805}
+All props are forwarded to the underlying {\ttfamily input} element. Can be controlled with the {\ttfamily value} and {\ttfamily on\+Value\+Change} props.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{const\ [search,\ setSearch]\ =\ React.useState('')}
+\DoxyCodeLine{}
+\DoxyCodeLine{return\ <Command.Input\ value=\{search\}\ onValueChange=\{setSearch\}\ />}
+
+\end{DoxyCode}
+\hypertarget{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1806}{}\doxysubsubsubsection{\texorpdfstring{List {\ttfamily \mbox{[}cmdk-\/list\mbox{]}}}{List {\ttfamily \mbox{[}cmdk-\/list\mbox{]}}}}\label{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1806}
+Contains items and groups. Animate height using the {\ttfamily -\/-\/cmdk-\/list-\/height} CSS variable.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{[cmdk-\/list]\ \{}
+\DoxyCodeLine{\ \ min-\/height:\ 300px;}
+\DoxyCodeLine{\ \ height:\ var(-\/-\/cmdk-\/list-\/height);}
+\DoxyCodeLine{\ \ max-\/height:\ 500px;}
+\DoxyCodeLine{\ \ transition:\ height\ 100ms\ ease;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+To scroll item into view earlier near the edges of the viewport, use scroll-\/padding\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{[cmdk-\/list]\ \{}
+\DoxyCodeLine{\ \ scroll-\/padding-\/block-\/start:\ 8px;}
+\DoxyCodeLine{\ \ scroll-\/padding-\/block-\/end:\ 8px;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1807}{}\doxysubsubsubsection{\texorpdfstring{Item {\ttfamily \mbox{[}cmdk-\/item\mbox{]}} {\ttfamily \mbox{[}data-\/disabled?\mbox{]}} {\ttfamily \mbox{[}data-\/selected?\mbox{]}}}{Item {\ttfamily \mbox{[}cmdk-\/item\mbox{]}} {\ttfamily \mbox{[}data-\/disabled?\mbox{]}} {\ttfamily \mbox{[}data-\/selected?\mbox{]}}}}\label{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1807}
+Item that becomes active on pointer enter. You should provide a unique {\ttfamily value} for each item, but it will be automatically inferred from the {\ttfamily .text\+Content}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<Command.Item}
+\DoxyCodeLine{\ \ onSelect=\{(value)\ =>\ console.log('Selected',\ value)\}}
+\DoxyCodeLine{\ \ //\ Value\ is\ implicity\ "{}apple"{}\ because\ of\ the\ provided\ text\ content}
+\DoxyCodeLine{>}
+\DoxyCodeLine{\ \ Apple}
+\DoxyCodeLine{</Command.Item>}
+
+\end{DoxyCode}
+
+
+You can also provide a {\ttfamily keywords} prop to help with filtering. Keywords are trimmed.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<Command.Item\ keywords=\{['fruit',\ 'apple']\}>Apple</Command.Item>}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<Command.Item}
+\DoxyCodeLine{\ \ onSelect=\{(value)\ =>\ console.log('Selected',\ value)\}}
+\DoxyCodeLine{\ \ //\ Value\ is\ implicity\ "{}apple"{}\ because\ of\ the\ provided\ text\ content}
+\DoxyCodeLine{>}
+\DoxyCodeLine{\ \ Apple}
+\DoxyCodeLine{</Command.Item>}
+
+\end{DoxyCode}
+
+
+You can force an item to always render, regardless of filtering, by passing the {\ttfamily force\+Mount} prop.\hypertarget{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1808}{}\doxysubsubsubsection{\texorpdfstring{Group {\ttfamily \mbox{[}cmdk-\/group\mbox{]}} {\ttfamily \mbox{[}hidden?\mbox{]}}}{Group {\ttfamily \mbox{[}cmdk-\/group\mbox{]}} {\ttfamily \mbox{[}hidden?\mbox{]}}}}\label{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1808}
+Groups items together with the given {\ttfamily heading} ({\ttfamily \mbox{[}cmdk-\/group-\/heading\mbox{]}}).
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<Command.Group\ heading="{}Fruit"{}>}
+\DoxyCodeLine{\ \ <Command.Item>Apple</Command.Item>}
+\DoxyCodeLine{</Command.Group>}
+
+\end{DoxyCode}
+
+
+Groups will not unmount from the DOM, rather the {\ttfamily hidden} attribute is applied to hide it from view. This may be relevant in your styling.
+
+You can force a group to always render, regardless of filtering, by passing the {\ttfamily force\+Mount} prop.\hypertarget{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1809}{}\doxysubsubsubsection{\texorpdfstring{Separator {\ttfamily \mbox{[}cmdk-\/separator\mbox{]}}}{Separator {\ttfamily \mbox{[}cmdk-\/separator\mbox{]}}}}\label{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1809}
+Visible when the search query is empty or {\ttfamily always\+Render} is true, hidden otherwise.\hypertarget{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1810}{}\doxysubsubsubsection{\texorpdfstring{Empty {\ttfamily \mbox{[}cmdk-\/empty\mbox{]}}}{Empty {\ttfamily \mbox{[}cmdk-\/empty\mbox{]}}}}\label{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1810}
+Automatically renders when there are no results for the search query.\hypertarget{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1811}{}\doxysubsubsubsection{\texorpdfstring{Loading {\ttfamily \mbox{[}cmdk-\/loading\mbox{]}}}{Loading {\ttfamily \mbox{[}cmdk-\/loading\mbox{]}}}}\label{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1811}
+You should conditionally render this with {\ttfamily progress} while loading asynchronous items.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{const\ [loading,\ setLoading]\ =\ React.useState(false)}
+\DoxyCodeLine{}
+\DoxyCodeLine{return\ <Command.List>\{loading\ \&\&\ <Command.Loading>Hang\ on…</Command.Loading>\}</Command.List>}
+
+\end{DoxyCode}
+\hypertarget{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1812}{}\doxysubsubsubsection{\texorpdfstring{{\ttfamily use\+Command\+State(state =\texorpdfstring{$>$}{>} state.\+selected\+Field)}}{{\ttfamily use\+Command\+State(state =\texorpdfstring{$>$}{>} state.\+selected\+Field)}}}\label{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1812}
+Hook that composes \href{https://reactjs.org/docs/hooks-reference.html\#usesyncexternalstore}{\texttt{{\ttfamily use\+Sync\+External\+Store}}}. Pass a function that returns a slice of the command menu state to re-\/render when that slice changes. This hook is provided for advanced use cases and should not be commonly used.
+
+A good use case would be to render a more detailed empty state, like so\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{const\ search\ =\ useCommandState((state)\ =>\ state.search)}
+\DoxyCodeLine{return\ <Command.Empty>No\ results\ found\ for\ "{}\{search\}"{}.</Command.Empty>}
+
+\end{DoxyCode}
+\hypertarget{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1813}{}\doxysubsubsection{\texorpdfstring{Examples}{Examples}}\label{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1813}
+Code snippets for common use cases.\hypertarget{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1814}{}\doxysubsubsubsection{\texorpdfstring{Nested items}{Nested items}}\label{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1814}
+Often selecting one item should navigate deeper, with a more refined set of items. For example selecting "{}\+Change theme…"{} should show new items "{}\+Dark theme"{} and "{}\+Light theme"{}. We call these sets of items "{}pages"{}, and they can be implemented with simple state\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{const\ ref\ =\ React.useRef(null)}
+\DoxyCodeLine{const\ [open,\ setOpen]\ =\ React.useState(false)}
+\DoxyCodeLine{const\ [search,\ setSearch]\ =\ React.useState('')}
+\DoxyCodeLine{const\ [pages,\ setPages]\ =\ React.useState([])}
+\DoxyCodeLine{const\ page\ =\ pages[pages.length\ -\/\ 1]}
+\DoxyCodeLine{}
+\DoxyCodeLine{return\ (}
+\DoxyCodeLine{\ \ <Command}
+\DoxyCodeLine{\ \ \ \ onKeyDown=\{(e)\ =>\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ //\ Escape\ goes\ to\ previous\ page}
+\DoxyCodeLine{\ \ \ \ \ \ //\ Backspace\ goes\ to\ previous\ page\ when\ search\ is\ empty}
+\DoxyCodeLine{\ \ \ \ \ \ if\ (e.key\ ===\ 'Escape'\ ||\ (e.key\ ===\ 'Backspace'\ \&\&\ !search))\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ e.preventDefault()}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ setPages((pages)\ =>\ pages.slice(0,\ -\/1))}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \}\}}
+\DoxyCodeLine{\ \ >}
+\DoxyCodeLine{\ \ \ \ <Command.Input\ value=\{search\}\ onValueChange=\{setSearch\}\ />}
+\DoxyCodeLine{\ \ \ \ <Command.List>}
+\DoxyCodeLine{\ \ \ \ \ \ \{!page\ \&\&\ (}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ <Command.Item\ onSelect=\{()\ =>\ setPages([...pages,\ 'projects'])\}>Search\ projects…</Command.Item>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ <Command.Item\ onSelect=\{()\ =>\ setPages([...pages,\ 'teams'])\}>Join\ a\ team…</Command.Item>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ </>}
+\DoxyCodeLine{\ \ \ \ \ \ )\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \{page\ ===\ 'projects'\ \&\&\ (}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ <Command.Item>Project\ A</Command.Item>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ <Command.Item>Project\ B</Command.Item>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ </>}
+\DoxyCodeLine{\ \ \ \ \ \ )\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \{page\ ===\ 'teams'\ \&\&\ (}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ <Command.Item>Team\ 1</Command.Item>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ <Command.Item>Team\ 2</Command.Item>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ </>}
+\DoxyCodeLine{\ \ \ \ \ \ )\}}
+\DoxyCodeLine{\ \ \ \ </Command.List>}
+\DoxyCodeLine{\ \ </Command>}
+\DoxyCodeLine{)}
+
+\end{DoxyCode}
+\hypertarget{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1815}{}\doxysubsubsubsection{\texorpdfstring{Show sub-\/items when searching}{Show sub-\/items when searching}}\label{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1815}
+If your items have nested sub-\/items that you only want to reveal when searching, render based on the search state\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{const\ SubItem\ =\ (props)\ =>\ \{}
+\DoxyCodeLine{\ \ const\ search\ =\ useCommandState((state)\ =>\ state.search)}
+\DoxyCodeLine{\ \ if\ (!search)\ return\ null}
+\DoxyCodeLine{\ \ return\ <Command.Item\ \{...props\}\ />}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{return\ (}
+\DoxyCodeLine{\ \ <Command>}
+\DoxyCodeLine{\ \ \ \ <Command.Input\ />}
+\DoxyCodeLine{\ \ \ \ <Command.List>}
+\DoxyCodeLine{\ \ \ \ \ \ <Command.Item>Change\ theme…</Command.Item>}
+\DoxyCodeLine{\ \ \ \ \ \ <SubItem>Change\ theme\ to\ dark</SubItem>}
+\DoxyCodeLine{\ \ \ \ \ \ <SubItem>Change\ theme\ to\ light</SubItem>}
+\DoxyCodeLine{\ \ \ \ </Command.List>}
+\DoxyCodeLine{\ \ </Command>}
+\DoxyCodeLine{)}
+
+\end{DoxyCode}
+\hypertarget{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1816}{}\doxysubsubsubsection{\texorpdfstring{Asynchronous results}{Asynchronous results}}\label{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1816}
+Render the items as they become available. Filtering and sorting will happen automatically.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{const\ [loading,\ setLoading]\ =\ React.useState(false)}
+\DoxyCodeLine{const\ [items,\ setItems]\ =\ React.useState([])}
+\DoxyCodeLine{}
+\DoxyCodeLine{React.useEffect(()\ =>\ \{}
+\DoxyCodeLine{\ \ async\ function\ getItems()\ \{}
+\DoxyCodeLine{\ \ \ \ setLoading(true)}
+\DoxyCodeLine{\ \ \ \ const\ res\ =\ await\ api.get('/dictionary')}
+\DoxyCodeLine{\ \ \ \ setItems(res)}
+\DoxyCodeLine{\ \ \ \ setLoading(false)}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ getItems()}
+\DoxyCodeLine{\},\ [])}
+\DoxyCodeLine{}
+\DoxyCodeLine{return\ (}
+\DoxyCodeLine{\ \ <Command>}
+\DoxyCodeLine{\ \ \ \ <Command.Input\ />}
+\DoxyCodeLine{\ \ \ \ <Command.List>}
+\DoxyCodeLine{\ \ \ \ \ \ \{loading\ \&\&\ <Command.Loading>Fetching\ words…</Command.Loading>\}}
+\DoxyCodeLine{\ \ \ \ \ \ \{items.map((item)\ =>\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ return\ (}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ <Command.Item\ key=\{`word-\/\$\{item\}`\}\ value=\{item\}>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{item\}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ </Command.Item>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\ \ \ \ \ \ \})\}}
+\DoxyCodeLine{\ \ \ \ </Command.List>}
+\DoxyCodeLine{\ \ </Command>}
+\DoxyCodeLine{)}
+
+\end{DoxyCode}
+\hypertarget{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1817}{}\doxysubsubsubsection{\texorpdfstring{Use inside Popover}{Use inside Popover}}\label{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1817}
+We recommend using the \href{https://www.radix-ui.com/docs/primitives/components/popover}{\texttt{Radix UI popover}} component. ⌘K relies on the Radix UI Dialog component, so this will reduce your bundle size a bit due to shared dependencies.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\$\ pnpm\ install\ @radix-\/ui/react-\/popover}
+
+\end{DoxyCode}
+
+
+Render {\ttfamily Command} inside of the popover content\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ *\ as\ Popover\ from\ '@radix-\/ui/react-\/popover'}
+\DoxyCodeLine{}
+\DoxyCodeLine{return\ (}
+\DoxyCodeLine{\ \ <Popover.Root>}
+\DoxyCodeLine{\ \ \ \ <Popover.Trigger>Toggle\ popover</Popover.Trigger>}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ <Popover.Content>}
+\DoxyCodeLine{\ \ \ \ \ \ <Command>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <Command.Input\ />}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <Command.List>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ <Command.Item>Apple</Command.Item>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ </Command.List>}
+\DoxyCodeLine{\ \ \ \ \ \ </Command>}
+\DoxyCodeLine{\ \ \ \ </Popover.Content>}
+\DoxyCodeLine{\ \ </Popover.Root>}
+\DoxyCodeLine{)}
+
+\end{DoxyCode}
+\hypertarget{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1818}{}\doxysubsubsubsection{\texorpdfstring{Drop in stylesheets}{Drop in stylesheets}}\label{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1818}
+You can find global stylesheets to drop in as a starting point for styling. See \href{website/styles/cmdk}{\texttt{website/styles/cmdk}} for examples.\hypertarget{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1819}{}\doxysubsubsection{\texorpdfstring{FAQ}{FAQ}}\label{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1819}
+{\bfseries{Accessible?}} Yes. Labeling, aria attributes, and DOM ordering tested with Voice Over and Chrome Dev\+Tools. Dialog composes an accessible Dialog implementation.
+
+{\bfseries{Virtualization?}} No. Good performance up to 2,000-\/3,000 items, though. Read below to bring your own.
+
+{\bfseries{Filter/sort items manually?}} Yes. Pass {\ttfamily should\+Filter=\{false\}} to Command. Better memory usage and performance. Bring your own virtualization this way.
+
+{\bfseries{React 18 safe?}} Yes, required. Uses React 18 hooks like {\ttfamily use\+Id} and {\ttfamily use\+Sync\+External\+Store}.
+
+{\bfseries{Unstyled?}} Yes, use the listed CSS selectors.
+
+{\bfseries{Hydration mismatch?}} No, likely a bug in your code. Ensure the {\ttfamily open} prop to {\ttfamily Command.\+Dialog} is {\ttfamily false} on the server.
+
+{\bfseries{React strict mode safe?}} Yes. Open an issue if you notice an issue.
+
+{\bfseries{Weird/wrong behavior?}} Make sure your {\ttfamily Command.\+Item} has a {\ttfamily key} and unique {\ttfamily value}.
+
+{\bfseries{Concurrent mode safe?}} Maybe, but concurrent mode is not yet real. Uses risky approaches like manual DOM ordering.
+
+{\bfseries{React server component?}} No, it\textquotesingle{}s a client component.
+
+{\bfseries{Listen for ⌘K automatically?}} No, do it yourself to have full control over keybind context.
+
+{\bfseries{React Native?}} No, and no plans to support it. If you build a React Native version, let us know and we\textquotesingle{}ll link your repository here.\hypertarget{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1820}{}\doxysubsubsection{\texorpdfstring{History}{History}}\label{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1820}
+Written in 2019 by Paco (\href{https://twitter.com/pacocoursey}{\texttt{@pacocoursey}}) to see if a composable combobox API was possible. Used for the Vercel command menu and autocomplete by Rauno (\href{https://twitter.com/raunofreiberg}{\texttt{@raunofreiberg}}) in 2020. Re-\/written independently in 2022 with a simpler and more performant approach. Ideas and help from Shu (\href{https://twitter.com/shuding_}{\texttt{@shuding\+\_\+}}).
+
+\href{https://github.com/pacocoursey/use-descendants}{\texttt{use-\/descendants}} was extracted from the 2019 version.\hypertarget{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1821}{}\doxysubsubsection{\texorpdfstring{Testing}{Testing}}\label{dir_bb606e285cc58d4709e62ec5d5a2166e_autotoc_md1821}
+First, install dependencies and Playwright browsers\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{pnpm\ install}
+\DoxyCodeLine{pnpm\ playwright\ install}
+
+\end{DoxyCode}
+
+
+Then ensure you\textquotesingle{}ve built the library\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{pnpm\ build}
+
+\end{DoxyCode}
+
+
+Then run the tests using your local build against real browser engines\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{pnpm\ test}
+
+\end{DoxyCode}
+ 

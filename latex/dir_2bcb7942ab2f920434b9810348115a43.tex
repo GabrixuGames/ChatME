@@ -1,0 +1,131 @@
+\doxysection{frontend/node\+\_\+modules/@isaacs/cliui Directory Reference}
+\hypertarget{dir_2bcb7942ab2f920434b9810348115a43}{}\label{dir_2bcb7942ab2f920434b9810348115a43}\index{frontend/node\_modules/"@isaacs/cliui Directory Reference@{frontend/node\_modules/"@isaacs/cliui Directory Reference}}
+
+
+\doxysubsection{Detailed Description}
+\hypertarget{dir_2bcb7942ab2f920434b9810348115a43_autotoc_md339}{}\doxysubsection{\texorpdfstring{@isaacs/cliui}{@isaacs/cliui}}\label{dir_2bcb7942ab2f920434b9810348115a43_autotoc_md339}
+Temporary fork of \href{http://npm.im/cliui}{\texttt{cliui}}.
+
+ \href{https://www.npmjs.com/package/cliui}{\texttt{}} \href{https://conventionalcommits.org}{\texttt{}} 
+
+easily create complex multi-\/column command-\/line-\/interfaces.\hypertarget{dir_2bcb7942ab2f920434b9810348115a43_autotoc_md340}{}\doxysubsection{\texorpdfstring{Example}{Example}}\label{dir_2bcb7942ab2f920434b9810348115a43_autotoc_md340}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{const\ ui\ =\ require('cliui')()}
+\DoxyCodeLine{}
+\DoxyCodeLine{ui.div('Usage:\ \$0\ [command]\ [options]')}
+\DoxyCodeLine{}
+\DoxyCodeLine{ui.div(\{}
+\DoxyCodeLine{\ \ text:\ 'Options:',}
+\DoxyCodeLine{\ \ padding:\ [2,\ 0,\ 1,\ 0]}
+\DoxyCodeLine{\})}
+\DoxyCodeLine{}
+\DoxyCodeLine{ui.div(}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ text:\ "{}-\/f,\ -\/-\/file"{},}
+\DoxyCodeLine{\ \ \ \ width:\ 20,}
+\DoxyCodeLine{\ \ \ \ padding:\ [0,\ 4,\ 0,\ 4]}
+\DoxyCodeLine{\ \ \},}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ text:\ "{}the\ file\ to\ load."{}\ +}
+\DoxyCodeLine{\ \ \ \ \ \ chalk.green("{}(if\ this\ description\ is\ long\ it\ wraps)."{})}
+\DoxyCodeLine{\ \ \ \ ,}
+\DoxyCodeLine{\ \ \ \ width:\ 20}
+\DoxyCodeLine{\ \ \},}
+\DoxyCodeLine{\ \ \{}
+\DoxyCodeLine{\ \ \ \ text:\ chalk.red("{}[required]"{}),}
+\DoxyCodeLine{\ \ \ \ align:\ 'right'}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{)}
+\DoxyCodeLine{}
+\DoxyCodeLine{console.log(ui.toString())}
+
+\end{DoxyCode}
+\hypertarget{dir_2bcb7942ab2f920434b9810348115a43_autotoc_md341}{}\doxysubsection{\texorpdfstring{Deno/\+ESM Support}{Deno/\+ESM Support}}\label{dir_2bcb7942ab2f920434b9810348115a43_autotoc_md341}
+As of {\ttfamily v7} {\ttfamily cliui} supports \href{https://github.com/denoland/deno}{\texttt{Deno}} and \href{https://nodejs.org/api/esm.html\#esm_ecmascript_modules}{\texttt{ESM}}\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ cliui\ from\ "{}https://deno.land/x/cliui/deno.ts"{};}
+\DoxyCodeLine{}
+\DoxyCodeLine{const\ ui\ =\ cliui(\{\})}
+\DoxyCodeLine{}
+\DoxyCodeLine{ui.div('Usage:\ \$0\ [command]\ [options]')}
+\DoxyCodeLine{}
+\DoxyCodeLine{ui.div(\{}
+\DoxyCodeLine{\ \ text:\ 'Options:',}
+\DoxyCodeLine{\ \ padding:\ [2,\ 0,\ 1,\ 0]}
+\DoxyCodeLine{\})}
+\DoxyCodeLine{}
+\DoxyCodeLine{ui.div(\{}
+\DoxyCodeLine{\ \ text:\ "{}-\/f,\ -\/-\/file"{},}
+\DoxyCodeLine{\ \ width:\ 20,}
+\DoxyCodeLine{\ \ padding:\ [0,\ 4,\ 0,\ 4]}
+\DoxyCodeLine{\})}
+\DoxyCodeLine{}
+\DoxyCodeLine{console.log(ui.toString())}
+
+\end{DoxyCode}
+
+
+\hypertarget{dir_2bcb7942ab2f920434b9810348115a43_autotoc_md342}{}\doxysubsection{\texorpdfstring{Layout DSL}{Layout DSL}}\label{dir_2bcb7942ab2f920434b9810348115a43_autotoc_md342}
+cliui exposes a simple layout DSL\+:
+
+If you create a single {\ttfamily ui.\+div}, passing a string rather than an object\+:
+
+
+\begin{DoxyItemize}
+\item {\ttfamily \textbackslash{}n}\+: characters will be interpreted as new rows.
+\item {\ttfamily \textbackslash{}t}\+: characters will be interpreted as new columns.
+\item {\ttfamily \textbackslash{}s}\+: characters will be interpreted as padding.
+\end{DoxyItemize}
+
+{\bfseries{as an example...}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var\ ui\ =\ require('./')(\{}
+\DoxyCodeLine{\ \ width:\ 60}
+\DoxyCodeLine{\})}
+\DoxyCodeLine{}
+\DoxyCodeLine{ui.div(}
+\DoxyCodeLine{\ \ 'Usage:\ node\ ./bin/foo.js\(\backslash\)n'\ +}
+\DoxyCodeLine{\ \ '\ \ <regex>\(\backslash\)t\ \ provide\ a\ regex\(\backslash\)n'\ +}
+\DoxyCodeLine{\ \ '\ \ <glob>\(\backslash\)t\ \ provide\ a\ glob\(\backslash\)t\ [required]'}
+\DoxyCodeLine{)}
+\DoxyCodeLine{}
+\DoxyCodeLine{console.log(ui.toString())}
+
+\end{DoxyCode}
+
+
+{\bfseries{will output\+:}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Usage:\ node\ ./bin/foo.js}
+\DoxyCodeLine{\ \ <regex>\ \ provide\ a\ regex}
+\DoxyCodeLine{\ \ <glob>\ \ \ provide\ a\ glob\ \ \ \ \ \ \ \ \ \ [required]}
+
+\end{DoxyCode}
+\hypertarget{dir_2bcb7942ab2f920434b9810348115a43_autotoc_md343}{}\doxysubsection{\texorpdfstring{Methods}{Methods}}\label{dir_2bcb7942ab2f920434b9810348115a43_autotoc_md343}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cliui\ =\ require('cliui')}
+
+\end{DoxyCode}
+\hypertarget{dir_2bcb7942ab2f920434b9810348115a43_autotoc_md344}{}\doxysubsubsection{\texorpdfstring{cliui(\{width\+: integer\})}{cliui(\{width\+: integer\})}}\label{dir_2bcb7942ab2f920434b9810348115a43_autotoc_md344}
+Specify the maximum width of the UI being generated. If no width is provided, cliui will try to get the current window\textquotesingle{}s width and use it, and if that doesn\textquotesingle{}t work, width will be set to {\ttfamily 80}.\hypertarget{dir_2bcb7942ab2f920434b9810348115a43_autotoc_md345}{}\doxysubsubsection{\texorpdfstring{cliui(\{wrap\+: boolean\})}{cliui(\{wrap\+: boolean\})}}\label{dir_2bcb7942ab2f920434b9810348115a43_autotoc_md345}
+Enable or disable the wrapping of text in a column.\hypertarget{dir_2bcb7942ab2f920434b9810348115a43_autotoc_md346}{}\doxysubsubsection{\texorpdfstring{cliui.\+div(column, column, column)}{cliui.\+div(column, column, column)}}\label{dir_2bcb7942ab2f920434b9810348115a43_autotoc_md346}
+Create a row with any number of columns, a column can either be a string, or an object with the following options\+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries{text\+:}} some text to place in the column.
+\item {\bfseries{width\+:}} the width of a column.
+\item {\bfseries{align\+:}} alignment, {\ttfamily right} or {\ttfamily center}.
+\item {\bfseries{padding\+:}} {\ttfamily \mbox{[}top, right, bottom, left\mbox{]}}.
+\item {\bfseries{border\+:}} should a border be placed around the div?
+\end{DoxyItemize}\hypertarget{dir_2bcb7942ab2f920434b9810348115a43_autotoc_md347}{}\doxysubsubsection{\texorpdfstring{cliui.\+span(column, column, column)}{cliui.\+span(column, column, column)}}\label{dir_2bcb7942ab2f920434b9810348115a43_autotoc_md347}
+Similar to {\ttfamily div}, except the next row will be appended without a new line being created.\hypertarget{dir_2bcb7942ab2f920434b9810348115a43_autotoc_md348}{}\doxysubsubsection{\texorpdfstring{cliui.\+reset\+Output()}{cliui.\+reset\+Output()}}\label{dir_2bcb7942ab2f920434b9810348115a43_autotoc_md348}
+Resets the UI elements of the current cliui instance, maintaining the values set for {\ttfamily width} and {\ttfamily wrap}. 

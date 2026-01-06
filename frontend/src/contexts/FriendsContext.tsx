@@ -1,6 +1,7 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { useAuth } from "@/contexts/AuthContext";
+import { useChat } from "@/contexts/ChatContext";
 
 export interface Friend {
   id: string;
@@ -36,33 +37,77 @@ export const FriendsProvider = ({ children }: { children: React.ReactNode }) => 
   const [sentRequests, setSentRequests] = useState<FriendRequest[]>([]);
   const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
   const { token } = useAuth();
+  const { socket } = useChat();
 
-  const authHeader = token ? { Authorization: `Bearer ${token}` } : {};
-
-  const refresh = async () => {
-    const [friendsRes, pendingRes, sentRes] = await Promise.all([
-      axios.get(`${API_URL}/friends/list`, { headers: authHeader }),
-      axios.get(`${API_URL}/friends/pending`, { headers: authHeader }),
-      axios.get(`${API_URL}/friends/sent`, { headers: authHeader })
-    ]);
-    setFriends(friendsRes.data.friends || []);
-    setPendingRequests(pendingRes.data.pending_requests || []);
-    setSentRequests(sentRes.data.sent_requests || []);
-  };
+  const refresh = useCallback(async () => {
+    if (!token) {
+      console.warn('⚠️ No hay token disponible, no se pueden cargar amigos');
+      return;
+    }
+    
+    const authHeader = { Authorization: `Bearer ${token}` };
+    
+    try {
+      console.log('🔄 Actualizando lista de amigos...');
+      const [friendsRes, pendingRes, sentRes] = await Promise.all([
+        axios.get(`${API_URL}/friends/list`, { headers: authHeader }),
+        axios.get(`${API_URL}/friends/pending`, { headers: authHeader }),
+        axios.get(`${API_URL}/friends/sent`, { headers: authHeader })
+      ]);
+      console.log('✅ Amigos:', friendsRes.data.friends);
+      console.log('📥 Solicitudes pendientes:', pendingRes.data.pending_requests);
+      console.log('📤 Solicitudes enviadas:', sentRes.data.sent_requests);
+      setFriends(friendsRes.data.friends || []);
+      setPendingRequests(pendingRes.data.pending_requests || []);
+      setSentRequests(sentRes.data.sent_requests || []);
+    } catch (error) {
+      console.error('❌ Error al actualizar amigos:', error);
+    }
+  }, [token, API_URL]);
 
   useEffect(() => { refresh(); }, [token]);
 
+  // Escuchar eventos personalizados de window (disparados desde ChatContext)
+  useEffect(() => {
+    const handleFriendRequestAccepted = (event: Event) => {
+      const data = (event as CustomEvent).detail;
+      console.log('🎉 [FriendsContext] Solicitud de amistad aceptada:', data);
+      console.log('🔄 [FriendsContext] Llamando a refresh()...');
+      refresh();
+    };
+
+    const handleFriendRequestReceived = (event: Event) => {
+      const data = (event as CustomEvent).detail;
+      console.log('📬 [FriendsContext] Nueva solicitud de amistad recibida:', data);
+      console.log('🔄 [FriendsContext] Llamando a refresh()...');
+      refresh();
+    };
+
+    console.log('👂 [FriendsContext] Registrando listeners de eventos personalizados');
+    window.addEventListener('friendRequestAccepted', handleFriendRequestAccepted);
+    window.addEventListener('friendRequestReceived', handleFriendRequestReceived);
+
+    return () => {
+      console.log('🔇 [FriendsContext] Removiendo listeners de eventos personalizados');
+      window.removeEventListener('friendRequestAccepted', handleFriendRequestAccepted);
+      window.removeEventListener('friendRequestReceived', handleFriendRequestReceived);
+    };
+  }, [refresh]);
+
   const sendRequest = async (receiver_id: string) => {
+    const authHeader = token ? { Authorization: `Bearer ${token}` } : {};
     await axios.post(`${API_URL}/friends/send_request`, { receiver_id }, { headers: authHeader });
     await refresh();
   };
 
   const respondRequest = async (request_id: string, status: string) => {
+    const authHeader = token ? { Authorization: `Bearer ${token}` } : {};
     await axios.post(`${API_URL}/friends/respond_request`, { request_id, status }, { headers: authHeader });
     await refresh();
   };
 
   const removeFriend = async (friend_id: string) => {
+    const authHeader = token ? { Authorization: `Bearer ${token}` } : {};
     await axios.post(`${API_URL}/friends/remove`, { friend_id }, { headers: authHeader });
     await refresh();
   };

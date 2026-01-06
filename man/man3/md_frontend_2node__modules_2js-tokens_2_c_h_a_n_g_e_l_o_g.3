@@ -1,0 +1,148 @@
+.TH "md_frontend_2node__modules_2js-tokens_2_c_h_a_n_g_e_l_o_g" 3 "Version 0.1" "Chat-ME!" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md_frontend_2node__modules_2js-tokens_2_c_h_a_n_g_e_l_o_g \- Version 4\&.0\&.0 (2018-01-28) 
+.PP
+
+
+.PP
+.IP "\(bu" 2
+Added: Support for ES2018\&. The only change needed was recognizing the \fRs\fP regex flag\&.
+.IP "\(bu" 2
+Changed: \fIAll\fP tokens returned by the \fRmatchToToken\fP function now have a \fRclosed\fP property\&. It is set to \fRundefined\fP for the tokens where “closed” doesn’t make sense\&. This means that all tokens objects have the same shape, which might improve performance\&.
+.PP
+
+.PP
+These are the breaking changes:
+
+.PP
+.IP "\(bu" 2
+\fR'/a/s'\&.match(jsTokens)\fP no longer returns \fR['/', 'a', '/', 's']\fP, but \fR['/a/s']\fP\&. (There are of course other variations of this\&.)
+.IP "\(bu" 2
+Code that rely on some token objects not having the \fRclosed\fP property could now behave differently\&.
+.PP
+.SS "Version 3\&.0\&.2 (2017-06-28)"
+.IP "\(bu" 2
+No code changes\&. Just updates to the readme\&.
+.PP
+.SS "Version 3\&.0\&.1 (2017-01-30)"
+.IP "\(bu" 2
+Fixed: ES2015 unicode escapes with more than 6 hex digits are now matched correctly\&.
+.PP
+.SS "Version 3\&.0\&.0 (2017-01-11)"
+This release contains one breaking change, that should \fRimprove performance in V8\fP:
+
+.PP
+.RS 4
+So how can you, as a JavaScript developer, ensure that your RegExps are fast? If you are not interested in hooking into RegExp internals, make sure that neither the RegExp instance, nor its prototype is modified in order to get the best performance:
+
+.PP
+.PP
+.nf
+var re = /\&./g;
+re\&.exec('');  // Fast path\&.
+re\&.new_property = 'slow';
+.fi
+.PP
+ 
+.RE
+.PP
+
+.PP
+This module used to export a single regex, with \fR\&.matchToToken\fP bolted on, just like in the above example\&. This release changes the exports of the module to avoid this issue\&.
+
+.PP
+Before:
+
+.PP
+.PP
+.nf
+import jsTokens from "js\-tokens"
+// or:
+var jsTokens = require("js\-tokens")
+var matchToToken = jsTokens\&.matchToToken
+.fi
+.PP
+
+.PP
+After:
+
+.PP
+.PP
+.nf
+import jsTokens, {matchToToken} from "js\-tokens"
+// or:
+var jsTokens = require("js\-tokens")\&.default
+var matchToToken = require("js\-tokens")\&.matchToToken
+.fi
+.PP
+.SS "Version 2\&.0\&.0 (2016-06-19)"
+.IP "\(bu" 2
+Added: Support for ES2016\&. In other words, support for the \fR**\fP exponentiation operator\&.
+.PP
+
+.PP
+These are the breaking changes:
+
+.PP
+.IP "\(bu" 2
+\fR'**'\&.match(jsTokens)\fP no longer returns \fR['*', '*']\fP, but \fR['**']\fP\&.
+.IP "\(bu" 2
+\fR'**='\&.match(jsTokens)\fP no longer returns \fR['*', '*=']\fP, but \fR['**=']\fP\&.
+.PP
+.SS "Version 1\&.0\&.3 (2016-03-27)"
+.IP "\(bu" 2
+Improved: Made the regex ever so slightly smaller\&.
+.IP "\(bu" 2
+Updated: The readme\&.
+.PP
+.SS "Version 1\&.0\&.2 (2015-10-18)"
+.IP "\(bu" 2
+Improved: Limited npm package contents for a smaller download\&. Thanks to @zertosh!
+.PP
+.SS "Version 1\&.0\&.1 (2015-06-20)"
+.IP "\(bu" 2
+Fixed: Declared an undeclared variable\&.
+.PP
+.SS "Version 1\&.0\&.0 (2015-02-26)"
+.IP "\(bu" 2
+Changed: Merged the 'operator' and 'punctuation' types into 'punctuator'\&. That type is now equivalent to the Punctuator token in the ECMAScript specification\&. (Backwards-incompatible change\&.)
+.IP "\(bu" 2
+Fixed: A \fR-\fP followed by a number is now correctly matched as a punctuator followed by a number\&. It used to be matched as just a number, but there is no such thing as negative number literals\&. (Possibly backwards-incompatible change\&.)
+.PP
+.SS "Version 0\&.4\&.1 (2015-02-21)"
+.IP "\(bu" 2
+Added: Support for the regex \fRu\fP flag\&.
+.PP
+.SS "Version 0\&.4\&.0 (2015-02-21)"
+.IP "\(bu" 2
+Improved: \fRjsTokens\&.matchToToken\fP performance\&.
+.IP "\(bu" 2
+Added: Support for octal and binary number literals\&.
+.IP "\(bu" 2
+Added: Support for template strings\&.
+.PP
+.SS "Version 0\&.3\&.1 (2015-01-06)"
+.IP "\(bu" 2
+Fixed: Support for unicode spaces\&. They used to be allowed in names (which is very confusing), and some unicode newlines were wrongly allowed in strings and regexes\&.
+.PP
+.SS "Version 0\&.3\&.0 (2014-12-19)"
+.IP "\(bu" 2
+Changed: The \fRjsTokens\&.names\fP array has been replaced with the \fRjsTokens\&.matchToToken\fP function\&. The capturing groups of \fRjsTokens\fP are no longer part of the public API; instead use said function\&. See this \fRgist\fP for an example\&. (Backwards-incompatible change\&.)
+.IP "\(bu" 2
+Changed: The empty string is now considered an “invalid” token, instead an “empty” token (its own group)\&. (Backwards-incompatible change\&.)
+.IP "\(bu" 2
+Removed: component support\&. (Backwards-incompatible change\&.)
+.PP
+.SS "Version 0\&.2\&.0 (2014-06-19)"
+.IP "\(bu" 2
+Changed: Match ES6 function arrows (\fR=>\fP) as an operator, instead of its own category (“functionArrow”), for simplicity\&. (Backwards-incompatible change\&.)
+.IP "\(bu" 2
+Added: ES6 splats (\fR\&.\&.\&.\fP) are now matched as an operator (instead of three punctuations)\&. (Backwards-incompatible change\&.)
+.PP
+.SS "Version 0\&.1\&.0 (2014-03-08)"
+.IP "\(bu" 2
+Initial release\&. 
+.PP
+

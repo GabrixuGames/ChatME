@@ -1,0 +1,146 @@
+\doxysection{frontend/node\+\_\+modules/react-\/remove-\/scroll Directory Reference}
+\hypertarget{dir_c881a72cda49eca87995cdbfbf6d7644}{}\label{dir_c881a72cda49eca87995cdbfbf6d7644}\index{frontend/node\_modules/react-\/remove-\/scroll Directory Reference@{frontend/node\_modules/react-\/remove-\/scroll Directory Reference}}
+
+
+\doxysubsection{Detailed Description}
+ \doxysubsection*{React-\/remove-\/📜}
+
+ ~\newline
+ dont even scroll ~\newline
+
+
+ \href{https://www.npmjs.com/package/react-remove-scroll}{\texttt{ }}
+
+ \href{https://travis-ci.org/theKashey/react-remove-scroll}{\texttt{ }}
+
+ \href{https://www.npmjs.com/package/react-remove-scroll}{\texttt{ }}
+
+ \href{https://bundlephobia.com/result?p=react-remove-scroll}{\texttt{ }} ~\newline
+ ~\newline
+ \hypertarget{dir_c881a72cda49eca87995cdbfbf6d7644_autotoc_md5299}{}\doxysubsection{\texorpdfstring{react-\/remove-\/scroll}{react-\/remove-\/scroll}}\label{dir_c881a72cda49eca87995cdbfbf6d7644_autotoc_md5299}
+\href{https://www.npmjs.com/package/react-remove-scroll}{\texttt{}}
+
+Disables scroll outside of {\ttfamily children} node.
+
+
+\begin{DoxyItemize}
+\item 🖱 mouse and touch devices friendly
+\item 📈 vertical and horizontal
+\item 📜 removes document scroll bar maintaining it space
+\item ✅ support nested scrollable elements
+\item 🕳 supports react-\/portals (uses React Event system)
+\item ☠️ it could block literally any scroll anywhere
+\end{DoxyItemize}\hypertarget{dir_c881a72cda49eca87995cdbfbf6d7644_autotoc_md5300}{}\doxysubsection{\texorpdfstring{Usage}{Usage}}\label{dir_c881a72cda49eca87995cdbfbf6d7644_autotoc_md5300}
+Just wrap content, which should be scrollable, and everything else would not. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ \{RemoveScroll\}\ from\ 'react-\/remove-\/scroll';}
+\DoxyCodeLine{}
+\DoxyCodeLine{<RemoveScroll>}
+\DoxyCodeLine{\ \ Only\ this\ content\ would\ be\ scrollable}
+\DoxyCodeLine{</RemoveScroll>\ \ }
+
+\end{DoxyCode}
+
+
+{\ttfamily Remove\+Scroll} accept following props
+\begin{DoxyItemize}
+\item {\ttfamily children}
+\item {\ttfamily \mbox{[}enabled\mbox{]}} -\/ activate or deactivate component behaviour without removing it.
+\item {\ttfamily \mbox{[}allow\+Pinch\+Zoom=false\mbox{]}} -\/ enabled "{}pinch-\/n-\/zoom"{} behavior. By default it might be prevented. However -\/ pinch and zoom might break "{}scroll isolation"{}, and {\bfseries{disabled by default}}.
+\item {\ttfamily \mbox{[}no\+Relative=false\mbox{]}} -\/ prevents setting {\ttfamily position\+: relative} on the body.
+\item {\ttfamily \mbox{[}no\+Isolation=false\mbox{]}} -\/ disables outer event capturing. Event capturing is React friendly and unlikely be a problem. But if you are using {\itshape shadowbox} of some sort -\/ you dont need it.
+\item {\ttfamily \mbox{[}inert=false\mbox{]}} -\/ ☠️(be careful) disables events the rest of page completely using {\ttfamily pointer-\/events} except the Lock(+shards). React portals not friendly, might lead to production issues. Enable only for {\bfseries{rare}} cases, when you have to disable scrollbars somewhere on the page(except body, Lock and shards). ~\newline
+
+\item {\ttfamily \mbox{[}forward\+Props\mbox{]}} -\/ will forward all props to the {\ttfamily children}
+\item {\ttfamily \mbox{[}class\+Name\mbox{]}} -\/ class\+Name for an internal div
+\item {\ttfamily \mbox{[}remove\+Scroll\+Bar\mbox{]}} -\/ to control scroll bar removal. Set to false, if you prefer to keep it (wheel and touch scroll is still disabled).
+\end{DoxyItemize}\hypertarget{dir_c881a72cda49eca87995cdbfbf6d7644_autotoc_md5301}{}\doxysubsection{\texorpdfstring{Size}{Size}}\label{dir_c881a72cda49eca87995cdbfbf6d7644_autotoc_md5301}
+\hypertarget{dir_c881a72cda49eca87995cdbfbf6d7644_autotoc_md5302}{}\doxysubsubsection{\texorpdfstring{-\/ (🧩 full) 1.\+7kb after compression (excluding tslib).}{-\/ (🧩 full) 1.\+7kb after compression (excluding tslib).}}\label{dir_c881a72cda49eca87995cdbfbf6d7644_autotoc_md5302}
+
+\begin{DoxyItemize}
+\item (👁 UI) {\bfseries{400b}}, visual elements only
+\item (🚗 sidecar) 1.\+5kb, side effects 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ \{sidecar\}\ from\ "{}react-\/remove-\/scroll"{};}
+\DoxyCodeLine{import\ \{RemoveScroll\}\ from\ 'react-\/remove-\/scroll/UI';}
+\DoxyCodeLine{}
+\DoxyCodeLine{const\ sidecar\ =\ sidecar(()\ =>\ import('react-\/remove-\/scroll/sidecar'));}
+\DoxyCodeLine{}
+\DoxyCodeLine{<RemoveScroll\ sideCar=\{sidecar\}>}
+\DoxyCodeLine{\ \ Will\ load\ logic\ from\ a\ sidecar\ when\ needed}
+\DoxyCodeLine{</RemoveScroll>\ \ }
+
+\end{DoxyCode}
+
+\end{DoxyItemize}
+
+\begin{quote}
+Consider setting {\ttfamily -\/webkit-\/overflow-\/scrolling\+: touch;} on a document level for a proper mobile experience. \end{quote}
+\hypertarget{dir_c881a72cda49eca87995cdbfbf6d7644_autotoc_md5303}{}\doxysubsubsection{\texorpdfstring{Internal div}{Internal div}}\label{dir_c881a72cda49eca87995cdbfbf6d7644_autotoc_md5303}
+By default Remove\+Scroll will create a div to handle and capture events. You may specify {\ttfamily class\+Name} for it, if you need, or {\bfseries{remove it}}.
+
+The following code samples will produce the same output 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<RemoveScroll\ className="{}scroll"{}>}
+\DoxyCodeLine{\ \ Only\ this\ content\ would\ be\ scrollable}
+\DoxyCodeLine{</RemoveScroll>}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<RemoveScroll\ forwardProps>}
+\DoxyCodeLine{\ \ <div\ className="{}scroll"{}>\ //RemoveScroll\ will\ inject\ props\ to\ this\ div}
+\DoxyCodeLine{\ \ \ \ Only\ this\ content\ would\ be\ scrollable}
+\DoxyCodeLine{\ \ </div>}
+\DoxyCodeLine{</RemoveScroll>\ }
+
+\end{DoxyCode}
+ Pick the first one if you don\textquotesingle{}t need a second.\hypertarget{dir_c881a72cda49eca87995cdbfbf6d7644_autotoc_md5304}{}\doxysubsubsection{\texorpdfstring{Position\+:fixed elements}{Position\+:fixed elements}}\label{dir_c881a72cda49eca87995cdbfbf6d7644_autotoc_md5304}
+To properly size these elements please add a special class\+Name to them. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ \{RemoveScroll\}\ from\ 'react-\/remove-\/scroll';}
+\DoxyCodeLine{}
+\DoxyCodeLine{//\ to\ make\ "{}width:\ 100\%"{}}
+\DoxyCodeLine{<div\ className=\{cx(classWithPositionFixed,\ RemoveScroll.classNames.fullWidth)\}\ />}
+\DoxyCodeLine{}
+\DoxyCodeLine{//\ to\ make\ "{}right:0"{}}
+\DoxyCodeLine{<div\ className=\{cx(classWithPositionFixed,\ RemoveScroll.classNames.zeroRight)\}\ />}
+
+\end{DoxyCode}
+ See \href{https://github.com/theKashey/react-remove-scroll-bar}{\texttt{react-\/remove-\/scroll-\/bar}} documentation for details.\hypertarget{dir_c881a72cda49eca87995cdbfbf6d7644_autotoc_md5305}{}\doxysubsubsection{\texorpdfstring{More than one lock}{More than one lock}}\label{dir_c881a72cda49eca87995cdbfbf6d7644_autotoc_md5305}
+When stacked more is active (default) only one (last) component would be active.\hypertarget{dir_c881a72cda49eca87995cdbfbf6d7644_autotoc_md5306}{}\doxysubsubsection{\texorpdfstring{Over isolation}{Over isolation}}\label{dir_c881a72cda49eca87995cdbfbf6d7644_autotoc_md5306}
+That could happen -\/ you disable scroll on the body, you are suppressing all scroll and wheel events, and you are ghosting the rest of the page by the {\ttfamily inert} prop.
+
+Only something inside Lock does exists for the browser, and that might be less than you expected.
+
+Dont forget about {\ttfamily shard}, dont forget -\/ {\ttfamily inert} is not portals friendly, dont forget -\/ you dont need over isolation in most of the cases.
+
+\begin{quote}
+just be careful! \end{quote}
+\hypertarget{dir_c881a72cda49eca87995cdbfbf6d7644_autotoc_md5307}{}\doxysubsection{\texorpdfstring{Performance}{Performance}}\label{dir_c881a72cda49eca87995cdbfbf6d7644_autotoc_md5307}
+To do the job this library setup {\itshape non} passive event listener. Chrome dev tools would complain about it, as a performance no-\/op.
+
+We have to use synchronous scroll/touch handler, and it may affect scrolling performance.
+
+Consider using {\ttfamily no\+Isolation} mode, if you have large scrollable areas.\hypertarget{dir_c881a72cda49eca87995cdbfbf6d7644_autotoc_md5308}{}\doxysubsection{\texorpdfstring{Supported React versions}{Supported React versions}}\label{dir_c881a72cda49eca87995cdbfbf6d7644_autotoc_md5308}
+
+\begin{DoxyItemize}
+\item v1 supports React 15/16
+\item v2 requires 16.\+8.\+0+ (hooks)
+\end{DoxyItemize}\hypertarget{dir_c881a72cda49eca87995cdbfbf6d7644_autotoc_md5309}{}\doxysubsection{\texorpdfstring{Scroll-\/\+Locky}{Scroll-\/\+Locky}}\label{dir_c881a72cda49eca87995cdbfbf6d7644_autotoc_md5309}
+This is a refactoring of another library -\/ \href{https://github.com/theKashey/react-scroll-locky}{\texttt{react-\/scroll-\/locky}} -\/ to make package smaller and more react-\/portals friendly.\hypertarget{dir_c881a72cda49eca87995cdbfbf6d7644_autotoc_md5310}{}\doxysubsubsection{\texorpdfstring{See also}{See also}}\label{dir_c881a72cda49eca87995cdbfbf6d7644_autotoc_md5310}
+
+\begin{DoxyItemize}
+\item \href{https://github.com/theKashey/react-focus-on}{\texttt{react-\/focus-\/on}} -\/ Finite Modal creator (uses Scroll-\/\+Locky) underneath.
+\item \href{https://github.com/theKashey/react-locky}{\texttt{react-\/locky}} -\/ React event canceler
+\item \href{https://github.com/jossmac/react-scrolllock}{\texttt{react-\/scrolllock}} -\/ React scroll lock
+\item \href{https://github.com/FL3NKEY/scroll-lock}{\texttt{scroll-\/lock}} -\/ DOM scroll lock
+\item \href{https://github.com/willmcpo/body-scroll-lock}{\texttt{body-\/scroll-\/lock}} -\/ DOM scroll lock
+\end{DoxyItemize}
+
+\begin{quote}
+This package is relative smaller(1), more react friendly(2), works with non zero body margins(3), and has a better "{}overscroll"{} management. \end{quote}
+\hypertarget{dir_c881a72cda49eca87995cdbfbf6d7644_autotoc_md5311}{}\doxysubsection{\texorpdfstring{License}{License}}\label{dir_c881a72cda49eca87995cdbfbf6d7644_autotoc_md5311}
+MIT 

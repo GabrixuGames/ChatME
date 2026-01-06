@@ -1,0 +1,72 @@
+\doxysection{services.\+auth\+\_\+service.\+Auth\+Service Class Reference}
+\hypertarget{classservices_1_1auth__service_1_1_auth_service}{}\label{classservices_1_1auth__service_1_1_auth_service}\index{services.auth\_service.AuthService@{services.auth\_service.AuthService}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Optional\mbox{[}str\mbox{]} \mbox{\hyperlink{classservices_1_1auth__service_1_1_auth_service_a9bc0c04951347dc116e7bf8e064fee33}{register\+\_\+user}} (self, str username, str email, str password)
+\item 
+\Hypertarget{classservices_1_1auth__service_1_1_auth_service_aeb6a5bc5abb01ba909f1babd1a99940c}\label{classservices_1_1auth__service_1_1_auth_service_aeb6a5bc5abb01ba909f1babd1a99940c} 
+{\bfseries \+\_\+\+\_\+init\+\_\+\+\_\+} (self)
+\item 
+Optional\mbox{[}Dict\mbox{]} \mbox{\hyperlink{classservices_1_1auth__service_1_1_auth_service_ada6c7ee5bd4d8201dead268ae69417b1}{authenticate\+\_\+user}} (self, str username, str password)
+\item 
+Optional\mbox{[}Dict\mbox{]} \mbox{\hyperlink{classservices_1_1auth__service_1_1_auth_service_a4e64d08bb0f07271fb89bd969db577ed}{get\+\_\+user\+\_\+by\+\_\+username}} (self, str username)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classservices_1_1auth__service_1_1_auth_service_ac4c7184f8885012ea81acc09d99b8fe1}\label{classservices_1_1auth__service_1_1_auth_service_ac4c7184f8885012ea81acc09d99b8fe1} 
+{\bfseries user\+\_\+repository} = \mbox{\hyperlink{classrepositories_1_1base__repository_1_1_user_repository}{User\+Repository}}()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Servicio de autenticación
+Encapsula la lógica de negocio para login, logout, etc.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classservices_1_1auth__service_1_1_auth_service_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classservices_1_1auth__service_1_1_auth_service_ada6c7ee5bd4d8201dead268ae69417b1}\index{services.auth\_service.AuthService@{services.auth\_service.AuthService}!authenticate\_user@{authenticate\_user}}
+\index{authenticate\_user@{authenticate\_user}!services.auth\_service.AuthService@{services.auth\_service.AuthService}}
+\doxysubsubsection{\texorpdfstring{authenticate\_user()}{authenticate\_user()}}
+{\footnotesize\ttfamily \label{classservices_1_1auth__service_1_1_auth_service_ada6c7ee5bd4d8201dead268ae69417b1} 
+ Optional\mbox{[}Dict\mbox{]} services.\+auth\+\_\+service.\+Auth\+Service.\+authenticate\+\_\+user (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{username}{, }\item[{str}]{password}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Autenticar usuario con username y password
+
+Args:
+    username: Username del usuario
+    password: Password en texto plano
+    
+Returns:
+    Dict con información del usuario si es válido, None si no
+\end{DoxyVerb}
+ \Hypertarget{classservices_1_1auth__service_1_1_auth_service_a4e64d08bb0f07271fb89bd969db577ed}\index{services.auth\_service.AuthService@{services.auth\_service.AuthService}!get\_user\_by\_username@{get\_user\_by\_username}}
+\index{get\_user\_by\_username@{get\_user\_by\_username}!services.auth\_service.AuthService@{services.auth\_service.AuthService}}
+\doxysubsubsection{\texorpdfstring{get\_user\_by\_username()}{get\_user\_by\_username()}}
+{\footnotesize\ttfamily \label{classservices_1_1auth__service_1_1_auth_service_a4e64d08bb0f07271fb89bd969db577ed} 
+ Optional\mbox{[}Dict\mbox{]} services.\+auth\+\_\+service.\+Auth\+Service.\+get\+\_\+user\+\_\+by\+\_\+username (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{username}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtener información de usuario por username\end{DoxyVerb}
+ \Hypertarget{classservices_1_1auth__service_1_1_auth_service_a9bc0c04951347dc116e7bf8e064fee33}\index{services.auth\_service.AuthService@{services.auth\_service.AuthService}!register\_user@{register\_user}}
+\index{register\_user@{register\_user}!services.auth\_service.AuthService@{services.auth\_service.AuthService}}
+\doxysubsubsection{\texorpdfstring{register\_user()}{register\_user()}}
+{\footnotesize\ttfamily \label{classservices_1_1auth__service_1_1_auth_service_a9bc0c04951347dc116e7bf8e064fee33} 
+ Optional\mbox{[}str\mbox{]} services.\+auth\+\_\+service.\+Auth\+Service.\+register\+\_\+user (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{username}{, }\item[{str}]{email}{, }\item[{str}]{password}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Registrar usuario nuevo
+Args:
+    username: Username del usuario
+    email: Email del usuario
+    password: Password en texto plano
+Returns:
+    ID del usuario creado o None
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+backend/services/auth\+\_\+service.\+py\end{DoxyCompactItemize}

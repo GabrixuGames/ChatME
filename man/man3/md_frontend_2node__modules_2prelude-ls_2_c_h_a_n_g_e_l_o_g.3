@@ -1,0 +1,211 @@
+.TH "md_frontend_2node__modules_2prelude-ls_2_c_h_a_n_g_e_l_o_g" 3 "Version 0.1" "Chat-ME!" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md_frontend_2node__modules_2prelude-ls_2_c_h_a_n_g_e_l_o_g \- 1\&.2\&.1 
+.PP
+
+
+.PP
+.IP "\(bu" 2
+fix version
+.PP
+.SH "1\&.2\&.0"
+.PP
+.IP "\(bu" 2
+add \fRList\&.remove\fP
+.IP "\(bu" 2
+build with LiveScript 1\&.6\&.0
+.IP "\(bu" 2
+update dependencies
+.IP "\(bu" 2
+remove coverage calculation
+.PP
+.SH "1\&.1\&.2"
+.PP
+.IP "\(bu" 2
+add \fRFunc\&.memoize\fP
+.IP "\(bu" 2
+fix \fRzip-all\fP and \fRzip-with-all\fP corner case (no input)
+.IP "\(bu" 2
+build with LiveScript 1\&.4\&.0
+.PP
+.SH "1\&.1\&.1"
+.PP
+.IP "\(bu" 2
+curry \fRunique-by\fP, \fRminimum-by\fP
+.PP
+.SH "1\&.1\&.0"
+.PP
+.IP "\(bu" 2
+added \fRList\fP functions: \fRmaximum-by\fP, \fRminimum-by\fP, \fRunique-by\fP
+.IP "\(bu" 2
+added \fRList\fP functions: \fRat\fP, \fRelem-index\fP, \fRelem-indices\fP, \fRfind-index\fP, \fRfind-indices\fP
+.IP "\(bu" 2
+added \fRStr\fP functions: \fRcapitalize\fP, \fRcamelize\fP, \fRdasherize\fP
+.IP "\(bu" 2
+added \fRFunc\fP function: \fRover\fP - eg\&. \fRsame-length = (==) `over` (\&.length)\fP
+.IP "\(bu" 2
+exported \fRStr\&.repeat\fP through main \fRprelude\fP object
+.IP "\(bu" 2
+fixed definition of \fRfoldr\fP and \fRfoldr1\fP, the new correct definition is backwards incompatible with the old, incorrect one
+.IP "\(bu" 2
+fixed issue with \fRfix\fP
+.IP "\(bu" 2
+improved code coverage
+.PP
+.SH "1\&.0\&.3"
+.PP
+.IP "\(bu" 2
+build browser versions
+.PP
+.SH "1\&.0\&.2"
+.PP
+.IP "\(bu" 2
+bug fix for \fRflatten\fP - slight change with bug fix, flattens arrays only, not array-like objects
+.PP
+.SH "1\&.0\&.1"
+.PP
+.IP "\(bu" 2
+bug fixes for \fRdrop-while\fP and \fRtake-while\fP
+.PP
+.SH "1\&.0\&.0"
+.PP
+.IP "\(bu" 2
+massive update - separated functions into separate modules
+.IP "\(bu" 2
+functions do not accept multiple types anymore - use different versions in their respective modules in some cases (eg\&. \fRObj\&.map\fP), or use \fRchars\fP or \fRvalues\fP in other cases to transform into a list
+.IP "\(bu" 2
+objects are no longer transformed into functions, simply use \fR(obj\&.)\fP in LiveScript to do that
+.IP "\(bu" 2
+browser version now using browserify - use \fRprelude = require('prelude-ls')\fP
+.IP "\(bu" 2
+added \fRcompact\fP, \fRsplit\fP, \fRflatten\fP, \fRdifference\fP, \fRintersection\fP, \fRunion\fP, \fRcount-by\fP, \fRgroup-by\fP, \fRchars\fP, \fRunchars\fP, \fRapply\fP
+.IP "\(bu" 2
+added \fRlists-to-obj\fP which takes a list of keys and list of values and zips them up into an object, and the converse \fRobj-to-lists\fP
+.IP "\(bu" 2
+added \fRpairs-to-obj\fP which takes a list of pairs (2 element lists) and creates an object, and the converse \fRobj-to-pairs\fP
+.IP "\(bu" 2
+removed \fRcons\fP, \fRappend\fP - use the concat operator
+.IP "\(bu" 2
+removed \fRcompose\fP - use the compose operator
+.IP "\(bu" 2
+removed \fRobj-to-func\fP - use partially applied access (eg\&. \fR(obj\&.)\fP)
+.IP "\(bu" 2
+removed \fRlength\fP - use \fR(\&.length)\fP
+.IP "\(bu" 2
+\fRsort-by\fP renamed to \fRsort-with\fP
+.IP "\(bu" 2
+added new \fRsort-by\fP
+.IP "\(bu" 2
+removed \fRcompare\fP - just use the new \fRsort-by\fP
+.IP "\(bu" 2
+\fRbreak-it\fP renamed \fRbreak-list\fP, (\fRStr\&.break-str\fP for the string version)
+.IP "\(bu" 2
+added \fRStr\&.repeat\fP which creates a new string by repeating the input n times
+.IP "\(bu" 2
+\fRunfold\fP as alias to \fRunfoldr\fP is no longer used
+.IP "\(bu" 2
+fixed up style and compiled with LiveScript 1\&.1\&.1
+.IP "\(bu" 2
+use Make instead of Slake
+.IP "\(bu" 2
+greatly improved tests
+.PP
+.SH "0\&.6\&.0"
+.PP
+.IP "\(bu" 2
+fixed various bugs
+.IP "\(bu" 2
+added \fRfix\fP, a fixpoint (Y combinator) for anonymous recursive functions
+.IP "\(bu" 2
+added \fRunfoldr\fP (alias \fRunfold\fP)
+.IP "\(bu" 2
+calling \fRreplicate\fP with a string now returns a list of strings
+.IP "\(bu" 2
+removed \fRpartial\fP, just use native partial application in LiveScript using the \fR_\fP placeholder, or currying
+.IP "\(bu" 2
+added \fRsort\fP, \fRsortBy\fP, and \fRcompare\fP
+.PP
+.SH "0\&.5\&.0"
+.PP
+.IP "\(bu" 2
+removed \fRlookup\fP - use (\&.prop)
+.IP "\(bu" 2
+removed \fRcall\fP - use (\&.func arg1, arg2)
+.IP "\(bu" 2
+removed \fRpluck\fP - use map (\&.prop), xs
+.IP "\(bu" 2
+fixed buys wtih \fRhead\fP and \fRlast\fP
+.IP "\(bu" 2
+added non-minifed browser version, as \fRprelude-browser\&.js\fP
+.IP "\(bu" 2
+renamed \fRprelude-min\&.js\fP to \fRprelude-browser-min\&.js\fP
+.IP "\(bu" 2
+renamed \fRzip\fP to \fRzipAll\fP
+.IP "\(bu" 2
+renamed \fRzipWith\fP to \fRzipAllWith\fP
+.IP "\(bu" 2
+added \fRzip\fP, a curried zip that takes only two arguments
+.IP "\(bu" 2
+added \fRzipWith\fP, a curried zipWith that takes only two arguments
+.PP
+.SH "0\&.4\&.0"
+.PP
+.IP "\(bu" 2
+added \fRparition\fP function
+.IP "\(bu" 2
+added \fRcurry\fP function
+.IP "\(bu" 2
+removed \fRelem\fP function (use \fRin\fP)
+.IP "\(bu" 2
+removed \fRnotElem\fP function (use \fRnot in\fP)
+.PP
+.SH "0\&.3\&.0"
+.PP
+.IP "\(bu" 2
+added \fRlistToObject\fP
+.IP "\(bu" 2
+added \fRunique\fP
+.IP "\(bu" 2
+added \fRobjToFunc\fP
+.IP "\(bu" 2
+added support for using strings in map and the like
+.IP "\(bu" 2
+added support for using objects in map and the like
+.IP "\(bu" 2
+added ability to use objects instead of functions in certain cases
+.IP "\(bu" 2
+removed \fRerror\fP (just use throw)
+.IP "\(bu" 2
+added \fRtau\fP constant
+.IP "\(bu" 2
+added \fRjoin\fP
+.IP "\(bu" 2
+added \fRvalues\fP
+.IP "\(bu" 2
+added \fRkeys\fP
+.IP "\(bu" 2
+added \fRpartial\fP
+.IP "\(bu" 2
+renamed \fRlog\fP to \fRln\fP
+.IP "\(bu" 2
+added alias to \fRhead\fP: \fRfirst\fP
+.IP "\(bu" 2
+added \fRinstallPrelude\fP helper
+.PP
+.SH "0\&.2\&.0"
+.PP
+.IP "\(bu" 2
+removed functions that simply warp operators as you can now use operators as functions in LiveScript
+.IP "\(bu" 2
+\fRmin/max\fP are now curried and take only 2 arguments
+.IP "\(bu" 2
+added \fRcall\fP
+.PP
+.SH "0\&.1\&.0"
+.PP
+.IP "\(bu" 2
+initial public release 
+.PP
+

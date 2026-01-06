@@ -1,0 +1,300 @@
+.TH "app" 3 "Version 0.1" "Chat-ME!" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+app
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBrequire_jwt\fP (f)"
+.br
+.ti -1c
+.RI "\fBcreate_individual_chat\fP ()"
+.br
+.ti -1c
+.RI "\fBdelete_individual_chat\fP ()"
+.br
+.ti -1c
+.RI "\fBcleanup_temporary_chats\fP ()"
+.br
+.ti -1c
+.RI "\fBget_rooms\fP ()"
+.br
+.ti -1c
+.RI "\fBremove_friend\fP ()"
+.br
+.ti -1c
+.RI "\fBsend_friend_request\fP ()"
+.br
+.ti -1c
+.RI "\fBrespond_friend_request\fP ()"
+.br
+.ti -1c
+.RI "\fBlist_friends\fP ()"
+.br
+.ti -1c
+.RI "\fBlist_pending_requests\fP ()"
+.br
+.ti -1c
+.RI "\fBlist_sent_requests\fP ()"
+.br
+.ti -1c
+.RI "\fBsearch_users\fP ()"
+.br
+.ti -1c
+.RI "\fBverificar_sesion\fP ()"
+.br
+.ti -1c
+.RI "\fBregister\fP ()"
+.br
+.RI "--- ENDPOINTS SISTEMA DE AMIGOS --- ## "
+.ti -1c
+.RI "\fBhome\fP ()"
+.br
+.ti -1c
+.RI "\fBprocesar_login\fP ()"
+.br
+.ti -1c
+.RI "\fBlogout\fP ()"
+.br
+.ti -1c
+.RI "\fBhandle_connect\fP ()"
+.br
+.ti -1c
+.RI "\fBhandle_disconnect\fP ()"
+.br
+.ti -1c
+.RI "\fBhandle_join\fP (data)"
+.br
+.ti -1c
+.RI "\fBhandle_message\fP (data)"
+.br
+.ti -1c
+.RI "\fBadd_cache_control\fP (response)"
+.br
+.ti -1c
+.RI "\fBfavicon\fP ()"
+.br
+.in -1c
+.SS "Constants"
+
+.in +1c
+.ti -1c
+.RI "\fBlogger\fP = setup_logging()"
+.br
+.ti -1c
+.RI "\fBapp\fP = Flask(__name__)"
+.br
+.ti -1c
+.RI "\fBsecret_key\fP"
+.br
+.ti -1c
+.RI "\fBjwt_secret\fP = os\&.getenv('JWT_SECRET', 'jwt_secret_dev')"
+.br
+.ti -1c
+.RI "\fBSESSION_COOKIE_SAMESITE\fP"
+.br
+.ti -1c
+.RI "\fBSESSION_COOKIE_SECURE\fP"
+.br
+.ti -1c
+.RI "list \fBallowed_origins\fP"
+.br
+.ti -1c
+.RI "\fBorigins\fP"
+.br
+.ti -1c
+.RI "\fBsupports_credentials\fP"
+.br
+.ti -1c
+.RI "\fBallow_headers\fP"
+.br
+.ti -1c
+.RI "\fBmethods\fP"
+.br
+.ti -1c
+.RI "\fBsocketio\fP"
+.br
+.ti -1c
+.RI "\fBauth_service\fP = \fBAuthService\fP()"
+.br
+.ti -1c
+.RI "\fBchat_service\fP = \fBChatService\fP()"
+.br
+.ti -1c
+.RI "\fBfriend_service\fP = \fBFriendService\fP()"
+.br
+.ti -1c
+.RI "\fBhost\fP"
+.br
+.ti -1c
+.RI "\fBport\fP"
+.br
+.ti -1c
+.RI "\fBdebug\fP"
+.br
+.ti -1c
+.RI "\fBallow_unsafe_werkzeug\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+.nf
+Refactored Main Application
+Implementa arquitectura en capas con patrones profesionales
+
+.fi
+.PP
+ 
+.SH "Function Documentation"
+.PP 
+.SS "app\&.add_cache_control ( response)"
+
+.PP
+.nf
+Evitar cache en el navegador
+.fi
+.PP
+ 
+.SS "app\&.cleanup_temporary_chats ()"
+
+.PP
+.nf
+Eliminar todos los chats temporales del usuario (por ejemplo, al cerrar sesión)
+.fi
+.PP
+ 
+.SS "app\&.create_individual_chat ()"
+
+.PP
+.nf
+Crear o recuperar sala individual entre dos usuarios
+.fi
+.PP
+ 
+.SS "app\&.delete_individual_chat ()"
+
+.PP
+.nf
+Eliminar/desactivar sala individual
+.fi
+.PP
+ 
+.SS "app\&.favicon ()"
+
+.PP
+.nf
+Servir favicon
+.fi
+.PP
+ 
+.SS "app\&.handle_connect ()"
+
+.PP
+.nf
+Manejar nueva conexión Socket\&.IO
+.fi
+.PP
+ 
+.SS "app\&.handle_disconnect ()"
+
+.PP
+.nf
+Manejar desconexión Socket\&.IO
+.fi
+.PP
+ 
+.SS "app\&.handle_join ( data)"
+
+.PP
+.nf
+Manejar unión a sala con manejo de errores
+
+.fi
+.PP
+ 
+.SS "app\&.handle_message ( data)"
+
+.PP
+.nf
+Manejar envío de mensaje con validación y errores
+
+.fi
+.PP
+ 
+.SS "app\&.home ()"
+
+.PP
+.nf
+Página principal
+.fi
+.PP
+ 
+.SS "app\&.logout ()"
+
+.PP
+.nf
+Cerrar sesión (solo frontend, JWT)
+.fi
+.PP
+ 
+.SS "app\&.procesar_login ()"
+
+.PP
+.nf
+Procesar login de usuario con manejo de errores profesional
+
+.fi
+.PP
+ 
+.SS "app\&.register ()"
+
+.PP
+--- ENDPOINTS SISTEMA DE AMIGOS --- ## 
+.PP
+.nf
+Registro de usuario nuevo
+
+.fi
+.PP
+ 
+.SS "app\&.verificar_sesion ()"
+
+.PP
+.nf
+Verificar si el usuario tiene sesión activa (JWT)
+.fi
+.PP
+ 
+.SH "Constant Documentation"
+.PP 
+.SS "list app\&.allowed_origins"
+\fBInitial value:\fP
+.nf
+1 =  [
+2     "http://localhost:8080",
+3     "http://172\&.20\&.10\&.10:8080",
+4     "http://192\&.168\&.56\&.1:8080",
+5     "http://172\&.24\&.144\&.1:8080"
+6 ]
+.PP
+.fi
+
+.SS "app\&.socketio"
+\fBInitial value:\fP
+.nf
+1 =  SocketIO(app, 
+2                    cors_allowed_origins=allowed_origins,
+3                    cors_credentials=True)
+.PP
+.fi
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Chat-ME! from the source code\&.

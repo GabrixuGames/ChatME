@@ -1,52 +1,158 @@
 import React from "react";
 import { useFriends } from "@/contexts/FriendsContext";
+import { useChat } from "@/contexts/ChatContext";
 import { Button } from "@/components/ui/button";
 import { AddFriendDialog } from "./AddFriendDialog";
-import { Check, X, Trash2 } from "lucide-react";
+import { Check, X, Trash2, MessageCircle } from "lucide-react";
 
 interface FriendsPanelProps {
   collapsed?: boolean;
 }
 
-export const FriendsPanel: React.FC<FriendsPanelProps> = ({ collapsed }) => {
+export const FriendsPanel: React.FC<FriendsPanelProps & { onRoomSelect?: (roomId: string) => void }> = ({ collapsed, onRoomSelect }) => {
   const { friends, pendingRequests, respondRequest, removeFriend, refresh } = useFriends();
+  const { openIndividualChat, rooms, currentRoom, setCurrentRoom } = useChat();
 
   return (
   <div className={collapsed ? "space-y-2 flex flex-col" : "space-y-4"}>
-      <div>
+      {/* Lista de amigos */}
+      <div className="space-y-1">
         {friends.length === 0 && <div className="text-xs px-2 py-1 text-muted-foreground">No tienes amigos aún.</div>}
-        {friends.map((f) => (
-          <div key={f.id} className="flex items-center px-2 py-1 text-sidebar-foreground bg-sidebar rounded w-full">
-            <div className="flex items-center min-w-0 flex-1">
-              {f.profile_pic ? (
-                <img src={f.profile_pic} alt={f.username} className="w-7 h-7 rounded-full object-cover mr-2 border border-sidebar-border" />
-              ) : (
-                <div className="w-7 h-7 rounded-full bg-sidebar-accent text-white flex items-center justify-center mr-2 border border-sidebar-border">
-                  {f.username.charAt(0).toUpperCase()}
-                </div>
-              )}
-              <span className="truncate text-sidebar-foreground text-left">{f.username}</span>
+        {friends.map((f) => {
+          // Buscar el chat room correspondiente a este amigo
+          const friendRoom = rooms.find(r => r.room_type === 'individual' && r.name.includes(f.username));
+          const isActive = currentRoom?.id === friendRoom?.id;
+          // Solo mostrar badge si hay mensajes no leídos Y la ventana NO está activa
+          const hasUnread = ((friendRoom?.unread_count ?? 0) > 0) && !isActive;
+          
+          return (
+          <div
+            key={f.id}
+            role="button"
+            className={`w-full flex flex-col px-2 py-2 rounded-xl transition text-sidebar-foreground justify-start border border-sidebar-border/30 bg-transparent hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus:bg-sidebar-accent focus:text-sidebar-accent-foreground focus:outline-none cursor-pointer ${isActive ? 'bg-sidebar-accent text-sidebar-accent-foreground' : ''} ${hasUnread ? 'font-semibold' : ''}`}
+            style={{ backdropFilter: 'blur(2px)', WebkitBackdropFilter: 'blur(2px)' }}
+            title={`Abrir chat con ${f.username}`}
+            tabIndex={0}
+            onClick={async e => {
+              if ((e.target as HTMLElement).closest('.delete-friend-btn')) return;
+              
+              console.log("🟢 Click en amigo:", f.username);
+              console.log("🟢 friendRoom encontrado:", friendRoom);
+              console.log("🟢 onRoomSelect existe:", !!onRoomSelect);
+              
+              // Si ya existe el room, abrirlo directamente
+              if (friendRoom) {
+                console.log("🟢 Abriendo room existente:", friendRoom.id);
+                setCurrentRoom(friendRoom.id);
+                if (onRoomSelect) {
+                  console.log("🟢 Llamando a onRoomSelect con:", friendRoom.id);
+                  onRoomSelect(friendRoom.id);
+                }
+                return;
+              }
+              
+              // Si no existe, crearlo
+              console.log("🟢 Room no existe, creando...");
+              const roomId = await openIndividualChat(f.username);
+              console.log("🟢 Room creado con ID:", roomId);
+              if (roomId) {
+                setCurrentRoom(roomId);
+                if (onRoomSelect) {
+                  console.log("🟢 Llamando a onRoomSelect con nuevo room:", roomId);
+                  onRoomSelect(roomId);
+                }
+              }
+            }}
+            onKeyDown={async e => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                if ((e.target as HTMLElement).closest('.delete-friend-btn')) return;
+                
+                if (friendRoom) {
+                  setCurrentRoom(friendRoom.id);
+                  if (onRoomSelect) onRoomSelect(friendRoom.id);
+                  return;
+                }
+                
+                const roomId = await openIndividualChat(f.username);
+                if (roomId) {
+                  setCurrentRoom(roomId);
+                  if (onRoomSelect) onRoomSelect(roomId);
+                }
+              }
+            }}
+          >
+            <div className="flex items-center justify-between w-full">
+              <div className="flex items-center gap-2 flex-1 min-w-0">
+                <MessageCircle className="h-4 w-4 shrink-0" />
+                <span className="text-sm truncate">{f.username}</span>
+                {hasUnread && (
+                  <span className="bg-primary text-primary-foreground rounded-full px-2 py-0.5 text-xs font-bold shrink-0">
+                    {friendRoom.unread_count}
+                  </span>
+                )}
+              </div>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-7 w-7 delete-friend-btn shrink-0"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (window.confirm(`¿Eliminar a ${f.username} de tus amigos?`)) {
+                    removeFriend(f.id).then(() => refresh());
+                  }
+                }}
+              >
+                <Trash2 className="h-4 w-4 text-destructive" />
+              </Button>
             </div>
-            <Button size="icon" variant="ghost" className="bg-red-100 text-red-700 hover:bg-red-200 p-1 h-6 w-6 ml-2" onClick={() => removeFriend(f.id)}>
-              <Trash2 className="h-4 w-4" />
-            </Button>
+            {friendRoom?.last_message && (
+              <div className="text-xs text-white/80 dark:text-muted-foreground mt-1 truncate w-full">
+                {friendRoom.last_message_username && `${friendRoom.last_message_username}: `}
+                {friendRoom.last_message}
+              </div>
+            )}
           </div>
-        ))}
+          );
+        })}
       </div>
-      <div>
-        {pendingRequests.map((r) => (
-          <div key={r.id} className="flex items-center px-2 py-1 text-sidebar-foreground bg-sidebar rounded w-full">
-            <span className="truncate text-sidebar-foreground text-left flex-1">{r.sender_username || r.sender_id}</span>
-            <div className="flex gap-1 ml-auto justify-end">
-              <Button size="icon" variant="ghost" className="bg-green-100 text-green-700 hover:bg-green-200 p-1 h-6 w-6" onClick={() => respondRequest(r.id, "accepted")}> <Check className="h-4 w-4" /> </Button>
-              <Button size="icon" variant="ghost" className="bg-red-100 text-red-700 hover:bg-red-200 p-1 h-6 w-6" onClick={() => respondRequest(r.id, "rejected")}> <X className="h-4 w-4" /> </Button>
+      
+      {/* Solicitudes pendientes */}
+      {pendingRequests.length > 0 && (
+        <div>
+          <div className="text-xs px-2 py-1 font-semibold text-sidebar-foreground">Solicitudes pendientes</div>
+          {pendingRequests.map((req) => (
+            <div
+              key={req.id}
+              className="w-full flex items-center justify-between px-2 py-2 rounded-xl transition text-sidebar-foreground border border-sidebar-border/30 bg-transparent mb-1"
+              style={{ backdropFilter: 'blur(2px)', WebkitBackdropFilter: 'blur(2px)' }}
+            >
+              <span className="text-sm truncate flex-1">{req.sender_username}</span>
+              <div className="flex items-center gap-1">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-7 w-7 text-green-500 hover:text-green-600 hover:bg-green-50 dark:hover:bg-green-950"
+                  onClick={() => respondRequest(req.id, 'accepted').then(() => refresh())}
+                >
+                  <Check className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-7 w-7 text-destructive hover:bg-destructive/10"
+                  onClick={() => respondRequest(req.id, 'rejected').then(() => refresh())}
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-      <div className="px-2 py-2 mt-2 flex justify-center">
-        <AddFriendDialog />
-      </div>
+          ))}
+        </div>
+      )}
+      
+      {/* Botón añadir amigo */}
+      <AddFriendDialog />
     </div>
   );
 };

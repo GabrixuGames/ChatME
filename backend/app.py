@@ -11,6 +11,7 @@ import os
 import jwt
 from functools import wraps
 from dotenv import load_dotenv
+import psycopg2.extras
 
 # Importar nuestros servicios y middleware
 from services.auth_service import AuthService
@@ -36,6 +37,7 @@ app.config.update(
 # Configurar CORS - permitir credenciales y configurar orígenes específicos
 allowed_origins = [
     "http://localhost:8080",
+    "http://127.0.0.1:8080",
     "http://172.20.10.10:8080",
     "http://192.168.56.1:8080",
     "http://172.24.144.1:8080"
@@ -45,7 +47,8 @@ CORS(app,
      origins=allowed_origins, 
      supports_credentials=True,
      allow_headers=["Content-Type", "Authorization"],
-     methods=["GET", "POST", "OPTIONS"])
+     methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+     expose_headers=["Content-Type", "Authorization"])
 
 # Configurar Socket.IO
 socketio = SocketIO(app, 
@@ -60,11 +63,14 @@ auth_service = AuthService()
 chat_service = ChatService()
 friend_service = FriendService()
 
-## --- ENDPOINTS SISTEMA DE AMIGOS --- ##
-
+# --- JWT DECORATOR (must be above endpoints that use it) --- #
 def require_jwt(f):
     @wraps(f)
     def decorated(*args, **kwargs):
+        # Permitir peticiones OPTIONS sin JWT (para CORS preflight)
+        if request.method == 'OPTIONS':
+            return f(*args, **kwargs)
+        
         auth_header = request.headers.get('Authorization', None)
         if not auth_header or not auth_header.startswith('Bearer '):
             return jsonify({'error': 'Token JWT requerido'}), 401
@@ -77,6 +83,268 @@ def require_jwt(f):
             return jsonify({'error': 'Token JWT inválido'}), 401
         return f(*args, **kwargs)
     return decorated
+
+
+@app.route('/chat/individual/create', methods=['POST', 'OPTIONS'])
+@require_jwt
+def create_individual_chat():
+    """Crear o recuperar sala individual entre dos usuarios"""
+    try:
+        data = request.get_json()
+        username_1 = getattr(request, 'username', None)
+        username_2 = data.get('username_2')
+        is_temporary = data.get('is_temporary', False)
+        if not username_1 or not username_2:
+            return jsonify({'error': 'Faltan datos'}), 400
+        room = chat_service.get_or_create_individual_room(username_1, username_2, is_temporary)
+        if room:
+            # Convertir datetime a string para serialización JSON
+            if 'created_at' in room and isinstance(room['created_at'], datetime):
+                room['created_at'] = room['created_at'].isoformat()
+            
+            # Emitir evento Socket.IO para notificar a ambos usuarios
+            socketio.emit('new_individual_chat', {
+                'room': room,
+                'for_user': username_2
+            }, room=f"user_{username_2}")
+            
+            logger.info(f"💬 Chat individual creado: {username_1} ↔ {username_2}, room_id: {room['id']}")
+            return jsonify({'room': room}), 200
+        return jsonify({'error': 'No se pudo crear sala'}), 500
+    except Exception as e:
+        logger.error(f"❌ Error interno en create_individual_chat: {e}")
+        return jsonify({'error': 'Error interno del servidor'}), 500
+
+@app.route('/chat/individual/delete', methods=['POST', 'OPTIONS'])
+@require_jwt
+def delete_individual_chat():
+    """Eliminar/desactivar sala individual"""
+    data = request.get_json()
+    room_id = data.get('room_id')
+    if not room_id:
+        return jsonify({'error': 'Falta room_id'}), 400
+    ok = chat_service.delete_room(room_id)
+    return jsonify({'success': ok}), 200 if ok else 400
+
+@app.route('/chat/individual/cleanup_temporary', methods=['POST', 'OPTIONS'])
+@require_jwt
+def cleanup_temporary_chats():
+    """Eliminar todos los chats temporales del usuario (por ejemplo, al cerrar sesión)"""
+    user_id = getattr(request, 'user_id', None)
+    if not user_id:
+        return jsonify({'error': 'Falta user_id'}), 400
+    count = chat_service.cleanup_temporary_rooms(user_id)
+    return jsonify({'deleted_count': count}), 200
+
+@app.route('/chat/rooms', methods=['GET', 'OPTIONS'])
+@require_jwt
+def get_rooms():
+    """Obtener salas del usuario con información completa"""
+    user_id = getattr(request, 'user_id', None)
+    username = getattr(request, 'username', None)
+    if not user_id:
+        return jsonify({'rooms': []})
+    
+    rooms = chat_service.get_user_rooms_detailed(user_id, username)
+    return jsonify({'rooms': rooms})
+
+@app.route('/chat/mark_read', methods=['POST', 'OPTIONS'])
+@require_jwt
+def mark_messages_read():
+    """Marcar mensajes de una sala como leídos"""
+    user_id = getattr(request, 'user_id', None)
+    
+    try:
+        data = request.get_json()
+        if not data:
+            return jsonify({'error': 'No se recibieron datos'}), 400
+            
+        room_id = data.get('room_id')
+        
+        if not user_id or not room_id:
+            return jsonify({'error': 'Faltan datos requeridos'}), 400
+        
+        count = chat_service.mark_messages_as_read(user_id, room_id)
+        return jsonify({'marked_count': count}), 200
+    except Exception as e:
+        logger.error(f"❌ Error en mark_messages_read: {e}")
+        return jsonify({'error': 'Error interno del servidor'}), 500
+
+@app.route('/chat/hide_room', methods=['POST', 'OPTIONS'])
+@require_jwt
+def hide_chat_room():
+    """Ocultar sala para el usuario"""
+    user_id = getattr(request, 'user_id', None)
+    data = request.get_json()
+    room_id = data.get('room_id')
+    
+    if not user_id or not room_id:
+        return jsonify({'error': 'Faltan datos'}), 400
+    
+    success = chat_service.hide_room(user_id, room_id)
+    return jsonify({'success': success}), 200 if success else 400
+
+@app.route('/friends/remove', methods=['POST', 'OPTIONS'])
+@require_jwt
+def remove_friend():
+    data = request.get_json()
+    user_id = getattr(request, 'user_id', None)
+    friend_id = data.get('friend_id')
+    if not user_id or not friend_id:
+        return jsonify({'error': 'Faltan datos'}), 400
+    ok = friend_service.remove_friend(user_id, friend_id)
+    return jsonify({'success': ok}), 200 if ok else 400
+
+@app.route('/friends/send_request', methods=['POST', 'OPTIONS'])
+@require_jwt
+def send_friend_request():
+    data = request.get_json()
+    sender_id = getattr(request, 'user_id', None)
+    sender_username = getattr(request, 'username', None)
+    receiver_id = data.get('receiver_id')
+    if not sender_id or not receiver_id:
+        return jsonify({'error': 'Faltan datos'}), 400
+    
+    # Obtener username del receptor
+    connection = db_manager.get_connection()
+    cursor = connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+    cursor.execute("SELECT username FROM users WHERE id = %s", (receiver_id,))
+    receiver = cursor.fetchone()
+    db_manager.return_connection(connection)
+    
+    req_id = friend_service.send_request(sender_id, receiver_id)
+    if req_id:
+        # Notificar al receptor en tiempo real si está conectado
+        if receiver:
+            logger.info(f"📬 Solicitud enviada: {sender_username} → {receiver['username']}")
+            logger.info(f"📤 Emitiendo evento a sala: user_{receiver['username']}")
+            socketio.emit('friend_request_received', {
+                'message': f'{sender_username} te envió una solicitud de amistad',
+                'sender_username': sender_username,
+                'request_id': req_id
+            }, room=f"user_{receiver['username']}")
+        
+        return jsonify({'message': 'Solicitud enviada', 'request_id': req_id}), 200
+    return jsonify({'error': 'No se pudo enviar solicitud'}), 400
+
+@app.route('/friends/respond_request', methods=['POST', 'OPTIONS'])
+@require_jwt
+def respond_friend_request():
+    data = request.get_json()
+    request_id = data.get('request_id')
+    status = data.get('status')
+    if not request_id or status not in ['accepted', 'rejected']:
+        return jsonify({'error': 'Datos inválidos'}), 400
+    
+    # Obtener información de la solicitud antes de responder
+    connection = db_manager.get_connection()
+    cursor = connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+    cursor.execute("""
+        SELECT fr.sender_id, fr.receiver_id, 
+               u1.username as sender_username, 
+               u2.username as receiver_username
+        FROM friend_requests fr
+        JOIN users u1 ON fr.sender_id = u1.id
+        JOIN users u2 ON fr.receiver_id = u2.id
+        WHERE fr.id = %s
+    """, (request_id,))
+    req_info = cursor.fetchone()
+    db_manager.return_connection(connection)
+    
+    ok = friend_service.respond_request(request_id, status)
+    
+    # Si se aceptó la solicitud, notificar a ambos usuarios vía Socket.IO
+    if ok and status == 'accepted' and req_info:
+        logger.info(f"🎉 Amistad aceptada: {req_info['sender_username']} ↔ {req_info['receiver_username']}")
+        
+        # Notificar al que envió la solicitud
+        logger.info(f"📤 Emitiendo evento a sala: user_{req_info['sender_username']}")
+        socketio.emit('friend_request_accepted', {
+            'message': f'{req_info["receiver_username"]} aceptó tu solicitud de amistad',
+            'friend_username': req_info['receiver_username']
+        }, room=f"user_{req_info['sender_username']}")
+        
+        # Notificar al que aceptó (opcional, pero útil para confirmar)
+        logger.info(f"📤 Emitiendo evento a sala: user_{req_info['receiver_username']}")
+        socketio.emit('friend_request_accepted', {
+            'message': f'Ahora eres amigo de {req_info["sender_username"]}',
+            'friend_username': req_info['sender_username']
+        }, room=f"user_{req_info['receiver_username']}")
+    
+    return jsonify({'success': ok}), 200 if ok else 400
+
+@app.route('/friends/list', methods=['GET', 'OPTIONS'])
+@require_jwt
+def list_friends():
+    user_id = getattr(request, 'user_id', None)
+    if not user_id:
+        return jsonify({'friends': []})
+    friends = friend_service.get_friends(user_id)
+    return jsonify({'friends': friends})
+
+@app.route('/friends/pending', methods=['GET', 'OPTIONS'])
+@require_jwt
+def list_pending_requests():
+    user_id = getattr(request, 'user_id', None)
+    if not user_id:
+        return jsonify({'pending_requests': []})
+    pending = friend_service.get_pending_requests(user_id)
+    return jsonify({'pending_requests': pending})
+
+    
+
+@app.route('/friends/sent', methods=['GET', 'OPTIONS'])
+@require_jwt
+def list_sent_requests():
+    user_id = getattr(request, 'user_id', None)
+    if not user_id:
+        return jsonify({'sent_requests': []})
+    sent = friend_service.get_sent_requests(user_id)
+    return jsonify({'sent_requests': sent})
+
+    
+
+@app.route('/friends/search', methods=['GET', 'OPTIONS'])
+@require_jwt
+def search_users():
+    user_id = getattr(request, 'user_id', None)
+    query_str = request.args.get('query', '').strip()
+    logger.info(f"🔎 Búsqueda de amigos: user_id={user_id}, query='{query_str}'")
+    
+    if not user_id:
+        logger.warning("❌ Búsqueda sin user_id")
+        return jsonify({'users': [], 'error': 'Usuario no autenticado'}), 401
+    
+    if not query_str or len(query_str) < 3:
+        logger.warning(f"⚠️ Query muy corto: '{query_str}'")
+        return jsonify({'users': []})
+    
+    # Excluir el propio usuario y amigos actuales
+    friends = friend_service.get_friends(user_id)
+    exclude_ids = [user_id] + [f['id'] for f in friends]
+    logger.info(f"📋 Excluyendo {len(exclude_ids)} usuarios de la búsqueda")
+    
+    users = friend_service.search_users(query_str, exclude_ids)
+    logger.info(f"✅ Encontrados {len(users)} usuarios")
+    return jsonify({'users': users})
+
+    
+
+@app.route('/verificar_sesion', methods=['GET', 'OPTIONS'])
+@require_jwt
+def verificar_sesion():
+    """Verificar si el usuario tiene sesión activa (JWT)"""
+    username = getattr(request, 'username', None)
+    if username:
+        return jsonify({"authenticated": True, "username": username}), 200
+    else:
+        return jsonify({"authenticated": False}), 401
+
+    
+
+
+
+## --- ENDPOINTS SISTEMA DE AMIGOS --- ##
 
 # Endpoint de registro de usuario
 @app.route('/register', methods=['POST'])
@@ -116,88 +384,12 @@ def register():
         logger.error(f"❌ Error interno en registro: {e}")
         return jsonify({"error": "Error interno del servidor"}), 500
 
-# Eliminar amigo
-@app.route('/friends/remove', methods=['POST'])
-@require_jwt
-def remove_friend():
-    data = request.get_json()
-    user_id = getattr(request, 'user_id', None)
-    friend_id = data.get('friend_id')
-    if not user_id or not friend_id:
-        return jsonify({'error': 'Faltan datos'}), 400
-    ok = friend_service.remove_friend(user_id, friend_id)
-    return jsonify({'success': ok}), 200 if ok else 400
 
-# Enviar solicitud de amistad
-@app.route('/friends/send_request', methods=['POST'])
-@require_jwt
-def send_friend_request():
-    data = request.get_json()
-    sender_id = getattr(request, 'user_id', None)
-    receiver_id = data.get('receiver_id')
-    if not sender_id or not receiver_id:
-        return jsonify({'error': 'Faltan datos'}), 400
-    req_id = friend_service.send_request(sender_id, receiver_id)
-    if req_id:
-        return jsonify({'message': 'Solicitud enviada', 'request_id': req_id}), 200
-    return jsonify({'error': 'No se pudo enviar solicitud'}), 400
 
-# Responder solicitud de amistad
-@app.route('/friends/respond_request', methods=['POST'])
-@require_jwt
-def respond_friend_request():
-    data = request.get_json()
-    request_id = data.get('request_id')
-    status = data.get('status')
-    if not request_id or status not in ['accepted', 'rejected']:
-        return jsonify({'error': 'Datos inválidos'}), 400
-    ok = friend_service.respond_request(request_id, status)
-    return jsonify({'success': ok}), 200 if ok else 400
 
-# Listar amigos
-@app.route('/friends/list', methods=['GET'])
-@require_jwt
-def list_friends():
-    user_id = getattr(request, 'user_id', None)
-    if not user_id:
-        return jsonify({'friends': []})
-    friends = friend_service.get_friends(user_id)
-    return jsonify({'friends': friends})
 
-# Listar solicitudes pendientes
-@app.route('/friends/pending', methods=['GET'])
-@require_jwt
-def list_pending_requests():
-    user_id = getattr(request, 'user_id', None)
-    if not user_id:
-        return jsonify({'pending_requests': []})
-    pending = friend_service.get_pending_requests(user_id)
-    return jsonify({'pending_requests': pending})
 
-# Listar solicitudes enviadas
-@app.route('/friends/sent', methods=['GET'])
-@require_jwt
-def list_sent_requests():
-    user_id = getattr(request, 'user_id', None)
-    if not user_id:
-        return jsonify({'sent_requests': []})
-    sent = friend_service.get_sent_requests(user_id)
-    return jsonify({'sent_requests': sent})
 
-# Buscar usuarios para añadir amigos
-@app.route('/friends/search', methods=['GET'])
-@require_jwt
-def search_users():
-    user_id = getattr(request, 'user_id', None)
-    query_str = request.args.get('query', '').strip()
-    print(f"🔎 Busqueda de amigos: user_id={user_id}, query='{query_str}'")
-    if not user_id or not query_str or len(query_str) < 3:
-        return jsonify({'users': []})
-    # Excluir el propio usuario y amigos actuales
-    friends = friend_service.get_friends(user_id)
-    exclude_ids = [user_id] + [f['id'] for f in friends]
-    users = friend_service.search_users(query_str, exclude_ids)
-    return jsonify({'users': users})
 
 @app.route("/")
 def home():
@@ -259,15 +451,6 @@ def logout():
     """Cerrar sesión (solo frontend, JWT)"""
     return jsonify({"message": "Logout frontend, borra el token JWT"}), 200
 
-@app.route('/verificar_sesion', methods=['GET'])
-@require_jwt
-def verificar_sesion():
-    """Verificar si el usuario tiene sesión activa (JWT)"""
-    username = getattr(request, 'username', None)
-    if username:
-        return jsonify({"authenticated": True, "username": username}), 200
-    else:
-        return jsonify({"authenticated": False}), 401
 
 # ============================================================================
 # EVENTOS SOCKET.IO
@@ -275,9 +458,28 @@ def verificar_sesion():
 
 @socketio.on('connect')
 def handle_connect():
-    """Manejar nueva conexión Socket.IO"""
+    """Manejar nueva conexión Socket.IO con auto-join a salas del usuario"""
     try:
         socketio_logger.log_connection(request.sid)
+        
+        # Obtener username desde query params o headers
+        username = request.args.get('username')
+        
+        if username:
+            # Unir a sala personal del usuario (para notificaciones)
+            from flask_socketio import join_room as socketio_join
+            socketio_join(f"user_{username}")
+            logger.info(f"👤 {username} unido a sala personal")
+            
+            # Obtener user_id
+            user = auth_service.get_user_by_username(username)
+            if user:
+                # Auto-join a todas las salas del usuario
+                rooms = chat_service.get_user_rooms(user['id'])
+                for room in rooms:
+                    socketio_join(room['id'])
+                    logger.info(f"🏛️ {username} auto-join a sala {room['id']}")
+        
         emit('connected', {"message": "Conectado al servidor"})
     except Exception as e:
         socketio_logger.log_error('connect', e, request.sid)
@@ -355,6 +557,38 @@ def handle_message(data):
         socketio_logger.log_error('message', e, request.sid)
         emit('error', {"message": "Error interno al procesar mensaje"})
 
+@socketio.on('typing')
+def handle_typing(data):
+    """
+    Manejar evento de usuario escribiendo
+    """
+    try:
+        username = data.get('username')
+        room_id = data.get('room')
+        
+        if username and room_id:
+            # Emitir a todos en la sala excepto el remitente
+            emit('user_typing', {'username': username, 'room': room_id}, 
+                 room=room_id, include_self=False)
+    except Exception as e:
+        socketio_logger.log_error('typing', e, request.sid)
+
+@socketio.on('stop_typing')
+def handle_stop_typing(data):
+    """
+    Manejar evento de usuario dejó de escribir
+    """
+    try:
+        username = data.get('username')
+        room_id = data.get('room')
+        
+        if username and room_id:
+            # Emitir a todos en la sala excepto el remitente
+            emit('user_stop_typing', {'username': username, 'room': room_id}, 
+                 room=room_id, include_self=False)
+    except Exception as e:
+        socketio_logger.log_error('stop_typing', e, request.sid)
+
 # ============================================================================
 # UTILIDADES
 # ============================================================================
@@ -366,6 +600,13 @@ def add_cache_control(response):
     response.headers['Pragma'] = 'no-cache'
     response.headers['Expires'] = '0'
     return response
+
+@app.before_request
+def handle_preflight():
+    """Manejar peticiones OPTIONS (CORS preflight) antes de cualquier otra lógica"""
+    if request.method == 'OPTIONS':
+        response = app.make_default_options_response()
+        return response
 
 @app.route('/favicon.ico')
 def favicon():

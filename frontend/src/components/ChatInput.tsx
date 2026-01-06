@@ -13,12 +13,21 @@ type ChatInputProps = {
 export function ChatInput({ roomId }: ChatInputProps) {
   const [message, setMessage] = useState("");
   const { user } = useAuth();
-  const { sendMessage, currentRoom, rooms } = useChat();
+  const { sendMessage, currentRoom, rooms, sendTyping, sendStopTyping } = useChat();
   const room = roomId ? rooms.find(r => r.id === roomId) : currentRoom;
+  const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const isTypingRef = useRef(false);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (!message.trim() || !user || !room) return;
+    
+    // Dejar de escribir antes de enviar
+    if (isTypingRef.current && user && room) {
+      sendStopTyping(room.id, user);
+      isTypingRef.current = false;
+    }
+    
     sendMessage(message.trim(), user, room.id);
     setMessage("");
   };
@@ -29,6 +38,53 @@ export function ChatInput({ roomId }: ChatInputProps) {
       handleSubmit(e);
     }
   };
+  
+  // Manejo de typing indicators con debounce
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const newValue = e.target.value;
+    setMessage(newValue);
+    
+    if (!user || !room) return;
+    
+    // Enviar typing si no se había enviado
+    if (!isTypingRef.current && newValue.length > 0) {
+      sendTyping(room.id, user);
+      isTypingRef.current = true;
+    }
+    
+    // Reiniciar timeout para stop_typing
+    if (typingTimeoutRef.current) {
+      clearTimeout(typingTimeoutRef.current);
+    }
+    
+    // Dejar de escribir después de 2 segundos de inactividad
+    if (newValue.length > 0) {
+      typingTimeoutRef.current = setTimeout(() => {
+        if (isTypingRef.current && user && room) {
+          sendStopTyping(room.id, user);
+          isTypingRef.current = false;
+        }
+      }, 2000);
+    } else {
+      // Si borró todo el texto, enviar stop_typing inmediatamente
+      if (isTypingRef.current) {
+        sendStopTyping(room.id, user);
+        isTypingRef.current = false;
+      }
+    }
+  };
+  
+  // Cleanup al desmontar
+  useEffect(() => {
+    return () => {
+      if (typingTimeoutRef.current) {
+        clearTimeout(typingTimeoutRef.current);
+      }
+      if (isTypingRef.current && user && room) {
+        sendStopTyping(room.id, user);
+      }
+    };
+  }, [room, user, sendStopTyping]);
   
   // Detectar si es móvil
   const isMobile = window.innerWidth < 640;
@@ -52,7 +108,7 @@ export function ChatInput({ roomId }: ChatInputProps) {
         <Textarea
           ref={textareaRef}
           value={message}
-          onChange={(e) => setMessage(e.target.value)}
+          onChange={handleChange}
           onKeyDown={handleKeyDown}
           placeholder={room ? "Escribe tu mensaje..." : "Selecciona una sala para enviar mensajes"}
           rows={1}
@@ -75,3 +131,4 @@ export function ChatInput({ roomId }: ChatInputProps) {
     </form>
   );
 }
+

@@ -139,6 +139,29 @@ class MessageRepository(BaseRepository):
         return affected_rows > 0
 
 class RoomRepository(BaseRepository):
+    def get_rooms_for_user(self, user_id):
+        """
+        Devuelve todas las salas (rooms) en las que el usuario participa, públicas e individuales.
+        Incluye filtro de visibilidad para chats individuales.
+        """
+        query = '''
+            SELECT r.* FROM rooms r
+            WHERE r.is_active = true
+            AND (
+                r.room_type = 'public'
+                OR (
+                    (r.user_id_1 = %s OR r.user_id_2 = %s)
+                    AND NOT EXISTS (
+                        SELECT 1 FROM user_room_visibility urv
+                        WHERE urv.room_id = r.id 
+                        AND urv.user_id = %s 
+                        AND urv.is_hidden = true
+                    )
+                )
+            )
+            ORDER BY r.created_at DESC
+        '''
+        return self.execute_query(query, (user_id, user_id, user_id), fetch_all=True) or []
     """
     Repository para operaciones de salas
     """
@@ -152,3 +175,43 @@ class RoomRepository(BaseRepository):
         """Buscar sala por ID"""
         query = "SELECT * FROM rooms WHERE id = %s AND is_active = true"
         return self.execute_query(query, (room_id,), fetch_one=True)
+
+    def find_individual_room(self, user_id_1: str, user_id_2: str) -> Optional[Dict]:
+        """Buscar sala individual entre dos usuarios (no importa el orden)"""
+        query = """
+            SELECT * FROM rooms
+            WHERE room_type = 'individual'
+              AND is_active = true
+              AND ((user_id_1 = %s AND user_id_2 = %s) OR (user_id_1 = %s AND user_id_2 = %s))
+            LIMIT 1
+        """
+        return self.execute_query(query, (user_id_1, user_id_2, user_id_2, user_id_1), fetch_one=True)
+
+    def create_individual_room(self, user_id_1: str, user_id_2: str, is_temporary: bool = False, username_1: str = None, username_2: str = None) -> Optional[str]:
+        """Crear sala individual entre dos usuarios"""
+        import uuid
+        query = """
+            INSERT INTO rooms (id, name, description, room_type, is_temporary, is_active, user_id_1, user_id_2)
+            VALUES (%s, %s, %s, 'individual', %s, true, %s, %s)
+            RETURNING id
+        """
+        room_id = str(uuid.uuid4())
+        # Usar username del otro usuario como nombre de sala
+        if username_1 and username_2:
+            # El nombre será diferente según quién consulte (se formatea en frontend)
+            name = f"{username_1} ↔ {username_2}"
+        else:
+            name = f"Chat privado"
+        description = "Chat individual"
+        try:
+            result = self.execute_query(query, (room_id, name, description, is_temporary, user_id_1, user_id_2), fetch_one=True)
+            return result['id'] if result else None
+        except Exception as e:
+            logger.error(f"❌ Error creando sala individual: {e}")
+            return None
+
+    def delete_room(self, room_id: str) -> bool:
+        """Eliminar (desactivar) una sala"""
+        query = "UPDATE rooms SET is_active = false WHERE id = %s"
+        affected_rows = self.execute_query(query, (room_id,))
+        return affected_rows > 0

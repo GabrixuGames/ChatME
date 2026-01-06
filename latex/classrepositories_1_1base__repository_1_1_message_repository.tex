@@ -1,0 +1,75 @@
+\doxysection{repositories.\+base\+\_\+repository.\+Message\+Repository Class Reference}
+\hypertarget{classrepositories_1_1base__repository_1_1_message_repository}{}\label{classrepositories_1_1base__repository_1_1_message_repository}\index{repositories.base\_repository.MessageRepository@{repositories.base\_repository.MessageRepository}}
+Inheritance diagram for repositories.\+base\+\_\+repository.\+Message\+Repository\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classrepositories_1_1base__repository_1_1_message_repository}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Optional\mbox{[}str\mbox{]} \mbox{\hyperlink{classrepositories_1_1base__repository_1_1_message_repository_aa5ab0c05bf6da50e30900e81fa3fad13}{save\+\_\+message}} (self, str user\+\_\+id, str room\+\_\+id, str content)
+\item 
+List\mbox{[}Dict\mbox{]} \mbox{\hyperlink{classrepositories_1_1base__repository_1_1_message_repository_a77392c15cf65f30356f35aba70cc72f4}{get\+\_\+messages\+\_\+by\+\_\+room}} (self, str room\+\_\+id, int limit=50, int offset=0)
+\item 
+int \mbox{\hyperlink{classrepositories_1_1base__repository_1_1_message_repository_ad8e12205eb4d88df7577fa113fa38eb0}{get\+\_\+message\+\_\+count\+\_\+by\+\_\+room}} (self, str room\+\_\+id)
+\item 
+bool \mbox{\hyperlink{classrepositories_1_1base__repository_1_1_message_repository_a2bce453b501b19e0818bdfde50c0fc28}{delete\+\_\+message}} (self, str message\+\_\+id, str user\+\_\+id)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classrepositories_1_1base__repository_1_1_base_repository}{repositories.\+base\+\_\+repository.\+Base\+Repository}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries \+\_\+\+\_\+init\+\_\+\+\_\+} (self)
+\item 
+Optional\mbox{[}Any\mbox{]} \mbox{\hyperlink{classrepositories_1_1base__repository_1_1_base_repository_a7c37db02349f466db83c092a4d3243d5}{execute\+\_\+query}} (self, str query, tuple params=None, bool fetch\+\_\+one=False, bool fetch\+\_\+all=False)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classrepositories_1_1base__repository_1_1_base_repository}{repositories.\+base\+\_\+repository.\+Base\+Repository}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries db\+\_\+manager} = db\+\_\+manager
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Repository para operaciones de mensajes
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classrepositories_1_1base__repository_1_1_message_repository_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classrepositories_1_1base__repository_1_1_message_repository_a2bce453b501b19e0818bdfde50c0fc28}\index{repositories.base\_repository.MessageRepository@{repositories.base\_repository.MessageRepository}!delete\_message@{delete\_message}}
+\index{delete\_message@{delete\_message}!repositories.base\_repository.MessageRepository@{repositories.base\_repository.MessageRepository}}
+\doxysubsubsection{\texorpdfstring{delete\_message()}{delete\_message()}}
+{\footnotesize\ttfamily \label{classrepositories_1_1base__repository_1_1_message_repository_a2bce453b501b19e0818bdfde50c0fc28} 
+ bool repositories.\+base\+\_\+repository.\+Message\+Repository.\+delete\+\_\+message (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{message\+\_\+id}{, }\item[{str}]{user\+\_\+id}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Soft delete de mensaje (solo el autor puede borrar)\end{DoxyVerb}
+ \Hypertarget{classrepositories_1_1base__repository_1_1_message_repository_ad8e12205eb4d88df7577fa113fa38eb0}\index{repositories.base\_repository.MessageRepository@{repositories.base\_repository.MessageRepository}!get\_message\_count\_by\_room@{get\_message\_count\_by\_room}}
+\index{get\_message\_count\_by\_room@{get\_message\_count\_by\_room}!repositories.base\_repository.MessageRepository@{repositories.base\_repository.MessageRepository}}
+\doxysubsubsection{\texorpdfstring{get\_message\_count\_by\_room()}{get\_message\_count\_by\_room()}}
+{\footnotesize\ttfamily \label{classrepositories_1_1base__repository_1_1_message_repository_ad8e12205eb4d88df7577fa113fa38eb0} 
+ int repositories.\+base\+\_\+repository.\+Message\+Repository.\+get\+\_\+message\+\_\+count\+\_\+by\+\_\+room (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{room\+\_\+id}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Contar mensajes en una sala\end{DoxyVerb}
+ \Hypertarget{classrepositories_1_1base__repository_1_1_message_repository_a77392c15cf65f30356f35aba70cc72f4}\index{repositories.base\_repository.MessageRepository@{repositories.base\_repository.MessageRepository}!get\_messages\_by\_room@{get\_messages\_by\_room}}
+\index{get\_messages\_by\_room@{get\_messages\_by\_room}!repositories.base\_repository.MessageRepository@{repositories.base\_repository.MessageRepository}}
+\doxysubsubsection{\texorpdfstring{get\_messages\_by\_room()}{get\_messages\_by\_room()}}
+{\footnotesize\ttfamily \label{classrepositories_1_1base__repository_1_1_message_repository_a77392c15cf65f30356f35aba70cc72f4} 
+ List\mbox{[}Dict\mbox{]} repositories.\+base\+\_\+repository.\+Message\+Repository.\+get\+\_\+messages\+\_\+by\+\_\+room (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{room\+\_\+id}{, }\item[{int }]{limit}{ = {\ttfamily 50}, }\item[{int }]{offset}{ = {\ttfamily 0}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtener mensajes de una sala con paginación\end{DoxyVerb}
+ \Hypertarget{classrepositories_1_1base__repository_1_1_message_repository_aa5ab0c05bf6da50e30900e81fa3fad13}\index{repositories.base\_repository.MessageRepository@{repositories.base\_repository.MessageRepository}!save\_message@{save\_message}}
+\index{save\_message@{save\_message}!repositories.base\_repository.MessageRepository@{repositories.base\_repository.MessageRepository}}
+\doxysubsubsection{\texorpdfstring{save\_message()}{save\_message()}}
+{\footnotesize\ttfamily \label{classrepositories_1_1base__repository_1_1_message_repository_aa5ab0c05bf6da50e30900e81fa3fad13} 
+ Optional\mbox{[}str\mbox{]} repositories.\+base\+\_\+repository.\+Message\+Repository.\+save\+\_\+message (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{user\+\_\+id}{, }\item[{str}]{room\+\_\+id}{, }\item[{str}]{content}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Guardar nuevo mensaje\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+backend/repositories/base\+\_\+repository.\+py\end{DoxyCompactItemize}

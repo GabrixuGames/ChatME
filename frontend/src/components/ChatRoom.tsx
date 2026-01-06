@@ -2,9 +2,10 @@ import { useRef, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useChat } from "@/contexts/ChatContext";
 import { ChatMessage } from "@/components/ChatMessage";
+import { TypingIndicator } from "@/components/TypingIndicator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
-import { MessageCircle } from "lucide-react";
+import { MessageCircle, X } from "lucide-react";
 
 type ChatRoomProps = {
   openSidebar?: () => void;
@@ -13,9 +14,12 @@ type ChatRoomProps = {
 
 export function ChatRoom({ openSidebar = () => {}, roomId }: ChatRoomProps) {
   const { user } = useAuth();
-  const { messages, currentRoom, setCurrentRoom, rooms } = useChat();
+  const { messages, currentRoom, setCurrentRoom, rooms, typingUsers, hideRoom } = useChat();
   const room = roomId ? rooms.find(r => r.id === roomId) : null;
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  
+  // Get typing users for current room (exclude current user)
+  const roomTypingUsers = room ? (typingUsers[room.id] || []).filter(u => u !== user) : [];
 
   // Filtrar mensajes para la sala actual
   const roomMessages = messages.filter(
@@ -36,10 +40,11 @@ export function ChatRoom({ openSidebar = () => {}, roomId }: ChatRoomProps) {
   
   // Join room when roomId changes
   useEffect(() => {
-    if (roomId) {
+    if (roomId && currentRoom?.id !== roomId) {
+      console.log("🔄 ChatRoom: Cambiando a room", roomId);
       setCurrentRoom(roomId);
     }
-  }, [roomId, setCurrentRoom]);
+  }, [roomId]); // Solo depende de roomId, no de setCurrentRoom
 
   if (!room) {
     return (
@@ -80,19 +85,39 @@ export function ChatRoom({ openSidebar = () => {}, roomId }: ChatRoomProps) {
 
   return (
     <div className="flex flex-col h-full w-full min-h-0">
-      <div className="border-b p-2 sm:p-4 sticky top-0 bg-white z-10 flex items-center">
-        {/* Botón menú flotante solo en móvil/tablet */}
-        {typeof window !== "undefined" && window.innerWidth < 640 && (
-          <button
-            className="mr-2 bg-purple-600 text-white rounded-full p-2 shadow-lg"
-            onClick={openSidebar}
+      <div className="border-b p-2 sm:p-4 sticky top-0 bg-white dark:bg-background z-10 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          {/* Botón menú flotante solo en móvil/tablet */}
+          {typeof window !== "undefined" && window.innerWidth < 640 && (
+            <button
+              className="bg-purple-600 text-white rounded-full p-2 shadow-lg"
+              onClick={openSidebar}
+            >
+              <span className="sr-only">Abrir menú</span>
+              <MessageCircle className="h-5 w-5" />
+            </button>
+          )}
+          <div>
+            <h2 className="font-semibold text-base sm:text-lg">{room.name}</h2>
+            <p className="text-xs sm:text-sm text-muted-foreground">{room.description}</p>
+          </div>
+        </div>
+        
+        {/* Botón ocultar chat (solo para chats individuales) */}
+        {room.room_type === 'individual' && (
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => {
+              if (window.confirm('¿Ocultar este chat? Podrás volver a abrirlo desde tu lista de amigos.')) {
+                hideRoom(room.id);
+              }
+            }}
+            className="text-muted-foreground hover:text-foreground"
           >
-            <span className="sr-only">Abrir menú</span>
-            <MessageCircle className="h-5 w-5" />
-          </button>
+            <X className="h-5 w-5" />
+          </Button>
         )}
-  <h2 className="font-semibold text-base sm:text-lg">{room.name}</h2>
-  <p className="text-xs sm:text-sm text-muted-foreground ml-2">{room.description}</p>
       </div>
 
       {/* Mensajes scrollables, usando ScrollArea para compatibilidad móvil/tablet */}
@@ -111,6 +136,8 @@ export function ChatRoom({ openSidebar = () => {}, roomId }: ChatRoomProps) {
               />
             ))
           )}
+          {/* Typing indicator */}
+          <TypingIndicator usernames={roomTypingUsers} />
           {/* Elemento invisible para hacer scroll automático */}
           <div ref={messagesEndRef} />
         </div>

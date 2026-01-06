@@ -1,0 +1,63 @@
+\doxysection{frontend/node\+\_\+modules/react-\/day-\/picker Directory Reference}
+\hypertarget{dir_6f6423ba80851354cba8628e8025e3dc}{}\label{dir_6f6423ba80851354cba8628e8025e3dc}\index{frontend/node\_modules/react-\/day-\/picker Directory Reference@{frontend/node\_modules/react-\/day-\/picker Directory Reference}}
+
+
+\doxysubsection{Detailed Description}
+\hypertarget{dir_6f6423ba80851354cba8628e8025e3dc_autotoc_md5262}{}\doxysubsection{\texorpdfstring{React Day\+Picker}{React Day\+Picker}}\label{dir_6f6423ba80851354cba8628e8025e3dc_autotoc_md5262}
+\href{http://react-day-picker.js.org}{\texttt{Day\+Picker}} is a date picker component for \href{https://reactjs.org}{\texttt{React}}. Renders a monthly calendar to select days. Day\+Picker is customizable, works great with input fields and can be styled to match any design.
+
+➡️ {\bfseries{\href{http://react-day-picker.js.org}{\texttt{react-\/day-\/picker.\+js.\+org}}}} for guides, examples and API reference.
+
+$<$picture$>$ $<$source media="{}(prefers-\/color-\/scheme\+: dark)"{} src\+Set="{}https\+://user-\/images.\+githubusercontent.\+com/120693/188241991-\/19d0e8a1-\/230a-\/48c8-\/8477-\/3c90d4e36197.\+png"{}$>$ $<$source media="{}(prefers-\/color-\/scheme\+: light)"{} src\+Set="{}https\+://user-\/images.\+githubusercontent.\+com/120693/188238076-\/311ec6d1-\/503d-\/4c21-\/8ffe-\/d89faa60e40f.\+png"{}$>$  $<$/picture$>$\hypertarget{dir_6f6423ba80851354cba8628e8025e3dc_autotoc_md5263}{}\doxysubsection{\texorpdfstring{Main features}{Main features}}\label{dir_6f6423ba80851354cba8628e8025e3dc_autotoc_md5263}
+
+\begin{DoxyItemize}
+\item ☀️ Select days, ranges or whatever
+\item 🧘‍♀️ using \href{http://date-fns.org}{\texttt{date-\/fns}} as date library
+\item 🌎 Localizable into any language
+\item ➡️ Keyboard navigation
+\item ♿️ \href{https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA}{\texttt{WAI-\/\+ARIA}} support
+\item 🤖 Written in Type\+Script
+\item 🎨 Easy to style and customize
+\item 🗓 Support multiple calendars
+\item 📄 Easy to integrate input fields
+\end{DoxyItemize}\hypertarget{dir_6f6423ba80851354cba8628e8025e3dc_autotoc_md5264}{}\doxysubsection{\texorpdfstring{Installation}{Installation}}\label{dir_6f6423ba80851354cba8628e8025e3dc_autotoc_md5264}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{npm\ install\ react-\/day-\/picker\ date-\/fns\ \ \#\ using\ npm}
+\DoxyCodeLine{pnpm\ install\ react-\/day-\/picker\ date-\/fns\ \#\ using\ pnpm}
+\DoxyCodeLine{yarn\ add\ react-\/day-\/picker\ date-\/fns\ \ \ \ \ \#\ using\ yarn}
+
+\end{DoxyCode}
+
+
+\href{https://www.npmjs.com/package/react-day-picker}{\texttt{}}  \hypertarget{dir_6f6423ba80851354cba8628e8025e3dc_autotoc_md5265}{}\doxysubsection{\texorpdfstring{Example}{Example}}\label{dir_6f6423ba80851354cba8628e8025e3dc_autotoc_md5265}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ \{\ useState\ \}\ from\ 'react';}
+\DoxyCodeLine{import\ \{\ format\ \}\ from\ 'date-\/fns';}
+\DoxyCodeLine{}
+\DoxyCodeLine{import\ \{\ DayPicker\ \}\ from\ 'react-\/day-\/picker';}
+\DoxyCodeLine{import\ 'react-\/day-\/picker/dist/style.css';}
+\DoxyCodeLine{}
+\DoxyCodeLine{export\ default\ function\ Example()\ \{}
+\DoxyCodeLine{\ \ const\ [selected,\ setSelected]\ =\ useState<Date>();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ let\ footer\ =\ <p>Please\ pick\ a\ day.</p>;}
+\DoxyCodeLine{\ \ if\ (selected)\ \{}
+\DoxyCodeLine{\ \ \ \ footer\ =\ <p>You\ picked\ \{format(selected,\ 'PP')\}.</p>;}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\ \ return\ (}
+\DoxyCodeLine{\ \ \ \ <DayPicker}
+\DoxyCodeLine{\ \ \ \ \ \ mode="{}single"{}}
+\DoxyCodeLine{\ \ \ \ \ \ selected=\{selected\}}
+\DoxyCodeLine{\ \ \ \ \ \ onSelect=\{setSelected\}}
+\DoxyCodeLine{\ \ \ \ \ \ footer=\{footer\}}
+\DoxyCodeLine{\ \ \ \ />}
+\DoxyCodeLine{\ \ );}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{dir_6f6423ba80851354cba8628e8025e3dc_autotoc_md5266}{}\doxysubsection{\texorpdfstring{Documentation}{Documentation}}\label{dir_6f6423ba80851354cba8628e8025e3dc_autotoc_md5266}
+See {\bfseries{\href{http://react-day-picker.js.org}{\texttt{react-\/day-\/picker.\+js.\+org}}}} for guides, examples and API reference of the latest version. 
+\footnotesize Docs for version 7 are at \href{https://react-day-picker-v7.netlify.app}{\texttt{react-\/day-\/picker-\/v7.\+netlify.\+app}}.
+\normalsize  

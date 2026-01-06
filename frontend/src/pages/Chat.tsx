@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { useChat } from "@/contexts/ChatContext";
 import { ChatSidebar } from "@/components/ChatSidebar";
-import { ChatRoomWindow } from "@/components/ChatRoomWindow";
-import { ChatInputWindow } from "@/components/ChatInputWindow";
+import { ChatRoom } from "@/components/ChatRoom";
+import { ChatInput } from "@/components/ChatInput";
 
 const Chat = () => {
   const { isAuthenticated } = useAuth();
@@ -33,10 +33,32 @@ const Chat = () => {
 
   // Open chat by click
   const handleRoomSelect = (roomId: string) => {
+    console.log("🔵 handleRoomSelect llamado con roomId:", roomId);
+    console.log("🔵 Estado actual openRooms:", openRooms);
+    
     setOpenRooms(prev => {
-      if (prev.length === 0) return [roomId];
-      if (prev.length === 1) return [roomId];
-      // If two chats, replace last active (do not alternate)
+      console.log("🔵 Dentro de setOpenRooms, prev:", prev);
+      
+      // Si es el mismo room que ya está abierto, no hacer nada
+      if (prev.includes(roomId)) {
+        console.log("🔵 Room ya está abierto, no hacer nada");
+        return prev;
+      }
+      
+      // Si no hay rooms abiertos, abrir este
+      if (prev.length === 0) {
+        console.log("🔵 No hay rooms abiertos, abriendo:", roomId);
+        return [roomId];
+      }
+      
+      // Si hay 1 room abierto, reemplazarlo con el nuevo
+      if (prev.length === 1) {
+        console.log("🔵 Hay 1 room abierto, reemplazando con:", roomId);
+        return [roomId];
+      }
+      
+      // Si hay 2 chats, reemplazar el último activo
+      console.log("🔵 Hay 2 rooms, reemplazando index", lastActiveIdx, "con:", roomId);
       const newRooms = [...prev];
       newRooms[lastActiveIdx] = roomId;
       return newRooms;
@@ -77,12 +99,11 @@ const Chat = () => {
           onDrop={e => handleDrop(1, e)}
           onClick={() => setLastActiveIdx(0)}
         >
-          <ChatRoomWindow
-            room={rooms.find(r => r.id === openRooms[0])}
+          <ChatRoom
+            roomId={openRooms[0]}
             openSidebar={() => setOpenSidebar(true)}
-            onClose={() => setOpenRooms([])}
           />
-          <ChatInputWindow room={rooms.find(r => r.id === openRooms[0])} />
+          <ChatInput roomId={openRooms[0]} />
         </div>
       )}
       {openRooms.length === 2 && (
@@ -96,16 +117,11 @@ const Chat = () => {
                 onDrop={e => handleDrop(idx, e)}
                 onClick={() => setLastActiveIdx(idx)}
               >
-                <ChatRoomWindow
-                  room={rooms.find(r => r.id === roomId)}
+                <ChatRoom
+                  roomId={roomId}
                   openSidebar={() => setOpenSidebar(true)}
-                  onClose={() => setOpenRooms(prev => {
-                    const newRooms = [...prev];
-                    newRooms.splice(idx, 1);
-                    return newRooms;
-                  })}
                 />
-                <ChatInputWindow room={rooms.find(r => r.id === roomId)} />
+                <ChatInput roomId={roomId} />
               </div>
             </div>
           ))}

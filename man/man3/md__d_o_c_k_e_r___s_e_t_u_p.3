@@ -1,0 +1,98 @@
+.TH "md__d_o_c_k_e_r___s_e_t_u_p" 3 "Version 0.1" "Chat-ME!" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md__d_o_c_k_e_r___s_e_t_u_p \- 🐳 ChatApp con Docker + PostgreSQL - Guía de Setup 
+.PP
+
+.SH "✅ Cuando Docker termine de instalarse:"
+.PP
+.SS "1\&. Abrir PowerShell en la carpeta del proyecto"
+.PP
+.nf
+cd "C:\\Users\\Gabrixu\\Documents\\Programacion\\chatapp\-main"
+.fi
+.PP
+.SS "2\&. Levantar PostgreSQL (un solo comando)"
+.PP
+.nf
+# Opción A: Script automático
+\&.\\setup\-db\&.ps1
+
+# Opción B: Manual
+docker\-compose up \-d postgres
+.fi
+.PP
+.SS "3\&. Instalar dependencias del backend"
+.PP
+.nf
+cd backend
+pip install \-r requirements\&.txt
+.fi
+.PP
+.SS "4\&. Levantar el backend"
+.PP
+.nf
+python app\&.py
+.fi
+.PP
+.SS "5\&. Levantar el frontend (en otra terminal)"
+.PP
+.nf
+cd \&.\&.\\frontend
+npm install
+npm run dev
+.fi
+.PP
+.SH "🎯 ¿Todo funcionando?"
+.PP
+Deberías ver:
+.IP "\(bu" 2
+✅ PostgreSQL: \fRhttp://localhost:5432\fP
+.IP "\(bu" 2
+✅ Backend: \fRhttp://localhost:5000\fP 
+.br
+
+.IP "\(bu" 2
+✅ Frontend: \fRhttp://localhost:8080\fP
+.PP
+.SH "🔧 Comandos útiles Docker:"
+.PP
+.PP
+.nf
+# Ver contenedores corriendo
+docker ps
+
+# Ver logs de PostgreSQL
+docker\-compose logs postgres
+
+# Parar todo
+docker\-compose down
+
+# Conectar a la base de datos
+docker exec \-it chatapp\-postgres psql \-U chatapp \-d chatapp
+.fi
+.PP
+.SH "🚨 Si algo falla:"
+.PP
+.IP "1." 4
+\fBDocker no inicia:\fP Reinicia Docker Desktop
+.IP "2." 4
+\fBPuerto ocupado:\fP Cambia puertos en docker-compose\&.yml
+.IP "3." 4
+\fBDependencias Python:\fP Usa un virtual environment
+.IP "4." 4
+\fBPostgreSQL no conecta:\fP Espera 30 segundos más
+.PP
+.SH "📊 Datos de prueba ya incluidos:"
+.PP
+.IP "\(bu" 2
+\fBUsuario:\fP testuser
+.IP "\(bu" 2
+\fBContraseña:\fP test123
+.IP "\(bu" 2
+\fBSalas:\fP R1, R2, R3
+.PP
+
+.PP
+¡Listo para chatear! 🚀 

@@ -1,0 +1,106 @@
+.TH "repositories.base_repository.RoomRepository" 3 "Version 0.1" "Chat-ME!" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+repositories.base_repository.RoomRepository
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fBrepositories\&.base_repository\&.BaseRepository\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBget_rooms_for_user\fP (self, user_id)"
+.br
+.ti -1c
+.RI "List[Dict] \fBget_all_active_rooms\fP (self)"
+.br
+.ti -1c
+.RI "Optional[Dict] \fBfind_by_id\fP (self, str room_id)"
+.br
+.ti -1c
+.RI "Optional[Dict] \fBfind_individual_room\fP (self, str user_id_1, str user_id_2)"
+.br
+.ti -1c
+.RI "Optional[str] \fBcreate_individual_room\fP (self, str user_id_1, str user_id_2, bool is_temporary=False, str username_1=None, str username_2=None)"
+.br
+.ti -1c
+.RI "bool \fBdelete_room\fP (self, str room_id)"
+.br
+.in -1c
+
+Public Member Functions inherited from \fBrepositories\&.base_repository\&.BaseRepository\fP
+.in +1c
+.ti -1c
+.RI "\fB__init__\fP (self)"
+.br
+.ti -1c
+.RI "Optional[Any] \fBexecute_query\fP (self, str query, tuple params=None, bool fetch_one=False, bool fetch_all=False)"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+
+
+Public Attributes inherited from \fBrepositories\&.base_repository\&.BaseRepository\fP
+.in +1c
+.ti -1c
+.RI "\fBdb_manager\fP = db_manager"
+.br
+.in -1c
+.SH "Member Function Documentation"
+.PP 
+.SS " Optional[str] repositories\&.base_repository\&.RoomRepository\&.create_individual_room ( self, str user_id_1, str user_id_2, bool  is_temporary = \fRFalse\fP, str  username_1 = \fRNone\fP, str  username_2 = \fRNone\fP)"
+
+.PP
+.nf
+Crear sala individual entre dos usuarios
+.fi
+.PP
+ 
+.SS " bool repositories\&.base_repository\&.RoomRepository\&.delete_room ( self, str room_id)"
+
+.PP
+.nf
+Eliminar (desactivar) una sala
+.fi
+.PP
+ 
+.SS " Optional[Dict] repositories\&.base_repository\&.RoomRepository\&.find_by_id ( self, str room_id)"
+
+.PP
+.nf
+Buscar sala por ID
+.fi
+.PP
+ 
+.SS " Optional[Dict] repositories\&.base_repository\&.RoomRepository\&.find_individual_room ( self, str user_id_1, str user_id_2)"
+
+.PP
+.nf
+Buscar sala individual entre dos usuarios (no importa el orden)
+.fi
+.PP
+ 
+.SS " List[Dict] repositories\&.base_repository\&.RoomRepository\&.get_all_active_rooms ( self)"
+
+.PP
+.nf
+Obtener todas las salas activas
+.fi
+.PP
+ 
+.SS "repositories\&.base_repository\&.RoomRepository\&.get_rooms_for_user ( self,  user_id)"
+
+.PP
+.nf
+Devuelve todas las salas (rooms) en las que el usuario participa, públicas e individuales\&.
+
+.fi
+.PP
+ 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Chat-ME! from the source code\&.

@@ -1,0 +1,89 @@
+\doxysection{repositories.\+base\+\_\+repository.\+Room\+Repository Class Reference}
+\hypertarget{classrepositories_1_1base__repository_1_1_room_repository}{}\label{classrepositories_1_1base__repository_1_1_room_repository}\index{repositories.base\_repository.RoomRepository@{repositories.base\_repository.RoomRepository}}
+Inheritance diagram for repositories.\+base\+\_\+repository.\+Room\+Repository\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classrepositories_1_1base__repository_1_1_room_repository}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classrepositories_1_1base__repository_1_1_room_repository_add02d177b3f9f93106974804b25d809f}{get\+\_\+rooms\+\_\+for\+\_\+user}} (self, user\+\_\+id)
+\item 
+List\mbox{[}Dict\mbox{]} \mbox{\hyperlink{classrepositories_1_1base__repository_1_1_room_repository_a870406bcbb661d89f1a3a1a355b4b967}{get\+\_\+all\+\_\+active\+\_\+rooms}} (self)
+\item 
+Optional\mbox{[}Dict\mbox{]} \mbox{\hyperlink{classrepositories_1_1base__repository_1_1_room_repository_ac4a54f27e33902eaa53a6e3e0161e9b3}{find\+\_\+by\+\_\+id}} (self, str room\+\_\+id)
+\item 
+Optional\mbox{[}Dict\mbox{]} \mbox{\hyperlink{classrepositories_1_1base__repository_1_1_room_repository_ad821e1742ba13a18108a5e678bd59027}{find\+\_\+individual\+\_\+room}} (self, str user\+\_\+id\+\_\+1, str user\+\_\+id\+\_\+2)
+\item 
+Optional\mbox{[}str\mbox{]} \mbox{\hyperlink{classrepositories_1_1base__repository_1_1_room_repository_af8515b631a932a346f79aea2356aee30}{create\+\_\+individual\+\_\+room}} (self, str user\+\_\+id\+\_\+1, str user\+\_\+id\+\_\+2, bool is\+\_\+temporary=False, str username\+\_\+1=None, str username\+\_\+2=None)
+\item 
+bool \mbox{\hyperlink{classrepositories_1_1base__repository_1_1_room_repository_a359f7f981740f462c6eda1952a043ebf}{delete\+\_\+room}} (self, str room\+\_\+id)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classrepositories_1_1base__repository_1_1_base_repository}{repositories.\+base\+\_\+repository.\+Base\+Repository}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries \+\_\+\+\_\+init\+\_\+\+\_\+} (self)
+\item 
+Optional\mbox{[}Any\mbox{]} \mbox{\hyperlink{classrepositories_1_1base__repository_1_1_base_repository_a7c37db02349f466db83c092a4d3243d5}{execute\+\_\+query}} (self, str query, tuple params=None, bool fetch\+\_\+one=False, bool fetch\+\_\+all=False)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classrepositories_1_1base__repository_1_1_base_repository}{repositories.\+base\+\_\+repository.\+Base\+Repository}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries db\+\_\+manager} = db\+\_\+manager
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{classrepositories_1_1base__repository_1_1_room_repository_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classrepositories_1_1base__repository_1_1_room_repository_af8515b631a932a346f79aea2356aee30}\index{repositories.base\_repository.RoomRepository@{repositories.base\_repository.RoomRepository}!create\_individual\_room@{create\_individual\_room}}
+\index{create\_individual\_room@{create\_individual\_room}!repositories.base\_repository.RoomRepository@{repositories.base\_repository.RoomRepository}}
+\doxysubsubsection{\texorpdfstring{create\_individual\_room()}{create\_individual\_room()}}
+{\footnotesize\ttfamily \label{classrepositories_1_1base__repository_1_1_room_repository_af8515b631a932a346f79aea2356aee30} 
+ Optional\mbox{[}str\mbox{]} repositories.\+base\+\_\+repository.\+Room\+Repository.\+create\+\_\+individual\+\_\+room (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{user\+\_\+id\+\_\+1}{, }\item[{str}]{user\+\_\+id\+\_\+2}{, }\item[{bool }]{is\+\_\+temporary}{ = {\ttfamily False}, }\item[{str }]{username\+\_\+1}{ = {\ttfamily None}, }\item[{str }]{username\+\_\+2}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Crear sala individual entre dos usuarios\end{DoxyVerb}
+ \Hypertarget{classrepositories_1_1base__repository_1_1_room_repository_a359f7f981740f462c6eda1952a043ebf}\index{repositories.base\_repository.RoomRepository@{repositories.base\_repository.RoomRepository}!delete\_room@{delete\_room}}
+\index{delete\_room@{delete\_room}!repositories.base\_repository.RoomRepository@{repositories.base\_repository.RoomRepository}}
+\doxysubsubsection{\texorpdfstring{delete\_room()}{delete\_room()}}
+{\footnotesize\ttfamily \label{classrepositories_1_1base__repository_1_1_room_repository_a359f7f981740f462c6eda1952a043ebf} 
+ bool repositories.\+base\+\_\+repository.\+Room\+Repository.\+delete\+\_\+room (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{room\+\_\+id}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Eliminar (desactivar) una sala\end{DoxyVerb}
+ \Hypertarget{classrepositories_1_1base__repository_1_1_room_repository_ac4a54f27e33902eaa53a6e3e0161e9b3}\index{repositories.base\_repository.RoomRepository@{repositories.base\_repository.RoomRepository}!find\_by\_id@{find\_by\_id}}
+\index{find\_by\_id@{find\_by\_id}!repositories.base\_repository.RoomRepository@{repositories.base\_repository.RoomRepository}}
+\doxysubsubsection{\texorpdfstring{find\_by\_id()}{find\_by\_id()}}
+{\footnotesize\ttfamily \label{classrepositories_1_1base__repository_1_1_room_repository_ac4a54f27e33902eaa53a6e3e0161e9b3} 
+ Optional\mbox{[}Dict\mbox{]} repositories.\+base\+\_\+repository.\+Room\+Repository.\+find\+\_\+by\+\_\+id (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{room\+\_\+id}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Buscar sala por ID\end{DoxyVerb}
+ \Hypertarget{classrepositories_1_1base__repository_1_1_room_repository_ad821e1742ba13a18108a5e678bd59027}\index{repositories.base\_repository.RoomRepository@{repositories.base\_repository.RoomRepository}!find\_individual\_room@{find\_individual\_room}}
+\index{find\_individual\_room@{find\_individual\_room}!repositories.base\_repository.RoomRepository@{repositories.base\_repository.RoomRepository}}
+\doxysubsubsection{\texorpdfstring{find\_individual\_room()}{find\_individual\_room()}}
+{\footnotesize\ttfamily \label{classrepositories_1_1base__repository_1_1_room_repository_ad821e1742ba13a18108a5e678bd59027} 
+ Optional\mbox{[}Dict\mbox{]} repositories.\+base\+\_\+repository.\+Room\+Repository.\+find\+\_\+individual\+\_\+room (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{user\+\_\+id\+\_\+1}{, }\item[{str}]{user\+\_\+id\+\_\+2}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Buscar sala individual entre dos usuarios (no importa el orden)\end{DoxyVerb}
+ \Hypertarget{classrepositories_1_1base__repository_1_1_room_repository_a870406bcbb661d89f1a3a1a355b4b967}\index{repositories.base\_repository.RoomRepository@{repositories.base\_repository.RoomRepository}!get\_all\_active\_rooms@{get\_all\_active\_rooms}}
+\index{get\_all\_active\_rooms@{get\_all\_active\_rooms}!repositories.base\_repository.RoomRepository@{repositories.base\_repository.RoomRepository}}
+\doxysubsubsection{\texorpdfstring{get\_all\_active\_rooms()}{get\_all\_active\_rooms()}}
+{\footnotesize\ttfamily \label{classrepositories_1_1base__repository_1_1_room_repository_a870406bcbb661d89f1a3a1a355b4b967} 
+ List\mbox{[}Dict\mbox{]} repositories.\+base\+\_\+repository.\+Room\+Repository.\+get\+\_\+all\+\_\+active\+\_\+rooms (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Obtener todas las salas activas\end{DoxyVerb}
+ \Hypertarget{classrepositories_1_1base__repository_1_1_room_repository_add02d177b3f9f93106974804b25d809f}\index{repositories.base\_repository.RoomRepository@{repositories.base\_repository.RoomRepository}!get\_rooms\_for\_user@{get\_rooms\_for\_user}}
+\index{get\_rooms\_for\_user@{get\_rooms\_for\_user}!repositories.base\_repository.RoomRepository@{repositories.base\_repository.RoomRepository}}
+\doxysubsubsection{\texorpdfstring{get\_rooms\_for\_user()}{get\_rooms\_for\_user()}}
+{\footnotesize\ttfamily \label{classrepositories_1_1base__repository_1_1_room_repository_add02d177b3f9f93106974804b25d809f} 
+repositories.\+base\+\_\+repository.\+Room\+Repository.\+get\+\_\+rooms\+\_\+for\+\_\+user (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{user\+\_\+id}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Devuelve todas las salas (rooms) en las que el usuario participa, públicas e individuales.
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+backend/repositories/base\+\_\+repository.\+py\end{DoxyCompactItemize}

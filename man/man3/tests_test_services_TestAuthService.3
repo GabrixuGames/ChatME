@@ -1,0 +1,86 @@
+.TH "tests.test_services.TestAuthService" 3 "Version 0.1" "Chat-ME!" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+tests.test_services.TestAuthService
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits unittest\&.TestCase\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBsetUp\fP (self)"
+.br
+.ti -1c
+.RI "\fBtest_authenticate_user_success\fP (self)"
+.br
+.ti -1c
+.RI "\fBtest_authenticate_user_not_found\fP (self)"
+.br
+.ti -1c
+.RI "\fBtest_authenticate_user_wrong_password\fP (self)"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBmock_user_repo\fP = Mock()"
+.br
+.ti -1c
+.RI "\fBmock_repo_class\fP = patcher\&.start()"
+.br
+.ti -1c
+.RI "\fBauth_service\fP = AuthService()"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+.nf
+Tests para AuthService
+.fi
+.PP
+ 
+.SH "Member Function Documentation"
+.PP 
+.SS "tests\&.test_services\&.TestAuthService\&.setUp ( self)"
+
+.PP
+.nf
+Configurar mocks para cada test
+.fi
+.PP
+ 
+.SS "tests\&.test_services\&.TestAuthService\&.test_authenticate_user_not_found ( self)"
+
+.PP
+.nf
+Test con usuario no encontrado
+.fi
+.PP
+ 
+.SS "tests\&.test_services\&.TestAuthService\&.test_authenticate_user_success ( self)"
+
+.PP
+.nf
+Test de autenticación exitosa
+.fi
+.PP
+ 
+.SS "tests\&.test_services\&.TestAuthService\&.test_authenticate_user_wrong_password ( self)"
+
+.PP
+.nf
+Test con password incorrecto
+.fi
+.PP
+ 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Chat-ME! from the source code\&.

@@ -1,0 +1,2328 @@
+.TH "md_frontend_2node__modules_2recharts_2_c_h_a_n_g_e_l_o_g" 3 "Version 0.1" "Chat-ME!" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md_frontend_2node__modules_2recharts_2_c_h_a_n_g_e_l_o_g \- ⚠️ Next versions change notes are available only on the \fRGitHub Releases\fP page ⚠️ 
+.PP
+
+.SH "2\&.2\&.0 (Dec 8, 2022)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Support keyboard navigation in pie chart (#2923)
+.IP "\(bu" 2
+Allow reversing the tooltip direction (#3056) 
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix rounding leading to hairline gaps (#3075)
+.IP "\(bu" 2
+fix: do not override zero brush end index (#3076)
+.IP "\(bu" 2
+fix: allow dragging brush when the mouse is outside (#3072)
+.IP "\(bu" 2
+fix: add label type to line props (#3068)
+.IP "\(bu" 2
+Ensure LabelList generic extends Data interface (#2954)
+.PP
+.SH "2\&.1\&.16 (Oct 29, 2022)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix incorrect date in CHAGELOG (#3016)
+.IP "\(bu" 2
+Let formatter function run even when value is falsy (#3026)
+.IP "\(bu" 2
+Fix(Sankey): update tooltip active state by trigger type(hover/click) (#3021)
+.IP "\(bu" 2
+Fix Area's \fRbaseValue\fP prop (#3013)
+.PP
+.SH "2\&.1\&.15 (Oct 12, 2022)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix scroll on hover
+.IP "\(bu" 2
+DefaultTooltipContent\&.tsx Solving type error for entry\&.value and entry\&.name
+.PP
+.SS "chore"
+.IP "\(bu" 2
+Revert D3 version
+.PP
+.SH "2\&.1\&.14 (Sep 7, 2022)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Add inactiveShape prop to Pie component (#2900)
+.IP "\(bu" 2
+Revert "chore: move type deps into devDependencies (#2843)" (#2942)
+.IP "\(bu" 2
+Fix typing of default tooltip formatter (#2924)
+.IP "\(bu" 2
+Take letter-spacing and font-size into consideration while rendering ticks (#2898)
+.IP "\(bu" 2
+Add formatter function type to tooltip props (#2916)
+.IP "\(bu" 2
+doc: Update CHANGELOG\&.md about d3 7\&.x (#2919)
+.PP
+.SH "2\&.1\&.13 (Jul 26, 2022)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+set animate flag before chart data update (#2911)
+.IP "\(bu" 2
+Error bar domain fix (#2863)
+.IP "\(bu" 2
+fix: fix "recharts@… doesn't provide prop-types, requested by react-smooth" warning (#2895)
+.PP
+.SS "chore"
+.IP "\(bu" 2
+upgrade d3 (#2893)
+.PP
+.SH "2\&.1\&.12 (Jun 27, 2022)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+update react-smooth version
+.IP "\(bu" 2
+update d3 from 6\&.x to 7\&.x it may break some tools like jest
+.PP
+
+.PP
+fix config for jest is to add the following configuration
+
+.PP
+.PP
+.nf
+const path = require('path');
+// took from d3/package\&.json
+const d3Pkgs = [
+    'd3',
+    'd3\-array',
+    'd3\-axis',
+    'd3\-brush',
+    'd3\-chord',
+    'd3\-color',
+    'd3\-contour',
+    'd3\-delaunay',
+    'd3\-dispatch',
+    'd3\-drag',
+    'd3\-dsv',
+    'd3\-ease',
+    'd3\-fetch',
+    'd3\-force',
+    'd3\-format',
+    'd3\-geo',
+    'd3\-hierarchy',
+    'd3\-interpolate',
+    'd3\-path',
+    'd3\-polygon',
+    'd3\-quadtree',
+    'd3\-random',
+    'd3\-scale',
+    'd3\-scale\-chromatic',
+    'd3\-selection',
+    'd3\-shape',
+    'd3\-time',
+    'd3\-time\-format',
+    'd3\-timer',
+    'd3\-transition',
+    'd3\-zoom',
+];
+
+// option 1 map module to an bundled version of the package which is es5
+const moduleNameMapper = d3Pkgs\&.reduce((acc, pkg) => {
+    acc[`^${pkg}$`] = path\&.join(require\&.resolve(pkg), `\&.\&./\&.\&./dist/${pkg}\&.min\&.js`);
+    return acc;
+}, {});
+
+module\&.exports = {
+    moduleNameMapper: {
+        // option 1
+        // \&.\&.\&.moduleNameMapper
+    },
+    transform: {
+        // match mjs js jsx ts tsx
+        '^\&.+\\\\\&.m?[jt]sx?$': 'babel\-jest',
+    },
+    // stop ignore node_modules transform since d3 and others start to put es6 as main of packages
+    transformIgnorePatterns: [
+        // option 2, stop ignore transform on es6 packages
+        `/node_modules/(?!${d3Pkgs\&.join('|')}|internmap|d3\-delaunay|delaunator|robust\-predicates)`,
+        // option 3, stop ignore transform on all node_modules
+        // `/node_modules/(?!\&.*)`,
+    ],
+};
+.fi
+.PP
+.SH "2\&.1\&.11 (Jun 24, 2022)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Adds react \fR^18\&.0\&.0\fP as valid peerDependency (#2820)
+.PP
+.SH "2\&.1\&.10 (May 19, 2022)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Add ARIA1\&.2 attributes to the SvgElementPropKeys filter array
+.IP "\(bu" 2
+Added Storybook Badge (#2840)
+.IP "\(bu" 2
+Handling of undefined values and type checks in DefaultTooltipContent
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Axis scale=band no longer works as of Recharts 2\&.x\&.x (#2742)
+.PP
+.SS "chore"
+.IP "\(bu" 2
+chore: move type deps into devDependencies (#2843)
+.PP
+.SH "2\&.1\&.9 (Feb 10, 2022)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+feat: allow axis domain to accept a callback (#2770)
+.IP "\(bu" 2
+Categorical chart callback types (#2739)
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fixing types in strict mode (#2745) (#2747)
+.IP "\(bu" 2
+Fix: removes overlapping legend for categorical charts (#2752)
+.IP "\(bu" 2
+Categorical chart callback types (#2739)
+.PP
+.SH "2\&.1\&.8 (dec 14, 2021)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Must use import to load ES Module (#2658)
+.PP
+.SH "2\&.1\&.7 (dec 14, 2021)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Treemap do not render depth (#2718 #2719)
+.IP "\(bu" 2
+Update PolarRadiusAxis\&.tsx (#2720)
+.PP
+.SS "chore"
+.IP "\(bu" 2
+Update d3-interpolate, d3-scale and d3-shape (#2707)
+.PP
+.SH "2\&.1\&.6 (oct 26, 2021)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix types folder missing
+.PP
+.SH "2\&.1\&.5 (oct 15, 2021)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fixed types for legend events (#2267 #2269)
+.IP "\(bu" 2
+Fix the react-is version (#2670)
+.IP "\(bu" 2
+Fix type declaration errors when tsc (#2675)
+.IP "\(bu" 2
+Fix(build-umd): add webpack output options libraryTarget (#2684)
+.PP
+.SH "2\&.1\&.4 (sep 19, 2021)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix: ResponsiveContainer makes legend overlapping with chart when re-rendering (#2660)
+.IP "\(bu" 2
+Fix: rendering of a single bar when maxBarSize is absent and barSize is present (#2659)
+.PP
+.SH "2\&.1\&.3 (sep 18, 2021)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix: Customized component has no key (#2637)
+.IP "\(bu" 2
+Fix XAxis scale property type (#2641)
+.PP
+.SH "2\&.1\&.2 (aug 24, 2021)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fixes undefined field reference when optional variables not supplied (#2630)
+.IP "\(bu" 2
+Fix fragment children (#2481) 
+.PP
+.SH "2\&.1\&.1 (aug 21, 2021)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix: responsive container
+.PP
+.SH "2\&.1\&.0 (aug 10, 2021)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Wrap ResponsiveContainer with forwardRef
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix for recharts issue #1787
+.IP "\(bu" 2
+Add chart type to tooltip payload 
+.PP
+.SH "2\&.0\&.10 (jul 13, 2021)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Feat: Allow automated axis padding for "gap" and "no-gap" for barcharts with continuous axis #2457
+.IP "\(bu" 2
+Passthrough position attribute on createLabeledScales
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix: barchart for a single data point #2512
+.IP "\(bu" 2
+fix: the bar label type definition #2582
+.IP "\(bu" 2
+fix: show scatter chart tooltip cross cursor #2592
+.PP
+.SH "2\&.0\&.9 (mar 24, 2021)"
+.PP
+.SS "chore"
+.IP "\(bu" 2
+update test config and webpack, etc
+.PP
+.SH "fix"
+.PP
+.IP "\(bu" 2
+fix for missing sankey tooltips, fix #2496
+.IP "\(bu" 2
+added polyfill for ReactResizeDetector, fix #2504
+.IP "\(bu" 2
+fix condition to actually remove the listener, fix #2498
+.IP "\(bu" 2
+fix typing of <Area type > prop, fix #2471
+.PP
+.SH "2\&.0\&.8 (Feb 24, 2021)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+allow to show tooltip when hover or click bar item for <BarChart > and <RadialBarChart >
+.IP "\(bu" 2
+add api \fRgetXScales\fP, \fRgetYScales\fP, \fRgetXScaleByAxisId\fP, \fRgetYScaleByAxisId\fP, \fRgetItemByXY\fP to chart, fix #2422
+.IP "\(bu" 2
+Add SyncMethod to categorical charts
+.IP "\(bu" 2
+\fRfindAllByType\fP searches for match inside of a fragment
+.IP "\(bu" 2
+allow to add customized \fRpolarAngles\fP and \fRpolarRadius\fP to <PolarGrid >, fix #2452
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix Tooltip receive wrong payload when mouse enter <Line >, \&.etc, fix #2394
+.IP "\(bu" 2
+fix Treemap tooltip when use \fRdataKey\fP to specify value, fix #2428
+.PP
+.SS "deps"
+.IP "\(bu" 2
+update react-resize-detector to 6\&.6\&.0, fix #2431
+.PP
+.SH "2\&.0\&.7 (Feb 18, 2021)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+add missed type definition of tickMargin in XAxis, YAxis, fix #2427
+.IP "\(bu" 2
+filter out nil elements of chart
+.IP "\(bu" 2
+ensures \fRid="undefined"\fP is not rendered to the DOM when use ResponsiveContainer
+.IP "\(bu" 2
+fix auto scale type of ComposedChart, fix #2403
+.IP "\(bu" 2
+Fix \&.d\&.ts types that relay on d3
+.PP
+.SH "2\&.0\&.6 (Feb 08, 2021)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix types error in npm pkg, fix #2398
+.PP
+.SH "2\&.0\&.5 (Feb 08, 2021)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+defer when syncing to other charts
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix Customized component types
+.IP "\(bu" 2
+fix child event not dispatched, fix #2414
+.PP
+.SH "2\&.0\&.4 (Jan 27, 2021)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+add maxLines prop to Text component
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Add \fRpayload\fP to \fRPayload\fP interface
+.IP "\(bu" 2
+prevent rerender errors in ResponsiveContainer
+.IP "\(bu" 2
+Add PieLabel, PieLabelRenderProps types
+.PP
+.SS "deps"
+.IP "\(bu" 2
+Upgrade react-resize-detector(4\&.x => 5\&.x) types to match the library
+.PP
+.SH "2\&.0\&.3 (Jan 13, 2021)"
+.PP
+.SS "refactor"
+.IP "\(bu" 2
+use \fRgetDerivedStateFromProps\fP to replace \fRUNSAFE_componentWillReceiveProps\fP, support react@17, #2385
+.PP
+.SH "2\&.0\&.2 (Jan 12, 2021)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix lint error
+.PP
+.SH "2\&.0\&.1 (Jan 12, 2021)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix typo, createLabeldScales -> createLabeledScales
+.IP "\(bu" 2
+Prefer Number\&.isFinite if available
+.IP "\(bu" 2
+fix types error
+.IP "\(bu" 2
+fix(package\&.json): disable side effects explicitly
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Add aria-hidden to measurementSpan
+.PP
+.SH "2\&.0\&.0 (Dec 29, 2020)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix minAngle for 0 in PieChart, fix ##2237
+.IP "\(bu" 2
+fix type error of <Bar >, fix #2335
+.IP "\(bu" 2
+fix type error of cursor in <Tooltip >, fix #2178
+.IP "\(bu" 2
+fix Props of XAxis, fix #2128
+.IP "\(bu" 2
+export Props of components, fix #2319, #2156, #2203
+.IP "\(bu" 2
+Fix typo, getRectangePath -> getRectanglePath in Rectangle
+.IP "\(bu" 2
+allow Duplicated Category for bar charts not using correct entries for custom tool tips
+.IP "\(bu" 2
+fixing typescript array coalesce
+.IP "\(bu" 2
+fix types error of sankey, fix #2280
+.IP "\(bu" 2
+Fixed SVG path for pie charts when corner radius is set to a value other than zero (#2331)
+.PP
+.SS "feat"
+.IP "\(bu" 2
+add props \fRreversed\fP to \fR<Funnel />\fP
+.IP "\(bu" 2
+add \fRbreakAll\fP props to \fR<Text />\fP to allow break all for chinese
+.IP "\(bu" 2
+fix width of labelList in Funnel; fix #2056, #1866
+.IP "\(bu" 2
+support range RadarChart and add props \fRconnectNulls\fP to <Radar >, fix #1890
+.IP "\(bu" 2
+add ability to pass in custom legend icon\&.
+.PP
+.SS "deps"
+.IP "\(bu" 2
+upgrade react-resize-detector to 5\&.2\&.0 and fix ts error, fix #2300
+.IP "\(bu" 2
+update react-smooth to 1\&.0\&.6 to fix bug after upgrading d3
+.IP "\(bu" 2
+upgrade d3 packages
+.PP
+.SH "2\&.0\&.0-beta\&.8 (Nov 16, 2020)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Add color change for inactive legend label
+.IP "\(bu" 2
+fix stackOffset="sign" in #2292, and add props stackOffset="positive" to fix #1667
+.PP
+.SS "refactor"
+.IP "\(bu" 2
+update \fRfilterSvgElements\fP and \fRrenderByOrder\fP
+.IP "\(bu" 2
+Replace core-js polyfill and remove babel-polyfill
+.PP
+.SH "2\&.0\&.0-beta\&.7 (Sep 08, 2020)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix flickering tooltip by keeping the isTooltipActive flag from the previous state
+.IP "\(bu" 2
+fix(AreaDot Type): add option to use a function that returns a react element
+.IP "\(bu" 2
+Fix typescript error in polar radar
+.IP "\(bu" 2
+Fix typos in Label\&.renderCallByParent
+.IP "\(bu" 2
+Add type definition for label prop on XAxis, YAxis and ZAxis
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Pass tickFormatter as a prop to customized tick component
+.IP "\(bu" 2
+Allow array value for last data element in Funnel to set bottom width instead of forcing 0
+.IP "\(bu" 2
+Add payloadIndex to cursor props
+.PP
+.SH "2\&.0\&.0-beta\&.6 (May 12, 2020)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix error of Brush when data is empty, but chart width or height or Brush update, fix #2093
+.IP "\(bu" 2
+fix build error , fix #2120
+.IP "\(bu" 2
+fix attrs of <Label >, reverts previous change: now \fRpositionAttrs\fP is again after \fRattrs\fP
+.IP "\(bu" 2
+Get legend wrapper boundingRect to correctly compute legend offset, fix #2062
+.PP
+.SS "feat"
+.IP "\(bu" 2
+support customized traveller of Brush, fix #1600
+.PP
+.SH "2\&.0\&.0-beta\&.5 (Mar 26, 2020)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix types of generateCategoricalChart
+.IP "\(bu" 2
+fix position of tooltip when the categorical axis has time scale
+.IP "\(bu" 2
+fix position of tooltip when direction is rtl
+.IP "\(bu" 2
+fix name of Scatter in tooltip
+.IP "\(bu" 2
+Fix outerArcAngle and innerArcAngle when cornerIsExternal == true
+.IP "\(bu" 2
+fix IE 11 supoort because of d3-scale@3\&.x
+.PP
+.SS "feat"
+.IP "\(bu" 2
+add Global setting, include "isSsr"
+.IP "\(bu" 2
+support tooltip trigger by click event
+.IP "\(bu" 2
+add static method \fRregisterSymbol\fP to Symbols
+.IP "\(bu" 2
+add payload to formatter and labelFormatter in Tooltip
+.IP "\(bu" 2
+allow domain of axis to change the order of categories
+.PP
+.SH "2\&.0\&.0-beta\&.4 (Mar 17, 2020)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix error of <Curve > when add child to <Line >, fix #2051
+.IP "\(bu" 2
+fix Stack AreaChart when some values is negative, fix #1667
+.IP "\(bu" 2
+fix stack AreaChart when some values is nill, fix #1601
+.PP
+.SS "dep"
+.IP "\(bu" 2
+Upgrade reduce-css-calc
+.PP
+.SS "chore"
+.IP "\(bu" 2
+add types
+.PP
+.SH "2\&.0\&.0-beta\&.3 (Mar 13, 2020)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix range of ReferenceArea of BarChart, fix #2045
+.IP "\(bu" 2
+fix className of axis line, fix ##2024
+.IP "\(bu" 2
+fix ComposedChart when has multiple <Bar>, fix #2031
+.IP "\(bu" 2
+fix ComposedChart when specify scale of <XAxis >, fix #2010
+.PP
+.SS "chore"
+.IP "\(bu" 2
+update eslint and add \&.prettierrc
+.PP
+.SH "2\&.0\&.0-beta\&.2 (Mar 10, 2020)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Do word line calculation only when needed
+.IP "\(bu" 2
+Fixes arc angles when \fRcornerIsExternal\fP is used
+.IP "\(bu" 2
+Invert cartesian label position based on negative values
+.IP "\(bu" 2
+Fix usage of hooks in Tooltip, Label, Legend and Customized
+.IP "\(bu" 2
+Move draging-end listener to the window for brush
+.IP "\(bu" 2
+Fix trigger after mouse leave
+.IP "\(bu" 2
+Added the angle as key which need to be used in the Label align
+.IP "\(bu" 2
+Rewrite index\&.js to index\&.ts, update scripts in package\&.json
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Added index to tickFormatter
+.IP "\(bu" 2
+Allow axis line customization through axisLine prop
+.PP
+.SH "2\&.0\&.0-beta\&.1 (Dec 03, 2019)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix error parameters in \fRappendOffsetOfLegend\fP
+.IP "\(bu" 2
+fix style of <Area >
+.PP
+.SH "2\&.0\&.0-beta\&.0 (Dec 03, 2019)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Only support react@16
+.IP "\(bu" 2
+Use typescript to rewrite src/
+.PP
+.SH "1\&.8\&.5 (Oct 22, 2019)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+revert \fRPR#1916\fP
+.IP "\(bu" 2
+fix Text update, fix #1914
+.PP
+.SH "1\&.8\&.4 (Oct 22, 2019)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Adding Composed chart to rescaled charts, to fix #1887
+.PP
+.SH "1\&.8\&.3 (Oct 17, 2019)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix: rollback to componentWillReceiveProps, fix crash in react@15
+.PP
+.SH "1\&.8\&.2 (Oct 17, 2019)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Used UNSAFE_componentWillReceiveProps to replace componentDidUpdate
+.PP
+.SH "1\&.8\&.1 (Oct 16, 2019)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fixed Text Component crash
+.IP "\(bu" 2
+Fixed eslint errors in src/
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Add props of <Brush > to always show text
+.IP "\(bu" 2
+Add onClick event to sankey chart
+.IP "\(bu" 2
+Shape prop can be used without any other prop in reference area
+.PP
+.SH "1\&.8\&.0 (Oct 15, 2019)"
+.PP
+.SS "refactor"
+.IP "\(bu" 2
+react unsafe methods refactored
+.PP
+.SH "1\&.7\&.1 (Aug 13, 2019)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix bar chart tooltip (#1837)
+.PP
+.SH "1\&.7\&.0 (Aug 08, 2019)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+allow events on Text and Label components
+.IP "\(bu" 2
+Enable Tooltip's \fRtranslate\fP style
+.IP "\(bu" 2
+Added position props for ReferenceLine to allow to control offset of it
+.PP
+.SS "fix"
+.IP "\(bu" 2
+handle \fRdataKey\fP as function, get correct data array for tooltip
+.IP "\(bu" 2
+fix style of legend in case of area and radar use fill for fallback color
+.PP
+.SH "1\&.6\&.2 (May 22, 2019)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Add cornerIsExternal prop to center rounded corner at radial bar edge
+.IP "\(bu" 2
+Add new component \fRCustomized\fP to render customized content which can user internal state and props
+.IP "\(bu" 2
+Add props \fRtooltipType="none"\fP to hide tooltip data for Area, Bar, Line, Scatter, Funnel, Pie, Radar, RadialBar
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix the order of tooltip items when not specify itemSorter
+.IP "\(bu" 2
+Fix typo in example of RadialBarChart
+.PP
+.SH "1\&.6\&.1 (May 20, 2019)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix "Maximum call stack size exceeded" error when use label={<Label >}
+.IP "\(bu" 2
+fix bug of "Cannot read property reduce of undefined in Text\&.js"
+.IP "\(bu" 2
+fix \fRgetDomainOfDataByKey\fP when all the values are null or undefined
+.PP
+.SH "1\&.6\&.0(May 14, 2019)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Use y-axis ticks to determine y-axis category
+.IP "\(bu" 2
+fix bug in ThreeMap inside ResponsiveContainer, fix #1692
+.IP "\(bu" 2
+Avoid same keys on label and line, fixes #1302
+.IP "\(bu" 2
+use _\&.max to replace Math\&.max\&.apply, use _\&.min to replace Math\&.min\&.apply
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Adds forceCornerRadius prop to RadialBar
+.IP "\(bu" 2
+calculate width with aspect and height when width is falsey
+.PP
+.SH "1\&.5\&.0(Feb 15, 2019)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix the bug of ReferenceLine when calculate coordinates, fix #1643
+.IP "\(bu" 2
+fix bug of Scatter in ComposedChart
+.PP
+.SS "feat"
+.IP "\(bu" 2
+allow aria-* attributes and "role", "focusable", "tabIndex" of charts, fix #1226, fix #1584
+.IP "\(bu" 2
+add new props "paylodUniqBy" to Tooltip and Legend
+.PP
+.SH "1\&.4\&.4(Feb 15, 2019)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix the bug of automatically calculate the y-coordinate of yAxis tick when tick has unit, fix #1623
+.IP "\(bu" 2
+render clipPath in <defs >, fix bug in generateCategoricalChart, fix #1592
+.IP "\(bu" 2
+remove React\&.Fragment in DefaultTooltipContent, fix #1645
+.PP
+.SH "1\&.4\&.3(Feb 12, 2019)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix bug of <Rectangle > when width < 0 && \fRradius\fP is not null, fix #1596
+.IP "\(bu" 2
+fix paddingAngle of Pie when render only <Pie > not <PieChart >
+.IP "\(bu" 2
+fix onMouseEnter and Tooltip for Pie on FireFox
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Make the timeOut timer for the brush configurable through props
+.IP "\(bu" 2
+Allow to format name in Tooltips
+.PP
+.SS "dep"
+.IP "\(bu" 2
+Update lodash version to 4\&.17\&.5 and install webpack-dev-server@3.1.14 dev dependency
+.IP "\(bu" 2
+Updated package\&.json to mark effectful modules
+.IP "\(bu" 2
+chore: update version of sinon, from 4\&.x to 7\&.x
+.PP
+.SH "1\&.4\&.2(Dec 21, 2018)"
+.PP
+.SS "refactor"
+.IP "\(bu" 2
+Refactor transition of <Area >, <Line >, <Radar >, make transition more smoothly when the length of dataset changes
+.PP
+.SS "fix"
+.IP "\(bu" 2
+replace lodash isFinite with Number\&.isFinite, meanwhile add polyfill core-js's Number polyfill in order to use Number\&.usFinite directly
+.IP "\(bu" 2
+updated area chart to cut off dots on left most axis
+.PP
+.SH "1\&.4\&.1(Nov 16, 2018)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix height of TreeMap
+.PP
+.SH "1\&.4\&.0(Nov 15, 2018)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Add FunnelChart and Trapezoid
+.IP "\(bu" 2
+Add nested Treemap
+.PP
+.SH "1\&.3\&.6(Nov 07, 2018)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix bug preventing use of functions or custom components for the Bar background prop
+.IP "\(bu" 2
+Fix incorrect sort logic in stripe rendering
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Added animateNewValues property to Line
+.PP
+.SH "1\&.3\&.5(Oct 25, 2018)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+use lodash _\&.values instead of Object\&.values
+.IP "\(bu" 2
+perfer YAxis which has finite domain and nice ticks when a chart has many YAxes
+.IP "\(bu" 2
+fix <Area > for expected length height attribute
+.PP
+.SS "chore"
+.IP "\(bu" 2
+add babel-plugin-lodash in babelrc
+.IP "\(bu" 2
+update webpack\&.config\&.js to remove sourceMap in umd/Recharts\&.min\&.js
+.PP
+.SH "1\&.3\&.4(Oct 13, 2018)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix domain calculation with 0 values (#1519)
+.PP
+.SH "1\&.3\&.3(Oct 10, 2018)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+find yAxisWithNiceTicks and choose it over getAnyElementOfObject
+.PP
+.SS "fix"
+.IP "\(bu" 2
+update recharts-scale to 0\&.4\&.2 to fix bug of DecimalError when data is Inifinity, fix #1493
+.PP
+.SH "1\&.3\&.2(Oct 07, 2018)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix axis type error
+.IP "\(bu" 2
+Fix add sideEffects flag to enable tree-shaing
+.PP
+.SH "1\&.3\&.1(Sep 29, 2018)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix the react-resize-detector don't match react 15
+.PP
+.SH "1\&.3\&.0(Sep 28, 2018)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+upgrade recharts-scale to 0\&.4\&.0, to fix the calculation of big float
+.PP
+.SH "1\&.2\&.0(Sep 7, 2018)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Add blendStroke prop to Pie component
+.IP "\(bu" 2
+Adding contentStyle prop to Tooltip for styling DefaultTooltipContent
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fixed typo of playload -> payload in Radar chart
+.IP "\(bu" 2
+Fix PieChart animation event handlers not firing
+.IP "\(bu" 2
+Fix alwaysShow warn() condition in ReferenceLine
+.IP "\(bu" 2
+Fix Tooltip disappears when using setState()
+.PP
+.SH "1\&.1\&.0(Jul 19, 2018)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Allow reference areas which extend past the canvas bounds
+.IP "\(bu" 2
+Allow to add more classes in tooltips
+.IP "\(bu" 2
+Reference line segment by specifying a pair of endpoints
+.PP
+.SH "1\&.0\&.1(Jul 05, 2018)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+only use babel-es in es6/, fix #1372
+.PP
+.SH "1\&.0\&.0(Jul 05, 2018)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+#1195 Replace axis scale value \fRutcTime\fP with \fRutc\fP
+.IP "\(bu" 2
+remove wrapperStyle on DefaultTooltipContent
+.IP "\(bu" 2
+Clip dots of <Line >
+.IP "\(bu" 2
+Move style spread to after default styles to allow overriding
+.IP "\(bu" 2
+Fixing range area chart bottom bound\&. Base line needed to be filterted for connecting null
+.IP "\(bu" 2
+Fix tooltips that disappear while mouse still over a scatter point
+.PP
+.SS "refactor"
+.IP "\(bu" 2
+use lodash-es for es6 build
+.IP "\(bu" 2
+Factor out some scale- and rect-related functions
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Add touchStart & touchEnd event handling
+.IP "\(bu" 2
+Add explicit prop \fRdefaultShowTooltip\fP to activate tooltip
+.IP "\(bu" 2
+Position the 'top' label outside the element for negative heights
+.PP
+.SH "1\&.0\&.0-beta\&.10(Jan 31, 2018)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix Scatter Chart:lineType 'fitting' does not work
+.IP "\(bu" 2
+Update to allow CSP compliance on setting styles
+.IP "\(bu" 2
+Remove react-transition-group from peerDependencies
+.PP
+.SS "refactor"
+.IP "\(bu" 2
+Replace flatmap of reduce to _\&.flatmap in getDomainOfDataByKey
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Add the gap of props for brush
+.PP
+.SH "1\&.0\&.0-beta\&.9(Jan 09, 2018)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix \fRverticalFill\fP and \fRhorizontalFill\fP in \fR<CartesianGrid />\fP when points are unordered
+.PP
+.SH "1\&.0\&.0-beta\&.8(Jan 09, 2018)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Add props \fRuseTranslate3d\fP to control whether use translate3d or translate in <Tooltip >
+.IP "\(bu" 2
+Add props \fRverticalFill\fP and \fRhorizontalFill\fP in \fR<CartesianGrid />\fP to show grid background
+.IP "\(bu" 2
+Add \fRvisibleTicksCount\fP in props of customized tick of \fR<CartesianAxis />\fP
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Replace lodash _\&.get with simple Array\&.prototype\&.find
+.IP "\(bu" 2
+Prevent texts from being selected when dragging the brush
+.IP "\(bu" 2
+Add try\&.\&.\&.catch\&.\&.\&. when getTotalLength is called by a svg path to fix IE bug
+.PP
+.SH "1\&.0\&.0-beta\&.7(Dec 21, 2017)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Add props \fRallowDuplicatedCategory\fP to XAxis, YAxis, PolarAngleAxis, PolarRadiusAxis, to remove duplicated category when type="category"
+.IP "\(bu" 2
+Add props id in \fR<Area />\fP, \fR<Bar />\fP, \fR<Line />\fP, \fR<Scatter />\fP, \fR<Label />\fP, \fR<LabelList />\fP for SSR
+.IP "\(bu" 2
+Support specify domain of category type axis when allowDuplicatedCategory is false, add cooresponding "xAis", "yAxis", "zAxis" to the props or customized shape of Scatter
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fx sanketartAngle and endAngle of RadarChart diagram not re-rendering when updating data prop
+.IP "\(bu" 2
+Fix animation of AreaChart when baseLine is NaN / undefined
+.IP "\(bu" 2
+Fix default startAngle and endAngle of RadarChart
+.IP "\(bu" 2
+Use cloneElement to create Legend
+.PP
+.SH "1\&.0\&.0-beta\&.6(Dec 02, 2017)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Add props \fRbackground\fP to support background rectange in \fR<Bar />\fP
+.IP "\(bu" 2
+add props \fRtickMargin\fP which set the space between text and tick line
+.PP
+.SS "fix"
+.IP "\(bu" 2
+update PRESENTATION_ATTRIBUTES to allow set the radius of each \fR<Rectangle />\fP of BarChart
+.IP "\(bu" 2
+render Legend when all values of Pie is 0
+.IP "\(bu" 2
+fix animation of intial \fR<Bar />\fP
+.PP
+.SH "1\&.0\&.0-beta\&.5(Nov 24, 2017)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix \fRisChildrenEqual\fP when chart has a single child in an array
+.IP "\(bu" 2
+support LabelList in ScatterChart
+.PP
+.SH "1\&.0\&.0-beta\&.4(Nov 24, 2017)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix Label when content is a function and return simple string
+.IP "\(bu" 2
+add name to propTypes of Scatter
+.IP "\(bu" 2
+fix ** error of lib/
+.PP
+.SH "1\&.0\&.0-beta\&.3(Nov 23, 2017)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Add datakey to proops of customized dot
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Removed the use of \fRChildren\&.only\fP from the isSingleChildEqual call\&. Appears to resolve the issue logged at https://github.com/recharts/recharts/issues/935
+.IP "\(bu" 2
+Fix Line Animation with given Magic Number
+.IP "\(bu" 2
+Don't break text contents on non-breaking spaces
+.IP "\(bu" 2
+Support for "strokeDasharray" in <Legend>
+.IP "\(bu" 2
+Fix Bar Animation with the given Magic Number
+.IP "\(bu" 2
+Fix position of \fR<Label />\fP
+.IP "\(bu" 2
+Fix exception of AreaChart when all the values are null
+.IP "\(bu" 2
+Fix the orders of polar angle ticks in RadarChart
+.IP "\(bu" 2
+Replace ** width Math\&.pow
+.PP
+.SH "1\&.0\&.0-beta\&.2(Nov 17, 2017)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix attributes order of \fR<Label />\fP
+.IP "\(bu" 2
+fix the domain of Axis when specify \fRticks\fP
+.PP
+.SS "feat"
+.IP "\(bu" 2
+allow set x, y, width, height, horizontalPoints, verticalPoints of CartesianGrid
+.IP "\(bu" 2
+add props to the parameters of callbacks
+.PP
+.SS "refactor"
+.IP "\(bu" 2
+add id prop to Pie Component
+.IP "\(bu" 2
+Update Bar and Line to allow them to recognise multiple ErrorBars
+.PP
+.SH "1\&.0\&.0-beta\&.1(Nov 06, 2017)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Add index to line props in Pie
+.IP "\(bu" 2
+Update ReferenceDot\&.js
+.PP
+.SS "chore"
+.IP "\(bu" 2
+update react-resize-detector, react-smooth to support react16
+.PP
+.SH "1\&.0\&.0-beta\&.0(Oct 24, 2017)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Allow ReferenceArea to cover available space
+.IP "\(bu" 2
+Support React 16
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix bug of animation when toggle the value of \fRisAnimationActive\fP
+.PP
+.SH "1\&.0\&.0-alpha\&.6(Oct 10, 2017)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Add props \fRreverseStackOrder\fP to reverse the order of stacked items
+.IP "\(bu" 2
+Allow an arbirary domain for cartesian X and Y axes
+.IP "\(bu" 2
+Added className prop for Label
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix confused parameter \fRstartX\fP in \fR<Brush />\fP
+.IP "\(bu" 2
+Fix ScatterChart when the type of XAxis is "category"
+.PP
+.SS "docs"
+.IP "\(bu" 2
+Fix typo initilaState -> initialState
+.PP
+.SH "1\&.0\&.0-alpha\&.5(Sep 16, 2017)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Don't check for animation when it is disabled
+.IP "\(bu" 2
+fix bug of paddingAngle when isAnimationActive is true
+.PP
+.SS "feat"
+.IP "\(bu" 2
+add props filterNull to \fRTooltip\fP, null values will not be filtered when filterNull = false
+.PP
+.SS "refactor"
+.IP "\(bu" 2
+Allowing length in different unit in ResponsiveContainer By allowing type: String on 'minHeight', 'minWidth', 'maxHeight' property, developers can use length in different units like em, pt etc\&.
+.IP "\(bu" 2
+Render curve with fill first in Area
+.PP
+.SS "dep"
+.IP "\(bu" 2
+remove react-transition-group in peer dependencies
+.IP "\(bu" 2
+Updates resize-detector to 0\&.6, close #705, fix the problem with strange scrollbars appearing over the charts
+.PP
+.SH "1\&.0\&.0-alpha\&.4(Aug 21, 2017)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix error 'Cannot read property 'map' of undefined' in Pie
+.IP "\(bu" 2
+Fix bug of parsing the width of Brush
+.IP "\(bu" 2
+Don't render any path when width === 0 || height === 0 in Rectangle 
+.PP
+.SS "refactor"
+.IP "\(bu" 2
+Avoid calculating ticks if tick is set to false
+.IP "\(bu" 2
+Update the order of parsing data in mixed components
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Render unit when the props unit of XAxis, YAxis is specified
+.IP "\(bu" 2
+Add default nameKey to "name" property in Pie
+.IP "\(bu" 2
+Add props className and id to ResponsiveContainer
+.PP
+.SS "dep"
+.IP "\(bu" 2
+Update recharts-scale to fix bug of ticks
+.PP
+.SH "1\&.0\&.0-alpha\&.3(Aug 12, 2017)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix bug of isChildrenEqual
+.IP "\(bu" 2
+fix "hide" props of YAxis
+.PP
+.SH "1\&.0\&.0-alpha\&.2(Jul 10, 2017)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Add props className to ReferenceLine, ReferenceDot, ReferenceArea
+.IP "\(bu" 2
+Specify the contents of LabelList by \fRdataKey\fP
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix faulty logic check in inRange function
+.IP "\(bu" 2
+onTouchMove event call method that handle tooltip and active dot draw
+.IP "\(bu" 2
+Show tooltip on drag movement on touch devices
+.IP "\(bu" 2
+Fix viewBox of Label when render implicit label
+.IP "\(bu" 2
+Fix label of Pie
+.IP "\(bu" 2
+Fix events of Pie and PieChart
+.IP "\(bu" 2
+Fix bug of interplateNumber
+.IP "\(bu" 2
+Fix the bug of parsing "dataMin - 0\&.05" like domain
+.PP
+.SH "1\&.0\&.0-alpha\&.1(Jun 11, 2017)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+update the propType of the props data or Bar
+.IP "\(bu" 2
+fix the type of Curve
+.IP "\(bu" 2
+fix connectNulls of \fRLine\fP
+.IP "\(bu" 2
+update version of recharts-scale to fix #713
+.IP "\(bu" 2
+fix valueKey of Pie temporarily and add logs when use deprecated "valueKey"
+.IP "\(bu" 2
+bind events to Radar
+.IP "\(bu" 2
+fix animation of active-dot
+.PP
+.SH "1\&.0\&.0-alpha\&.0(May 24, 2017)"
+.PP
+.SS "refactor"
+.IP "\(bu" 2
+refactor PolarCharts
+.IP "\(bu" 2
+refactor Animation
+.IP "\(bu" 2
+refactor Label and LabelLis
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix scale of ErrorBar
+.PP
+.SH "0\&.22\&.4 (Apr 26, 2017)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix dot customized className
+.PP
+.SS "dep"
+.IP "\(bu" 2
+update react-smooth, and react-transition-group
+.PP
+.SH "0\&.22\&.3 (Apr 19, 2017)"
+.PP
+.SS "refactor"
+.IP "\(bu" 2
+add mathSign in DataUtils to replace Math\&.sign
+.PP
+.SH "0\&.22\&.2 (Apr 18, 2017)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix spelling error of fillOpacity
+.IP "\(bu" 2
+fix bug of axis when has duplicated ticks
+.PP
+.SH "0\&.22\&.1 (Apr 13, 2017)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Add legendType: ‘none’ to not render coresponding legend item
+.IP "\(bu" 2
+use prop-types instead of React\&.PropTypes
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix re-rendering element bug when adding new elements
+.IP "\(bu" 2
+Fix circular dependence of Brush\&.js and LineChart\&.js
+.PP
+.SH "0\&.22\&.0 (Apr 05, 2017)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Add event handlers to component Dot
+.IP "\(bu" 2
+Support embedded chart as a panoram in Brush
+.IP "\(bu" 2
+Add props reversed to \fRXAxis\fP and \fRYAxis\fP to reverse the range of axis
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix error or time scale
+.PP
+.SH "0\&.21\&.2 (Mar 01, 2017)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix ticks for specified domain
+.PP
+.SH "0\&.21\&.1 (Feb 28, 2017)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Update recharts-scale to fix bug of ticks
+.PP
+.SH "0\&.21\&.0 (Feb 28, 2017)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Support band area and band bar
+.IP "\(bu" 2
+support customized horizontal line and vertical line in CartesianGrid
+.IP "\(bu" 2
+support customized events in ReferenceArea, ReferenceLine
+.IP "\(bu" 2
+add formatter in \fRLegend\fP
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix empty tick when category axis has nil values
+.IP "\(bu" 2
+fix the propTypes of fontSize
+.IP "\(bu" 2
+support props dx and dy in Text
+.IP "\(bu" 2
+fix bug of stacked bar when spcify domain of axis
+.IP "\(bu" 2
+fix the barSize of bars in \fR<Bar />\fP when too many bars
+.PP
+.SH "0\&.20\&.8 (Feb 15, 2017)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix bug when onBBoxUpdate of Legend is null
+.PP
+.SH "0\&.20\&.7 (Feb 15, 2017)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix stack chart when only have one stacked element
+.IP "\(bu" 2
+Fix the offset when the boundary box update
+.IP "\(bu" 2
+Fix position of XAxis in ScatterChart when the orientation is right
+.IP "\(bu" 2
+Use DataUtils\&.uniqueId to replace lodash\&.uniqueId
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Add props \fRmirror\fP in XAxis and YAxis, support mirror ticks
+.IP "\(bu" 2
+Add props iconType to the props of Legend which can specify the icon type of legend
+.PP
+.SH "0\&.20\&.6 (Feb 08, 2017)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix \fRdataStartIndex\fP and \fRdataEndIndex\fP of synchronized chart
+.IP "\(bu" 2
+Use lodash\&.uniqueId to produce the id of Pie
+.PP
+.SH "0\&.20\&.5 (Jan 17, 2017)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix "Maximum call stack size exceeded error" caused by Tooltip update
+.PP
+.SH "0\&.20\&.4 (Jan 17, 2017)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Animate of Tooltip may crash browser sometimes, use style transition to do the animation of tooltip
+.PP
+.SH "0\&.20\&.3 (Jan 17, 2017)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix Tooltip in ScatterChart
+.IP "\(bu" 2
+Fix radius of Rectangle when height < 0
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Add clip path in Area, Bar and Scatter
+.IP "\(bu" 2
+Add onMouseDown and onMouseUp hooks in generateCategoricalChart
+.PP
+.SS "chore"
+.IP "\(bu" 2
+Disable babel transform es2015 modules to commonjs for es6 build
+.IP "\(bu" 2
+Use cross-env to support windows builds, likewise downgrade linebreak-style to warning
+.IP "\(bu" 2
+Update release\&.sh
+.PP
+.SH "0\&.20\&.2 (Jan 05, 2017)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+remove opacity in ErrorBar
+.IP "\(bu" 2
+fix \fRTooltip\fP when \fRcoordinate\fP is null
+.PP
+.SS "feat"
+.IP "\(bu" 2
+add props \fRbasevalue\fP in \fRAreaChart\fP
+.IP "\(bu" 2
+add clipPath when xAxis or yAxis of \fRLine\fP allow data overflow
+.IP "\(bu" 2
+allow dataKey to be a map function
+.IP "\(bu" 2
+support Tooltip in Sankey and Tooltip
+.IP "\(bu" 2
+Allow Brush to set default startIndex and endIndex
+.PP
+.SH "0\&.20\&.1 (Dec 27, 2016)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix bug of \fRisChildrenEqual\fP when component has child \fRnull\fP
+.IP "\(bu" 2
+Adjust \fRbarGap\fP when \fRbandSize\fP is too small to display bars
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Add props \fRpayload\fP and \fRvalue\fP, update props \fRindex\fP in \fRactiveDot\fP of \fRLine\fP, \fRArea\fP
+.PP
+.SS "refactor"
+.IP "\(bu" 2
+Move polyfill of \fRMath\&.sign\fP to polyfill\&.js
+.PP
+.SH "0\&.20\&.0 (Dec 26, 2016)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Support \fRErrorBar\fP in \fRLine\fP, \fRArea\fP, \fRBar\fP, \fRScatter\fP
+.IP "\(bu" 2
+Support touch event in \fRLineChart\fP, \fRAreaChart\fP, \fRBarChart\fP
+.IP "\(bu" 2
+Add props \fRthrottleDelay\fP in \fRLineChart\fP, \fRAreaChart\fP, \fRBarChart\fP for performance
+.IP "\(bu" 2
+Support cornerRadius in Sector, RadialBar and Pie
+.IP "\(bu" 2
+Support events in CartesianAxis, PolarAngleAxis, PolarRadiusAxis
+.IP "\(bu" 2
+Support touch events in Brush
+.PP
+.SS "refactor"
+.IP "\(bu" 2
+Use \fRgetStringSize\fP to calculate the width of \fRText\fP
+.IP "\(bu" 2
+Refactor children comparsion in \fRgenerateCategoricalChart\fP, and add updateId to force Brush update when children update
+.IP "\(bu" 2
+Refactor \fRgetMouseInfo\fP to remove some duplicated codes in \fRgenerateCategoricalChart\fP
+.IP "\(bu" 2
+Refactor Tooltip and Legend, remove react-dom-server
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix the \fRchartId\fP in \fRhandleReceiveSyncEvent\fP of \fRgenerateCategoricalChart\fP
+.PP
+.SH "0\&.19\&.1(Dec 15, 2016)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Adding missing event propTypes
+.IP "\(bu" 2
+support x, y of \fRText\fP are number or text
+.IP "\(bu" 2
+fix proptypes of Scatter to allow that the props \fRdata\fP can be a array of array
+.IP "\(bu" 2
+fix server side render check \fRisSsr\fP
+.IP "\(bu" 2
+remove duplicated "square" in legendType
+.IP "\(bu" 2
+fix \fRgetStringSize\fP when server side rendering check fails
+.IP "\(bu" 2
+fix animation error when update Line which has props stroke-dasharray
+.IP "\(bu" 2
+fix bug of BarChart when add stackId in only one Bar and update test cases
+.PP
+.SH "0\&.19\&.0 (Nov 23, 2016)"
+.PP
+.SS "refactor"
+.IP "\(bu" 2
+remove unneed \fRAnimate\fP in \fRBar\fP and \fRRectangle\fP
+.IP "\(bu" 2
+refactor interval of \fRCartesianAxis\fP, support "preserveStart", "preserveEnd", "preserveStartEnd"
+.IP "\(bu" 2
+add payload in the \fRTooltip\fP and \fRScatter\fP of \fRScatterChart\fP, and unify the payload of Components
+.PP
+.SS "feat"
+.IP "\(bu" 2
+\fRRadialBar\fP support events triggered on the entire bar
+.IP "\(bu" 2
+support customized lable in \fRRadialBar\fP
+.IP "\(bu" 2
+support \fRmaxHeight\fP in \fRResponsiveContianer\fP
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix multiple y-axes breaks chart when plotting only single datum
+.IP "\(bu" 2
+Relax propTypes\&.ticks in CartesianAxis
+.PP
+.SH "0\&.18\&.0 (Nov 15, 2016)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+support customized scale function of categorical charts
+.IP "\(bu" 2
+support customized events in Legend
+.PP
+.SS "refactor"
+.IP "\(bu" 2
+refactor ResponsiveContainer with ReactResizeDetector
+.IP "\(bu" 2
+change the default value of isAnimationActive
+.IP "\(bu" 2
+remove some unneed default attributes of Components
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix wrong written default props
+.IP "\(bu" 2
+fix twice triggered event in Bar
+.IP "\(bu" 2
+fix treemap stroke pollution cause by defaultProps
+.PP
+.SH "0\&.17\&.0 | 0\&.17\&.1 (Nov 08, 2016)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix strokeDasharray of Line
+.IP "\(bu" 2
+add payload in Legend payload item
+.IP "\(bu" 2
+fix position of vertical Legend
+.IP "\(bu" 2
+Recalculate points after width or height change
+.PP
+.SS "refactor"
+.IP "\(bu" 2
+refactor ticks filter algorithm of CartesianAxis
+.IP "\(bu" 2
+change order of stacked BarChart and AreaChart
+.IP "\(bu" 2
+refactor event handlers of PieChart, RadarChart, Brush, RadialBarChart
+.IP "\(bu" 2
+support onMouseEnter, onMouseLeave, onMouseMove, onClick in categorical chart
+.PP
+.SH "0\&.16\&.2 (Nov 04, 2016)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix dash line animation
+.IP "\(bu" 2
+fix the bug when the children of categorical chart change
+.PP
+.SS "feat"
+.IP "\(bu" 2
+support shape in ReferenceLine
+.PP
+.SS "refactor"
+.IP "\(bu" 2
+render Bar, Area, Line according to the order of Bar, Area, Line in ComposedChart
+.PP
+.SH "0\&.16\&.1 (Nov 03, 2016)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+refactor to treat NaN like undefined or null, fix #303
+.IP "\(bu" 2
+fix tranform origin of Bar, fix #292
+.PP
+.SS "feat"
+.IP "\(bu" 2
+support customized position of Tooltip, fix #31
+.PP
+.SS "docs"
+.IP "\(bu" 2
+fix LodashModuleReplacementPlugin
+.PP
+.SH "0\&.16\&.0 (Nov 03, 2016)"
+.PP
+.SS "refactor"
+.IP "\(bu" 2
+Major Performance Change - Re-Use Expensive To Generate Data
+.PP
+.SS "feat"
+.IP "\(bu" 2
+support both x-axis and y-axis are numerical axis, fix #183
+.IP "\(bu" 2
+add animation events in \fRLine\fP, \fRArea\fP, \fRBar\fP
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix angle of PolorRadiusAxis
+.PP
+.SH "0\&.15\&.3 (Oct 28, 2016)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Add angle property to PRESENTATION_ATTRIBUTES (#307)
+.PP
+.SS "Dev"
+.IP "\(bu" 2
+chore: update istanbul plugin and add yarn\&.lock
+.PP
+.SH "0\&.15\&.2 (Oct 13, 2016)"
+.PP
+.SS "Fix"
+.IP "\(bu" 2
+support empty margin in generateCategoricalChart
+.IP "\(bu" 2
+fix the label of RadialBarChart
+.IP "\(bu" 2
+fix the bug of \fR<Text>{0}</Text>\fP
+.IP "\(bu" 2
+fix the bug of ScatterChart when margin lose some attributes
+.PP
+.SS "Feat"
+.IP "\(bu" 2
+support maxBarSize in BarChart and Bar
+.IP "\(bu" 2
+support fill in CartesianGrid
+.PP
+.SS "Refactor"
+.IP "\(bu" 2
+simplify the calculation of width and height when specified aspect
+.PP
+.SH "0\&.15\&.1 (Sep 26, 2016)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix label/tick vertical alignment of Text
+.PP
+.SH "0\&.15\&.0 (Sep 23, 2016)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+New Component \fRText\fP
+.PP
+.SS "refactor"
+.IP "\(bu" 2
+Fix possible memory leak warning of events
+.PP
+.SS "fix"
+.IP "\(bu" 2
+minPointSize working when value is 0
+.IP "\(bu" 2
+Restored support for discrete values in Line and Area charts
+.IP "\(bu" 2
+Allowed for strings to be used as axis id in the ScatterChart
+.PP
+.SH "0\&.14\&.2 (Sep 19, 2016)"
+.PP
+.SS "Fix"
+.IP "\(bu" 2
+Stop caching span in memory of getStringSize
+.IP "\(bu" 2
+Fix the bug of LineChart and ScaterChart when some data is null or undefined
+.PP
+.SS "feat"
+.IP "\(bu" 2
+ScatterChart support for attributes using data and Cell
+.PP
+.SH "0\&.14\&.1 (Sep 12, 2016)"
+.PP
+.IP "\(bu" 2
+Fix webpack\&.config\&.js
+.PP
+.SH "0\&.14\&.0 (Sep 12, 2016)"
+.PP
+.SS "Feat"
+.IP "\(bu" 2
+allow label function to return a string
+.IP "\(bu" 2
+Pass entry to formatter function
+.IP "\(bu" 2
+Support labels in ScatterChart axis
+.IP "\(bu" 2
+Add dataKey in the payload of Legend
+.IP "\(bu" 2
+support allowDataOverflow in XAxis, YAxis, PolarRadiusAxis
+.PP
+.SS "Refactor"
+.IP "\(bu" 2
+Refactor the received props of Surface
+.PP
+.SS "Fix"
+.IP "\(bu" 2
+Fixed up handling of nulls for domain creation
+.IP "\(bu" 2
+Stopped domain calculation reverting to 0 for missing data points
+.IP "\(bu" 2
+Fix the bug of stacked areas which have yAxisId different from "0"
+.IP "\(bu" 2
+Fix the spelling error of AniamtionDecorator
+.PP
+.SS "Docs"
+.IP "\(bu" 2
+Update webpack\&.config\&.js, to support AMD
+.PP
+.SH "0\&.13\&.4 (Aug 24, 2016)"
+.PP
+.SS "Feat"
+.IP "\(bu" 2
+Add cartesian Component ReferenceArea
+.PP
+.SS "Refactor"
+.IP "\(bu" 2
+Refactor ResponsiveContainer and support minHeight, minWidth, aspect in ResponsiveContainer
+.PP
+.SS "Fix"
+.IP "\(bu" 2
+Fix the position of Bar for charts which have multiple y-axes
+.PP
+.SH "0\&.13\&.3 (Aug 17, 2016)"
+.PP
+.SS "Feat"
+.IP "\(bu" 2
+Support the functionality that syncs multiple categorical charts when mouse enter, move, leave a chart, or when change the brush of one chart
+.PP
+.SS "Fix"
+.IP "\(bu" 2
+Fix the bug of stack offset function - "sign"
+.IP "\(bu" 2
+Fix the propTypes or legendType
+.PP
+.SH "0\&.13\&.2 (Aug 15, 2016)"
+.PP
+.SS "Feat"
+.IP "\(bu" 2
+Add an option "sign" to the props stackOffset in BarChart and AreaChart which allows the bars and areas to be stacked according to the sign of value\&.
+.PP
+.SS "Fix"
+.IP "\(bu" 2
+Fix the the bug of legend in ScatterChart and refactor symbols\&.
+.PP
+.SH "0\&.13\&.1 (Aug 08, 2016)"
+.PP
+.SS "Fix"
+.IP "\(bu" 2
+Fix the bug that tooltip did not show up for pie chart while using nameKey and valueKey
+.PP
+.SS "Refactor"
+.IP "\(bu" 2
+Refactor Brush as controlled component
+.PP
+.SH "0\&.13\&.0 (Aug 03, 2016)"
+.PP
+.SS "Fix"
+.IP "\(bu" 2
+Ensured all tooltip-related state gets reset upon receiving new data for all the charts
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Support smooth curve in Scatter
+.IP "\(bu" 2
+Support props connectNulls in Area, Line, and Curve,
+.PP
+.SS "refactor"
+.IP "\(bu" 2
+Refactor animation of Area
+.PP
+.SH "0\&.12\&.8 (Aug 01, 2016)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix the bug of getTicksOfScale
+.IP "\(bu" 2
+Fix the bug of radius of ClipPath is so small that some texts of Pie is covered
+.PP
+.SH "0\&.12\&.7 (July 25, 2016)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Add itemSorter to tooltips
+.IP "\(bu" 2
+add props allowDecimals in XAxis and YAxis
+.PP
+.SH "0\&.12\&.6 (July 21, 2016)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Support Tooltip of RadarChart
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix the initial value of state isAnimationFinished in Line and Area
+.IP "\(bu" 2
+Fix the spelling error, pressentation => presentation (CartesianAxis)
+.IP "\(bu" 2
+Tweak text in RadarSpec
+.PP
+.SH "0\&.12\&.5 (July 12, 2016)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Add paddingAngle in Pie, fix #142
+.PP
+.SS "deps"
+.IP "\(bu" 2
+update version of react, fix #138, fix #103
+.PP
+.SH "0\&.12\&.4 (July 8, 2016)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix the bug of calculation accuracy in IE(Sector)
+.IP "\(bu" 2
+Remove unneed props "formatter" in Area and Bar
+.IP "\(bu" 2
+Fix props which can be supported by html tags and svg tags
+.PP
+.SS "refactor"
+.IP "\(bu" 2
+Support multiple activeIndex in Pie
+.PP
+.SS "deps"
+.IP "\(bu" 2
+Update d3-scale and d3-shape to the latest version
+.IP "\(bu" 2
+Update version of react-smooth and recharts-scale
+.IP "\(bu" 2
+Restrict the version of react to '~15\&.1\&.0'
+.PP
+.SH "0\&.12\&.3 (June 30, 2016)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix the bug that no animation when data change, but points of Line are the same
+.PP
+.SS "refactor"
+.IP "\(bu" 2
+Remove xAxisMap and yAxisMap in ReferenceDot and ReferenceLine
+.PP
+.SH "0\&.12\&.2 (June 29, 2016)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Add margin props in Sankey to avoid outer-clip
+.IP "\(bu" 2
+Add shape props in ReferenceDot
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix the width and height of wrapper
+.PP
+.SH "0\&.12\&.1 (June 24, 2016)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix the bug with a hack method that global css will affect the width and height of Legend, Tooltip
+.PP
+.SH "0\&.12\&.0 (June 23, 2016)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Add padding in XAxis and YAxis
+.IP "\(bu" 2
+Support minPointSize in Bar
+.IP "\(bu" 2
+Support "dataMin - 110" and "dataMax + 100" in the domain of numeric axis
+.PP
+.SS "refactor"
+.IP "\(bu" 2
+Refactor Treemap, change ratio to aspectRatio
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix the bug of axisId in BarChart
+.IP "\(bu" 2
+Fix the bug of tooltip's position in BarChart
+.IP "\(bu" 2
+Fix PropTypes of \fRtype\fP in \fRArea\fP
+.PP
+.SH "0\&.11\&.0 (June 17, 2016)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Add Sankey
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix the bug of Area when the data break off in some points
+.IP "\(bu" 2
+Fix the bug of ticks when 0 in ticks
+.PP
+.SS "refactor"
+.IP "\(bu" 2
+Refactor the payload of tooltip, and the props of activeDot in AreaChart
+.PP
+.SH "0\&.10\&.10 (June 13, 2016)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix the position of labels in Bar
+.PP
+.SH "0\&.10\&.9 (June 12, 2016)"
+.PP
+.SS "refactor"
+.IP "\(bu" 2
+Use react-container-dimensions to refactor ResponsiveContainer, close #104, close #105
+.PP
+.SH "0\&.10\&.8 (June 2, 2016)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Support any svg elements in the charts, such as defs, linearGradient
+.PP
+.SH "0\&.10\&.7 (May 30, 2016)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix the bug of Brush when data or the size of container changes\&.
+.PP
+.SH "0\&.10\&.6 (May 25, 2016)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Add customized event handlers in BarChart
+.IP "\(bu" 2
+Add curveMonotoneX and curveMonotoneY in Curve and Line
+.IP "\(bu" 2
+Pass stackOffset type as an optional parameter for categorical chart
+.IP "\(bu" 2
+Add \fRisFront\fP in ReferenceLine and ReferenceDot to support auxiliary information at differents z-index
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix legend position with margin
+.PP
+.SH "0\&.10\&.5 (May 9, 2016)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Support more interpolations in Curve, Line
+.IP "\(bu" 2
+Allow to set custom tick formatter function for Brush start/end index
+.PP
+.SH "0\&.10\&.4 (May 5, 2016)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+support animation when data update
+.PP
+.SS "refactor"
+.IP "\(bu" 2
+refactor event handlers in charts
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix tooltip position in BarChart
+.PP
+.SH "0\&.10\&.3 (May 4, 2016)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix bug of ReactUtils in Firefox 31
+.PP
+.SH "0\&.10\&.2 (May 4, 2016)"
+.PP
+.SS "refactor"
+.IP "\(bu" 2
+refactor data in Pie which was modified internally
+.PP
+.SH "0\&.10\&.1 (April 27, 2016)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Support Tooltip in Treemap
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Rename \fRSymbol\fP to \fRSymbols\fP
+.IP "\(bu" 2
+Fix the key of \fRactiveDot\fP in \fRAreaChart\fP
+.PP
+.SH "0\&.10\&.0 (April 21, 2016)"
+.PP
+.SS "refactor"
+.IP "\(bu" 2
+Refactor \fIticks\fP specified in \fRXAxis\fP, \fRYAxis\fP
+.IP "\(bu" 2
+Use area of \fRSymbol\fP to show the size of number in ScatterChart
+.IP "\(bu" 2
+Refactor the \fRactiveShape\fP in \fRScatter\fP
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Add \fRSymbol\fP and support different \fRSymbol\fP in ScatterChart
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix the content of legend in \fRPieChart\fP
+.IP "\(bu" 2
+Fix the crush bug when categorical axis has duplicate labels
+.IP "\(bu" 2
+Fix the bug of calculating tick width
+.PP
+.SH "0\&.9\&.3 (April 12, 2016)"
+.PP
+.SS "deps"
+.IP "\(bu" 2
+Update react-smooth to 0\&.1\&.4
+.PP
+.SH "0\&.9\&.2 (April 12, 2016)"
+.PP
+.SS "deps"
+.IP "\(bu" 2
+Update react to 15\&.0\&.0
+.PP
+.SH "0\&.9\&.1 (April 8, 2016)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix the bug of bar animation
+.PP
+.SS "deps"
+.IP "\(bu" 2
+update version of rechats-scale, and babel-eslint
+.PP
+.SH "0\&.9\&.0 (April 7, 2016)"
+.PP
+.SS "refactor"
+.IP "\(bu" 2
+Remove default event handler in Pie, and add \fRactiveIndex\fP to let user control the active sector
+.IP "\(bu" 2
+Remove detectElementResize
+.IP "\(bu" 2
+Add activeDot in Line and Area
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix the bug of updating line when the length of line is zero at first
+.IP "\(bu" 2
+Fix the base value of AreaChart which was set to be 0 before
+.PP
+.SH "0\&.8\&.8 (March 25, 2016)"
+.PP
+.SS "refactor"
+.IP "\(bu" 2
+Support fixed value of width or height in ResponsiveContainer
+.PP
+.SH "0\&.8\&.7 (March 21, 2016)"
+.PP
+.SS "refactor"
+.IP "\(bu" 2
+Don't overwrite payload in Legend when customized payload has been setted
+.PP
+.SH "0\&.8\&.6 (March 09, 2016)"
+.PP
+.SS "refactor"
+.IP "\(bu" 2
+Use detectElementResize in react-virtualized to refactor ResponsiveContainer
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix ssr render bug of CartesianAxis
+.PP
+.SH "0\&.8\&.5 (March 08, 2016)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Add support of function type customized element
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix the props labelLine in Pie
+.IP "\(bu" 2
+fix the bug of PureRender
+.PP
+.SS "test"
+.IP "\(bu" 2
+Add more test cases
+.PP
+.SH "0\&.8\&.4 (March 02, 2016)"
+.PP
+.SS "refactor"
+.IP "\(bu" 2
+Refactor the implementation type of renderPolygon in \fRRadar\fP
+.IP "\(bu" 2
+Refactor code in \fRTreemap\fP
+.IP "\(bu" 2
+Remove \fRinvariant\fP and add \fRLogUtils\fP
+.PP
+.SS "feat"
+.IP "\(bu" 2
+Add animation of Area, Radar, RadialBar, Scatter
+.IP "\(bu" 2
+Add label formatter to default tooltip
+.IP "\(bu" 2
+Add props labelLine in \fRPie\fP
+.IP "\(bu" 2
+Add Cell of \fRPie\fP to set different options for each sector
+.IP "\(bu" 2
+Add Cell support in \fRBar\fP, \fRRadialBar\fP
+.PP
+.SS "fix"
+.IP "\(bu" 2
+Fix Pie chart Label position, When using custom label It was not rendering as part of the curve group\&.
+.IP "\(bu" 2
+Fix \fRisAnimationActive\fP props in \fRArea\fP
+.PP
+.SH "0\&.8\&.3 (February 25, 2016)"
+.PP
+.SS "refactor"
+.IP "\(bu" 2
+refactor CartesianChart to a high order component, move some function to /util/CartesianUtils which can be used in ScatterChart\&.
+.IP "\(bu" 2
+Simplify ComposedChart, remove duplicated code
+.IP "\(bu" 2
+use \fRfilterEventAttributes\fP to add events props
+.IP "\(bu" 2
+cancel selecting line and area in LineChart, AreaChart, ComposedChart
+.PP
+.SH "0\&.8\&.2 (February 24, 2016)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+rollback last fix of Line animation from value
+.PP
+.SH "0\&.8\&.1 (February 24, 2016)"
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix the bug of Line animation from value
+.PP
+.SH "0\&.8\&.0 (February 22, 2016)"
+.PP
+.SS "feat"
+.IP "\(bu" 2
+implement ReferenceDot in cartesian charts
+.IP "\(bu" 2
+support alwaysShow of ReferenceLine and ReferenceDot
+.PP
+.SS "refactor"
+.IP "\(bu" 2
+refactor domain of CartesianAxis and PolarRadiusAxis
+.IP "\(bu" 2
+refactor this props name in ReferenceLine
+.PP
+.SS "fix"
+.IP "\(bu" 2
+fix the bug of calculate extent in RadarChart
+.IP "\(bu" 2
+fix some bugs of server side rendering when document is called
+.PP
+.SH "0\&.7\&.0 (February 17, 2016)"
+.PP
+.SS "UI"
+.IP "\(bu" 2
+feat: support dasharray line animation
+.IP "\(bu" 2
+refactor(CartesianAxis, PolarAngleAxis, PolarRadiusAxis):rename label to tick
+.IP "\(bu" 2
+feat(label): add label of CartesianAxis, PolarRadiusAxis, ReferenceLine
+.IP "\(bu" 2
+feat: Implement tooltip for PieChart
+.IP "\(bu" 2
+feat:Implement tooltip for RadialBarChart
+.IP "\(bu" 2
+deps(d3-scale,d3-shape,oui-dom-util): 1\&.update version of d3-scale, d3-shape, oui-dom-util 2\&.update some api of d3-scale
+.PP
+.SH "0\&.6\&.3 (February 10, 2016)"
+.PP
+.SS "UI"
+.IP "\(bu" 2
+refactor(Legend): refactor the location of legend
+.IP "\(bu" 2
+fix(CartesianChart,CartesianAxis): 1\&. fix the bug of dataStartIndex && dataEndIndex when the length of data was changed 2\&. fix the default value of tickFormatter
+.IP "\(bu" 2
+fix(cartesian/Line\&.js): fix Line animation bug
+.PP
+.SH "0\&.6\&.2 (February 9, 2016)"
+.PP
+.SS "UI"
+.IP "\(bu" 2
+feat: use lodash \fRisEqual\fP write new pureRender
+.PP
+.SH "0\&.6\&.1 (February 5, 2016)"
+.PP
+.SS "UI"
+.IP "\(bu" 2
+fix(Pie, RadialBarChart): fix the default value of cx, cy, innerRadius, outerRadius
+.PP
+.SH "0\&.6\&.0 (February 5, 2016)"
+.PP
+.SS "UI"
+.IP "\(bu" 2
+refactor: rename AdaptionWrapper to ResponsiveContainer
+.IP "\(bu" 2
+refactor: delete some repeated codes, and use polarToCartesian in PolarUtils
+.IP "\(bu" 2
+fix: update the defaultProps of cx, cy, innerRadius, outerRadius
+.IP "\(bu" 2
+fix(Sector, AdaptionWrapper):1\&. fix the bug of Sector when innerRadius is 0 2\&. fix the bug of unbind event when component is unmounted
+.IP "\(bu" 2
+feat(util): use lodash replace utils
+.PP
+.SH "0\&.5\&.2 (February 4, 2016)"
+.PP
+.SS "UI"
+.IP "\(bu" 2
+fix(RadarChart): fix the bug of unreasonable default value for radius in PolarAngleAxis
+.PP
+.SS "Docs"
+.IP "\(bu" 2
+chore: change main and jsnext:main in package\&.json
+.PP
+.SH "0\&.5\&.1 (February 4, 2016)"
+.PP
+.SS "UI"
+.IP "\(bu" 2
+feat: support percentage string in the props(cx, cy, innerRadius, outerRadius) of RadarChart, PieChart, RadialChart
+.IP "\(bu" 2
+fix(PolarRadiusAxis): add props domain
+.IP "\(bu" 2
+refactor(CartesianAxis): remove unneeded props domain
+.PP
+.SS "Docs"
+.IP "\(bu" 2
+chore: optimize npm script commands
+.IP "\(bu" 2
+chore: update pkg
+.PP
+.SH "0\&.5\&.0 (February 3, 2016)"
+.PP
+.SS "UI"
+.IP "\(bu" 2
+feat(AdaptionWrapper): add AdaptionWrapper to make charts adapt to the size of parent dom
+.IP "\(bu" 2
+refactor: directory structure adjustment
+.IP "\(bu" 2
+fix(LineChart, CartesianChart): 1\&.fix the bug of margin when only part of the attributes are specified 2\&.fix the bug of number axis when domain is specified 3\&.fix the bug of category number when no dataKey is specified 4\&.format the code in README\&.md
+.IP "\(bu" 2
+refactor(treemap): support tree structure data; changed props that pass to shape
+.PP
+.SS "Test"
+.IP "\(bu" 2
+test: 1\&.rename some test files 2\&.add test case of LodashUtil
+.IP "\(bu" 2
+test(treemap): modified treemap test
+.PP
+.SS "Docs"
+.IP "\(bu" 2
+deps: add dependence oui-dom-utils
+.IP "\(bu" 2
+chore(README\&.md): add syntax highlighting to the readme
+.IP "\(bu" 2
+chore(package\&.json): add keyword react-component
+.PP
+.SH "0\&.4\&.9 (February 2, 2016)"
+.PP
+.SS "UI"
+.IP "\(bu" 2
+refactor(CartesianAxis, PolarAngleAxis): change props name "orient" to "orientation"
+.IP "\(bu" 2
+refactor(Line, Bar, Pie): refactor animation using new react-smooth
+.IP "\(bu" 2
+refactor(Pie, RidalBar): remove the props clockWise, and add the props endAngle 
+.PP
+.SS "Test"
+.IP "\(bu" 2
+test(Line, Bar, Radar, Scatter): add test case
+.PP
+.SH "0\&.4\&.7 (February 1, 2016)"
+.PP
+.SS "UI"
+.IP "\(bu" 2
+refactor(RadarChart, Radar, PolarAngleAxis, PolarRadiusAxis): refactor the components of Radar
+.IP "\(bu" 2
+refactor(classNames): refactor the method of package a className
+.IP "\(bu" 2
+refactor(Pie): add nameKey in Pie
+.PP
+.SH "0\&.4\&.6 (January 29, 2016)"
+.PP
+.SS "UI"
+.IP "\(bu" 2
+refactor(Legend): refactor the legend in all the charts, change the location method of legend
+.IP "\(bu" 2
+feat(radar): add new RadarChart with the new component used in Chart, like PolarAngleAxis PolarRadiusAxis PolarGrid Polygon ex
+.PP
+.SS "Test"
+.IP "\(bu" 2
+feat(test): add test for charts, chartWrappers, components, and shapes
+.PP
+.SH "0\&.4\&.5 (January 29, 2016)"
+.PP
+.SS "UI"
+.IP "\(bu" 2
+fix(Curve): fix the bug of curve defined function
+.IP "\(bu" 2
+fix(ComposedChart): fix the bug of bar position when a line and a bar display a same group of data\&.
+.IP "\(bu" 2
+chore(webpack\&.config\&.js): add react, react-dom, react-dom-server to external
+.IP "\(bu" 2
+deps(react, react-dom): update version to v0\&.14\&.7
+.PP
+.SH "0\&.4\&.4 (January 28, 2016)"
+.PP
+.SS "Dev"
+.IP "\(bu" 2
+chore(webpack\&.config\&.js): add build command
+.PP
+.SH "0\&.4\&.3 (January 28, 2016)"
+.PP
+.SS "UI"
+.IP "\(bu" 2
+deps(recharts-scale, react-smooth): update version of recharts-scale and react-smooth
+.IP "\(bu" 2
+refactor(Bar, RadialBar, TreemapChart, Tooltip): rename the props customContent
+.PP
+.SH "0\&.4\&.2 (January 28, 2016)"
+.PP
+.SS "UI"
+.IP "\(bu" 2
+Add support of stack value in BarChart, AreaChart, ComposedChart
+.PP
+.SH "0\&.4\&.1 (January 27, 2016)"
+.PP
+.SS "UI"
+.IP "\(bu" 2
+Change name of the props in Tooltip, Legend
+.IP "\(bu" 2
+Fix the bug of customized label element in CartesianAxis
+.IP "\(bu" 2
+Remove repeated, meaningless constructor functions
+.PP
+.SH "0\&.4\&.0 (January 26, 2016)"
+.PP
+.SS "UI"
+.IP "\(bu" 2
+Refactor some components, include CartesianAxis, Legend, Tooltip etc, to unify some props name\&. 
+.PP
+

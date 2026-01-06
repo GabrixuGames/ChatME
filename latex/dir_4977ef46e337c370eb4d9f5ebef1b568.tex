@@ -1,0 +1,56 @@
+\doxysection{frontend/node\+\_\+modules/string-\/width Directory Reference}
+\hypertarget{dir_4977ef46e337c370eb4d9f5ebef1b568}{}\label{dir_4977ef46e337c370eb4d9f5ebef1b568}\index{frontend/node\_modules/string-\/width Directory Reference@{frontend/node\_modules/string-\/width Directory Reference}}
+
+
+\doxysubsection{Detailed Description}
+\hypertarget{dir_4977ef46e337c370eb4d9f5ebef1b568_autotoc_md6499}{}\doxysubsection{\texorpdfstring{string-\/width}{string-\/width}}\label{dir_4977ef46e337c370eb4d9f5ebef1b568_autotoc_md6499}
+\begin{quote}
+Get the visual width of a string -\/ the number of columns required to display it \end{quote}
+
+
+Some Unicode characters are \href{https://en.wikipedia.org/wiki/Halfwidth_and_fullwidth_forms}{\texttt{fullwidth}} and use double the normal width. \href{https://en.wikipedia.org/wiki/ANSI_escape_code}{\texttt{ANSI escape codes}} are stripped and doesn\textquotesingle{}t affect the width.
+
+Useful to be able to measure the actual width of command-\/line output.\hypertarget{dir_4977ef46e337c370eb4d9f5ebef1b568_autotoc_md6500}{}\doxysubsection{\texorpdfstring{Install}{Install}}\label{dir_4977ef46e337c370eb4d9f5ebef1b568_autotoc_md6500}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\$\ npm\ install\ string-\/width}
+
+\end{DoxyCode}
+\hypertarget{dir_4977ef46e337c370eb4d9f5ebef1b568_autotoc_md6501}{}\doxysubsection{\texorpdfstring{Usage}{Usage}}\label{dir_4977ef46e337c370eb4d9f5ebef1b568_autotoc_md6501}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ stringWidth\ from\ 'string-\/width';}
+\DoxyCodeLine{}
+\DoxyCodeLine{stringWidth('a');}
+\DoxyCodeLine{//=>\ 1}
+\DoxyCodeLine{}
+\DoxyCodeLine{stringWidth('古');}
+\DoxyCodeLine{//=>\ 2}
+\DoxyCodeLine{}
+\DoxyCodeLine{stringWidth('\(\backslash\)u001B[1m古\(\backslash\)u001B[22m');}
+\DoxyCodeLine{//=>\ 2}
+
+\end{DoxyCode}
+\hypertarget{dir_4977ef46e337c370eb4d9f5ebef1b568_autotoc_md6502}{}\doxysubsection{\texorpdfstring{API}{API}}\label{dir_4977ef46e337c370eb4d9f5ebef1b568_autotoc_md6502}
+\hypertarget{dir_4977ef46e337c370eb4d9f5ebef1b568_autotoc_md6503}{}\doxysubsubsection{\texorpdfstring{string\+Width(string, options?)}{string\+Width(string, options?)}}\label{dir_4977ef46e337c370eb4d9f5ebef1b568_autotoc_md6503}
+\hypertarget{dir_4977ef46e337c370eb4d9f5ebef1b568_autotoc_md6504}{}\doxysubsubsubsection{\texorpdfstring{string}{string}}\label{dir_4977ef46e337c370eb4d9f5ebef1b568_autotoc_md6504}
+Type\+: {\ttfamily string}
+
+The string to be counted.\hypertarget{dir_4977ef46e337c370eb4d9f5ebef1b568_autotoc_md6505}{}\doxysubsubsubsection{\texorpdfstring{options}{options}}\label{dir_4977ef46e337c370eb4d9f5ebef1b568_autotoc_md6505}
+Type\+: {\ttfamily object}\hypertarget{dir_4977ef46e337c370eb4d9f5ebef1b568_autotoc_md6506}{}\doxysubsubsubsubsection{\texorpdfstring{ambiguous\+Is\+Narrow}{ambiguous\+Is\+Narrow}}\label{dir_4977ef46e337c370eb4d9f5ebef1b568_autotoc_md6506}
+Type\+: {\ttfamily boolean}\textbackslash{} Default\+: {\ttfamily false}
+
+Count \href{https://www.unicode.org/reports/tr11/\#Ambiguous}{\texttt{ambiguous width characters}} as having narrow width (count of 1) instead of wide width (count of 2).\hypertarget{dir_4977ef46e337c370eb4d9f5ebef1b568_autotoc_md6507}{}\doxysubsection{\texorpdfstring{Related}{Related}}\label{dir_4977ef46e337c370eb4d9f5ebef1b568_autotoc_md6507}
+
+\begin{DoxyItemize}
+\item \href{https://github.com/sindresorhus/string-width-cli}{\texttt{string-\/width-\/cli}} -\/ CLI for this module
+\item \href{https://github.com/sindresorhus/string-length}{\texttt{string-\/length}} -\/ Get the real length of a string
+\item \href{https://github.com/sindresorhus/widest-line}{\texttt{widest-\/line}} -\/ Get the visual width of the widest line in a string
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+
+
+ {\bfseries{ \href{https://tidelift.com/subscription/pkg/npm-string-width?utm_source=npm-string-width&utm_medium=referral&utm_campaign=readme}{\texttt{Get professional support for this package with a Tidelift subscription}} }} ~\newline
+ \textsubscript{ Tidelift helps make open source sustainable for maintainers while giving companies~\newline
+assurances about security, maintenance, and licensing for their dependencies. }  

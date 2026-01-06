@@ -1,0 +1,71 @@
+\doxysection{frontend/node\+\_\+modules/socket.io-\/parser Directory Reference}
+\hypertarget{dir_686760580212e2400853c589cc432668}{}\label{dir_686760580212e2400853c589cc432668}\index{frontend/node\_modules/socket.io-\/parser Directory Reference@{frontend/node\_modules/socket.io-\/parser Directory Reference}}
+
+
+\doxysubsection{Detailed Description}
+\hypertarget{dir_686760580212e2400853c589cc432668_autotoc_md6427}{}\doxysubsection{\texorpdfstring{socket.\+io-\/parser}{socket.\+io-\/parser}}\label{dir_686760580212e2400853c589cc432668_autotoc_md6427}
+\href{https://github.com/socketio/socket.io-parser/actions}{\texttt{}} \href{http://badge.fury.io/js/socket.io-parser}{\texttt{}}
+
+A socket.\+io encoder and decoder written in Java\+Script complying with version {\ttfamily 5} of \href{https://github.com/socketio/socket.io-protocol}{\texttt{socket.\+io-\/protocol}}. Used by \href{https://github.com/automattic/socket.io}{\texttt{socket.\+io}} and \href{https://github.com/automattic/socket.io-client}{\texttt{socket.\+io-\/client}}.
+
+Compatibility table\+:
+
+
+\begin{DoxyTable}{3}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Parser version  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Socket.\+IO server version  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Protocol revision  \\
+3.\+x  &1.\+x / 2.\+x  &4  \\
+4.\+x  &3.\+x  &5  \\
+\end{DoxyTable}
+\hypertarget{dir_686760580212e2400853c589cc432668_autotoc_md6428}{}\doxysubsection{\texorpdfstring{Parser API}{Parser API}}\label{dir_686760580212e2400853c589cc432668_autotoc_md6428}
+socket.\+io-\/parser is the reference implementation of socket.\+io-\/protocol. Read the full API here\+: \href{https://github.com/learnboost/socket.io-protocol}{\texttt{socket.\+io-\/protocol}}.\hypertarget{dir_686760580212e2400853c589cc432668_autotoc_md6429}{}\doxysubsection{\texorpdfstring{Example Usage}{Example Usage}}\label{dir_686760580212e2400853c589cc432668_autotoc_md6429}
+\hypertarget{dir_686760580212e2400853c589cc432668_autotoc_md6430}{}\doxysubsubsection{\texorpdfstring{Encoding and decoding a packet}{Encoding and decoding a packet}}\label{dir_686760580212e2400853c589cc432668_autotoc_md6430}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var\ parser\ =\ require('socket.io-\/parser');}
+\DoxyCodeLine{var\ encoder\ =\ new\ parser.Encoder();}
+\DoxyCodeLine{var\ packet\ =\ \{}
+\DoxyCodeLine{\ \ type:\ parser.EVENT,}
+\DoxyCodeLine{\ \ data:\ 'test-\/packet',}
+\DoxyCodeLine{\ \ id:\ 13}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{encoder.encode(packet,\ function(encodedPackets)\ \{}
+\DoxyCodeLine{\ \ var\ decoder\ =\ new\ parser.Decoder();}
+\DoxyCodeLine{\ \ decoder.on('decoded',\ function(decodedPacket)\ \{}
+\DoxyCodeLine{\ \ \ \ //\ decodedPacket.type\ ==\ parser.EVENT}
+\DoxyCodeLine{\ \ \ \ //\ decodedPacket.data\ ==\ 'test-\/packet'}
+\DoxyCodeLine{\ \ \ \ //\ decodedPacket.id\ ==\ 13}
+\DoxyCodeLine{\ \ \});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ for\ (var\ i\ =\ 0;\ i\ <\ encodedPackets.length;\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ decoder.add(encodedPackets[i]);}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\});}
+
+\end{DoxyCode}
+\hypertarget{dir_686760580212e2400853c589cc432668_autotoc_md6431}{}\doxysubsubsection{\texorpdfstring{Encoding and decoding a packet with binary data}{Encoding and decoding a packet with binary data}}\label{dir_686760580212e2400853c589cc432668_autotoc_md6431}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var\ parser\ =\ require('socket.io-\/parser');}
+\DoxyCodeLine{var\ encoder\ =\ new\ parser.Encoder();}
+\DoxyCodeLine{var\ packet\ =\ \{}
+\DoxyCodeLine{\ \ type:\ parser.BINARY\_EVENT,}
+\DoxyCodeLine{\ \ data:\ \{i:\ new\ Buffer(1234),\ j:\ new\ Blob([new\ ArrayBuffer(2)])\},}
+\DoxyCodeLine{\ \ id:\ 15}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{encoder.encode(packet,\ function(encodedPackets)\ \{}
+\DoxyCodeLine{\ \ var\ decoder\ =\ new\ parser.Decoder();}
+\DoxyCodeLine{\ \ decoder.on('decoded',\ function(decodedPacket)\ \{}
+\DoxyCodeLine{\ \ \ \ //\ decodedPacket.type\ ==\ parser.BINARY\_EVENT}
+\DoxyCodeLine{\ \ \ \ //\ Buffer.isBuffer(decodedPacket.data.i)\ ==\ true}
+\DoxyCodeLine{\ \ \ \ //\ Buffer.isBuffer(decodedPacket.data.j)\ ==\ true}
+\DoxyCodeLine{\ \ \ \ //\ decodedPacket.id\ ==\ 15}
+\DoxyCodeLine{\ \ \});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ for\ (var\ i\ =\ 0;\ i\ <\ encodedPackets.length;\ i++)\ \{}
+\DoxyCodeLine{\ \ \ \ decoder.add(encodedPackets[i]);}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\});}
+
+\end{DoxyCode}
+ See the test suite for more examples of how socket.\+io-\/parser is used.\hypertarget{dir_686760580212e2400853c589cc432668_autotoc_md6432}{}\doxysubsection{\texorpdfstring{License}{License}}\label{dir_686760580212e2400853c589cc432668_autotoc_md6432}
+MIT 

@@ -1,0 +1,45 @@
+\doxysection{frontend/node\+\_\+modules/strip-\/ansi Directory Reference}
+\hypertarget{dir_6c2c8d707d0c7a1fd9f3dc3b4e5c2be0}{}\label{dir_6c2c8d707d0c7a1fd9f3dc3b4e5c2be0}\index{frontend/node\_modules/strip-\/ansi Directory Reference@{frontend/node\_modules/strip-\/ansi Directory Reference}}
+
+
+\doxysubsection{Detailed Description}
+\hypertarget{dir_6c2c8d707d0c7a1fd9f3dc3b4e5c2be0_autotoc_md6526}{}\doxysubsection{\texorpdfstring{strip-\/ansi}{strip-\/ansi}}\label{dir_6c2c8d707d0c7a1fd9f3dc3b4e5c2be0_autotoc_md6526}
+\begin{quote}
+Strip \href{https://en.wikipedia.org/wiki/ANSI_escape_code}{\texttt{ANSI escape codes}} from a string \end{quote}
+
+
+\begin{DoxyNote}{Note}
+Node.\+js has this built-\/in now with \href{https://nodejs.org/api/util.html\#utilstripvtcontrolcharactersstr}{\texttt{{\ttfamily strip\+VTControl\+Characters}}}. The benefit of this package is consistent behavior across Node.\+js versions and faster improvements. The Node.\+js version is actually based on this package.
+\end{DoxyNote}
+\hypertarget{dir_6c2c8d707d0c7a1fd9f3dc3b4e5c2be0_autotoc_md6527}{}\doxysubsection{\texorpdfstring{Install}{Install}}\label{dir_6c2c8d707d0c7a1fd9f3dc3b4e5c2be0_autotoc_md6527}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{npm\ install\ strip-\/ansi}
+
+\end{DoxyCode}
+\hypertarget{dir_6c2c8d707d0c7a1fd9f3dc3b4e5c2be0_autotoc_md6528}{}\doxysubsection{\texorpdfstring{Usage}{Usage}}\label{dir_6c2c8d707d0c7a1fd9f3dc3b4e5c2be0_autotoc_md6528}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ stripAnsi\ from\ 'strip-\/ansi';}
+\DoxyCodeLine{}
+\DoxyCodeLine{stripAnsi('\(\backslash\)u001B[4mUnicorn\(\backslash\)u001B[0m');}
+\DoxyCodeLine{//=>\ 'Unicorn'}
+\DoxyCodeLine{}
+\DoxyCodeLine{stripAnsi('\(\backslash\)u001B]8;;https://github.com\(\backslash\)u0007Click\(\backslash\)u001B]8;;\(\backslash\)u0007');}
+\DoxyCodeLine{//=>\ 'Click'}
+
+\end{DoxyCode}
+\hypertarget{dir_6c2c8d707d0c7a1fd9f3dc3b4e5c2be0_autotoc_md6529}{}\doxysubsection{\texorpdfstring{Related}{Related}}\label{dir_6c2c8d707d0c7a1fd9f3dc3b4e5c2be0_autotoc_md6529}
+
+\begin{DoxyItemize}
+\item \href{https://github.com/chalk/strip-ansi-cli}{\texttt{strip-\/ansi-\/cli}} -\/ CLI for this module
+\item \href{https://github.com/chalk/strip-ansi-stream}{\texttt{strip-\/ansi-\/stream}} -\/ Streaming version of this module
+\item \href{https://github.com/chalk/has-ansi}{\texttt{has-\/ansi}} -\/ Check if a string has ANSI escape codes
+\item \href{https://github.com/chalk/ansi-regex}{\texttt{ansi-\/regex}} -\/ Regular expression for matching ANSI escape codes
+\item \href{https://github.com/chalk/chalk}{\texttt{chalk}} -\/ Terminal string styling done right
+\end{DoxyItemize}\hypertarget{dir_6c2c8d707d0c7a1fd9f3dc3b4e5c2be0_autotoc_md6530}{}\doxysubsection{\texorpdfstring{Maintainers}{Maintainers}}\label{dir_6c2c8d707d0c7a1fd9f3dc3b4e5c2be0_autotoc_md6530}
+
+\begin{DoxyItemize}
+\item \href{https://github.com/sindresorhus}{\texttt{Sindre Sorhus}}
+\item \href{https://github.com/qix-}{\texttt{Josh Junon}} 
+\end{DoxyItemize}

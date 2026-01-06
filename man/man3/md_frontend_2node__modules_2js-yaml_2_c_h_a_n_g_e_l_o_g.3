@@ -1,0 +1,708 @@
+.TH "md_frontend_2node__modules_2js-yaml_2_c_h_a_n_g_e_l_o_g" 3 "Version 0.1" "Chat-ME!" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md_frontend_2node__modules_2js-yaml_2_c_h_a_n_g_e_l_o_g \- Changelog 
+.PP
+
+
+.PP
+All notable changes to this project will be documented in this file\&.
+
+.PP
+The format is based on \fRKeep a Changelog\fP, and this project adheres to \fRSemantic Versioning\fP\&.
+.SH "\fR4\&.1\&.0\fP - 2021-04-15"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+Types are now exported as \fRyaml\&.types\&.XXX\fP\&.
+.IP "\(bu" 2
+Every type now has \fRoptions\fP property with original arguments kept as they were (see \fRyaml\&.types\&.int\&.options\fP as an example)\&.
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+\fRSchema\&.extend()\fP now keeps old type order in case of conflicts (e\&.g\&. Schema\&.extend([ a, b, c ])\&.extend([ b, a, d ]) is now ordered as \fRabcd\fP instead of \fRcbad\fP)\&.
+.PP
+.SH "\fR4\&.0\&.0\fP - 2021-01-03"
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+Check \fBmigration guide\fP to see details for all breaking changes\&.
+.IP "\(bu" 2
+Breaking: "unsafe" tags \fR!!js/function\fP, \fR!!js/regexp\fP, \fR!!js/undefined\fP are moved to \fRjs-yaml-js-types\fP package\&.
+.IP "\(bu" 2
+Breaking: removed \fRsafe*\fP functions\&. Use \fRload\fP, \fRloadAll\fP, \fRdump\fP instead which are all now safe by default\&.
+.IP "\(bu" 2
+\fRyaml\&.DEFAULT_SAFE_SCHEMA\fP and \fRyaml\&.DEFAULT_FULL_SCHEMA\fP are removed, use \fRyaml\&.DEFAULT_SCHEMA\fP instead\&.
+.IP "\(bu" 2
+\fRyaml\&.Schema\&.create(schema, tags)\fP is removed, use \fRschema\&.extend(tags)\fP instead\&.
+.IP "\(bu" 2
+\fR!!binary\fP now always mapped to \fRUint8Array\fP on load\&.
+.IP "\(bu" 2
+Reduced nesting of \fR/lib\fP folder\&.
+.IP "\(bu" 2
+Parse numbers according to YAML 1\&.2 instead of YAML 1\&.1 (\fR01234\fP is now decimal, \fR0o1234\fP is octal, \fR1:23\fP is parsed as string instead of base60)\&.
+.IP "\(bu" 2
+\fRdump()\fP no longer quotes \fR:\fP, \fR[\fP, \fR]\fP, \fR(\fP, \fR)\fP except when necessary, #470, #557\&.
+.IP "\(bu" 2
+Line and column in exceptions are now formatted as \fR(X:Y)\fP instead of \fRat line X, column Y\fP (also present in compact format), #332\&.
+.IP "\(bu" 2
+Code snippet created in exceptions now contains multiple lines with line numbers\&.
+.IP "\(bu" 2
+\fRdump()\fP now serializes \fRundefined\fP as \fRnull\fP in collections and removes keys with \fRundefined\fP in mappings, #571\&.
+.IP "\(bu" 2
+\fRdump()\fP with \fRskipInvalid=true\fP now serializes invalid items in collections as null\&.
+.IP "\(bu" 2
+Custom tags starting with \fR!\fP are now dumped as \fR!tag\fP instead of \fR!<!tag>\fP, #576\&.
+.IP "\(bu" 2
+Custom tags starting with \fRtag:yaml\&.org,2002:\fP are now shorthanded using \fR!!\fP, #258\&.
+.PP
+.SS "Added"
+.IP "\(bu" 2
+Added \fR\&.mjs\fP (es modules) support\&.
+.IP "\(bu" 2
+Added \fRquotingType\fP and \fRforceQuotes\fP options for dumper to configure string literal style, #290, #529\&.
+.IP "\(bu" 2
+Added \fRstyles: { '!!null': 'empty' }\fP option for dumper (serializes \fR{ foo: null }\fP as "`foo: `"), #570\&.
+.IP "\(bu" 2
+Added \fRreplacer\fP option (similar to option in JSON\&.stringify), #339\&.
+.IP "\(bu" 2
+Custom \fRTag\fP can now handle all tags or multiple tags with the same prefix, #385\&.
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Astral characters are no longer encoded by \fRdump()\fP, #587\&.
+.IP "\(bu" 2
+"duplicate mapping key" exception now points at the correct column, #452\&.
+.IP "\(bu" 2
+Extra commas in flow collections (e\&.g\&. \fR[foo,,bar]\fP) now throw an exception instead of producing null, #321\&.
+.IP "\(bu" 2
+\fR__proto__\fP key no longer overrides object prototype, #164\&.
+.IP "\(bu" 2
+Removed \fRbower\&.json\fP\&.
+.IP "\(bu" 2
+Tags are now url-decoded in \fRload()\fP and url-encoded in \fRdump()\fP (previously usage of custom non-ascii tags may have led to invalid YAML that can't be parsed)\&.
+.IP "\(bu" 2
+Anchors now work correctly with empty nodes, #301\&.
+.IP "\(bu" 2
+Fix incorrect parsing of invalid block mapping syntax, #418\&.
+.IP "\(bu" 2
+Throw an error if block sequence/mapping indent contains a tab, #80\&.
+.PP
+.SH "[3\&.14\&.1] - 2020-12-07"
+.PP
+.SS "Security"
+.IP "\(bu" 2
+Fix possible code execution in (already unsafe) \fR\&.load()\fP (in &anchor)\&.
+.PP
+.SH "\fR3\&.14\&.0\fP - 2020-05-22"
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+Support \fRsafe/loadAll(input, options)\fP variant of call\&.
+.IP "\(bu" 2
+CI: drop outdated nodejs versions\&.
+.IP "\(bu" 2
+Dev deps bump\&.
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Quote \fR=\fP in plain scalars #519\&.
+.IP "\(bu" 2
+Check the node type for \fR!<?>\fP tag in case user manually specifies it\&.
+.IP "\(bu" 2
+Verify that there are no null-bytes in input\&.
+.IP "\(bu" 2
+Fix wrong quote position when writing condensed flow, #526\&.
+.PP
+.SH "\fR3\&.13\&.1\fP - 2019-04-05"
+.PP
+.SS "Security"
+.IP "\(bu" 2
+Fix possible code execution in (already unsafe) \fR\&.load()\fP, #480\&.
+.PP
+.SH "\fR3\&.13\&.0\fP - 2019-03-20"
+.PP
+.SS "Security"
+.IP "\(bu" 2
+Security fix: \fRsafeLoad()\fP can hang when arrays with nested refs used as key\&. Now throws exception for nested arrays\&. #475\&.
+.PP
+.SH "\fR3\&.12\&.2\fP - 2019-02-26"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fix \fRnoArrayIndent\fP option for root level, #468\&.
+.PP
+.SH "\fR3\&.12\&.1\fP - 2019-01-05"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+Added \fRnoArrayIndent\fP option, #432\&.
+.PP
+.SH "\fR3\&.12\&.0\fP - 2018-06-02"
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+Support arrow functions without a block statement, #421\&.
+.PP
+.SH "\fR3\&.11\&.0\fP - 2018-03-05"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+Add arrow functions suport for \fR!!js/function\fP\&.
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fix dump in bin/octal/hex formats for negative integers, #399\&.
+.PP
+.SH "\fR3\&.10\&.0\fP - 2017-09-10"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fix \fRcondenseFlow\fP output (quote keys for sure, instead of spaces), #371, #370\&.
+.IP "\(bu" 2
+Dump astrals as codepoints instead of surrogate pair, #368\&.
+.PP
+.SH "\fR3\&.9\&.1\fP - 2017-07-08"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Ensure stack is present for custom errors in node 7\&.+, #351\&.
+.PP
+.SH "\fR3\&.9\&.0\fP - 2017-07-08"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+Add \fRcondenseFlow\fP option (to create pretty URL query params), #346\&.
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Support array return from safeLoadAll/loadAll, #350\&.
+.PP
+.SH "\fR3\&.8\&.4\fP - 2017-05-08"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Dumper: prevent space after dash for arrays that wrap, #343\&.
+.PP
+.SH "\fR3\&.8\&.3\fP - 2017-04-05"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Should not allow numbers to begin and end with underscore, #335\&.
+.PP
+.SH "\fR3\&.8\&.2\fP - 2017-03-02"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fix \fR!!float 123\fP (integers) parse, #333\&.
+.IP "\(bu" 2
+Don't allow leading zeros in floats (except 0, 0\&.xxx)\&.
+.IP "\(bu" 2
+Allow positive exponent without sign in floats\&.
+.PP
+.SH "\fR3\&.8\&.1\fP - 2017-02-07"
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+Maintenance: update browserified build\&.
+.PP
+.SH "\fR3\&.8\&.0\fP - 2017-02-07"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fix reported position for \fRduplicated mapping key\fP errors\&. Now points to block start instead of block end\&. (#243, thanks to @shockey)\&.
+.PP
+.SH "\fR3\&.7\&.0\fP - 2016-11-12"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+Support polymorphism for tags (#300, thanks to @monken)\&.
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fix parsing of quotes followed by newlines (#304, thanks to @dplepage)\&.
+.PP
+.SH "\fR3\&.6\&.1\fP - 2016-05-11"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fix output cut on a pipe, #286\&.
+.PP
+.SH "\fR3\&.6\&.0\fP - 2016-04-16"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Dumper rewrite, fix multiple bugs with trailing \fR\\n\fP\&. Big thanks to @aepsilon!
+.IP "\(bu" 2
+Loader: fix leading/trailing newlines in block scalars, @aepsilon\&.
+.PP
+.SH "\fR3\&.5\&.5\fP - 2016-03-17"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Date parse fix: don't allow dates with on digit in month and day, #268\&.
+.PP
+.SH "\fR3\&.5\&.4\fP - 2016-03-09"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRnoCompatMode\fP for dumper, to disable quoting YAML 1\&.1 values\&.
+.PP
+.SH "\fR3\&.5\&.3\fP - 2016-02-11"
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+Maintenance release\&.
+.PP
+.SH "\fR3\&.5\&.2\fP - 2016-01-11"
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+Maintenance: missed comma in bower config\&.
+.PP
+.SH "\fR3\&.5\&.1\fP - 2016-01-11"
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+Removed \fRinherit\fP dependency, #239\&.
+.IP "\(bu" 2
+Better browserify workaround for esprima load\&.
+.IP "\(bu" 2
+Demo rewrite\&.
+.PP
+.SH "\fR3\&.5\&.0\fP - 2016-01-10"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Dumper\&. Fold strings only, #217\&.
+.IP "\(bu" 2
+Dumper\&. \fRnorefs\fP option, to clone linked objects, #229\&.
+.IP "\(bu" 2
+Loader\&. Throw a warning for duplicate keys, #166\&.
+.IP "\(bu" 2
+Improved browserify support (mark \fResprima\fP & \fRBuffer\fP excluded)\&.
+.PP
+.SH "\fR3\&.4\&.6\fP - 2015-11-26"
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+Use standalone \fRinherit\fP to keep browserified files clear\&.
+.PP
+.SH "\fR3\&.4\&.5\fP - 2015-11-23"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+Added \fRlineWidth\fP option to dumper\&.
+.PP
+.SH "\fR3\&.4\&.4\fP - 2015-11-21"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed floats dump (missed dot for scientific format), #220\&.
+.IP "\(bu" 2
+Allow non-printable characters inside quoted scalars, #192\&.
+.PP
+.SH "\fR3\&.4\&.3\fP - 2015-10-10"
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+Maintenance release - deps bump (esprima, argparse)\&.
+.PP
+.SH "\fR3\&.4\&.2\fP - 2015-09-09"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed serialization of duplicated entries in sequences, #205\&. Thanks to @vogelsgesang\&.
+.PP
+.SH "\fR3\&.4\&.1\fP - 2015-09-05"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed stacktrace handling in generated errors, for browsers (FF/IE)\&.
+.PP
+.SH "\fR3\&.4\&.0\fP - 2015-08-23"
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+Don't throw on warnings anymore\&. Use \fRonWarning\fP option to catch\&.
+.IP "\(bu" 2
+Throw error on unknown tags (was warning before)\&.
+.IP "\(bu" 2
+Reworked internals of error class\&.
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed multiline keys dump, #197\&. Thanks to @tcr\&.
+.IP "\(bu" 2
+Fixed heading line breaks in some scalars (regression)\&.
+.PP
+.SH "\fR3\&.3\&.1\fP - 2015-05-13"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+Added \fR\&.sortKeys\fP dumper option, thanks to @rjmunro\&.
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed astral characters support, #191\&.
+.PP
+.SH "\fR3\&.3\&.0\fP - 2015-04-26"
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+Significantly improved long strings formatting in dumper, thanks to @isaacs\&.
+.IP "\(bu" 2
+Strip BOM if exists\&.
+.PP
+.SH "\fR3\&.2\&.7\fP - 2015-02-19"
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+Maintenance release\&.
+.IP "\(bu" 2
+Updated dependencies\&.
+.IP "\(bu" 2
+HISTORY\&.md -> CHANGELOG\&.md
+.PP
+.SH "\fR3\&.2\&.6\fP - 2015-02-07"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed encoding of UTF-16 surrogate pairs\&. (e\&.g\&. "\\U0001F431" CAT FACE)\&.
+.IP "\(bu" 2
+Fixed demo dates dump (#113, thanks to @Hypercubed)\&.
+.PP
+.SH "\fR3\&.2\&.5\fP - 2014-12-28"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed resolving of all built-in types on empty nodes\&.
+.IP "\(bu" 2
+Fixed invalid warning on empty lines within quoted scalars and flow collections\&.
+.IP "\(bu" 2
+Fixed bug: Tag on an empty node didn't resolve in some cases\&.
+.PP
+.SH "\fR3\&.2\&.4\fP - 2014-12-19"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed resolving of !!null tag on an empty node\&.
+.PP
+.SH "\fR3\&.2\&.3\fP - 2014-11-08"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Implemented dumping of objects with circular and cross references\&.
+.IP "\(bu" 2
+Partially fixed aliasing of constructed objects\&. (see issue #141 for details)
+.PP
+.SH "\fR3\&.2\&.2\fP - 2014-09-07"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed infinite loop on unindented block scalars\&.
+.IP "\(bu" 2
+Rewritten base64 encode/decode in binary type, to keep code licence clear\&.
+.PP
+.SH "\fR3\&.2\&.1\fP - 2014-08-24"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Nothig new\&. Just fix npm publish error\&.
+.PP
+.SH "\fR3\&.2\&.0\fP - 2014-08-24"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+Added input piping support to CLI\&.
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed typo, that could cause hand on initial indent (#139)\&.
+.PP
+.SH "\fR3\&.1\&.0\fP - 2014-07-07"
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+1\&.5x-2x speed boost\&.
+.IP "\(bu" 2
+Removed deprecated \fRrequire('xxx\&.yml')\fP support\&.
+.IP "\(bu" 2
+Significant code cleanup and refactoring\&.
+.IP "\(bu" 2
+Internal API changed\&. If you used custom types - see updated examples\&. Others are not affected\&.
+.IP "\(bu" 2
+Even if the input string has no trailing line break character, it will be parsed as if it has one\&.
+.IP "\(bu" 2
+Added benchmark scripts\&.
+.IP "\(bu" 2
+Moved bower files to /dist folder
+.IP "\(bu" 2
+Bugfixes\&.
+.PP
+.SH "\fR3\&.0\&.2\fP - 2014-02-27"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed bug: "constructor" string parsed as \fRnull\fP\&.
+.PP
+.SH "\fR3\&.0\&.1\fP - 2013-12-22"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed parsing of literal scalars\&. (issue #108)
+.IP "\(bu" 2
+Prevented adding unnecessary spaces in object dumps\&. (issue #68)
+.IP "\(bu" 2
+Fixed dumping of objects with very long (> 1024 in length) keys\&.
+.PP
+.SH "\fR3\&.0\&.0\fP - 2013-12-16"
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+Refactored code\&. Changed API for custom types\&.
+.IP "\(bu" 2
+Removed output colors in CLI, dump json by default\&.
+.IP "\(bu" 2
+Removed big dependencies from browser version (esprima, buffer)\&. Load \fResprima\fP manually, if \fR!!js/function\fP needed\&. \fR!!bin\fP now returns Array in browser
+.IP "\(bu" 2
+AMD support\&.
+.IP "\(bu" 2
+Don't quote dumped strings because of \fR-\fP & \fR?\fP (if not first char)\&.
+.IP "\(bu" 2
+\fBDeprecated\fP loading yaml files via \fRrequire()\fP, as not recommended behaviour for node\&.
+.PP
+.SH "\fR2\&.1\&.3\fP - 2013-10-16"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fix wrong loading of empty block scalars\&.
+.PP
+.SH "\fR2\&.1\&.2\fP - 2013-10-07"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fix unwanted line breaks in folded scalars\&.
+.PP
+.SH "\fR2\&.1\&.1\fP - 2013-10-02"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Dumper now respects deprecated booleans syntax from YAML 1\&.0/1\&.1
+.IP "\(bu" 2
+Fixed reader bug in JSON-like sequences/mappings\&.
+.PP
+.SH "\fR2\&.1\&.0\fP - 2013-06-05"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+Add standard YAML schemas: Failsafe (\fRFAILSAFE_SCHEMA\fP), JSON (\fRJSON_SCHEMA\fP) and Core (\fRCORE_SCHEMA\fP)\&.
+.IP "\(bu" 2
+Add \fRskipInvalid\fP dumper option\&.
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+Rename \fRDEFAULT_SCHEMA\fP to \fRDEFAULT_FULL_SCHEMA\fP and \fRSAFE_SCHEMA\fP to \fRDEFAULT_SAFE_SCHEMA\fP\&.
+.IP "\(bu" 2
+Use \fRsafeLoad\fP for \fRrequire\fP extension\&.
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Bug fix: export \fRNIL\fP constant from the public interface\&.
+.PP
+.SH "\fR2\&.0\&.5\fP - 2013-04-26"
+.PP
+.SS "Security"
+.IP "\(bu" 2
+Close security issue in !!js/function constructor\&. Big thanks to @nealpoole for security audit\&.
+.PP
+.SH "\fR2\&.0\&.4\fP - 2013-04-08"
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+Updated \&.npmignore to reduce package size
+.PP
+.SH "\fR2\&.0\&.3\fP - 2013-02-26"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed dumping of empty arrays ans objects\&. ([] and {} instead of null)
+.PP
+.SH "\fR2\&.0\&.2\fP - 2013-02-15"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed input validation: tabs are printable characters\&.
+.PP
+.SH "\fR2\&.0\&.1\fP - 2013-02-09"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed error, when options not passed to function cass
+.PP
+.SH "\fR2\&.0\&.0\fP - 2013-02-09"
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+Full rewrite\&. New architecture\&. Fast one-stage parsing\&.
+.IP "\(bu" 2
+Changed custom types API\&.
+.IP "\(bu" 2
+Added YAML dumper\&.
+.PP
+.SH "\fR1\&.0\&.3\fP - 2012-11-05"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed utf-8 files loading\&.
+.PP
+.SH "\fR1\&.0\&.2\fP - 2012-08-02"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Pull out hand-written shims\&. Use ES5-Shims for old browsers support\&. See #44\&.
+.IP "\(bu" 2
+Fix timstamps incorectly parsed in local time when no time part specified\&.
+.PP
+.SH "\fR1\&.0\&.1\fP - 2012-07-07"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixes \fRTypeError: 'undefined' is not an object\fP under Safari\&. Thanks Phuong\&.
+.IP "\(bu" 2
+Fix timestamps incorrectly parsed in local time\&. Thanks @caolan\&. Closes #46\&.
+.PP
+.SH "\fR1\&.0\&.0\fP - 2012-07-01"
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+\fRy\fP, \fRyes\fP, \fRn\fP, \fRno\fP, \fRon\fP, \fRoff\fP are not converted to Booleans anymore\&. Fixes #42\&.
+.IP "\(bu" 2
+\fRrequire(filename)\fP now returns a single document and throws an Error if file contains more than one document\&.
+.IP "\(bu" 2
+CLI was merged back from js-yaml\&.bin
+.PP
+.SH "\fR0\&.3\&.7\fP - 2012-02-28"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fix export of \fRaddConstructor()\fP\&. Closes #39\&.
+.PP
+.SH "\fR0\&.3\&.6\fP - 2012-02-22"
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+Removed AMD parts - too buggy to use\&. Need help to rewrite from scratch
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Removed YUI compressor warning (renamed \fRdouble\fP variable)\&. Closes #40\&.
+.PP
+.SH "\fR0\&.3\&.5\fP - 2012-01-10"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Workagound for \&.npmignore fuckup under windows\&. Thanks to airportyh\&.
+.PP
+.SH "\fR0\&.3\&.4\fP - 2011-12-24"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixes str[] for oldIEs support\&.
+.IP "\(bu" 2
+Adds better has change support for browserified demo\&.
+.IP "\(bu" 2
+improves compact output of Error\&. Closes #33\&.
+.PP
+.SH "\fR0\&.3\&.3\fP - 2011-12-20"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+adds \fRcompact\fP stringification of Errors\&.
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+jsyaml executable moved to separate module\&.
+.PP
+.SH "\fR0\&.3\&.2\fP - 2011-12-16"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+Added jsyaml executable\&.
+.IP "\(bu" 2
+Added !!js/function support\&. Closes #12\&.
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixes ug with block style scalars\&. Closes #26\&.
+.IP "\(bu" 2
+All sources are passing JSLint now\&.
+.IP "\(bu" 2
+Fixes bug in Safari\&. Closes #28\&.
+.IP "\(bu" 2
+Fixes bug in Opers\&. Closes #29\&.
+.IP "\(bu" 2
+Improves browser support\&. Closes #20\&.
+.PP
+.SH "\fR0\&.3\&.1\fP - 2011-11-18"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+Added AMD support for browserified version\&.
+.IP "\(bu" 2
+Added permalinks for online demo YAML snippets\&. Now we have YPaste service, lol\&.
+.IP "\(bu" 2
+Added !!js/regexp and !!js/undefined types\&. Partially solves #12\&.
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+Wrapped browserified js-yaml into closure\&.
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed the resolvement of non-specific tags\&. Closes #17\&.
+.IP "\(bu" 2
+Fixed !!set mapping\&.
+.IP "\(bu" 2
+Fixed month parse in dates\&. Closes #19\&.
+.PP
+.SH "\fR0\&.3\&.0\fP - 2011-11-09"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+Added browserified version\&. Closes #13\&.
+.IP "\(bu" 2
+Added live demo of browserified version\&.
+.IP "\(bu" 2
+Ported some of the PyYAML tests\&. See #14\&.
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Removed JS\&.Class dependency\&. Closes #3\&.
+.IP "\(bu" 2
+Fixed timestamp bug when fraction was given\&.
+.PP
+.SH "\fR0\&.2\&.2\fP - 2011-11-06"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed crash on docs without ---\&. Closes #8\&.
+.IP "\(bu" 2
+Fixed multiline string parse
+.IP "\(bu" 2
+Fixed tests/comments for using array as key
+.PP
+.SH "\fR0\&.2\&.1\fP - 2011-11-02"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed short file read (<4k)\&. Closes #9\&.
+.PP
+.SH "\fR0\&.2\&.0\fP - 2011-11-02"
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+First public release 
+.PP
+

@@ -1,0 +1,68 @@
+.TH "utils.validators.MessageValidator" 3 "Version 0.1" "Chat-ME!" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+utils.validators.MessageValidator
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits \fButils\&.validators\&.BaseValidator\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "Dict[str, str] \fBvalidate\fP (cls, Dict data)"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+
+
+Static Public Member Functions inherited from \fButils\&.validators\&.BaseValidator\fP
+.in +1c
+.ti -1c
+.RI "str \fBvalidate_string\fP (Any value, str field_name, int min_length=1, int max_length=255, bool required=True)"
+.br
+.ti -1c
+.RI "str \fBvalidate_username\fP (Any username)"
+.br
+.ti -1c
+.RI "str \fBvalidate_room_id\fP (Any room_id)"
+.br
+.ti -1c
+.RI "str \fBvalidate_message_content\fP (Any content)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+.nf
+Validador para datos de mensaje
+.fi
+.PP
+ 
+.SH "Member Function Documentation"
+.PP 
+.SS " Dict[str, str] utils\&.validators\&.MessageValidator\&.validate ( cls, Dict data)"
+
+.PP
+.nf
+Validar datos de mensaje
+
+Args:
+    data: Diccionario con username, room y message
+    
+Returns:
+    Diccionario con datos validados
+    
+Raises:
+    ValidationError: Si hay errores de validación
+
+.fi
+.PP
+ 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Chat-ME! from the source code\&.

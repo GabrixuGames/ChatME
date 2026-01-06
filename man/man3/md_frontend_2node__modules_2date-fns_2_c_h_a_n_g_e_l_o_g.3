@@ -1,0 +1,2551 @@
+.TH "md_frontend_2node__modules_2date-fns_2_c_h_a_n_g_e_l_o_g" 3 "Version 0.1" "Chat-ME!" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md_frontend_2node__modules_2date-fns_2_c_h_a_n_g_e_l_o_g \- Change Log 
+.PP
+
+
+.PP
+All notable changes to this project will be documented in this file\&. This project adheres to \fRSemantic Versioning\fP\&.
+
+.PP
+This change log follows the format documented in \fRKeep a CHANGELOG\fP\&.
+.SH "v3\&.6\&.0 - 2024-03-18"
+.PP
+On this release worked @kossnocorp and @world1dan\&. Also, thanks to \fR@seated\fP \fRfor sponsoring me\fP\&.
+.SS "Fixed"
+.IP "\(bu" 2
+\fRFixed weeks in the Belarisuan locale's \fRformatDistance\fP\&.\fP
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRAdded CDN versions of modules compatible with older browsers\&.\fP \fRSee the CDN guide\&.\fP
+.PP
+.SH "v3\&.5\&.0 - 2024-03-15"
+.PP
+Kudos to @fturmel, @kossnocorp, @makstyle119, @tan75, @marcreichel, @tareknatsheh and @audunru for working on the release\&. Also, thanks to \fR@seated\fP \fRfor sponsoring me\fP\&.
+.SS "Fixed"
+.IP "\(bu" 2
+\fRFixed functions that use current date internally and made them work with date extensions like \fRUTCDate\fP\&.\fP
+.IP "\(bu" 2
+\fRFixed \fRdaysToWeeks\fP returning negative 0\&.\fP
+.IP "\(bu" 2
+\fRFixed German grammar for the "half a minute" string\&.\fP
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRAdded the Northern Sámi (\fRse\fP) locale\&.\fP
+.IP "\(bu" 2
+Added the \fRconstructNow\fP function that creates the current date using the passed reference date's constructor\&.
+.PP
+.SH "v3\&.4\&.0 - 2024-03-11"
+.PP
+Kudos to @kossnocorp, @sakamossan and @Revan99 for working on the release\&. Also, thanks to \fR@seated\fP \fRfor sponsoring me\fP\&.
+.SS "Added"
+.IP "\(bu" 2
+\fRAdded \fRroundToNearestHours\fP function\&.\fP
+.IP "\(bu" 2
+\fRAdded Central Kurdish (\fRckb\fP) locale\&.\fP
+.PP
+.SH "v3\&.3\&.1 - 2024-01-22"
+.PP
+Kudos to @kossnocorp and @fturmel for working on the release\&.
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed DST issue in \fRgetOverlappingDaysInIntervals\fP, resulting in an inconsistent number of days returned for intervals starting and ending in different DST periods\&.
+.IP "\(bu" 2
+Fixed functions incorrectly using \fRtrunc\fP instead of \fRround\fP\&. The bug was introduced in v3\&.3\&.0\&. The affected functions: \fRdifferenceInCalendarDays\fP, \fRdifferenceInCalendarISOWeeks\fP, \fRdifferenceInCalendarWeeks\fP, \fRgetISOWeek\fP, \fRgetWeek\fP, and \fRgetISOWeeksInYear\fP\&.
+.PP
+.SH "v3\&.3\&.0 - 2024-01-20"
+.PP
+On this release worked @kossnocorp, @TheKvikk, @fturmel and @ckcherry23\&.
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed the bug in \fRgetOverlappingDaysInIntervals\fP caused by incorrect sorting of interval components that led to 0 for timestamps of different lengths\&.
+.IP "\(bu" 2
+Fixed bugs when working with negative numbers caused by using \fRMath\&.floor\fP (\fR-1\&.1\fP → \fR-2\fP) instead of \fRMath\&.trunc\fP (\fR-1\&.1\fP → \fR-1\fP)\&. Most of the conversion functions (i\&.e\&., \fRhoursToMinutes\fP) were affected when passing some negative fractional input\&. Also, some other functions that could be possibly affected by unfortunate timezone/date combinations were fixed\&.
+
+.PP
+The functions that were affected: \fRformat\fP, \fRparse\fP, \fRgetUnixTime\fP, \fRdaysToWeeks\fP, \fRhoursToMilliseconds\fP, \fRhoursToMinutes\fP, \fRhoursToSeconds\fP, \fRmilliseconds\fP, \fRminutesToMilliseconds\fP, \fRmillisecondsToMinutes\fP, \fRmonthsToYears\fP, \fRmillisecondsToHours\fP, \fRmillisecondsToSeconds\fP, \fRminutesToHours\fP, \fRminutesToSeconds\fP, \fRyearsToQuarters\fP, \fRyearsToMonths\fP, \fRyearsToDays\fP, \fRweeksToDays\fP, \fRsecondsToMinutes\fP, \fRsecondsToHours\fP, \fRquartersToYears\fP, \fRquartersToMonths\fP and \fRmonthsToQuarters\fP\&.
+.IP "\(bu" 2
+\fRFixed the Czech locale's \fRformatDistance\fP to include \fR1\fP in \fRformatDistance\fP\&.\fP
+.IP "\(bu" 2
+Fixed \fRdifferenceInSeconds\fP and other functions relying on rounding options that can produce a negative 0\&.
+.IP "\(bu" 2
+\fRAdded a preprocessor to the locales API, enabling fixing a long-standing bug in the French locale\&.\fP (\fR#1391\fP)
+.IP "\(bu" 2
+Added missing \fRyearsToDays\fP to the FP submodule\&.
+.IP "\(bu" 2
+Made functions using rounding methods always return \fR0\fP instead of \fR-0\fP\&.
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRAdded \fRformat\fP alias \fRformatDate\fP with corresponding \fRFormatDateOptions\fP interface\fP\&.
+.PP
+.SH "v3\&.2\&.0 - 2024-01-09"
+.PP
+This release is brought to you by @kossnocorp, @fturmel, @grossbart, @MelvinVermeer, and @jcarstairs-scottlogic\&.
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed types compatability with Lodash's \fRflow\fP and fp-ts's \fRpipe\fP\&. (\fR#3641\fP)
+.IP "\(bu" 2
+\fRFixed inconsistent behavior of \fRroundToNearestMinutes\fP\&.\fP
+.PP
+.SS "Added"
+.IP "\(bu" 2
+Added exports of \fRformat\fP, \fRlightFormat\fP, and \fRparse\fP internals that enable 3rd-parties to consume those\&.
+.PP
+.SH "v3\&.1\&.0 - 2024-01-05"
+.PP
+This release is brought to you by @kossnocorp, @makstyle119 and @dmgawel\&.
+.SS "Fixed"
+.IP "\(bu" 2
+\fRFixed the plural form of weeks in Swedish\fP\&.
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRAdded \fRyearsToDays\fP function\fP\&.
+.IP "\(bu" 2
+Added warning about using protected tokens like \fRY\fP or \fRD\fP without passing a corresponding option\&. \fRSee #2950\fP\&.
+.PP
+.SH "v3\&.0\&.6 - 2023-12-22"
+.PP
+On this release worked @imwh0im, @jamcry and @tyrw\&.
+.SS "Fixed"
+.IP "\(bu" 2
+\fRFixed bug in \fRareIntervalsOverlapping\fP caused by incorrect sorting\fP (\fR#3614\fP)
+.PP
+.SH "v3\&.0\&.5 - 2023-12-21"
+.PP
+This release is brought to you by @goku4199\&.
+.SS "Fixed"
+.IP "\(bu" 2
+\fRFixed internal \fRtoDate\fP not processing string arguments properly\fP
+.PP
+.SH "v3\&.0\&.4 - 2023-12-21"
+.PP
+This release is brought to you by @kossnocorp\&.
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed isWithinInterval bug caused by incorrectly sorting dates (\fR#3623\fP)\&.
+.PP
+.SH "v3\&.0\&.3 - 2023-12-21"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Rolled back pointing ESM types to the same \fRd\&.ts\fP files\&. Instead now it copies the content to avoid \fRthe Masquerading as CJS problem\fP reported by "Are the types wrong?"\&.
+.PP
+.SH "v3\&.0\&.2 - 2023-12-21"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed \fRyet another issue caused by ESM types\fP by pointing to the same \fRd\&.ts\fP files\&.
+.IP "\(bu" 2
+\fRAdded \fRpackage\&.json\fP to exports\fP to provide access to tooling\&.
+.IP "\(bu" 2
+\fRFixed TypeScript 5\&.4 build break\fP by using the latest type names\&.
+.PP
+.SH "v3\&.0\&.1 - 2023-12-20"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+\fRFixed an error\fP in certain environments caused by \fRd\&.mts\fP files exporting only types\&.
+.PP
+.SH "v3\&.0\&.0 - 2023-12-18"
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+\fBBREAKING\fP: date-fns is now a dual-package with the support of both ESM and CommonJS\&. The files exports are now explicitly in the \fRpackage\&.json\fP\&. The ESM files now have \fR\&.mjs\fP extension\&.
+.IP "\(bu" 2
+\fBBREAKING\fP: The package now has a flat structure, meaning functions are now named \fRnode_modules/date-fns/add\&.mjs\fP, locales are \fRnode_modules/date-fns/locale/enUS\&.mjs\fP, etc\&.
+.IP "\(bu" 2
+\fBBREAKING\fP: Now all file content’s exported via named exports instead of \fRexport default\fP, which will require change direct imports i\&.e\&. \fRconst addDays = require(‘date-fns/addDays’)\fP to \fRconst { addDays } = require(‘date-fns/addDays’)\fP\&.
+.IP "\(bu" 2
+\fBBREAKING\fP: TypeScript types are now completely rewritten, check out the \fRd\&.ts\fP files for more information\&.
+.IP "\(bu" 2
+\fBBREAKING\fP: \fRconstants\fP now is not exported via the index, so to import one use \fRimport { daysInYear } from "date-fns/constants";\fP\&. It improves compatibility with setups that modularize imports \fRlike Next\&.js\fP\&.
+.IP "\(bu" 2
+\fBBREAKING\fP: Functions now don’t check the number of passed arguments, delegating this task to type checkers\&. The functions are now slimmer because of this\&.
+.IP "\(bu" 2
+\fBBREAKING\fP The arguments are not explicitly converted to the target types\&. Instead, they are passed as is, delegating this task to type checkers\&.
+.IP "\(bu" 2
+\fBBREAKING\fP: Functions that accept \fRInterval\fP arguments now do not throw an error if the start is before the end and handle it as a negative interval\&. If one of the properties in an \fRInvalid Date\fP, these functions also do not throw and handle them as invalid intervals\&.
+.IP "  \(bu" 4
+\fRareIntervalsOverlapping\fP normalize intervals before comparison, so \fR{ start: a, end: b }\fP is practically equivalent to \fR{ start: b, end: a }\fP\&. When comparing intervals with one of the properties being \fRInvalid Date\fP, the function will return false unless the others are valid and equal, given the \fRinclusive\fP option is passed\&. Otherwise, and when even one of the intervals has both properties invalid, the function will always return \fRfalse\fP\&.
+.IP "  \(bu" 4
+\fRgetOverlappingDaysInIntervals\fP now normalizes intervals before comparison, so \fR{ start: a, end: b }\fP is practically equivalent to \fR{ start: b, end: a }\fP\&. If any of the intervals’ properties is an \fRInvalid Date\fP, the function will always return 0\&.
+.IP "  \(bu" 4
+\fRisWithinInterval\fP now normalizes intervals before comparison, so \fR{ start: a, end: b }\fP is practically equivalent to \fR{ start: b, end: a }\fP\&. If any of the intervals’ properties is an \fRInvalid Date\fP, the function will always return false\&.
+.IP "  \(bu" 4
+\fRintervalToDuration\fP now returns negative durations for negative intervals\&. If one or both of the interval properties are invalid, the function will return an empty object\&.
+.IP "  \(bu" 4
+The eachXOfInterval functions (\fReachDayOfInterval\fP, \fReachHourOfInterval\fP, \fReachMinuteOfInterval\fP, \fReachMonthOfInterval\fP, \fReachWeekendOfInterval\fP, \fReachWeekendOfMonth\fP, \fReachWeekendOfYear\fP, \fReachWeekOfInterval\fP, \fReachYearOfInterval\fP) now return a reversed array if the passed interval’s start is after the end\&. Invalid properties will result in an empty array\&. Functions that accept the \fRstep\fP option now also allow negative, 0, and NaN values and return reversed results if the step is negative and an empty array otherwise\&.
+.PP
+
+.IP "\(bu" 2
+\fBBREAKING\fP: \fRintervalToDuration\fP now skips 0 values in the resulting duration, resulting in more compact objects with only relevant properties\&.
+.IP "\(bu" 2
+\fBBREAKING\fP: \fRroundToNearestMinutes\fP now returns \fRInvalid Date\fP instead of throwing an error when \fRnearestTo\fP option is less than 1 or more than 30\&.
+.IP "\(bu" 2
+\fBBREAKING\fP: IE is no longer supported\&.
+.IP "\(bu" 2
+\fBBREAKING\fP: Now all functions use \fRMath\&.trunc\fP rounding method where rounding is required\&. The behavior is configurable on a per-function basis\&.
+.IP "\(bu" 2
+\fBBREAKING\fP: Undocumented \fRonlyNumeric\fP option was removed from \fRnn\fP and \fRsv\fP locales\&. If you relied on it, \fRplease contact me\fP\&.
+.IP "\(bu" 2
+\fBBREAKING\fP: Flow is not supported anymore\&. If you relied on it, \fRplease contact me\fP\&.
+.IP "\(bu" 2
+\fBBREAKING\fP: The locales now use regular functions instead of the UTC version, which should not break any code unless you used locales directly\&.
+.PP
+.SS "Added"
+.IP "\(bu" 2
+All functions that accept date arguments now also accept strings\&.
+.IP "\(bu" 2
+All functions now export options interfaces\&.
+.IP "\(bu" 2
+Now functions allow passing custom Date extensions like \fRUTCDate\fP\&. They will detect and use the arguments constructor to generate the result of the same class\&.
+.IP "\(bu" 2
+\fReachMonthOfInterval\fP, \fReachQuarterOfInterval\fP, \fReachWeekOfInterval\fP, and \fReachYearOfInterval\fP now accept the \fRstep\fP option like most of the eachXOfInterval functions\&.
+.IP "\(bu" 2
+A new \fRinterval\fP function that validates interval, emulating the v2 interval functions behavior\&.
+.IP "\(bu" 2
+\fRdifferenceInX\fP functions now accept options and allow setting up \fRroundingMethod\fP that configures how the result is rounded\&. \fRMath\&.trunc\fP is the default method\&.
+.PP
+.SH "v2\&.30\&.0"
+.PP
+Kudos to @kossnocorp and @Andarist for working on the release\&.
+.SS "Changes"
+.IP "\(bu" 2
+Fixed increased build size after enabling compatibility with older browsers in the previous release\&. This was done by adding @babel/runtime as a dependency\&. \fRSee more details\fP\&.
+.PP
+.SH "v2\&.29\&.3 - 2022-09-13"
+.PP
+This release is prepared by our own @leshakoss\&.
+.SS "Fixed"
+.IP "\(bu" 2
+\fRFixed Ukrainian (\fRuk\fP) locale grammar for \fRformatDistance\fP\&.\fP
+.IP "\(bu" 2
+\fRImproved browser compatibility by transforming the code with \fR@babel/preset-env\fP\&.\fP
+.PP
+.SH "v2\&.29\&.2 - 2022-08-18"
+.PP
+This release is brought to you by @nopears, @vadimpopa and @leshakoss\&.
+.SS "Fixed"
+.IP "\(bu" 2
+\fRFixed \fRsv\fP locale abbreviated months matcher\&.\fP
+.IP "\(bu" 2
+\fRFixed \fRuk\fP locale abbreviated months matcher\&.\fP
+.IP "\(bu" 2
+\fRFixed a breaking change in \fRintervalToDuration\fP by removing a recently introduced RangeError\&.\fP
+.PP
+.SH "v2\&.29\&.1 - 2022-08-18"
+.PP
+Thanks to @fturmel for working on the release\&.
+.SS "Fixed"
+.IP "\(bu" 2
+\fRFixed TypeScript and flow types for daysInYear constant\&.\fP
+.PP
+.SH "v2\&.29\&.0 - 2022-07-22"
+.PP
+On this release worked @tan75, @kossnocorp, @nopears, @Balastrong, @cpapazoglou, @dovca, @aliasgar55, @tomchentw, @JuanM04, @alexandresaura, @fturmel, @aezell, @andersravn, @TiagoPortfolio, @SukkaW, @Zebreus, @aviskarkc10, @maic66, \fI\fP-korzun, @Mejans, @davidspiess, @alexgul1, @matroskin062, @undecaf, @mprovenc, @jooola and @leshakoss\&.
+.SS "Added"
+.IP "\(bu" 2
+\fRAdded \fRintlFormatDistance\fP function`\&.\fP
+.IP "\(bu" 2
+\fRAdded \fRsetDefaultOptions\fP and \fRgetDefaultOptions\fP functions that allow you to set default default locale, \fRweekStartsOn\fP and \fRfirstWeekContainsDate\fP\&.\fP
+.IP "\(bu" 2
+\fRAdded \fRroundingMethod\fP option to \fRroundToNearestMinutes\fP\&.\fP
+.IP "\(bu" 2
+\fRAdded Swiss Italian locale (\fRit-CH\fP)\&.\fP
+.IP "\(bu" 2
+\fRAdded Occitan (\fRoc\fP) locale\&.\fP (\fR#2061\fP)
+.IP "\(bu" 2
+\fRAdded Belarusian Classic (\fRbe-tarask\fP) locale\&.\fP
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+\fRFixed Azerbaijani (\fRaz\fP) locale for \fRformatDistance\fP\&.\fP
+.IP "\(bu" 2
+\fRFixed Czech (\fRcs\fP) locale for \fRparse\fP\&.\fP
+.IP "\(bu" 2
+\fRFixed TypeScript types for constants\&.\fP
+.IP "\(bu" 2
+\fRFixed long formatters in the South African English locale (\fRen-ZA\fP)\&.\fP
+.IP "\(bu" 2
+\fRFixed a typo in the Icelandic locale (\fRis\fP) for \fRformat\fP\&.\fP
+.IP "\(bu" 2
+\fRFixed weekday format for \fRformatRelative\fP in the Portuguese locale (\fRpt\fP)\&.\fP
+.IP "\(bu" 2
+\fRFixed \fRintervalToDuration\fP being off by 1 day sometimes\&.\fP
+.IP "\(bu" 2
+\fRFixed ordinal number formatting in Italian locale (\fRit\fP)\&.\fP
+.IP "\(bu" 2
+\fRFixed issue parsing months in Croatian (\fRhr\fP), Georgian (\fRka\fP) and Serbian (\fRsr\fP and \fRsr-Latn\fP) locales\&.\fP
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+\fRReplaced \fRgit\&.io\fP links with full URLs in error messages\&.\fP
+.IP "\(bu" 2
+\fR\fIInternal\fP: removed "v2\&.0\&.0 breaking changes" section from individual function docs\fP
+.PP
+.SH "v2\&.28\&.0 - 2021-12-28"
+.PP
+Kudos to @tan75, @fturmel, @arcanar7, @jeffjose, @helmut-lang, @zrev2220, @jooola, @minitesh, @cowboy-bebug, @mesqueeb, @JuanM04, @zhirzh, @damon02 and @leshakoss for working on the release\&.
+.SS "Added"
+.IP "\(bu" 2
+\fRAdded West Frisian (\fRfy\fP) locale\&.\fP
+.IP "\(bu" 2
+\fRAdded Uzbek Cyrillic locale (\fRuz-Cyrl\fP)\&.\fP
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+\fRadd the missing accent mark for Saturday in Spanish locale (\fRes\fP) for \fRformat\fP\&.\fP
+.IP "\(bu" 2
+\fRallowed \fRK\fP token to be used with \fRa\fP or \fRb\fP in \fRparse\fP\&.\fP
+.PP
+.SH "v2\&.27\&.0 - 2021-11-30"
+.PP
+Kudos to @tan75, @hg-pyun, @07akioni, @razvanmitre, @Haqverdi, @pgcalixto, @janziemba, @fturmel, @JuanM04, @zhirzh, @seanghay, @bulutfatih, @nodeadtree, @cHaLkdusT, \fI\fP-korzun, @fishmandev, @wingclover, @Zacharias3690, @kossnocorp and @leshakoss for working on the release\&.
+.SS "Fixed"
+.IP "\(bu" 2
+\fRFixed translation for quarters in \fRformat\fP in Chinese Simplified locale (\fRzh-CN\fP)\&.\fP
+.IP "\(bu" 2
+\fRFixed \fRP\fP token in \fRformat\fP for Romanian locale (\fRro\fP)\&.\fP
+.IP "\(bu" 2
+\fRFixed era and month formatters in Azerbaijani locale (\fRaz\fP)\&.\fP
+.IP "\(bu" 2
+\fRFixed \fRformatRelative\fP patterns in Georgian locale (\fRka\fP)\&.\fP
+.IP "\(bu" 2
+\fRFixed regular expressions for \fRparse\fP in Estonian locale (\fRer\fP)\&.\fP
+.IP "\(bu" 2
+\fRFixed the format of zeros in \fRformatDuration\fP in Czech locale (\fRcs\fP)\&.\fP
+.IP "\(bu" 2
+\fRFixed ordinal formatting for years, weeks, hours, minutes and seconds in \fRfr\fP, \fRfr-CA\fP and \fRfr-CH\fP locales\&.\fP
+.IP "\(bu" 2
+\fRFixed constants not having proper TypeScript and Flow types\&.\fP
+.IP "\(bu" 2
+\fRFixed translation for Monday in Turkish locale (\fRtr\fP)\&.\fP
+.IP "\(bu" 2
+\fRFixed \fReachMinuteOfInterval\fP not handling intervals less than a minute correctly\&.\fP
+.IP "\(bu" 2
+\fRFixed flow types for \fRclosestTo\fP and \fRclosestIndexTo\fP\&.\fP
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRAdded Khmer locale (\fRkm\fP)\&.\fP
+.PP
+.SH "v2\&.26\&.0 - 2021-11-19"
+.PP
+Thanks to @kossnocorp, @leshakoss, @tan75, @gaplo, @AbdAllahAbdElFattah13, @fturmel, @kentaro84207, @V-Gutierrez, @atefBB, @jhonatanmacazana, @zhirzh, @Haqverdi, @mandaputtra, @micnic and @rikkalo for working on the release\&.
+.SS "Fixed"
+.IP "\(bu" 2
+\fRFixed \fRformatRelative\fP format for \fRlastWeek\fP in Spanish locale\&.\fP
+.IP "\(bu" 2
+\fRFixed translation for October in Hindi locale\&.\fP
+.IP "\(bu" 2
+\fRFixed Azerbaijani locale to use correct era matchers for \fRparse\fP\&.\fP
+.IP "\(bu" 2
+\fRAdded the functions that use \fRweekStartsOn\fP and \fRfirstWeekContainsDate\fP that were missing from the \fRLocale\fP documentation page\&.\fP
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+\fRChanged abbreviation for August from "Ags" to "Agt" in Indonesian locale\&.\fP
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRAdded Irish English locale (\fRen-IE\fP)\&.\fP
+.IP "\(bu" 2
+\fRAdded Arabic locale (\fRar\fP)\&.\fP (\fR#1670\fP)
+.IP "\(bu" 2
+\fRAdded Hong Kong Traditional Chinese locale (zh-HK)\&.\fP (\fR#2684\fP)
+.IP "\(bu" 2
+\fRAdded Egyptian Arabic locale (ar-EG)\&.\fP
+.PP
+.SH "v2\&.25\&.0 - 2021-10-05"
+.PP
+This release is brought to you by @kossnocorp, @gierschv, @fturmel, @redbmk, @mprovenc, @artyom-ivanov and @tan75\&.
+.SS "Added"
+.IP "\(bu" 2
+\fRAdded Japanese Hiragana locale (\fRja-Hira\fP)\&.\fP
+.IP "\(bu" 2
+\fRAdded standalone months support to \fRde\fP and \fRde-AT\fP locales\&.\fP
+.PP
+.SH "v2\&.24\&.0 - 2021-09-17"
+.PP
+Kudos to \fRSasha Koss\fP, \fRLucas Silva\fP, \fRJan Ziemba\fP, \fRAnastasia Kobzar\fP, \fRDeepak Gupta\fP, \fRJonas L\fP, \fRKentaro Suzuki\fP, \fRKoussay Haj Kacem\fP, \fRfturmel\fP, \fRTan75\fP and \fRAdriaan Callaerts\fP for working on the release\&.
+.SS "Fixed"
+.IP "\(bu" 2
+\fRFixed an edge case in the Slovak locale caused by unescaped character\&.\fP (\fR#2083\fP)
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+\fRUsed \fR1\fP instead of \fRein\fP for German \fRformatDuration\fP to make it consistent with other locales and formats\&.\fP (\fR#2505\fP)
+.IP "\(bu" 2
+\fRMade Norwegian \fRformatDuration\fP consistent with other locales by using numeric representation instead of written\&.\fP (\fR#2469\fP)
+.IP "\(bu" 2
+\fRUse the word "sekunda" instead of "vteřina" for second in the Czech locale\&.\fP
+.IP "\(bu" 2
+\fRMade Flemish short date format corresponds to the Flemish government\&.\fP
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRAdded \fRroundingMethod\fP option to \fRdifferenceInHours\fP, \fRdifferenceInMinutes\fP, \fRdifferenceInQuarters\fP, \fRdifferenceInSeconds\fP and \fRdifferenceInWeeks\fP with \fRtrunc\fP as the default method\&.\fP (\fR#2555\fP)
+.IP "\(bu" 2
+\fRAdded new functions: \fRpreviousDay\fP, \fRpreviousMonday\fP, \fRpreviousTuesday\fP, \fRpreviousWednesday\fP, \fRpreviousThursday\fP, \fRpreviousFriday\fP, \fRpreviousSaturday\fP and \fRpreviousSunday\fP\&.\fP
+.PP
+.SH "v2\&.23\&.0 - 2021-07-23"
+.PP
+Thanks to \fRLiam Tait\fP, \fRfturmel\fP, \fRTakuya Uehara\fP, \fRBranislav Lazic\fP, \fRSeyyed Morteza Moosavi\fP, \fRFelipe Armoni\fP, \fRSasha Koss\fP, \fRMichael Mok\fP, \fRTan75\fP and \fRMaxim Topciu\fP for working on the release\&.
+.SS "Changed"
+.IP "\(bu" 2
+\fRImproved \fRnextDay\fP performance by roughly 50%\&.\fP
+.IP "\(bu" 2
+\fRAdded more ordinal formatting to the Japanese locale\&.\fP
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRAdded a new \fRclamp\fP function that allows to bound a date to an interval\&.\fP
+.IP "\(bu" 2
+\fRAdded Bosnian locale (bs)\&.\fP
+.IP "\(bu" 2
+\fRAllowed passing \fRundefined\fP in the duration to add and sub functions\&.\fP
+.PP
+.SH "v2\&.22\&.1 - 2021-05-28"
+.PP
+Thanks to \fRSasha Koss\fP for working on the release\&.
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed constant typings\&. (\fR#2491\fP)
+.PP
+.SH "v2\&.22\&.0 - 2021-05-28"
+.PP
+\fRSasha Koss\fP, \fRLucas Silva\fP, \fRLay\fP, \fRjwbth\fP, \fRfturmel\fP, \fRTan75\fP and \fRAnastasia Kobzar\fP worked on this release\&.
+.SS "Fixed"
+.IP "\(bu" 2
+\fRFixed Taiwanese locale to use traditional Chinese and removed unnecessary spaces\&.\fP
+.IP "\(bu" 2
+\fRFixed Russian locale to use correct long formats\&.\fP
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRAdded 18 new conversion functions\fP:
+.IP "  \(bu" 4
+\fRdaysToWeeks\fP
+.IP "  \(bu" 4
+\fRhoursToMilliseconds\fP
+.IP "  \(bu" 4
+\fRhoursToMinutes\fP
+.IP "  \(bu" 4
+\fRhoursToSeconds\fP
+.IP "  \(bu" 4
+\fRmillisecondsToHours\fP
+.IP "  \(bu" 4
+\fRmillisecondsToMinutes\fP
+.IP "  \(bu" 4
+\fRmillisecondsToSeconds\fP
+.IP "  \(bu" 4
+\fRminutesToHours\fP
+.IP "  \(bu" 4
+\fRminutesToMilliseconds\fP
+.IP "  \(bu" 4
+\fRminutesToSeconds\fP
+.IP "  \(bu" 4
+\fRmonthsToQuarters\fP
+.IP "  \(bu" 4
+\fRmonthsToYears\fP
+.IP "  \(bu" 4
+\fRquartersToMonths\fP
+.IP "  \(bu" 4
+\fRquartersToYears\fP
+.IP "  \(bu" 4
+\fRsecondsToHours\fP
+.IP "  \(bu" 4
+\fRsecondsToMilliseconds\fP
+.IP "  \(bu" 4
+\fRsecondsToMinutes\fP
+.IP "  \(bu" 4
+\fRweeksToDays\fP
+.IP "  \(bu" 4
+\fRyearsToMonths\fP
+.IP "  \(bu" 4
+\fRyearsToQuarters\fP
+.PP
+
+.PP
+.SH "v2\&.21\&.3 - 2021-05-08"
+.PP
+This release is brought to you by \fRMaxim Topciu\fP\&.
+.SS "Fixed"
+.IP "\(bu" 2
+\fRFixed IE11 support by babelifing the shorthand properties\&.\fP
+.PP
+.SH "v2\&.21\&.2 - 2021-05-05"
+.PP
+Kudos to \fRAleksei Korzun\fP, \fRMaxim Topciu\fP, \fRJonas L\fP, \fRMohammad ali Ali panah\fP and \fRTan75\fP for working on the release\&.
+.SS "Fixed"
+.IP "\(bu" 2
+\fR\fRdifferenceInBusinessDays\fP now returns \fRNaN\fP instead of \fRInvalid Date\fP when an invalid argument is passed to the function\&.\fP
+.IP "\(bu" 2
+\fRFixed \fRweekStartsOn\fP in Persian locale\&.\fP
+.PP
+.SH "v2\&.21\&.1 - 2021-04-15"
+.PP
+Thanks to \fRSasha Koss\fP for working on the release\&.
+.SS "Fixed"
+.IP "\(bu" 2
+\fRFixed a breaking change introduced by using modern default argument value syntax (see https://github\&.com/Hacker0x01/react-datepicker/issues/2870)\&.\fP
+.PP
+.SH "v2\&.21\&.0 - 2021-04-14"
+.PP
+This release is brought to you by \fRAleksei Korzun\fP, \fRTan75\fP, \fRRubens Mariuzzo\fP, \fRChristoph Stenglein\fP and \fRClément Tamisier\fP\&.
+.SS "Fixed"
+.IP "\(bu" 2
+\fRMade \fRformatDistanceStrict\fP return \fR12 months\fP instead of \fR1 year\fP when \fRunit: 'month'\fP\&.\fP
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRAdded Haitian Creole (\fRht\fP) locale\&.\fP
+.IP "\(bu" 2
+\fRAdded Austrian German (\fRde-AT\fP) locale\&.\fP
+.PP
+.SH "v2\&.20\&.3 - 2021-04-13"
+.PP
+Kudos to \fRfturmel\fP for working on the release\&.
+.SS "Fixed"
+.IP "\(bu" 2
+\fRFixed broken tree-shaking caused by missing links to corresponding ESM\&.\fP (\fR#2207\fP)
+.PP
+.SH "v2\&.20\&.2 - 2021-04-12"
+.PP
+Kudos to \fRMaxim Topciu\fP for working on the release\&.
+.SS "Fixed"
+.IP "\(bu" 2
+\fRFixed IE11 incompatibility caused by the usage of spread syntax\&.\fP (\fR#2408\fP)
+.PP
+.SH "v2\&.20\&.1 - 2021-04-09"
+.PP
+This release is brought to you by \fRSasha Koss\fP and \fRTan75\fP\&.
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed \fRisDate\fP Flow typings that we broke in \fRv2\&.20\&.0\fP\&.
+.PP
+.SH "v2\&.20\&.0 - 2021-04-08"
+.PP
+This release is brought to you by \fRSasha Koss\fP, \fRMaxim Topciu\fP, \fRtu4mo\fP, \fRTan75\fP, \fRArdit Dine\fP, \fRCarl Rosell\fP, \fRRoman Mahotskyi\fP, \fRMateusz Krzak\fP, \fRfgottschalk\fP, \fRAnastasia Kobzar\fP, \fRBilguun Ochirbat\fP, \fRLesha Koss\fP, \fRYuLe\fP and \fRguyroberts21\fP\&.
+.SS "Fixed"
+.IP "\(bu" 2
+\fRMade \fRformatDistanceStrict\fP and \fRformatDistanceToNowStrict\fP always return \fR1 year\fP instead of \fR12 months\fP\&.\fP (\fR#2388\fP)
+.IP "\(bu" 2
+Fixed \fRnextDay\fP, \fRnextMonday\fP and \fRnextTuesday\fP missing in exports and type definitions\&. (\fR#2325\fP)
+.IP "\(bu" 2
+\fRFixed a DST bug in \fRformatDistanceStrict\fP\&.\fP (\fR#2307\fP)
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRAdded new \fReachMinuteOfInterval\fP function\&.\fP
+.IP "\(bu" 2
+\fRAdded Albanian (\fRsq\fP) locale\fP
+.IP "\(bu" 2
+\fRAdded Mongolian (\fRmn\fP) locale\fP
+.IP "\(bu" 2
+\fRAdded \fRnextWednesday\fP, \fRnextThursday\fP, \fRnextFriday\fP, \fRnextSaturday\fP and \fRnextSunday\fP\&.\fP
+.PP
+.SH "v2\&.19\&.0 - 2021-03-05"
+.PP
+\fRTan75\fP worked on this release\&.
+.SS "Fixed"
+.IP "\(bu" 2
+\fRAssigned the correct \fRfirstWeekContainsDate\fP value (\fR4\fP) for the French locale\&.\fP (\fR#2148\fP)
+.IP "\(bu" 2
+\fRFixed torsdag abbreviation in the Swedish locale\&.\fP
+.IP "\(bu" 2
+\fRFixed a bug in \fRdifferenceInMonths\fP and \fRintervalToDuration\fP that occurs when dealing with the 28th of February\&.\fP (\fR#2255\fP)
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRAdded new functions: \fRnextDay\fP, \fRnextMonday\fP and \fRnextTuesday\fP that allows getting the next day of the week, Monday or Tuesday respectively\&.\fP
+.PP
+.SH "v2\&.18\&.0 - 2021-03-01"
+.PP
+Thanks to \fRTan75\fP and \fRLesha Koss\fP\&.
+.SS "Fixed"
+.IP "\(bu" 2
+\fRFixed documentation missing for \fRintlFormat\fP\&.\fP (\fR#2258\fP)
+.IP "\(bu" 2
+\fRFixed date formats in the Latvian locale\&.\fP (\fR#2202\fP)
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRAdded support of positive and negative offsets in \fRparseJSON\fP\&.\fP (\fR#2149\fP)
+.PP
+.SH "[2\&.17\&.0] - 2021-02-05"
+.PP
+Kudos to \fR@shaykav\fP, \fR@davidgape89\fP, \fR@rikkalo\fP, \fR@tan75\fP, \fR@talgautb\fP, \fR@owenl131\fP, \fR@kylesezhi\fP, \fR@inigoiparragirre\fP, \fR@gius\fP, \fR@Endeauvirr\fP and \fR@frankyston\fP\&.
+.SS "Fixed"
+.IP "\(bu" 2
+\fRFixed Russian locale parsing issue\fP\&.
+.IP "\(bu" 2
+\fRFixed \fRdifferenceInMonths\fP for edge cases, such as the end of February dates\fP\&.
+.IP "\(bu" 2
+\fRFixed suffixes for the Kazakh locale\fP\&.
+.IP "\(bu" 2
+\fRFixed \fRformatDuration\fP week translation in \fRpt\fP and \fRpt-BR\fP locales\fP\&.
+.IP "\(bu" 2
+\fRMade Japanese locale to use the correct value for the start of the week\fP\&.
+.IP "\(bu" 2
+\fRAdjusted date formats in the Basque locale\fP\&.
+.IP "\(bu" 2
+\fRFixed the short and medium date formats in the Czech locale\fP\&.
+.IP "\(bu" 2
+\fRAdjusted the Polish translations of \fRformatDistance\fP\fP\&.
+.IP "\(bu" 2
+\fRFixed the week's abbreviations in the Brazilian Portuguese\fP\&.
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRAdded \fRintlFormat\fP\fP a lightweight formatting function that uses \fRIntl API\fP\&. Eventually, it will become the default formatting function, so it's highly recommended for new code\&.
+.IP "\(bu" 2
+\fRAdded \fRen-ZA\fP locale\fP\&.
+.IP "\(bu" 2
+\fRAdded an ability to format lowercase am/pm with \fRaaa\fP and \fRbbb\fP tokens\fP\&.
+.IP "\(bu" 2
+\fRAdded ordinal formatting for Japanese year values\fP\&.
+.PP
+.SH "\fR2\&.16\&.1\fP - 2020-07-31"
+.PP
+Kudos to \fR@aleksaps\fP, \fR@leedriscoll\fP and \fR@BanForFun\fP for pull-requests!
+.SS "Fixed"
+.IP "\(bu" 2
+\fRFixed a typo in Scottish Gaelic (gd) locale\fP\&.
+.IP "\(bu" 2
+\fRFixed typos in Serbian Latin locale\fP\&.
+.IP "\(bu" 2
+\fRFixed greek grammar for Saturday on \fRformatRelative\fP\fP\&.
+.IP "\(bu" 2
+Removed locale snapshots from the npm package making it lighter\&.
+.PP
+.SH "\fR2\&.16\&.0\fP - 2020-08-27"
+.PP
+Kudos to \fR@jvpelt\fP, \fR@piotrl\fP, \fR@yotamofek\fP, \fR@dwaxweiler\fP, \fR@leedriscoll\fP and \fR@bradevans\fP for working on the release\&. Also thanks to \fR@PascalHonegger\fP, \fR@pickfire\fP, \fR@TheJaredWilcurt\fP, \fR@SidKH\fP and \fR@nfantone\fP for improving the documentation\&.
+.SS "Fixed"
+.IP "\(bu" 2
+\fRAdded correct translations for Welsh \fR1 minute\fP and \fR2 days\fP\fP\&.
+.IP "\(bu" 2
+\fRFixed \fRformatRFC3339\fP formatting timezone offset with minutes\fP\&.
+.IP "\(bu" 2
+\fRAdded missing locale type definition for \fRformatDuration\fP\fP
+.IP "\(bu" 2
+\fRFixed Scottish Gaelic locale issues\fP\&.
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+\fRUsed shorter Hebrew alternative for "about"\fP\&.
+.IP "\(bu" 2
+\fRImproved string arguments warning after upgrading to v2\fP\&.
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRAdded Luxembourgish (lb) locale\fP\&.
+.PP
+.SH "\fR2\&.15\&.0\fP - 2020-07-17"
+.PP
+Thanks to \fR@belgamo\fP, \fR@Matsuuu\fP, \fR@Imballinst\fP, \fR@arsnyder16\fP, \fR@pankajupadhyay29\fP, \fR@DCBN\fP, \fR@leedriscoll\fP, \fR@gottsohn\fP, \fR@mukuljainx\fP and \fR@dtriana\fP for working on the release\&. Also kudos to \fR@KidkArolis\fP, \fR@imgx64\fP, \fR@fjc0k\fP, \fR@wmonk\fP, \fR@djD-REK\fP, \fR@dandv\fP, \fR@psimk\fP and \fR@brimworks\fP for improving the documentation\&.
+.SS "Fixed"
+.IP "\(bu" 2
+\fRFixed behavior of \fRaddBusinessDays\fP when input date is a weekend day\fP\&.
+.IP "\(bu" 2
+\fRFixed \fRparseISO\fP not returning \fRInvalid Date\fP on incorrect string when there are spaces in it\fP\&.
+.IP "\(bu" 2
+\fRFixed \fRes\fP round-tripping dates with Wednesday\fP\&.
+.IP "\(bu" 2
+\fRFixed round-trip bug with \fRd\fP/\fREEEE\fP ordering in tokens like \fRPPPPP\fP\fP\&.
+.IP "\(bu" 2
+\fRFixed issues with parsing values in Japanese\fP\&.
+.IP "\(bu" 2
+\fRFixed Hungarian breaking IE11\fP\&.
+.IP "\(bu" 2
+\fRFixed Spanish accents in Saturday and Wednesday\fP\&.
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+\fRImproved the message of protected tokens error\fP\&.
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRAdded Swiss-French \fRfr-CH\fP locale\fP\&.
+.IP "\(bu" 2
+\fRAdded Flemish \fRnl-BE\fP locale\fP\&.
+.IP "\(bu" 2
+\fRAdded Scottish Gaelic \fRgd\fP locale\fP\&.
+.IP "\(bu" 2
+\fRAdded New Zealand English \fRen-NZ\fP locale\fP\&.
+.IP "\(bu" 2
+\fRAdded \fRisMatch\fP function\fP\&.
+.PP
+.SH "\fR2\&.14\&.0\fP - 2020-05-18"
+.PP
+Kudos to \fR@julamb\fP, \fR@JacobSoderblom\fP, \fR@justingrant\fP, \fR@dragunoff\fP, \fR@jmate0321\fP, \fR@gbhasha\fP, \fR@rasck\fP, \fR@AlbertoPdRF\fP, \fR@sebastianhaberey\fP and \fR@giogonzo\fP for working on the release!
+.SS "Fixed"
+.IP "\(bu" 2
+\fRFixed DST issues with \fRadd\fP, \fRaddDays\fP and \fRaddMonths\fP\fP\&.
+.IP "\(bu" 2
+\fRFixed "quarter" translation in the Bulgarian locale\fP\&.
+.IP "\(bu" 2
+\fRFixed \fRformatDistance\fP strings in the Hungarian locale\fP\&.
+.IP "\(bu" 2
+\fRFixed Danish month abbreviations\fP\&.
+.IP "\(bu" 2
+\fRFixed parsing of mei in the Dutch locale\fP\&.
+.IP "\(bu" 2
+\fRFixed missing preposition in \fRformatLong\fP in the Spanish locale\fP\&.
+.IP "\(bu" 2
+\fRFixed \fRformatRelative\fP in the Italian locale\fP\&.
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRAdded \fReachQuarterOfInterval\fP\fP\&.
+.IP "\(bu" 2
+\fRAdded Basque (\fReu\fP) locale\fP\&.
+.IP "\(bu" 2
+\fRAdded Indian English (\fRen-IN\fP) locale\fP\&.
+.IP "\(bu" 2
+\fRAdded \fReachHourOfInterval\fP\fP\&.
+.PP
+.SH "\fR2\&.13\&.0\fP - 2020-05-06"
+.PP
+Thanks to \fR@JorenVos\fP, \fR@developergouli\fP, \fR@rhlowe\fP and \fR@justingrant\fP for working on the release!
+.SS "Fixed"
+.IP "\(bu" 2
+\fRFixed mei abbreviation in the Dutch locale\fP\&.
+.IP "\(bu" 2
+\fRFixed \fRdifferenceInDays\fP DST behavior broken in 2\&.12\&.0\fP\&.
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRAdded Kannada locale support\fP\&.
+.IP "\(bu" 2
+\fRAdded \fRformatISODuration\fP function\fP\&.
+.IP "\(bu" 2
+\fRAdded \fRintervalToDuration\fP function\fP\&.
+.PP
+.SH "\fR2\&.12\&.0\fP - 2020-04-09"
+.PP
+Kudos to \fR@leshakoss\fP, \fR@skyuplam\fP, \fR@so99ynoodles\fP, \fR@dkozickis\fP, \fR@belgamo\fP, \fR@akgondber\fP, \fR@dcousens\fP and \fR@BoomDev\fP for working on the release!
+.SS "Fixed"
+.IP "\(bu" 2
+\fRFixed minulý štvrtok in Slovak locale\fP\&.
+.IP "\(bu" 2
+Fixed date ordinalNumber for \fRja/zh-CN/zh-TW\fP and \fRko\fP\&.
+.IP "\(bu" 2
+\fRFixed quarters parsing\fP\&.
+.IP "\(bu" 2
+\fRFixed \fRsetDay\fP with \fRweekStartsOn\fP != 0\fP\&.
+.IP "\(bu" 2
+\fRFixed differenceInDays across DST\fP\&.
+.IP "\(bu" 2
+\fRFixed required arguments exception message\fP\&.
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRAdded new function \fRformatDistanceToNowStrict\fP\fP\&.
+.PP
+.SH "\fR2\&.11\&.1\fP - 2020-03-26"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Rebuilt TypeScript and flow types\&.
+.PP
+.SH "\fR2\&.11\&.0\fP - 2020-03-13"
+.PP
+Kudos to \fR@oakhan3\fP, \fR@Mukhammadali\fP, \fR@altrim\fP, \fR@leepowellcouk\fP, \fR@amatzon\fP, \fR@bryanMt\fP, \fR@kalekseev\fP, \fR@eugene-platov\fP and \fR@tjrobinson\fP for working on the release\&.
+.SS "Fixed"
+.IP "\(bu" 2
+\fRFixed a bug in \fRdifferenceInYears\fP causing incorrect results when the left date is a leap day\fP\&.
+.IP "\(bu" 2
+\fRFixed \fRparseISO\fP to work correctly around time shift dates\fP\&.
+.IP "\(bu" 2
+\fRFixed \fRformat\fP to work correctly with GMT-0752/GMT-0456 and similar timezones\fP\&.
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+\fRChanged \fRgetDay\fP typings to return \fR0|1|2|3|4|5|6\fP instead of \fRnumber\fP\fP\&.
+.IP "\(bu" 2
+\fRImproved Chinese locale\fP:
+.IP "  \(bu" 4
+Change date format to meet the national standard (GB/T 7408-2005)\&.
+.IP "  \(bu" 4
+Improve \fRordinalNumber\fP function behavior\&.
+.IP "  \(bu" 4
+Add prefix in \fRformatRelative\fP depending on if it's a current week or not\&.
+.PP
+
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRAdded Uzbek \fRuz\fP locale\fP\&.
+.IP "\(bu" 2
+\fRUpdated Macedonian locale for v2\fP\&.
+.IP "\(bu" 2
+\fRAdded Maltese \fRmt\fP locale\fP\&.
+.PP
+.SH "\fR2\&.10\&.0\fP - 2020-02-25"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+\fRFixed \fRformatISO\fP when formatting time with timezones with minute offsets > 0\fP\&. Kudos to \fR@dcRUSTy\fP\&.
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed a bug in setDay when using weekStartsOn that is not 0
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRAdded \fRweeks\fP to \fRDuration\fP\fP\&.
+.IP "\(bu" 2
+\fRAdded \fRweeks\fP support to \fRadd\fP and \fRsub\fP\fP\&.
+.IP "\(bu" 2
+\fRAdded details message in \fRthrowProtectedError\fP\fP\&.
+.PP
+.SH "\fR2\&.9\&.0\fP - 2020-01-08"
+.PP
+Thanks to \fR@mborgbrant\fP, \fR@saintplay\fP, \fR@mrenty\fP, \fR@kibertoad\fP, \fR@levibuzolic\fP, \fR@Anshuman71\fP, \fR@talgautb\fP, \fR@filipjuza\fP, \fR@tobyzerner\fP, \fR@emil9453\fP, \fR@fintara\fP, \fR@pascaliske\fP, \fR@rramiachraf\fP, \fR@marnusw\fP and \fR@Imballinst\fP for working on the release\&.
+.SS "Fixed"
+.IP "\(bu" 2
+\fRFixed a bug with addBusinessDays returning the Tuesday when adding 1 day on weekends\&. Now it returns the Monday\fP\&.
+.IP "\(bu" 2
+\fRAdded missing timezone to \fRformatISO\fP\fP\&.
+.IP "\(bu" 2
+\fRRemoved dots from short day period names in the Kazakh locale\fP\&.
+.IP "\(bu" 2
+\fRFixed typo in formatDistance in the Czech locale\fP\&.
+.IP "\(bu" 2
+\fRFixed shortenings in the Bulgarian locale\fP\&.
+.IP "\(bu" 2
+\fRFixed regex for the May in the Portuguese locale\fP\&.
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRAdded \fReachMonthOfInterval\fP and \fReachYearOfInterval\fP\fP\&.
+.IP "\(bu" 2
+\fRAdded \fRinclusive\fP option to `areIntervalsOverlapping\fP\&.
+.IP "\(bu" 2
+\fRAdded \fRisExists\fP function that checks if the given date is exists\fP\&.
+.IP "\(bu" 2
+\fRAdded \fRadd\fP function to add seconds, minutes, hours, weeks, years in single call\fP\&.
+.IP "\(bu" 2
+\fRAdded \fRsub\fP function, the opposite of \fRadd\fP\fP\&.
+.IP "\(bu" 2
+\fRAdded \fRDuration\fP type used in \fRadd\fP and \fRsub\fP\fP\&.
+.IP "\(bu" 2
+\fRAdded Azerbaijani (az) locale\fP\&.
+.IP "\(bu" 2
+\fRAdded Moroccan Arabic (ar-MA) locale\fP\&.
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+\fRReduced the total minified build size by 1Kb/4%\fP\&.
+.IP "\(bu" 2
+\fRMade all properties in \fRLocale\fP type optional\fP\&.
+.IP "\(bu" 2
+\fRAdded missing properties to \fRLocale\fP type\fP\&.
+.IP "\(bu" 2
+\fRAdd the locale code to \fRLocale\fP type\fP\&.
+.IP "\(bu" 2
+\fRAdded support of space time separator to \fRparseJSON\fP\fP\&.
+.IP "\(bu" 2
+\fRAllowed up to 7 digits in milliseconds in \fRparseJSON\fP\fP\&.
+.PP
+.SH "\fR2\&.8\&.1\fP - 2019-11-22"
+.PP
+Thanks to \fR@Imballinst\fP for the bug fix!
+.SS "Fixed"
+.IP "\(bu" 2
+\fRAdd colon between the hour and minutes for \fRformatRFC3339\fP\fP\&. \fRSee #1548\fP\&.
+.PP
+.SH "\fR2\&.8\&.0\fP - 2019-11-19"
+.PP
+Kudos to \fR@NaridaL\fP, \fR@Zyten\fP, \fR@Imballinst\fP, \fR@leshakoss\fP and \fR@Neorth\fP for working on the release\&.
+.SS "Fixed"
+.IP "\(bu" 2
+\fRRemove the next week preposition in the Swedish locale\fP\&.
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRAdded Malay (ms) locale\fP\&.
+.IP "\(bu" 2
+\fRAdded \fRformatISO\fP, \fRformatISO9075\fP, \fRformatRFC3339\fP, and \fRformatRFC7231\fP functions\fP\&.
+.PP
+.SH "\fR2\&.7\&.0\fP - 2019-11-07"
+.PP
+Thanks to \fR@mzgajner\fP, \fR@NaridaL\fP, \fR@Zyten\fP, \fR@leshakoss\fP, \fR@fintara\fP, \fR@kpr-hellofresh\fP for contributing to the release\&.
+.SS "Fixed"
+.IP "\(bu" 2
+\fRFixed a mistake in the Slovenian locale\fP\&.
+.IP "\(bu" 2
+\fRFixed incorrect behavior of \fRparseISO\fP in Firefox caused by differences in \fRgetTimezoneOffset\fP\fP\&.
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+\fRMake object arguments types more elaborate in Flow type definitions\fP\&.
+.IP "\(bu" 2
+\fRGet rid of deprecated Function in Flow type definitions\fP\&.
+.IP "\(bu" 2
+\fRAllow \fRparseJSON\fP to accept strings without trailing 'Z' symbol and with up to 6 digits in the milliseconds' field\fP\&.
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRAdded Bulgarian (bg) locale\fP\&.
+.PP
+.SH "\fR2\&.6\&.0\fP - 2019-10-22"
+.PP
+Kudos to \fR@marnusw\fP, \fR@cdrikd\fP and \fR@rogyvoje\fP for working on the release!
+.SS "Added"
+.IP "\(bu" 2
+\fRAdded \fRparseJSON\fP - lightweight function (just 411 B) that parses dates formatted with \fRtoJSON\fP\fP\&.
+.IP "\(bu" 2
+\fRAdded the language code to each locale\fP\&.
+.IP "\(bu" 2
+\fRAdded \fRsubBusinessDays\fP function\fP\&.
+.IP "\(bu" 2
+\fRAdded both Serbian - cyrillic (sr) and latin (sr-Latn) locales\fP\&.
+.PP
+.SH "\fR2\&.5\&.1\fP - 2019-10-18"
+.PP
+Thanks to \fR@mitchellbutler\fP for the bug fix!
+.SS "Fixed"
+.IP "\(bu" 2
+\fRFixed infinite loop in \fRaddBusinessDays\fP\fP\&.
+.PP
+.SH "\fR2\&.5\&.0\fP - 2019-10-16"
+.PP
+Kudos to \fR@dkozickis\fP, \fR@drugoi\fP, \fR@kranthilakum\fP, \fR@102\fP, \fR@gpetrioli\fP and \fR@JulienMalige\fP for making the release happen\&.
+.SS "Fixed"
+.IP "\(bu" 2
+\fRFixed compatibility with IE11 by removing \fRfindIndex\fP from the code\fP\&.
+.IP "\(bu" 2
+\fRFixed Greek locale patterns\fP\&.
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRAdded Kazakh (kk) locale\fP\&.
+.IP "\(bu" 2
+\fRAdded Telugu (te) locale\fP\&.
+.IP "\(bu" 2
+\fRAdded Canadian French (fr-CA) locale\fP\&.
+.IP "\(bu" 2
+\fRAdded Australian English (en-AU) locale\fP\&.
+.IP "\(bu" 2
+\fRExported \fRInterval\fP and \fRLocale\fP types from Flow typings\fP\&.
+.PP
+.SH "\fR2\&.4\&.1\fP - 2019-09-28"
+.PP
+Thanks to \fR@mrclayman\fP for reporting the issue and \fR@leshakoss\fP for fixing it\&.
+.SS "Fixed"
+.IP "\(bu" 2
+\fRFixed am/pm mixup in the Czech locale\fP\&.
+.PP
+.SH "\fR2\&.4\&.0\fP - 2019-09-27"
+.PP
+This release is brought to you by these amazing people: \fR@lovelovedokidoki\fP, \fR@alexigityan\fP, \fR@kalekseev\fP and \fR@andybangs\fP\&. You rock!
+.SS "Fixed"
+.IP "\(bu" 2
+\fRFixed Vietnamese parsing patterns\fP\&.
+.IP "\(bu" 2
+\fRFixed Czech parsing regexes\fP\&.
+.IP "\(bu" 2
+\fRFixed offset for Eastern Hemisphere in \fRparseISO\fP\fP\&.
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRAdded Armenian locale support\fP\&.
+.PP
+.SH "\fR2\&.3\&.0\fP - 2019-09-24"
+.PP
+Huge thanks to \fR@lovelovedokidoki\fP who improved 8 (!) locales in an unstoppable open-source rampage and \fR@VesterDe\fP for fixing Slovenian locale 👏
+.SS "Fixed"
+.IP "\(bu" 2
+\fRFixed the translation of "yesterday" in the Slovenian locale\fP\&.
+.IP "\(bu" 2
+\fRFixed French parsing issues with June and August\fP\&.
+.IP "\(bu" 2
+\fRImproved Turkish parsing\fP\&.
+.IP "\(bu" 2
+\fRFixed "March" in Dutch parsing patterns\fP\&.
+.IP "\(bu" 2
+\fRFixed Hindi parsing patterns\fP\&.
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRAdded Finnish matching patterns\fP\&.
+.IP "\(bu" 2
+\fRAccept abbreviated March, June, July in Norwegian locales\fP\&.
+.IP "\(bu" 2
+\fRAdded parsing for Greek months with long formatting\fP\&.
+.PP
+.SH "\fR2\&.2\&.1\fP - 2019-09-12"
+.PP
+Kudos to date-fns contributors: \fR@mzgajner\fP, \fR@sibiraj-s\fP, \fR@mukeshmandiwal\fP, \fR@SneakyFish5\fP and \fR@CarterLi\fP\&.
+.SS "Added"
+.IP "\(bu" 2
+\fRAdded new \fRset\fP function\fP\&.
+.IP "\(bu" 2
+\fRUpdated Slovenian (sl) locale for v2\fP\&.
+.IP "\(bu" 2
+\fRAdded Tamil (ta) locale\fP\&.
+.IP "\(bu" 2
+\fRAdded Hindi (hi) locale\fP\&.
+.IP "\(bu" 2
+\fRAdded support of \fR\\n\fP in \fRformat\fP, \fRlightFormat\fP and \fRparse\fP\fP\&.
+.PP
+.SH "\fR2\&.1\&.0\fP - 2019-09-06"
+.PP
+Thanks to date-fns contributors: \fR@ManadayM\fP, \fR@illuminist\fP, \fR@visualfanatic\fP, \fR@vsaarinen\fP and at last but not the least \fR@leshakoss\fP!
+.SS "Fixed"
+.IP "\(bu" 2
+\fRSet start of the week to Sunday for Thai locale\fP\&.
+.IP "\(bu" 2
+\fRFixed month matching in Polish locale\fP\&.
+.IP "\(bu" 2
+\fRFixed \fReachWeekendOfInterval\fP skipping the first date in the supplied interval\fP\&.
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRAdded Gujarati locale\fP\&.
+.PP
+.SH "\fR2\&.0\&.1\fP - 2019-08-23"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+\fRFix\fP \fRgetWeekOfMonth\fP with \fRoptions\&.weekStartsOn\fP set to 1 \fRnot working for Sundays\fP\&. Kudos to \fR@waseemahmad31\fP!
+.PP
+.SH "\fR2\&.0\&.0\fP - 2019-08-20"
+.PP
+If you're upgrading from v2 alpha or beta, \fRsee the pre-release changelog\fP\&.
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed the \fRtoDate\fP bug occurring when parsing ISO-8601 style dates (but not valid ISO format) with a trailing Z (e\&.g \fR2012-01Z\fP), it returned Invalid Date for FireFox/IE11 \fR#510\fP
+.IP "\(bu" 2
+Fixed \fRdifferenceIn\&.\&.\&.\fP functions returning negative zero in some cases: \fR#692\fP
+.IP "\(bu" 2
+\fRisDate\fP now works properly with dates passed across iframes \fR#754\fP\&.
+.IP "\(bu" 2
+Fixed a few bugs that appeared in timezones with offsets that include seconds (e\&.g\&. GMT+00:57:44)\&. See PR \fR#789\fP\&.
+.IP "\(bu" 2
+\fRFixed DST issue\fP\&. See \fR#972\fP and \fR#992\fP for more details\&.
+.IP "\(bu" 2
+Fixed DST issue in \fReachDayOfInterval\fP that caused time in the days after DST change to have the shift as well\&.
+.IP "\(bu" 2
+Fixed bug in Galician locale caused by incorrect usage of \fRgetHours\fP instead of \fRgetUTCHours\fP\&.
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+\fBBREAKING\fP: now functions don't accept string arguments, but only numbers or dates\&. When a string is passed, it will result in an unexpected result (\fRInvalid Date\fP, \fRNaN\fP, etc)\&.
+
+.PP
+From now on a string should be parsed using \fRparseISO\fP (ISO 8601) or \fRparse\fP\&.
+
+.PP
+In v1 we've used \fRnew Date()\fP to parse strings, but it resulted in many hard-to-track bugs caused by inconsistencies in different browsers\&. To address that we've implemented our ISO 8601 parser but that made library to significantly grow in size\&. To prevent inevitable bugs and keep the library tiny, we made this trade-off\&.
+
+.PP
+See \fRthis post\fP for more details\&.
+
+.PP
+.PP
+.nf
+// Before v2\&.0\&.0
+addDays("2016\-01\-01", 1);
+
+// v2\&.0\&.0 onward
+addDays(parseISO("2016\-01\-01"), 1);
+.fi
+.PP
+
+.IP "\(bu" 2
+\fBBREAKING\fP: new format string API for \fRformat\fP function which is based on \fRUnicode Technical Standard #35\fP\&. See \fRthis post\fP for more details\&.
+.PP
+
+.PP
+Unit  v2 Pattern  v1 Pattern  Result examples  Era  G\&.\&.GGG  AD, BC  GGGG  Anno Domini, Before Christ  GGGGG  A, B  Calendar year  y  44, 1, 1900, 2017  yo  44th, 1st, 0th, 17th  yy  YY  44, 01, 00, 17  yyy  044, 001, 1900, 2017  yyyy  YYYY  0044, 0001, 1900, 2017  yyyyy  \&.\&.\&.  Local week-numbering year  Y  44, 1, 1900, 2017  Yo  44th, 1st, 1900th, 2017th  YY  44, 01, 00, 17  YYY  044, 001, 1900, 2017  YYYY  0044, 0001, 1900, 2017  YYYYY  \&.\&.\&.  ISO week-numbering year  R  -43, 0, 1, 1900, 2017  RR  GG  -43, 00, 01, 1900, 2017  RRR  -043, 000, 001, 1900, 2017  RRRR  GGGG  -0043, 0000, 0001, 1900, 2017  RRRRR  \&.\&.\&.  Extended year  u  -43, 0, 1, 1900, 2017  uu  -43, 01, 1900, 2017  uuu  -043, 001, 1900, 2017  uuuu  -0043, 0001, 1900, 2017  uuuuu  \&.\&.\&.  Quarter (formatting)  Q  1, 2, 3, 4  Qo  1st, 2nd, 3rd, 4th  QQ  01, 02, 03, 04  QQQ  Q1, Q2, Q3, Q4  QQQQ  1st quarter, 2nd quarter, \&.\&.\&.  QQQQQ  1, 2, 3, 4  Quarter (stand-alone)  q  Q  1, 2, 3, 4  qo  Qo  1st, 2nd, 3rd, 4th  qq  01, 02, 03, 04  qqq  Q1, Q2, Q3, Q4  qqqq  1st quarter, 2nd quarter, \&.\&.\&.  qqqqq  1, 2, 3, 4  Month (formatting)  M  1, 2, \&.\&.\&., 12  Mo  1st, 2nd, \&.\&.\&., 12th  MM  01, 02, \&.\&.\&., 12  MMM  Jan, Feb, \&.\&.\&., Dec  MMMM  January, February, \&.\&.\&., December  MMMMM  J, F, \&.\&.\&., D  Month (stand-alone)  L  M  1, 2, \&.\&.\&., 12  Lo  1st, 2nd, \&.\&.\&., 12th  LL  MM  01, 02, \&.\&.\&., 12  LLL  MMM  Jan, Feb, \&.\&.\&., Dec  LLLL  MMMM  January, February, \&.\&.\&., December  LLLLL  J, F, \&.\&.\&., D  Local week of year  w  1, 2, \&.\&.\&., 53  wo  1st, 2nd, \&.\&.\&., 53th  ww  01, 02, \&.\&.\&., 53  ISO week of year  I  W  1, 2, \&.\&.\&., 53  Io  Wo  1st, 2nd, \&.\&.\&., 53th  II  WW  01, 02, \&.\&.\&., 53  Day of month  d  D  1, 2, \&.\&.\&., 31  do  Do  1st, 2nd, \&.\&.\&., 31st  dd  DD  01, 02, \&.\&.\&., 31  Day of year  D  DDD  1, 2, \&.\&.\&., 365, 366  Do  DDDo  1st, 2nd, \&.\&.\&., 365th, 366th  DD  01, 02, \&.\&.\&., 365, 366  DDD  DDDD  001, 002, \&.\&.\&., 365, 366  DDDD  \&.\&.\&.  Day of week (formatting)  E\&.\&.EEE  Mon, Tue, Wed, \&.\&.\&., Su  EEEE  Monday, Tuesday, \&.\&.\&., Sunday  EEEEE  M, T, W, T, F, S, S  EEEEEE  Mo, Tu, We, Th, Fr, Sa, Su  ISO day of week (formatting)  i  E  1, 2, 3, \&.\&.\&., 7  io  do  1st, 2nd, \&.\&.\&., 7th  ii  01, 02, \&.\&.\&., 07  iii  ddd  Mon, Tue, Wed, \&.\&.\&., Su  iiii  dddd  Monday, Tuesday, \&.\&.\&., Sunday  iiiii  M, T, W, T, F, S, S  iiiiii  dd  Mo, Tu, We, Th, Fr, Sa, Su  Local day of week (formatting)  e  2, 3, 4, \&.\&.\&., 1  eo  2nd, 3rd, \&.\&.\&., 1st  ee  02, 03, \&.\&.\&., 01  eee  Mon, Tue, Wed, \&.\&.\&., Su  eeee  Monday, Tuesday, \&.\&.\&., Sunday  eeeee  M, T, W, T, F, S, S  eeeeee  Mo, Tu, We, Th, Fr, Sa, Su  Local day of week (stand-alone)  c  2, 3, 4, \&.\&.\&., 1  co  2nd, 3rd, \&.\&.\&., 1st  cc  02, 03, \&.\&.\&., 01  ccc  Mon, Tue, Wed, \&.\&.\&., Su  cccc  Monday, Tuesday, \&.\&.\&., Sunday  ccccc  M, T, W, T, F, S, S  cccccc  Mo, Tu, We, Th, Fr, Sa, Su  AM, PM  a\&.\&.aaa  A  AM, PM  aaaa  aa  a\&.m\&., p\&.m\&.  aaaaa  a, p  AM, PM, noon, midnight  b\&.\&.bbb  AM, PM, noon, midnight  bbbb  a\&.m\&., p\&.m\&., noon, midnight  bbbbb  a, p, n, mi  Flexible day period  B\&.\&.BBB  at night, in the morning, \&.\&.\&.  BBBB  at night, in the morning, \&.\&.\&.  BBBBB  at night, in the morning, \&.\&.\&.  Hour [1-12]  h  1, 2, \&.\&.\&., 11, 12  ho  1st, 2nd, \&.\&.\&., 11th, 12th  hh  01, 02, \&.\&.\&., 11, 12  Hour [0-23]  H  0, 1, 2, \&.\&.\&., 23  Ho  0th, 1st, 2nd, \&.\&.\&., 23rd  HH  00, 01, 02, \&.\&.\&., 23  Hour [0-11]  K  1, 2, \&.\&.\&., 11, 0  Ko  1st, 2nd, \&.\&.\&., 11th, 0th  KK  1, 2, \&.\&.\&., 11, 0  Hour [1-24]  k  24, 1, 2, \&.\&.\&., 23  ko  24th, 1st, 2nd, \&.\&.\&., 23rd  kk  24, 01, 02, \&.\&.\&., 23  Minute  m  0, 1, \&.\&.\&., 59  mo  0th, 1st, \&.\&.\&., 59th  mm  00, 01, \&.\&.\&., 59  Second  s  0, 1, \&.\&.\&., 59  so  0th, 1st, \&.\&.\&., 59th  ss  00, 01, \&.\&.\&., 59  Fraction of second  S  0, 1, \&.\&.\&., 9  SS  00, 01, \&.\&.\&., 99  SSS  000, 0001, \&.\&.\&., 999  SSSS  \&.\&.\&.  Timezone (ISO-8601 w/ Z)  X  -08, +0530, Z  XX  -0800, +0530, Z  XXX  -08:00, +05:30, Z  XXXX  -0800, +0530, Z, +123456  XXXXX  -08:00, +05:30, Z, +12:34:56  Timezone (ISO-8601 w/o Z)  x  -08, +0530, +00  xx  ZZ  -0800, +0530, +0000  xxx  Z  -08:00, +05:30, +00:00  xxxx  -0800, +0530, +0000, +123456  xxxxx  -08:00, +05:30, +00:00, +12:34:56  Timezone (GMT)  O\&.\&.\&.OOO  GMT-8, GMT+5:30, GMT+0  OOOO  GMT-08:00, GMT+05:30, GMT+00:00  Timezone (specific non-locat\&.)  z\&.\&.\&.zzz  GMT-8, GMT+5:30, GMT+0  zzzz  GMT-08:00, GMT+05:30, GMT+00:00  Seconds timestamp  t  X  512969520  tt  \&.\&.\&.  Milliseconds timestamp  T  x  512969520900  TT  \&.\&.\&.  Long localized date  P  5/29/53  PP  May 29, 1453  PPP  May 29th, 1453  PPPP  Sunday, May 29th, 1453  Long localized time  p  12:00 AM  pp  12:00:00 AM  ppp  12:00:00 AM GMT+2  pppp  12:00:00 AM GMT+02:00  Combination of date and time  Pp  5/29/53, 12:00 AM  PPpp  May 29, 1453, 12:00 AM  PPPppp  May 29th, 1453 at \&.\&.\&.  PPPPpppp  Sunday, May 29th, 1453 at \&.\&.\&.  
+
+.PP
+Characters are now escaped using single quote symbols (\fR'\fP) instead of square brackets\&. \fRformat\fP now throws RangeError if it encounters an unescaped latin character that isn't a valid formatting token\&.
+
+.PP
+To use \fRYY\fP and \fRYYYY\fP tokens that represent week-numbering years, you should set \fRuseAdditionalWeekYearTokens\fP option:
+
+.PP
+.PP
+.nf
+format(Date\&.now(), "YY", { useAdditionalWeekYearTokens: true });
+//=> '86'
+.fi
+.PP
+
+.PP
+To use \fRD\fP and \fRDD\fP tokens which represent days of the year, set \fRuseAdditionalDayOfYearTokens\fP option:
+
+.PP
+.PP
+.nf
+format(Date\&.now(), "D", { useAdditionalDayOfYearTokens: true });
+//=> '364'
+.fi
+.PP
+
+.PP
+.IP "\(bu" 2
+\fBBREAKING\fP: function submodules now use camelCase naming schema:
+
+.PP
+.PP
+.nf
+// Before v2\&.0\&.0
+import differenceInCalendarISOYears from "date\-fns/difference_in_calendar_iso_years";
+
+// v2\&.0\&.0 onward
+import differenceInCalendarISOYears from "date\-fns/differenceInCalendarISOYears";
+.fi
+.PP
+
+.IP "\(bu" 2
+\fBBREAKING\fP: min and max functions now accept an array of dates rather than spread arguments\&.
+
+.PP
+.PP
+.nf
+// Before v2\&.0\&.0
+var date1 = new Date(1989, 6 /* Jul */, 10);
+var date2 = new Date(1987, 1 /* Feb */, 11);
+
+var minDate = min(date1, date2);
+var maxDate = max(date1, date2);
+
+// v2\&.0\&.0 onward:
+var dates = [
+  new Date(1989, 6 /* Jul */, 10),
+  new Date(1987, 1 /* Feb */, 11),
+];
+
+var minDate = min(dates);
+var maxDate = max(dates);
+.fi
+.PP
+
+.IP "\(bu" 2
+\fBBREAKING\fP: make the second argument of \fRformat\fP required for the sake of explicitness\&.
+
+.PP
+.PP
+.nf
+// Before v2\&.0\&.0
+format(new Date(2016, 0, 1));
+
+// v2\&.0\&.0 onward
+format(new Date(2016, 0, 1), "yyyy\-MM\-dd'T'HH:mm:ss\&.SSSxxx");
+.fi
+.PP
+
+.IP "\(bu" 2
+\fBBREAKING\fP renamed ISO week-numbering year helpers:
+.IP "  \(bu" 4
+\fRaddISOYears\fP → \fRaddISOWeekYears\fP
+.IP "  \(bu" 4
+\fRdifferenceInCalendarISOYears\fP → \fRdifferenceInCalendarISOWeekYears\fP
+.IP "  \(bu" 4
+\fRdifferenceInISOYears\fP → \fRdifferenceInISOWeekYears\fP
+.IP "  \(bu" 4
+\fRendOfISOYear\fP → \fRendOfISOWeekYear\fP
+.IP "  \(bu" 4
+\fRgetISOYear\fP → \fRgetISOWeekYear\fP
+.IP "  \(bu" 4
+\fRisSameISOYear\fP → \fRisSameISOWeekYear\fP
+.IP "  \(bu" 4
+\fRlastDayOfISOYear\fP → \fRlastDayOfISOWeekYear\fP
+.IP "  \(bu" 4
+\fRsetISOYear\fP → \fRsetISOWeekYear\fP
+.IP "  \(bu" 4
+\fRsubISOYears\fP → \fRsubISOWeekYears\fP
+.PP
+
+.PP
+i\&.e\&. "ISO year" renamed to "ISO week year", which is short for \fRISO week-numbering year\fP\&. It makes them consistent with locale-dependent week-numbering year helpers, e\&.g\&., \fRstartOfWeekYear\fP\&.
+.IP "\(bu" 2
+\fBBREAKING\fP: functions renamed:
+.IP "  \(bu" 4
+\fRareRangesOverlapping\fP → \fRareIntervalsOverlapping\fP
+.IP "  \(bu" 4
+\fReachDay\fP → \fReachDayOfInterval\fP
+.IP "  \(bu" 4
+\fRgetOverlappingDaysInRanges\fP → \fRgetOverlappingDaysInIntervals\fP
+.IP "  \(bu" 4
+\fRisWithinRange\fP → \fRisWithinInterval\fP
+.PP
+
+.PP
+This change was made to mirror the use of the word "interval" in standard ISO 8601:2004 terminology:
+
+.PP
+.PP
+.nf
+2\&.1\&.3
+time interval
+part of the time axis limited by two instants
+.fi
+.PP
+
+.PP
+Also these functions now accept an object with \fRstart\fP and \fRend\fP properties instead of two arguments as an interval\&. All these functions throw \fRRangeError\fP if the start of the interval is after its end or if any date in the interval is \fRInvalid Date\fP\&.
+
+.PP
+.PP
+.nf
+// Before v2\&.0\&.0
+
+areRangesOverlapping(
+  new Date(2014, 0, 10),
+  new Date(2014, 0, 20),
+  new Date(2014, 0, 17),
+  new Date(2014, 0, 21),
+);
+
+eachDay(new Date(2014, 0, 10), new Date(2014, 0, 20));
+
+getOverlappingDaysInRanges(
+  new Date(2014, 0, 10),
+  new Date(2014, 0, 20),
+  new Date(2014, 0, 17),
+  new Date(2014, 0, 21),
+);
+
+isWithinRange(
+  new Date(2014, 0, 3),
+  new Date(2014, 0, 1),
+  new Date(2014, 0, 7),
+);
+
+// v2\&.0\&.0 onward
+
+areIntervalsOverlapping(
+  { start: new Date(2014, 0, 10), end: new Date(2014, 0, 20) },
+  { start: new Date(2014, 0, 17), end: new Date(2014, 0, 21) },
+);
+
+eachDayOfInterval({
+  start: new Date(2014, 0, 10),
+  end: new Date(2014, 0, 20),
+});
+
+getOverlappingDaysInIntervals(
+  { start: new Date(2014, 0, 10), end: new Date(2014, 0, 20) },
+  { start: new Date(2014, 0, 17), end: new Date(2014, 0, 21) },
+);
+
+isWithinInterval(new Date(2014, 0, 3), {
+  start: new Date(2014, 0, 1),
+  end: new Date(2014, 0, 7),
+});
+.fi
+.PP
+
+.IP "\(bu" 2
+\fBBREAKING\fP: functions renamed:
+.IP "  \(bu" 4
+\fRdistanceInWords\fP → \fRformatDistance\fP
+.IP "  \(bu" 4
+\fRdistanceInWordsStrict\fP → \fRformatDistanceStrict\fP
+.IP "  \(bu" 4
+\fRdistanceInWordsToNow\fP → \fRformatDistanceToNow\fP
+.PP
+
+.PP
+to make them consistent with \fRformat\fP and \fRformatRelative\fP\&.
+.IP "\(bu" 2
+\fBBREAKING\fP: The order of arguments of \fRdistanceInWords\fP and \fRdistanceInWordsStrict\fP is swapped to make them consistent with \fRdifferenceIn\&.\&.\&.\fP functions\&.
+
+.PP
+.PP
+.nf
+// Before v2\&.0\&.0
+
+distanceInWords(
+  new Date(1986, 3, 4, 10, 32, 0),
+  new Date(1986, 3, 4, 11, 32, 0),
+  { addSuffix: true },
+); //=> 'in about 1 hour'
+
+// v2\&.0\&.0 onward
+
+formatDistance(
+  new Date(1986, 3, 4, 11, 32, 0),
+  new Date(1986, 3, 4, 10, 32, 0),
+  { addSuffix: true },
+); //=> 'in about 1 hour'
+.fi
+.PP
+
+.IP "\(bu" 2
+\fBBREAKING\fP: \fRpartialMethod\fP option in \fRformatDistanceStrict\fP is renamed to \fRroundingMethod\fP\&.
+
+.PP
+.PP
+.nf
+// Before v2\&.0\&.0
+
+distanceInWordsStrict(
+  new Date(1986, 3, 4, 10, 32, 0),
+  new Date(1986, 3, 4, 10, 33, 1),
+  { partialMethod: "ceil" },
+); //=> '2 minutes'
+
+// v2\&.0\&.0 onward
+
+formatDistanceStrict(
+  new Date(1986, 3, 4, 10, 33, 1),
+  new Date(1986, 3, 4, 10, 32, 0),
+  { roundingMethod: "ceil" },
+); //=> '2 minutes'
+.fi
+.PP
+
+.IP "\(bu" 2
+\fBBREAKING\fP: in \fRformatDistanceStrict\fP, if \fRroundingMethod\fP is not specified, it now defaults to \fRround\fP instead of \fRfloor\fP\&.
+.IP "\(bu" 2
+\fBBREAKING\fP: \fRunit\fP option in \fRformatDistanceStrict\fP now accepts one of the strings: 'second', 'minute', 'hour', 'day', 'month' or 'year' instead of 's', 'm', 'h', 'd', 'M' or 'Y'
+
+.PP
+.PP
+.nf
+// Before v2\&.0\&.0
+
+distanceInWordsStrict(
+  new Date(1986, 3, 4, 10, 32, 0),
+  new Date(1986, 3, 4, 10, 33, 1),
+  { unit: "m" },
+);
+
+// v2\&.0\&.0 onward
+
+formatDistanceStrict(
+  new Date(1986, 3, 4, 10, 33, 1),
+  new Date(1986, 3, 4, 10, 32, 0),
+  { unit: "minute" },
+);
+.fi
+.PP
+
+.IP "\(bu" 2
+\fBBREAKING\fP: \fRparse\fP that previously used to convert strings and numbers to dates now parses only strings in an arbitrary format specified as an argument\&. Use \fRtoDate\fP to coerce numbers and \fRparseISO\fP to parse ISO 8601 strings\&.
+
+.PP
+.PP
+.nf
+// Before v2\&.0\&.0
+parse("2016\-01\-01");
+parse(1547005581366);
+parse(new Date()); // Clone the date
+
+// v2\&.0\&.0 onward
+parse("2016\-01\-01", "yyyy\-MM\-dd", new Date());
+parseISO("2016\-01\-01");
+toDate(1547005581366);
+toDate(new Date()); // Clone the date
+.fi
+.PP
+
+.IP "\(bu" 2
+\fBBREAKING\fP: \fRtoDate\fP (previously \fRparse\fP) now doesn't accept string arguments but only numbers and dates\&. \fRtoDate\fP called with an invalid argument will return \fRInvalid Date\fP\&.
+.IP "\(bu" 2
+\fBBREAKING\fP: new locale format\&. See \fRdocs/Locale\fP\&. Locales renamed:
+.IP "  \(bu" 4
+\fRen\fP → \fRen-US\fP
+.IP "  \(bu" 4
+\fRzh_cn\fP → \fRzh-CN\fP
+.IP "  \(bu" 4
+\fRzh_tw\fP → \fRzh-TW\fP
+.PP
+
+.PP
+.PP
+.nf
+// Before v2\&.0\&.0
+import locale from "date\-fns/locale/zh_cn";
+
+// v2\&.0\&.0 onward
+import locale from "date\-fns/locale/zh\-CN";
+.fi
+.PP
+
+.IP "\(bu" 2
+\fBBREAKING\fP: now \fRclosestTo\fP and \fRclosestIndexTo\fP don't throw an exception when the second argument is not an array, and return Invalid Date instead\&.
+.IP "\(bu" 2
+\fBBREAKING\fP: now \fRisValid\fP doesn't throw an exception if the first argument is not an instance of Date\&. Instead, argument is converted beforehand using \fRtoDate\fP\&.
+
+.PP
+Examples:
+.PP
+
+.PP
+\fRisValid\fP argument  Before v2\&.0\&.0  v2\&.0\&.0 onward  \fRnew Date()\fP  \fRtrue\fP  \fRtrue\fP  \fRnew Date('2016-01-01')\fP  \fRtrue\fP  \fRtrue\fP  \fRnew Date('')\fP  \fRfalse\fP  \fRfalse\fP  \fRnew Date(1488370835081)\fP  \fRtrue\fP  \fRtrue\fP  \fRnew Date(NaN)\fP  \fRfalse\fP  \fRfalse\fP  \fR'2016-01-01'\fP  \fRTypeError\fP  \fRfalse\fP  \fR''\fP  \fRTypeError\fP  \fRfalse\fP  \fR1488370835081\fP  \fRTypeError\fP  \fRtrue\fP  \fRNaN\fP  \fRTypeError\fP  \fRfalse\fP  
+
+.PP
+We introduce this change to make \fIdate-fns\fP consistent with ECMAScript behavior that try to coerce arguments to the expected type (which is also the case with other \fIdate-fns\fP functions)\&.
+
+.PP
+.IP "\(bu" 2
+\fBBREAKING\fP: functions now throw \fRRangeError\fP if optional values passed to \fRoptions\fP are not \fRundefined\fP or have expected values\&. This change is introduced for consistency with ECMAScript standard library which does the same\&.
+.IP "\(bu" 2
+\fBBREAKING\fP: \fRformat\fP, \fRformatDistance\fP (previously \fRdistanceInWords\fP) and \fRformatDistanceStrict\fP (previously \fRdistanceInWordsStrict\fP) now throw \fRRangeError\fP if one of the passed arguments is invalid\&. It reflects behavior of \fRtoISOString\fP and Intl API\&. See \fR#1032\fP\&.
+.IP "\(bu" 2
+\fBBREAKING\fP: all functions now implicitly convert arguments by following rules:
+.PP
+
+.PP
+date  number  string  boolean  0  new Date(0)  0  '0'  false  '0'  Invalid Date  0  '0'  false  1  new Date(1)  1  '1'  true  '1'  Invalid Date  1  '1'  true  true  Invalid Date  NaN  'true'  true  false  Invalid Date  NaN  'false'  false  null  Invalid Date  NaN  'null'  false  undefined  Invalid Date  NaN  'undefined'  false  NaN  Invalid Date  NaN  'NaN'  false  
+
+.PP
+Notes:
+
+.PP
+.IP "\(bu" 2
+as before, arguments expected to be \fRDate\fP are converted to \fRDate\fP using \fIdate-fns'\fP \fRtoDate\fP function;
+.IP "\(bu" 2
+arguments expected to be numbers are converted to integer numbers using our custom \fRtoInteger\fP implementation (see \fR#765\fP);
+.IP "\(bu" 2
+arguments expected to be strings are converted to strings using JavaScript's \fRString\fP function;
+.IP "\(bu" 2
+arguments expected to be booleans are converted to boolean using JavaScript's \fRBoolean\fP function\&.
+.PP
+
+.PP
+\fRnull\fP and \fRundefined\fP passed to optional arguments (i\&.e\&. properties of \fRoptions\fP argument) are ignored as if no argument was passed\&.
+
+.PP
+If any resulting argument is invalid (i\&.e\&. \fRNaN\fP for numbers and \fRInvalid Date\fP for dates), an invalid value will be returned:
+
+.PP
+.IP "\(bu" 2
+\fRfalse\fP for functions that return booleans (expect \fRisValid\fP);
+.IP "\(bu" 2
+\fRInvalid Date\fP for functions that return dates;
+.IP "\(bu" 2
+and \fRNaN\fP for functions that return numbers\&.
+.PP
+
+.PP
+See tests and PRs \fR#460\fP and \fR#765\fP for exact behavior\&.
+
+.PP
+.IP "\(bu" 2
+\fBBREAKING\fP: all functions now check if the passed number of arguments is less than the number of required arguments and will throw \fRTypeError\fP exception if so\&.
+.IP "\(bu" 2
+\fBBREAKING\fP: all functions that accept numbers as arguments, now coerce values using \fRNumber()\fP and also round off decimals\&. Positive decimals are rounded using \fRMath\&.floor\fP, decimals less than zero are rounded using \fRMath\&.ceil\fP\&.
+.IP "\(bu" 2
+\fBBREAKING\fP: The Bower & UMD/CDN package versions are no longer supported\&.
+.IP "\(bu" 2
+\fBBREAKING\fP: \fRnull\fP now is not a valid date\&. \fRisValid(null)\fP returns \fRfalse\fP; \fRtoDate(null)\fP returns an invalid date\&. Since \fRtoDate\fP is used internally by all the functions, operations over \fRnull\fP will also return an invalid date\&. \fRSee #537\fP for the reasoning\&.
+.IP "\(bu" 2
+\fRtoDate\fP (previously \fRparse\fP) and \fRisValid\fP functions now accept \fRany\fP type as the first argument\&.
+.IP "\(bu" 2
+\fRExclude \fRdocs\&.json\fP from the npm package\fP\&. Kudos to \fR@hawkrives\fP\&.
+.PP
+.SS "Added"
+.IP "\(bu" 2
+FP functions like those in \fRlodash\fP, that support \fRcurrying\fP, and, as a consequence, functional-style \fRfunction composing\fP\&.
+
+.PP
+Functions with options (\fRformat\fP, \fRparse\fP, etc\&.) have two FP counterparts: one that has the options object as its first argument and one that hasn't\&. The name of the former has \fRWithOptions\fP added to the end of its name\&.
+
+.PP
+In FP functions, the order of arguments is reversed\&.
+
+.PP
+See \fRFP Guide\fP for more information\&.
+
+.PP
+.PP
+.nf
+import addYears from "date\-fns/fp/addYears";
+import formatWithOptions from "date\-fns/fp/formatWithOptions";
+import eo from "date\-fns/locale/eo";
+
+// If FP function has not received enough arguments, it returns another function
+const addFiveYears = addYears(5);
+
+// Several arguments can be curried at once
+const dateToString = formatWithOptions({ locale: eo }, "d MMMM yyyy");
+
+const dates = [
+  new Date(2017, 0 /* Jan */, 1),
+  new Date(2017, 1 /* Feb */, 11),
+  new Date(2017, 6 /* Jul */, 2),
+];
+
+const formattedDates = dates\&.map((date) => dateToString(addFiveYears(date)));
+//=> ['1 januaro 2022', '11 februaro 2022', '2 julio 2022']
+.fi
+.PP
+
+.IP "\(bu" 2
+Added support for \fRECMAScript Modules\fP\&.
+
+.PP
+It allows usage with bundlers that support tree-shaking, like \fRrollup\&.js\fP and \fRwebpack\fP:
+
+.PP
+.PP
+.nf
+// Without tree\-shaking:
+import format from "date\-fns/format";
+import parse from "date\-fns/parse";
+
+// With tree\-shaking:
+import { format, parse } from "date\-fns";
+.fi
+.PP
+
+.PP
+Also, ESM functions provide default export, they can be used with TypeScript to import functions in more idiomatic way:
+
+.PP
+.PP
+.nf
+// Before
+import * as format from "date\-fns/format";
+
+// Now
+import format from "date\-fns/format";
+.fi
+.PP
+
+.IP "\(bu" 2
+\fRformatRelative\fP function\&. See \fRformatRelative\fP
+.IP "\(bu" 2
+Flow typings for \fRindex\&.js\fP, \fRfp/index\&.js\fP, \fRlocale/index\&.js\fP, and their ESM equivalents\&. See PR \fR#558\fP
+.IP "\(bu" 2
+New locale-dependent week-numbering year helpers:
+.IP "  \(bu" 4
+\fRgetWeek\fP
+.IP "  \(bu" 4
+\fRgetWeekYear\fP
+.IP "  \(bu" 4
+\fRsetWeek\fP
+.IP "  \(bu" 4
+\fRsetWeekYear\fP
+.IP "  \(bu" 4
+\fRstartOfWeekYear\fP
+.PP
+
+.IP "\(bu" 2
+Added \fReachWeekOfInterval\fP, the weekly equivalent of \fReachDayOfInterval\fP
+.IP "\(bu" 2
+\fRAdded \fRgetUnixTime\fP function\fP\&. Kudos to \fR@Kingwl\fP\&.
+.IP "\(bu" 2
+\fRNew decade helpers\fP\&. Thanks to \fR@y-nk\fP!
+.IP "  \(bu" 4
+\fRgetDecade\fP
+.IP "  \(bu" 4
+\fRstartOfDecade\fP
+.IP "  \(bu" 4
+\fRendOfDecade\fP
+.IP "  \(bu" 4
+\fRlastDayOfDecade\fP
+.PP
+
+.IP "\(bu" 2
+\fRNew \fRroundToNearestMinutes\fP function\fP\&. Kudos to \fR@xkizer\fP\&.
+.IP "\(bu" 2
+Added new function \fRfromUnixTime\fP\&. Thansk to \fR@xkizer\fP\&.
+.IP "\(bu" 2
+New interval, month, and year helpers to fetch a list of all Saturdays and Sundays (weekends) for a given date interval\&. \fReachWeekendOfInterval\fP is the handler function while the other two are wrapper functions\&. Kudos to \fR@laekettavong\fP!
+.IP "  \(bu" 4
+\fReachWeekendOfInterval\fP
+.IP "  \(bu" 4
+\fReachWeekendOfMonth\fP
+.IP "  \(bu" 4
+\fReachWeekendOfYear\fP
+.PP
+
+.IP "\(bu" 2
+Build-efficient \fRlightFormat\fP that only supports the popular subset of tokens\&. See \fR#1050\fP\&.
+.IP "\(bu" 2
+\fRparseISO\fP function that parses ISO 8601 strings\&. See \fR#1023\fP\&.
+.IP "\(bu" 2
+Add constants that can be imported directly from \fRdate-fns\fP or the submodule \fRdate-fns/constants\fP:
+.IP "  \(bu" 4
+\fRmaxTime\fP
+.IP "  \(bu" 4
+\fRminTime\fP
+.PP
+
+.IP "\(bu" 2
+New locales:
+.IP "  \(bu" 4
+\fRNorwegian Nynorsk locale (nn)\fP by \fR@draperunner\fP\&.
+.IP "  \(bu" 4
+\fRUkrainian locale (ua)\fP by \fR@korzhyk\fP\&.
+.IP "  \(bu" 4
+\fRVietnamese locale (vi)\fP by \fR@trongthanh\fP\&.
+.IP "  \(bu" 4
+\fRPersian locale (fa-IR)\fP by \fR@mort3za\fP\&.
+.IP "  \(bu" 4
+\fRLatvian locale (lv)\fP by \fR@prudolfs\fP\&.
+.IP "  \(bu" 4
+\fRBengali locale (bb)\fP by \fR@nutboltu\fP and \fR@touhidrahman\fP\&.
+.IP "  \(bu" 4
+\fRHungarian (hu) and Lithuanian (lt) locales\fP by \fR@izifortune\fP and \fRpardoeryanair\fP\&.
+.IP "  \(bu" 4
+\fRCanadian English locale (en-CA)\fP by \fR@markowsiak\fP\&.
+.IP "  \(bu" 4
+\fRGreat Britain English locale (en-GB)\fP by \fR@glintik\fP\&.
+.IP "  \(bu" 4
+\fRUighur locale (ug)\fP by \fR@abduwaly\fP\&.
+.PP
+
+.IP "\(bu" 2
+\fRAdded new function \fRdifferenceInBusinessDays\fP\fP which calculates the difference in business days\&. Kudos to \fR@ThorrStevens\fP!
+.IP "\(bu" 2
+\fRAdded new function \fRaddBusinessDays\fP\fP, similar to \fRaddDays\fP but ignoring weekends\&. Thanks to \fR@ThorrStevens\fP!
+.PP
+.SH "[1\&.30\&.1] - 2018-12-10"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+\fRFixed DST issue\fP\&. See \fR#972\fP and \fR#992\fP for more details\&. This fix was backported from v2\&.
+.IP "\(bu" 2
+Fix a few bugs that appear in timezones with offsets that include seconds (e\&.g\&. GMT+00:57:44)\&. See PR \fR#789\fP\&. This fix was backported from v2\&.
+.IP "\(bu" 2
+\fRFixed misspelled January in the Thai locale\fP\&. Thanks to \fR@ratchapol-an\fP!
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRAdded Serbian locale\fP\&. Kudos to \fR@mawi12345\fP!
+.IP "\(bu" 2
+\fRAdded Belarusian locale\fP\&. Kudos to \fR@mawi12345\fP again!
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+\fRImproved ja translation of distanceInWords\fP\&. Thanks to \fR@kudohamu\fP!
+.PP
+.SH "[1\&.30\&.0] - 2018-12-10"
+.PP
+⚠️ The release got failed\&.
+.SH "[1\&.29\&.0] - 2017-10-11"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed Italian translations for \fRformatDistance\fP\&. (\fRsee the issue: #550\fP; \fRsee the PR: #552\fP) Thanks to \fR@giofilo\fP!
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRHungarian locale (hu)\fP (thanks to László Horváth \fR@horvathlg\fP)
+.IP "\(bu" 2
+\fRSlovenian locale (sl)\fP (thanks to Adam Stradovnik \fR@Neoglyph\fP)
+.IP "\(bu" 2
+Added \fRstep\fP to \fReachDay\fP function\&. Thanks to \fR@BDav24\fP\&. See PR \fR#487\fP\&.
+.PP
+.SH "\fR1\&.28\&.5\fP - 2017-05-19"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed a\&.m\&./p\&.m\&. formatters in Chinese Simplified locale\&. Thanks to \fR@fnlctrl\fP\&. See PR \fR#486\fP
+.PP
+.SH "\fR1\&.28\&.4\fP - 2017-04-26"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed accents on weekdays in the Italian locale\&. See PR \fR#481\fP\&. Thanks to \fR@albertorestifo\fP
+.IP "\(bu" 2
+Fixed typo in \fRddd\fP format token in Spanish language locale\&. Kudos to \fR@fjaguero\fP\&. See PR \fR#482\fP
+.PP
+.SH "\fR1\&.28\&.3\fP - 2017-04-14"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed ordinal numbers for Danish language locale\&. Thanks to \fR@kgram\fP\&. See PR \fR#474\fP
+.PP
+.SH "\fR1\&.28\&.2\fP - 2017-03-27"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed \fRdd\fP and \fRddd\fP formatters in Polish language locale\&. Kudos to \fR@justrag\fP\&. See PR: \fR#467\fP
+.PP
+.SH "\fR1\&.28\&.1\fP - 2017-03-19"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed DST border bug in \fRaddMilliseconds\fP, \fRaddSeconds\fP, \fRaddMinutes\fP, \fRaddHours\fP, \fRsubMilliseconds\fP, \fRsubSeconds\fP, \fRsubMinutes\fP and \fRsubHours\fP\&. See issue \fR#465\fP
+.IP "\(bu" 2
+Minor fix for Indonesian locale\&. Thanks to \fR@bentinata\fP\&. See PR: \fR#458\fP
+.PP
+.SH "\fR1\&.28\&.0\fP - 2017-02-27"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRRomanian locale (ro)\fP (thanks to Sergiu Munteanu \fR@jsergiu\fP)
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+All functions now convert all their arguments to the respective types\&. See PR: \fR#443\fP
+.IP "\(bu" 2
+Fixes for ordinals (1er, 2, 3, …) in French locale\&. Thanks to \fR@fbonzon\fP\&. See PR: \fR#449\fP
+.PP
+.SH "\fR1\&.27\&.2\fP - 2017-02-01"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Various fixes for Dutch locale\&. See PR: \fR#416\fP\&. Thanks to Ruben Stolk \fR@rubenstolk\fP
+.PP
+.SH "\fR1\&.27\&.1\fP - 2017-01-20"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Added generation of TypeScript locale sub-modules, allowing import of locales in TypeScript\&.
+.PP
+.SH "\fR1\&.27\&.0\fP - 2017-01-19"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRMacedonian locale (mk)\fP (thanks to Petar Vlahu \fR@vlahupetar\fP)
+.PP
+.SH "\fR1\&.26\&.0\fP - 2017-01-15"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRgetTime\fP
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Various fixes for Japanese locale\&. See PR: \fR395\fP\&. Thanks to Yamagishi Kazutoshi \fR@ykzts\fP
+.PP
+.SH "\fR1\&.25\&.0\fP - 2017-01-11"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRBulgarian locale (bg)\fP (thanks to Nikolay Stoynov \fR@arvigeus\fP)
+.IP "\(bu" 2
+\fRCzech locale (cs)\fP (thanks to David Rus \fR@davidrus\fP)
+.PP
+.SH "\fR1\&.24\&.0\fP - 2017-01-06"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRModern Standard Arabic locale (ar)\fP (thanks to Abdallah Hassan \fR@AbdallahAHO\fP)
+.PP
+.SH "\fR1\&.23\&.0\fP - 2017-01-05"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+Auto generate TypeScript and flow typings from documentation on release\&. Thanks to \fR@mattlewis92\fP\&. See related PRs: \fR#355\fP, \fR#370\fP
+.IP "\(bu" 2
+\fRCroatian locale (hr)\fP (thanks to Matija Marohnić \fR@silvenon\fP)
+.IP "\(bu" 2
+\fRThai locale (th)\fP (thanks to Athiwat Hirunworawongkun \fR@athivvat\fP)
+.IP "\(bu" 2
+\fRFinnish locale (fi)\fP (thanks to Pyry-Samuli Lahti \fR@Pyppe\fP)
+.PP
+.SH "\fR1\&.22\&.0\fP - 2016-12-28"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRIcelandic locale (is)\fP (thanks to Derek Blank \fR@derekblank\fP)
+.PP
+.SH "\fR1\&.21\&.1\fP - 2016-12-18"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed \fRisBefore\fP and \fRisAfter\fP documentation mistakes\&.
+.PP
+.SH "\fR1\&.21\&.0\fP - 2016-12-16"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRFilipino locale (fil)\fP (thanks to Ian De La Cruz \fR@RIanDeLaCruz\fP)
+.IP "\(bu" 2
+\fRDanish locale (da)\fP (kudos to Anders B\&. Hansen \fR@Andersbiha\fP)
+.PP
+.SH "\fR1\&.20\&.1\fP - 2016-12-14"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed documentation for \fRgetOverlappingDaysInRanges\fP\&.
+.PP
+.SH "\fR1\&.20\&.0\fP - 2016-12-13"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRareRangesOverlapping\fP and \fRgetOverlappingDaysInRanges\fP Thanks to Joanna T \fR@asia-t\fP\&. See PR: \fR#331\fP
+.PP
+.SH "\fR1\&.19\&.0\fP - 2016-12-13"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRGreek locale (el)\fP (kudos to Theodoros Orfanidis \fR@teoulas\fP)
+.IP "\(bu" 2
+\fRSlovak locale (sk)\fP (kudos to Marek Suscak \fR@mareksuscak\fP)
+.IP "\(bu" 2
+Added yarn support\&. Thanks to Uladzimir Havenchyk \fR@havenchyk\fP\&. See PR: \fR#288\fP
+.PP
+.SH "\fR1\&.18\&.0\fP - 2016-12-12"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRTurkish locale (tr)\fP (kudos to Alpcan Aydın \fR@alpcanaydin\fP)
+.IP "\(bu" 2
+\fRKorean locale (ko)\fP (thanks to Hong Chulju \fR@angdev\fP)
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+\fRSS\fP and \fRSSS\fP formats in \fRformat\fP are now correctly displayed with leading zeros\&. Thanks to Paul Dijou \fR@pauldijou\fP\&. See PR: \fR#330\fP
+.PP
+.SH "\fR1\&.17\&.0\fP - 2016-12-10"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRPolish locale (pl)\fP (thanks to Mateusz Derks \fR@ertrzyiks\fP)
+.IP "\(bu" 2
+\fRPortuguese locale (pt)\fP (thanks to Dário Freire \fR@dfreire\fP)
+.IP "\(bu" 2
+\fRSwedish locale (sv)\fP (thanks to Johannes Ulén \fR@ejulen\fP)
+.IP "\(bu" 2
+\fRFrench locale (fr)\fP (thanks to Jean Dupouy \fR@izeau\fP)
+.IP "\(bu" 2
+Performance tests\&. See PR: \fR#289\fP
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed TypeScript and flow typings for \fRisValid\fP\&. See PR: \fR#310\fP
+.IP "\(bu" 2
+Fixed incorrect locale tests that could potentially lead to \fRformat\fP bugs\&. Kudos to Mateusz Derks \fR@ertrzyiks\fP\&. See related PRs: \fR#312\fP, \fR#320\fP
+.IP "\(bu" 2
+Minor language fixes in the documentation\&. Thanks to Vedad Šoše \fR@vedadsose\fP (\fR#314\fP) and Asia \fR@asia-t\fP (\fR#318\fP)
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+\fRformat\fP now returns \fRString('Invalid Date')\fP if the passed date is invalid\&. See PR: \fR#323\fP
+.IP "\(bu" 2
+\fRdistanceInWords\fP, \fRdistanceInWordsToNow\fP, \fRdistanceInWordsStrict\fP and \fRformat\fP functions now check if the passed locale is valid, and fallback to English locale otherwise\&. See PR: \fR#321\fP
+.IP "\(bu" 2
+\fIInternal\fP: use a loop instead of \fRObject\&.keys\fP in \fRbuildFormattingTokensRegExp\fP to improve compatibility with older browsers\&. See PR: \fR#322\fP
+.PP
+.SH "\fR1\&.16\&.0\fP - 2016-12-08"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRItalian locale (it)\fP (thanks to Alberto Restifo \fR@albertorestifo\fP)
+.IP "\(bu" 2
+For German \fRbuildDistanceInWordsLocale\fP, add nominative case translations (for distances without a suffix)\&. Kudos to Asia \fR@asia-t\fP\&. See related PR: \fR#295\fP
+.PP
+.SH "\fR1\&.15\&.1\fP - 2016-12-07"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed TypeScript imports from individual modules\&. Thanks to \fR@mattlewis92\fP\&. See related PR: \fR#287\fP
+.PP
+.SH "\fR1\&.15\&.0\fP - 2016-12-07"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRIndonesian locale (id)\fP (thanks to Rahmat Budiharso \fR@rbudiharso\fP)
+.IP "\(bu" 2
+\fRCatalan locale (ca)\fP (thanks to Guillermo Grau \fR@guigrpa\fP)
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed some inaccuracies in Spanish locale\&. Kudos to \fR@guigrpa\fP\&. See related PR: \fR#302\fP
+.PP
+.SH "\fR1\&.14\&.1\fP - 2016-12-06"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed broken test for Norwegian Bokmål locale\&.
+.PP
+.SH "\fR1\&.14\&.0\fP - 2016-12-06"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRNorwegian Bokmål locale (nb)\fP (thanks to Hans-Kristian Koren \fR@Hanse\fP)
+.PP
+.SH "\fR1\&.13\&.0\fP - 2016-12-06"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRChinese Traditional locale (zh_tw)\fP (thanks to tonypai \fR@tpai\fP)\&.
+.IP "\(bu" 2
+\fRDutch language locale (nl)\fP (kudos to Jorik Tangelder \fR@jtangelder\fP)
+.PP
+.SH "\fR1\&.12\&.1\fP - 2016-12-05"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Added \fRdistanceInWordsStrict\fP to the list of supported functions in I18n doc\&.
+.PP
+.SH "\fR1\&.12\&.0\fP - 2016-12-05"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRSpanish language locale (es)\fP (thanks to Juan Angosto \fR@juanangosto\fP)\&.
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed flow typings for some of the functions\&. See PR: \fR#273\fP
+.PP
+.SH "\fR1\&.11\&.2\fP - 2016-11-28"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Bug in \fRparse\fP when it sometimes parses ISO week-numbering dates incorrectly\&. See PR: \fR#262\fP
+.IP "\(bu" 2
+Bug in some functions which caused them to handle dates earlier than 100 AD incorrectly\&. See PR: \fR#263\fP
+.PP
+.SH "\fR1\&.11\&.1\fP - 2016-11-24"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Include TypeScript typings with npm package\&.
+.PP
+.SH "\fR1\&.11\&.0\fP - 2016-11-23"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRdistanceInWordsStrict\fP\&. Kudos to \fR@STRML\fP\&. See related PR: \fR#254\fP
+.IP "\(bu" 2
+\fRTypeScript\fP typings for all functions\&. Kudos to \fR@mattlewis92\fP\&. See related PR: \fR#255\fP
+.PP
+.SH "\fR1\&.10\&.0\fP - 2016-11-01"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRparse\fP now can parse dates that are ISO 8601 centuries (e\&.g\&., \fR19\fP and \fR+0019\fP)\&.
+
+.PP
+.PP
+.nf
+var result = parse("19");
+//=> Mon Jan 01 1900 00:00:00
+.fi
+.PP
+
+.IP "\(bu" 2
+In \fRparse\fP, added ability to specify the number of additional digits for extended year or century format (possible values are 0, 1 or 2; default is 2)\&.
+
+.PP
+.PP
+.nf
+parse("+002016\-11\-01");
+parse("+02016\-11\-01", { additionalDigits: 1 });
+parse("+2016\-11\-01", { additionalDigits: 0 });
+.fi
+.PP
+
+.PP
+.SH "\fR1\&.9\&.0\fP - 2016-10-25"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+Got index\&.js imports to work with SystemJS\&.
+.PP
+.SH "\fR1\&.8\&.1\fP - 2016-10-24"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Added Japanese and German language locales to the list in I18n doc\&.
+.PP
+.SH "\fR1\&.8\&.0\fP - 2016-10-23"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRJapanese language locale (ja)\fP (thanks to Thomas Eilmsteiner \fR@DeMuu\fP again!)
+.IP "\(bu" 2
+\fRgetISODay\fP
+.IP "\(bu" 2
+\fRsetISODay\fP
+.PP
+.SH "\fR1\&.7\&.0\fP - 2016-10-20"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRGerman language locale (de)\fP (thanks to Thomas Eilmsteiner \fR@DeMuu\fP)\&.
+.PP
+.SH "\fR1\&.6\&.0\fP - 2016-10-16"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRChinese Simplified locale (zh_cn)\fP (kudos to Changyu \fR@KingMario\fP Geng)\&.
+.PP
+.SH "\fR1\&.5\&.2\fP - 2016-10-13"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Incorrectly generated docs for \fRformat\fP\&.
+.IP "\(bu" 2
+Fixed typo in I18n doc\&.
+.PP
+.SH "\fR1\&.5\&.1\fP - 2016-10-12"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+A change log entry for \fR1\&.5\&.0\fP is added\&.
+.PP
+.SH "\fR1\&.5\&.0\fP - 2016-10-12"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRThe initial I18n support\fP
+.PP
+.SH "\fR1\&.4\&.0\fP - 2016-10-09"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+Basic \fRSystemJS\fP support\&.
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed incorrect behaviour of \fRYYYY\fP and \fRYY\fP for years prior to 1000: now \fRformat(new Date('0001-01-01'), 'YYYY-MM-DD')\fP returns \fR0001-01-01\fP instead of \fR1-01-01\fP\&.
+.PP
+.SH "\fR1\&.3\&.0\fP - 2016-05-26"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRclosestIndexTo\fP
+.PP
+.SH "\fR1\&.2\&.0\fP - 2016-05-23"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+Added an ability to pass negative numbers to \fRsetDay\fP\&.
+.PP
+.SH "\fR1\&.1\&.1\fP - 2016-05-19"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed \fRFlow\fP declarations for some of the functions\&.
+.PP
+.SH "\fR1\&.1\&.0\fP - 2016-05-19"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRFlow\fP declarations for each function in \fRthe "\&.js\&.flow" style\fP\&. Kudos to \fR@JohnyDays\fP\&. See related PRs:
+.IP "  \(bu" 4
+\fR#205\fP
+.IP "  \(bu" 4
+\fR#207\fP
+.PP
+
+.PP
+.SH "\fR1\&.0\&.0\fP - 2016-05-18"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+\fRformat\fP now returns the correct result for key \fRE\fP\&.
+.IP "\(bu" 2
+Prevent \fRstartOf\&.\&.\&.\fP, \fRendOf\&.\&.\&.\fP and \fRlastDayOf\&.\&.\&.\fP functions to return dates with an incorrect time when the date is modifying into another time zone\&.
+.IP "\(bu" 2
+\fRparse\fP now parses years from 1 AD to 99 AD correctly\&.
+.IP "\(bu" 2
+Fix a bug in \fRgetISOWeek\fP appearing because of a changing time zone (e\&.g\&., when the given date is in DST and the start of the ISO year is not)\&.
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+\fBBREAKING\fP: all functions are moved to the root of the library, so they are now accessible with \fRrequire('date-fns/name_of_function')\fP or \fRimport nameOfFunction from 'date-fns/name_of_function'\fP\&.
+
+.PP
+.PP
+.nf
+// Before v1\&.0\&.0
+var addMonths = require("date\-fns/src/add_months");
+
+// v1\&.0\&.0 onward
+var addMonths = require("date\-fns/add_months");
+.fi
+.PP
+
+.IP "\(bu" 2
+\fBBREAKING\fP: functions that had the last optional argument \fRweekStartsAt\fP (i\&.e\&. \fRendOfWeek\fP, \fRisSameWeek\fP, \fRlastDayOfWeek\fP, \fRsetDay\fP, \fRstartOfWeek\fP) now instead receive the object \fRoptions\fP with the property \fRoptions\&.weekStartsOn\fP as the last argument\&.
+
+.PP
+.PP
+.nf
+// Before v1\&.0\&.0
+var result = endOfWeek(new Date(2014, 8, 2), 1);
+
+// v1\&.0\&.0 onward
+var result = endOfWeek(new Date(2014, 8, 2), { weekStartsOn: 1 });
+.fi
+.PP
+
+.IP "\(bu" 2
+\fBBREAKING\fP: remove the function \fRgetTimeSinceMidnight\fP that was used inside the other functions\&.
+.IP "\(bu" 2
+\fBBREAKING\fP: \fRdifferenceInDays\fP now returns the number of full days instead of calendar days\&.
+.IP "\(bu" 2
+\fBBREAKING\fP: \fReachDay\fP and \fRisWithinRange\fP now throw an exception when the given range boundaries are invalid\&.
+.IP "\(bu" 2
+Faster \fRisLeapYear\fP\&.
+.IP "\(bu" 2
+\fIInternal\fP: make the documentation more verbose\&.
+.IP "\(bu" 2
+\fIInternal\fP: convert the tests from Chai to power-assert allowing them to run against IE8\&.
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRaddISOYears\fP
+.IP "\(bu" 2
+\fRclosestTo\fP
+.IP "\(bu" 2
+\fRdifferenceInCalendarDays\fP
+.IP "\(bu" 2
+\fRdifferenceInCalendarISOWeeks\fP
+.IP "\(bu" 2
+\fRdifferenceInCalendarISOYears\fP
+.IP "\(bu" 2
+\fRdifferenceInCalendarMonths\fP
+.IP "\(bu" 2
+\fRdifferenceInCalendarQuarters\fP
+.IP "\(bu" 2
+\fRdifferenceInCalendarWeeks\fP
+.IP "\(bu" 2
+\fRdifferenceInCalendarYears\fP
+.IP "\(bu" 2
+\fRdifferenceInHours\fP
+.IP "\(bu" 2
+\fRdifferenceInISOYears\fP
+.IP "\(bu" 2
+\fRdifferenceInMilliseconds\fP
+.IP "\(bu" 2
+\fRdifferenceInMinutes\fP
+.IP "\(bu" 2
+\fRdifferenceInMonths\fP
+.IP "\(bu" 2
+\fRdifferenceInQuarters\fP
+.IP "\(bu" 2
+\fRdifferenceInSeconds\fP
+.IP "\(bu" 2
+\fRdifferenceInWeeks\fP
+.IP "\(bu" 2
+\fRdifferenceInYears\fP
+.IP "\(bu" 2
+\fRdistanceInWords\fP
+.IP "\(bu" 2
+\fRdistanceInWordsToNow\fP
+.IP "\(bu" 2
+\fRendOfISOWeek\fP
+.IP "\(bu" 2
+\fRendOfISOYear\fP
+.IP "\(bu" 2
+\fRendOfToday\fP
+.IP "\(bu" 2
+\fRendOfTomorrow\fP
+.IP "\(bu" 2
+\fRendOfYesterday\fP
+.IP "\(bu" 2
+\fRgetDaysInYear\fP
+.IP "\(bu" 2
+\fRisDate\fP
+.IP "\(bu" 2
+\fRisFriday\fP
+.IP "\(bu" 2
+\fRisMonday\fP
+.IP "\(bu" 2
+\fRisSameISOWeek\fP
+.IP "\(bu" 2
+\fRisSameISOYear\fP
+.IP "\(bu" 2
+\fRisSaturday\fP
+.IP "\(bu" 2
+\fRisSunday\fP
+.IP "\(bu" 2
+\fRisThisHour\fP
+.IP "\(bu" 2
+\fRisThisISOWeek\fP
+.IP "\(bu" 2
+\fRisThisISOYear\fP
+.IP "\(bu" 2
+\fRisThisMinute\fP
+.IP "\(bu" 2
+\fRisThisMonth\fP
+.IP "\(bu" 2
+\fRisThisQuarter\fP
+.IP "\(bu" 2
+\fRisThisSecond\fP
+.IP "\(bu" 2
+\fRisThisWeek\fP
+.IP "\(bu" 2
+\fRisThisYear\fP
+.IP "\(bu" 2
+\fRisThursday\fP
+.IP "\(bu" 2
+\fRisTomorrow\fP
+.IP "\(bu" 2
+\fRisTuesday\fP
+.IP "\(bu" 2
+\fRisValid\fP
+.IP "\(bu" 2
+\fRisWednesday\fP
+.IP "\(bu" 2
+\fRisYesterday\fP
+.IP "\(bu" 2
+\fRlastDayOfISOWeek\fP
+.IP "\(bu" 2
+\fRlastDayOfISOYear\fP
+.IP "\(bu" 2
+\fRstartOfISOWeek\fP
+.IP "\(bu" 2
+\fRstartOfToday\fP
+.IP "\(bu" 2
+\fRstartOfTomorrow\fP
+.IP "\(bu" 2
+\fRstartOfYesterday\fP
+.IP "\(bu" 2
+\fRsubISOYears\fP
+.IP "\(bu" 2
+Add \fRQo\fP, \fRW\fP, \fRWo\fP, \fRWW\fP, \fRGG\fP, \fRGGGG\fP, \fRZ\fP, \fRZZ\fP, \fRX\fP, \fRx\fP keys to \fRformat\fP\&.
+.PP
+.SH "\fR0\&.17\&.0\fP - 2015-09-29"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed a lot of bugs appearing when date is modifying into other time zone (e\&.g\&., when adding months and original date is in DST but new date is not)\&.
+.IP "\(bu" 2
+Prevent instances of Date to lose milliseconds value when passed to\&. \fRparse\fP in IE10\&.
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+\fRsetISOWeek\fP now keeps time from original date\&.
+.IP "\(bu" 2
+\fIInternal\fP: reuse \fRgetDaysInMonth\fP inside of \fRaddMonths\fP\&.
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRdifferenceInDays\fP
+.IP "\(bu" 2
+\fRgetTimeSinceMidnight\fP
+.IP "\(bu" 2
+\fRformat\fP now has new format key \fRaa\fP, which returns \fRa\&.m\&.\fP/\fRp\&.m\&.\fP as opposed to \fRa\fP that returns \fRam\fP/\fRpm\fP\&.
+.IP "\(bu" 2
+Complete UMD package (for Bower and CDN)\&.
+.PP
+.SH "\fR0\&.16\&.0\fP - 2015-09-01"
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+Use \fRparse\fP to clean date arguments in all functions\&.
+.IP "\(bu" 2
+\fRparse\fP now fallbacks to \fRnew Date\fP when the argument is not an ISO formatted date\&.
+.IP "\(bu" 2
+\fIInternal\fP: reuse \fRgetDaysInMonth\fP inside of \fRsetMonth\fP\&.
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRaddQuarters\fP
+.IP "\(bu" 2
+\fRaddWeeks\fP
+.IP "\(bu" 2
+\fRendOfQuarter\fP
+.IP "\(bu" 2
+\fRgetDate\fP
+.IP "\(bu" 2
+\fRgetDay\fP
+.IP "\(bu" 2
+\fRgetDaysInMonth\fP
+.IP "\(bu" 2
+\fRgetHours\fP
+.IP "\(bu" 2
+\fRgetISOWeeksInYear\fP
+.IP "\(bu" 2
+\fRgetMilliseconds\fP
+.IP "\(bu" 2
+\fRgetMinutes\fP
+.IP "\(bu" 2
+\fRgetMonth\fP
+.IP "\(bu" 2
+\fRgetSeconds\fP
+.IP "\(bu" 2
+\fRgetYear\fP
+.IP "\(bu" 2
+\fRisLeapYear\fP
+.IP "\(bu" 2
+\fRisSameHour\fP
+.IP "\(bu" 2
+\fRisSameMinute\fP
+.IP "\(bu" 2
+\fRisSameQuarter\fP
+.IP "\(bu" 2
+\fRisSameSecond\fP
+.IP "\(bu" 2
+\fRlastDayOfQuarter\fP
+.IP "\(bu" 2
+\fRlastDayOfWeek\fP
+.IP "\(bu" 2
+\fRmax\fP
+.IP "\(bu" 2
+\fRmin\fP
+.IP "\(bu" 2
+\fRsetDate\fP
+.IP "\(bu" 2
+\fRsetDay\fP
+.IP "\(bu" 2
+\fRsetHours\fP
+.IP "\(bu" 2
+\fRsetMilliseconds\fP
+.IP "\(bu" 2
+\fRsetMinutes\fP
+.IP "\(bu" 2
+\fRsetSeconds\fP
+.IP "\(bu" 2
+\fRstartOfQuarter\fP
+.IP "\(bu" 2
+\fRsubQuarters\fP
+.IP "\(bu" 2
+\fRsubWeeks\fP
+.PP
+.SH "\fR0\&.15\&.0\fP - 2015-08-26"
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+\fRformat\fP now returns \fRa\&.m\&.\fP/\fRp\&.m\&.\fP instead of \fRam\fP/\fRpm\fP\&.
+.IP "\(bu" 2
+\fRsetMonth\fP now sets last day of month if original date was last day of longer month\&.
+.IP "\(bu" 2
+\fIInternal\fP: Fix code style according to ESLint\&.
+.IP "\(bu" 2
+\fIInternal\fP: Make tests run through all time zones\&.
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRgetQuarter\fP
+.IP "\(bu" 2
+\fRsetQuarter\fP
+.IP "\(bu" 2
+\fRgetDayOfYear\fP
+.IP "\(bu" 2
+\fRsetDayOfYear\fP
+.IP "\(bu" 2
+\fRisPast\fP
+.IP "\(bu" 2
+\fRaddSeconds\fP
+.IP "\(bu" 2
+\fRsubSeconds\fP
+.IP "\(bu" 2
+\fRstartOfSecond\fP
+.IP "\(bu" 2
+\fRendOfSecond\fP
+.IP "\(bu" 2
+\fRstartOfMinute\fP
+.IP "\(bu" 2
+\fRendOfMinute\fP
+.IP "\(bu" 2
+\fRaddMilliseconds\fP
+.IP "\(bu" 2
+\fRsubMilliseconds\fP
+.IP "\(bu" 2
+\fRendOfYear\fP
+.IP "\(bu" 2
+\fRaddYears\fP
+.IP "\(bu" 2
+\fRsubYears\fP
+.IP "\(bu" 2
+\fRlastDayOfYear\fP
+.IP "\(bu" 2
+\fRlastDayOfMonth\fP
+.PP
+.SH "\fR0\&.14\&.11\fP - 2015-08-21"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+\fRformat\fP now uses \fRparse\fP to avoid time zone bugs\&.
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+\fRsetIsoWeek\fP now sets time to the start of the day\&.
+.PP
+.SH "\fR0\&.14\&.10\fP - 2015-07-29"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+\fRformat\fP now behaves correctly with 12:00 am\&.
+.IP "\(bu" 2
+\fRformat\fP now behaves correctly with ordinal numbers\&.
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRcompareAsc\fP
+.IP "\(bu" 2
+\fRcompareDesc\fP
+.IP "\(bu" 2
+\fRaddHours\fP
+.IP "\(bu" 2
+\fRsubHours\fP
+.IP "\(bu" 2
+\fRisSameDay\fP
+.IP "\(bu" 2
+\fRparse\fP
+.IP "\(bu" 2
+\fRgetISOYear\fP
+.IP "\(bu" 2
+\fRsetISOYear\fP
+.IP "\(bu" 2
+\fRstartOfISOYear\fP
+.IP "\(bu" 2
+\fRgetISOWeek\fP
+.IP "\(bu" 2
+\fRsetISOWeek\fP
+.PP
+.SH "\fR0\&.14\&.9\fP - 2015-01-14"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+\fRaddMonths\fP now correctly behaves with February (see \fR#18\fP)\&.
+.PP
+.SH "\fR0\&.14\&.8\fP - 2014-12-25"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+\fRformat\fP function now behaves correctly with \fRpm\fP/\fRam\fP\&.
+.PP
+.SH "\fR0\&.14\&.6\fP - 2014-12-04"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fix broken Bower support\&.
+.PP
+.SH "\fR0\&.14\&.0\fP - 2014-11-05"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+Bower package\&.
+.PP
+.SH "\fR0\&.13\&.0\fP - 2014-10-22"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRaddMinutes\fP
+.IP "\(bu" 2
+\fRsubMinutes\fP
+.IP "\(bu" 2
+\fRisEqual\fP
+.IP "\(bu" 2
+\fRisBefore\fP
+.IP "\(bu" 2
+\fRisAfter\fP
+.PP
+.SH "\fR0\&.12\&.1\fP - 2014-10-19"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Incorrect rounding in \fRDDD\fP formatter\&.
+.PP
+.SH "\fR0\&.12\&.0\fP - 2014-10-15"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRisSameYear\fP
+.PP
+.SH "\fR0\&.11\&.0\fP - 2014-10-15"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRisWithinRange\fP
+.PP
+.SH "\fR0\&.10\&.0\fP - 2014-10-13"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRformat\fP
+.IP "\(bu" 2
+\fRstartOfYear\fP
+.PP
+.SH "\fR0\&.9\&.0\fP - 2014-10-10"
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+\fIInternal\fP: simplify \fRisWeekend\fP
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRisFuture\fP
+.PP
+.SH "\fR0\&.8\&.0\fP - 2014-10-09"
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+\fIInternal\fP: reuse \fRaddDays\fP inside of \fRsubDays\fP\&.
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRaddMonths\fP
+.IP "\(bu" 2
+\fRsubMonths\fP
+.IP "\(bu" 2
+\fRsetMonth\fP
+.IP "\(bu" 2
+\fRsetYear\fP
+.PP
+.SH "\fR0\&.7\&.0\fP - 2014-10-08"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRisSameWeek\fP
+.PP
+.SH "\fR0\&.6\&.0\fP - 2014-10-07"
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Inconsistent behavior of \fRendOfMonth\fP\&.
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRisFirstDayOfMonth\fP
+.IP "\(bu" 2
+\fRisLastDayOfMonth\fP
+.IP "\(bu" 2
+\fRisSameMonth\fP
+.PP
+.SH "\fR0\&.5\&.0\fP - 2014-10-07"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRaddDays\fP
+.IP "\(bu" 2
+\fRsubDays\fP
+.PP
+.SH "\fR0\&.4\&.0\fP - 2014-10-07"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRstartOfWeek\fP
+.IP "\(bu" 2
+\fRendOfWeek\fP
+.IP "\(bu" 2
+\fReachDay\fP
+.PP
+.SH "\fR0\&.3\&.0\fP - 2014-10-06"
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+\fRstartOfDay\fP now sets milliseconds as well\&.
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRendOfDay\fP
+.IP "\(bu" 2
+\fRstartOfMonth\fP
+.IP "\(bu" 2
+\fRendOfMonth\fP
+.PP
+.SH "\fR0\&.2\&.0\fP - 2014-10-06"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRisToday\fP
+.IP "\(bu" 2
+\fRisWeekend\fP
+.PP
+.SH "0\&.1\&.0 - 2014-10-06"
+.PP
+.SS "Added"
+.IP "\(bu" 2
+\fRstartOfDay\fP 
+.PP
+

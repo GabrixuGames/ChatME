@@ -1,0 +1,364 @@
+\doxysection{frontend/node\+\_\+modules/use-\/sidecar Directory Reference}
+\hypertarget{dir_a03221562eb905056bf27ed9059e3454}{}\label{dir_a03221562eb905056bf27ed9059e3454}\index{frontend/node\_modules/use-\/sidecar Directory Reference@{frontend/node\_modules/use-\/sidecar Directory Reference}}
+
+
+\doxysubsection{Detailed Description}
+ \doxysubsection*{🏎 side car}
+
+ ~\newline
+ Alternative way to code splitting ~\newline
+
+
+ \href{https://www.npmjs.com/package/use-sidecar}{\texttt{ }}
+
+ \href{https://travis-ci.org/theKashey/use-sidecar}{\texttt{ }}
+
+ \href{https://www.npmjs.com/package/use-sidecar}{\texttt{ }}
+
+ \href{https://bundlephobia.com/result?p=use-sidecar}{\texttt{ }} ~\newline
+ ~\newline
+ 
+
+UI/\+Effects code splitting pattern
+\begin{DoxyItemize}
+\item \href{https://dev.to/thekashey/sidecar-for-a-code-splitting-1o8g}{\texttt{read the original article}} to understand concepts behind.
+\item \href{https://medium.com/@cramforce/designing-very-large-javascript-applications-6e013a3291a3}{\texttt{read how Google}} split view and logic.
+\item \href{https://developers.facebook.com/videos/2019/building-the-new-facebookcom-with-react-graphql-and-relay/}{\texttt{watch how Facebook}} defers "{}interactivity"{} effects.
+\end{DoxyItemize}\hypertarget{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7433}{}\doxysubsubsection{\texorpdfstring{Terminology\+:}{Terminology\+:}}\label{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7433}
+
+\begin{DoxyItemize}
+\item {\ttfamily sidecar} -\/ non UI component, which may carry effects for a paired UI component.
+\item {\ttfamily UI} -\/ UI component, which interactivity is moved to a {\ttfamily sidecar}.
+\end{DoxyItemize}
+
+{\ttfamily UI} is a {\itshape view}, {\ttfamily sidecar} is the {\itshape logic} for it. Like Batman(\+UI) and his sidekick Robin(effects).\hypertarget{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7434}{}\doxysubsubsection{\texorpdfstring{Concept}{Concept}}\label{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7434}
+
+\begin{DoxyItemize}
+\item a {\ttfamily package} exposes {\bfseries{3 entry points}} using a \href{https://github.com/theKashey/multiple-entry-points-example}{\texttt{nested {\ttfamily package.\+json} format}}\+:
+\begin{DoxyItemize}
+\item default aka {\ttfamily combination}, and lets hope tree shaking will save you
+\item {\ttfamily UI}, with only UI part
+\item {\ttfamily sidecar}, with all the logic
+\item \texorpdfstring{$>$}{>} {\ttfamily UI} + {\ttfamily sidecar} === {\ttfamily combination}. The size of {\ttfamily UI+sidecar} might a bit bigger than size of their {\ttfamily combination}. Use \href{https://github.com/ai/size-limit}{\texttt{size-\/limit}} to control their size independently.
+\end{DoxyItemize}
+\item package uses a {\ttfamily medium} to talk with own sidecar, breaking explicit dependency.
+\item if package depends on another {\itshape sidecar} package\+:
+\begin{DoxyItemize}
+\item it shall export dependency side car among own sidecar.
+\item package imports own sidecar via {\ttfamily medium}, thus able to export multiple sidecars via one export.
+\end{DoxyItemize}
+\item final consumer uses {\ttfamily sidecar} or {\ttfamily use\+Sidecar} to combine pieces together. ~\newline
+
+\end{DoxyItemize}\hypertarget{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7435}{}\doxysubsubsection{\texorpdfstring{Rules}{Rules}}\label{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7435}
+
+\begin{DoxyItemize}
+\item {\ttfamily UI} components might use/import any other {\ttfamily UI} components
+\item {\ttfamily sidecar} could use/import any other {\ttfamily sidecar}
+\end{DoxyItemize}
+
+That would form two different code branches, you may load separately -\/ UI first, and effect sidecar later. That also leads to a obvious consequence -\/ {\bfseries{one sidecar may export all sidecars}}.
+\begin{DoxyItemize}
+\item to decouple {\ttfamily sidecars} from module exports, and be able to pick "{}the right"{} one at any point you have to use {\ttfamily export\+Sidecar(medium, component)} to export it, and use the same {\ttfamily medium} to import it back.
+\item this limitation is for {\bfseries{libraries only}}, as long as in the usercode you might dynamically import whatever and whenever you want.
+\item {\ttfamily use\+Medium} is always async -\/ action would be executed in a next tick, or on the logic load.
+\item {\ttfamily sidecar} is always async -\/ is does not matter have you loaded logic or not -\/ component would be rendered at least in the next tick.
+\end{DoxyItemize}
+
+\begin{quote}
+except {\ttfamily medium.\+read}, which synchronously read the data from a medium, and {\ttfamily medium.\+assing\+Sync\+Medium} which changes {\ttfamily use\+Medium} to be sync. \end{quote}
+\hypertarget{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7436}{}\doxysubsubsection{\texorpdfstring{SSR and usage tracking}{SSR and usage tracking}}\label{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7436}
+Sidecar pattern is clear\+:
+\begin{DoxyItemize}
+\item you dont need to use/render any {\ttfamily sidecars} on server.
+\item you dont have to load {\ttfamily sidecars} prior main render.
+\end{DoxyItemize}
+
+Thus -\/ no usage tracking, and literally no SSR. It\textquotesingle{}s just skipped.\hypertarget{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7437}{}\doxysubsection{\texorpdfstring{API}{API}}\label{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7437}
+\hypertarget{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7438}{}\doxysubsubsection{\texorpdfstring{create\+Medium()}{create\+Medium()}}\label{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7438}
+
+\begin{DoxyItemize}
+\item Type\+: Util. Creates shared effect medium for algebraic effect.
+\item Goal\+: To decouple modules from each other.
+\item Usage\+: {\ttfamily use} in UI side, and {\ttfamily assign} from side-\/car. All effects would be executed.
+\item Analog\+: Weak\+Map, React.\+\_\+\+\_\+\+SECRET\+\_\+\+DOM\+\_\+\+DO\+\_\+\+NOT\+\_\+\+USE\+\_\+\+OR\+\_\+\+YOU\+\_\+\+WILL\+\_\+\+BE\+\_\+\+FIRED 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{const\ medium\ =\ createMedium(defaultValue);}
+\DoxyCodeLine{const\ cancelCb\ =\ medium.useMedium(someData);}
+\DoxyCodeLine{}
+\DoxyCodeLine{//\ like}
+\DoxyCodeLine{useEffect(()\ =>\ medium.useMedium(someData),\ []);}
+\DoxyCodeLine{}
+\DoxyCodeLine{medium.assignMedium(someDataProcessor)}
+\DoxyCodeLine{}
+\DoxyCodeLine{//\ createSidecarMedium\ is\ a\ helper\ for\ createMedium\ to\ create\ a\ "{}sidecar"{}\ symbol}
+\DoxyCodeLine{const\ effectCar\ =\ createSidecarMedium();}
+
+\end{DoxyCode}
+
+\end{DoxyItemize}
+
+\begin{quote}
+! For consistence {\ttfamily use\+Medium} is async -\/ sidecar load status should not affect function behavior, thus effect would be always executed at least in the "{}next tick"{}. You may alter this behavior by using {\ttfamily medium.\+assing\+Sync\+Medium}. \end{quote}
+\hypertarget{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7439}{}\doxysubsubsection{\texorpdfstring{export\+Sidecar(medium, component)}{export\+Sidecar(medium, component)}}\label{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7439}
+
+\begin{DoxyItemize}
+\item Type\+: HOC
+\item Goal\+: store {\ttfamily component} inside {\ttfamily medium} and return external wrapper
+\item Solving\+: decoupling module exports to support exporting multiple sidecars via a single entry point.
+\item Usage\+: use to export a {\ttfamily sidecar}
+\item Analog\+: Weak\+Map 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ \{effectCar\}\ from\ './medium';}
+\DoxyCodeLine{import\ \{EffectComponent\}\ from\ './Effect';}
+\DoxyCodeLine{//\ !!!\ -\/\ to\ prevent\ Effect\ from\ being\ imported}
+\DoxyCodeLine{//\ \`{}effectCar`\ medium\ \_\_have\_\_\ to\ be\ defined\ in\ another\ file}
+\DoxyCodeLine{//\ const\ effectCar\ =\ createSidecarMedium();}
+\DoxyCodeLine{export\ default\ exportSidecar(effectCar,\ EffectComponent);}
+
+\end{DoxyCode}
+
+\end{DoxyItemize}\hypertarget{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7440}{}\doxysubsubsection{\texorpdfstring{sidecar(importer)}{sidecar(importer)}}\label{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7440}
+
+\begin{DoxyItemize}
+\item Type\+: HOC
+\item Goal\+: React.\+lazy analog for code splitting, but does not require {\ttfamily Suspense}, might provide error failback.
+\item Usage\+: like React.\+lazy to load a side-\/car component.
+\item Analog\+: React.\+Lazy 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ \{sidecar\}\ from\ "{}use-\/sidecar"{};}
+\DoxyCodeLine{const\ Sidecar\ =\ \ sidecar(()\ =>\ import('./sidecar'),\ <span>on\ fail</span>);}
+\DoxyCodeLine{}
+\DoxyCodeLine{<>}
+\DoxyCodeLine{\ <Sidecar\ />}
+\DoxyCodeLine{\ <UI\ />}
+\DoxyCodeLine{</>\ }
+
+\end{DoxyCode}
+ 
+\end{DoxyItemize}\hypertarget{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7441}{}\doxysubsubsubsection{\texorpdfstring{Importing {\ttfamily exported\+Sidecar}}{Importing {\ttfamily exported\+Sidecar}}}\label{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7441}
+Would require additional prop to be set -\/ {\ttfamily \texorpdfstring{$<$}{<}Sidecar side\+Car=\{effect\+Car\} /\texorpdfstring{$>$}{>}}\hypertarget{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7442}{}\doxysubsubsection{\texorpdfstring{use\+Sidecar(importer)}{use\+Sidecar(importer)}}\label{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7442}
+
+\begin{DoxyItemize}
+\item Type\+: hook, loads a {\ttfamily side\+Car} using provided {\ttfamily importer} which shall follow React.\+lazy API
+\item Goal\+: to load a side car without displaying any "{}spinners"{}.
+\item Usage\+: load side car for a component
+\item Analog\+: none 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ \{useSidecar\}\ from\ 'use-\/sidecar';}
+\DoxyCodeLine{}
+\DoxyCodeLine{const\ [Car,\ error]\ =\ useSidecar(()\ =>\ import('./sideCar'));}
+\DoxyCodeLine{return\ (}
+\DoxyCodeLine{\ \ <>}
+\DoxyCodeLine{\ \ \ \ \{Car\ ?\ <Car\ \{...props\}\ />\ :\ null\}}
+\DoxyCodeLine{\ \ \ \ <UIComponent\ \{...props\}>}
+\DoxyCodeLine{\ \ </>}
+\DoxyCodeLine{);\ }
+
+\end{DoxyCode}
+ 
+\end{DoxyItemize}\hypertarget{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7443}{}\doxysubsubsubsection{\texorpdfstring{Importing {\ttfamily exported\+Side\+Car}}{Importing {\ttfamily exported\+Side\+Car}}}\label{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7443}
+You have to specify {\bfseries{effect medium}} to read data from, as long as {\bfseries{export itself is empty}}. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ \{useSidecar\}\ from\ 'use-\/sidecar';}
+\DoxyCodeLine{}
+\DoxyCodeLine{/*\ medium.js:\ */\ export\ const\ effectCar\ =\ useMedium(\{\});}
+\DoxyCodeLine{/*\ sideCar.js:\ */export\ default\ exportSidecar(effectCar,\ EffectComponent);}
+\DoxyCodeLine{}
+\DoxyCodeLine{const\ [Car,\ error]\ =\ useSidecar(()\ =>\ import('./sideCar'),\ effectCar);\ }
+\DoxyCodeLine{return\ (}
+\DoxyCodeLine{\ \ <>}
+\DoxyCodeLine{\ \ \ \ \{Car\ ?\ <Car\ \{...props\}\ />\ :\ null\}}
+\DoxyCodeLine{\ \ \ \ <UIComponent\ \{...props\}>}
+\DoxyCodeLine{\ \ </>}
+\DoxyCodeLine{);}
+
+\end{DoxyCode}
+\hypertarget{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7444}{}\doxysubsubsection{\texorpdfstring{render\+Car(\+Component)}{render\+Car(\+Component)}}\label{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7444}
+
+\begin{DoxyItemize}
+\item Type\+: HOC, moves render\+Prop component to a side channel
+\item Goal\+: Provide render prop support, ie defer component loading keeping tree untouched.
+\item Usage\+: Provide {\ttfamily defaults} and use them until sidecar is loaded letting you code split (non visual) render-\/prop component
+\item Analog\+: -\/ Analog\+: code split library like \href{https://github.com/theKashey/react-imported-library}{\texttt{react-\/imported-\/library}} or \href{https://www.smooth-code.com/open-source/loadable-components/docs/library-splitting/}{\texttt{@loadable/lib}}. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ \{renderCar,\ sidecar\}\ from\ "{}use-\/sidecar"{};}
+\DoxyCodeLine{const\ RenderCar\ =\ renderCar(}
+\DoxyCodeLine{\ \ //\ will\ move\ side\ car\ to\ a\ side\ channel}
+\DoxyCodeLine{\ \ sidecar(()\ =>\ import('react-\/powerplug').then(imports\ =>\ imports.Value)),}
+\DoxyCodeLine{\ \ //\ default\ render\ props}
+\DoxyCodeLine{\ \ [\{value:\ 0\}]\ \ }
+\DoxyCodeLine{);}
+\DoxyCodeLine{}
+\DoxyCodeLine{<RenderCar>}
+\DoxyCodeLine{\ \ \{(\{value\})\ =>\ <span>\{value\}</span>\}}
+\DoxyCodeLine{</RenderCar>}
+
+\end{DoxyCode}
+
+\end{DoxyItemize}\hypertarget{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7445}{}\doxysubsubsection{\texorpdfstring{set\+Config(config)}{set\+Config(config)}}\label{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7445}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{setConfig(\{}
+\DoxyCodeLine{\ \ onError,\ //\ sets\ default\ error\ handler}
+\DoxyCodeLine{\});}
+
+\end{DoxyCode}
+\hypertarget{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7446}{}\doxysubsection{\texorpdfstring{Examples}{Examples}}\label{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7446}
+\hypertarget{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7447}{}\doxysubsubsection{\texorpdfstring{Deferred effect}{Deferred effect}}\label{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7447}
+Let\textquotesingle{}s imagine -\/ on element focus you have to do "{}something"{}, for example focus anther element\hypertarget{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7448}{}\doxysubsubsubsubsection{\texorpdfstring{Original code}{Original code}}\label{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7448}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{onFocus\ =\ event\ =>\ \{}
+\DoxyCodeLine{\ \ if\ (event.currentTarget\ ===\ event.target)\ \{}
+\DoxyCodeLine{\ \ \ \ document.querySelectorAll('button',\ event.currentTarget)}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7449}{}\doxysubsubsubsubsection{\texorpdfstring{Sidecar code}{Sidecar code}}\label{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7449}
+
+\begin{DoxyEnumerate}
+\item Use medium (yes, .3) 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{//\ we\ are\ calling\ medium\ with\ an\ original\ event\ as\ an\ argument}
+\DoxyCodeLine{const\ onFocus\ =\ event\ =>\ focusMedium.useMedium(event);}
+
+\end{DoxyCode}
+
+\end{DoxyEnumerate}
+\begin{DoxyEnumerate}
+\item Define reaction 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{//\ in\ a\ sidecar}
+\DoxyCodeLine{}
+\DoxyCodeLine{//\ we\ are\ setting\ handler\ for\ the\ effect\ medium}
+\DoxyCodeLine{//\ effect\ is\ complicated\ -\/\ we\ are\ skipping\ event\ "{}bubbling"{},\ }
+\DoxyCodeLine{//\ and\ focusing\ some\ button\ inside\ a\ parent}
+\DoxyCodeLine{focusMedium.assignMedium(event\ =>\ \{}
+\DoxyCodeLine{\ \ if\ (event.currentTarget\ ===\ event.target)\ \{}
+\DoxyCodeLine{\ \ \ \ document.querySelectorAll('button',\ event.currentTarget)}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\});}
+
+\end{DoxyCode}
+
+\end{DoxyEnumerate}
+\begin{DoxyEnumerate}
+\item Create medium Having these constrains -\/ we have to clone {\ttfamily event}, as long as React would eventually reuse Synthetic\+Event, thus not preserve {\ttfamily target} and {\ttfamily current\+Target}. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{//\ }
+\DoxyCodeLine{const\ focusMedium\ =\ createMedium(null,\ event\ =>\ (\{...event\}));}
+
+\end{DoxyCode}
+ Now medium side effect is ok to be async
+\end{DoxyEnumerate}
+
+{\bfseries{Example}}\+: \href{https://github.com/theKashey/react-focus-lock/blob/8c69c644ecfeed2ec9dc0dc4b5b30e896a366738/src/Lock.js\#L48}{\texttt{Effect for react-\/focus-\/lock}} -\/ 1kb UI, 4kb sidecar\hypertarget{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7450}{}\doxysubsubsubsection{\texorpdfstring{Medium callback}{Medium callback}}\label{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7450}
+Like a library level code splitting\hypertarget{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7451}{}\doxysubsubsubsubsection{\texorpdfstring{Original code}{Original code}}\label{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7451}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ \{x,\ y\}\ from\ './utils';}
+\DoxyCodeLine{}
+\DoxyCodeLine{useEffect(()\ =>\ \{}
+\DoxyCodeLine{\ \ if\ (x())\ \{}
+\DoxyCodeLine{\ \ \ \ y()}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{\},\ []);}
+
+\end{DoxyCode}
+\hypertarget{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7452}{}\doxysubsubsubsubsection{\texorpdfstring{Sidecar code}{Sidecar code}}\label{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7452}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{//\ medium}
+\DoxyCodeLine{const\ utilMedium\ =\ createMedium();}
+\DoxyCodeLine{}
+\DoxyCodeLine{//\ utils}
+\DoxyCodeLine{const\ x\ =\ ()\ =>\ \{\ /*\ ...\ */\};}
+\DoxyCodeLine{const\ y\ =\ ()\ =>\ \{\ /*\ ...\ */\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{//\ medium\ will\ callback\ with\ exports\ exposed}
+\DoxyCodeLine{utilMedium.assignMedium(cb\ =>\ cb(\{}
+\DoxyCodeLine{\ x,\ y}
+\DoxyCodeLine{\}));}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{//\ UI}
+\DoxyCodeLine{//\ not\ importing\ x\ and\ y\ from\ the\ module\ system,\ but\ would\ be\ given\ via\ callback}
+\DoxyCodeLine{useEffect(()\ =>\ \{}
+\DoxyCodeLine{\ \ utilMedium.useMedium((\{x,y\})\ =>\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ if\ (x())\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ y()}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \})}
+\DoxyCodeLine{\},\ []);}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item Hint\+: there is a easy way to type it 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{const\ utilMedium\ =\ createMedium<(cb:\ typeof\ import('./utils'))\ =>\ void>();}
+
+\end{DoxyCode}
+
+\end{DoxyItemize}
+
+{\bfseries{Example}}\+: \href{https://github.com/theKashey/react-focus-lock/blob/8c69c644ecfeed2ec9dc0dc4b5b30e896a366738/src/MoveFocusInside.js\#L12}{\texttt{Callback API for react-\/focus-\/lock}}\hypertarget{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7453}{}\doxysubsubsubsection{\texorpdfstring{Split effects}{Split effects}}\label{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7453}
+Lets take an example from a Google -\/ Calendar app, with view and logic separated. To be honest -\/ it\textquotesingle{}s not easy to extract logic from application like calendar -\/ usually it\textquotesingle{}s tight coupled.\hypertarget{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7454}{}\doxysubsubsubsubsection{\texorpdfstring{Original code}{Original code}}\label{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7454}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{const\ CalendarUI\ =\ ()\ =>\ \{\ }
+\DoxyCodeLine{\ \ const\ [date,\ setDate]\ =\ useState();}
+\DoxyCodeLine{\ \ const\ onButtonClick\ =\ useCallback(()\ =>\ setDate(Date.now),\ []);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ return\ (}
+\DoxyCodeLine{\ \ \ \ <>}
+\DoxyCodeLine{\ \ \ \ \ <input\ type="{}date"{}\ onChange=\{setDate\}\ value=\{date\}\ />}
+\DoxyCodeLine{\ \ \ \ \ <input\ type="{}button"{}\ onClick=\{onButtonClick\}>Set\ Today</button>}
+\DoxyCodeLine{\ \ \ \ </>}
+\DoxyCodeLine{\ \ )}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ \hypertarget{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7455}{}\doxysubsubsubsubsection{\texorpdfstring{Sidecar code}{Sidecar code}}\label{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7455}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{const\ CalendarUI\ =\ ()\ =>\ \{}
+\DoxyCodeLine{\ \ const\ [events,\ setEvents]\ =\ useState(\{\});}
+\DoxyCodeLine{\ \ const\ [date,\ setDate]\ =\ useState();}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ return\ (}
+\DoxyCodeLine{\ \ \ \ <>}
+\DoxyCodeLine{\ \ \ \ \ <Sidecar\ setDate=\{setDate\}\ setEvents=\{setEvents\}/>}
+\DoxyCodeLine{\ \ \ \ \ <UILayout\ \{...events\}\ date=\{date\}/>}
+\DoxyCodeLine{\ \ \ \ </>}
+\DoxyCodeLine{\ \ )}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{const\ UILayout\ =\ (\{onDateChange,\ onButtonClick,\ date\})\ =>\ (}
+\DoxyCodeLine{\ \ <>}
+\DoxyCodeLine{\ \ \ \ \ \ <input\ type="{}date"{}\ onChange=\{onDateChange\}\ value=\{date\}\ />}
+\DoxyCodeLine{\ \ \ \ \ \ <input\ type="{}button"{}\ onClick=\{onButtonClick\}>Set\ Today</button>}
+\DoxyCodeLine{\ \ </>}
+\DoxyCodeLine{);}
+\DoxyCodeLine{}
+\DoxyCodeLine{//\ in\ a\ sidecar}
+\DoxyCodeLine{//\ we\ are\ providing\ callbacks\ back\ to\ UI}
+\DoxyCodeLine{const\ Sidecar\ =\ (\{setDate,\ setEvents\})\ =>\ \{}
+\DoxyCodeLine{\ \ useEffect(()\ =>\ setEvents(\{}
+\DoxyCodeLine{\ \ \ \ \ \ onDateChange:setDate,}
+\DoxyCodeLine{\ \ \ \ \ \ onButtonClick:\ ()\ =>\ setDate(Date.now),}
+\DoxyCodeLine{\ \ \}),\ []);}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ return\ null;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+While in this example this looks a bit, you know, strange -\/ there are 3 times more code that in the original example -\/ that would make a sense for a real Calendar, especially if some helper library, like {\ttfamily moment}, has been used.
+
+{\bfseries{Example}}\+: \href{https://github.com/theKashey/react-remove-scroll/blob/666472d5c77fb6c4e5beffdde87c53ae63ef42c5/src/SideEffect.tsx\#L166}{\texttt{Effect for react-\/remove-\/scroll}} -\/ 300b UI, 2kb sidecar\hypertarget{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7456}{}\doxysubsection{\texorpdfstring{Licence}{Licence}}\label{dir_a03221562eb905056bf27ed9059e3454_autotoc_md7456}
+MIT 

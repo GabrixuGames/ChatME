@@ -1,0 +1,81 @@
+\chapter{🐳 Chat\+App con Docker + Postgre\+SQL -\/ Guía de Setup }
+\hypertarget{md__d_o_c_k_e_r___s_e_t_u_p}{}\label{md__d_o_c_k_e_r___s_e_t_u_p}\index{🐳 ChatApp con Docker + PostgreSQL -\/ Guía de Setup@{🐳 ChatApp con Docker + PostgreSQL -\/ Guía de Setup}}
+\label{md__d_o_c_k_e_r___s_e_t_u_p_autotoc_md11}%
+\Hypertarget{md__d_o_c_k_e_r___s_e_t_u_p_autotoc_md11}%
+\hypertarget{md__d_o_c_k_e_r___s_e_t_u_p_autotoc_md12}{}\doxysection{\texorpdfstring{✅ Cuando Docker termine de instalarse\+:}{✅ Cuando Docker termine de instalarse\+:}}\label{md__d_o_c_k_e_r___s_e_t_u_p_autotoc_md12}
+\hypertarget{md__d_o_c_k_e_r___s_e_t_u_p_autotoc_md13}{}\doxysubsection{\texorpdfstring{1. Abrir Power\+Shell en la carpeta del proyecto}{1. Abrir Power\+Shell en la carpeta del proyecto}}\label{md__d_o_c_k_e_r___s_e_t_u_p_autotoc_md13}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ "{}C:\(\backslash\)Users\(\backslash\)Gabrixu\(\backslash\)Documents\(\backslash\)Programacion\(\backslash\)chatapp-\/main"{}}
+
+\end{DoxyCode}
+\hypertarget{md__d_o_c_k_e_r___s_e_t_u_p_autotoc_md14}{}\doxysubsection{\texorpdfstring{2. Levantar Postgre\+SQL (un solo comando)}{2. Levantar Postgre\+SQL (un solo comando)}}\label{md__d_o_c_k_e_r___s_e_t_u_p_autotoc_md14}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Opción\ A:\ Script\ automático}
+\DoxyCodeLine{.\(\backslash\)setup-\/db.ps1}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Opción\ B:\ Manual}
+\DoxyCodeLine{docker-\/compose\ up\ -\/d\ postgres}
+
+\end{DoxyCode}
+\hypertarget{md__d_o_c_k_e_r___s_e_t_u_p_autotoc_md15}{}\doxysubsection{\texorpdfstring{3. Instalar dependencias del backend}{3. Instalar dependencias del backend}}\label{md__d_o_c_k_e_r___s_e_t_u_p_autotoc_md15}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ backend}
+\DoxyCodeLine{pip\ install\ -\/r\ requirements.txt}
+
+\end{DoxyCode}
+\hypertarget{md__d_o_c_k_e_r___s_e_t_u_p_autotoc_md16}{}\doxysubsection{\texorpdfstring{4. Levantar el backend}{4. Levantar el backend}}\label{md__d_o_c_k_e_r___s_e_t_u_p_autotoc_md16}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python\ app.py}
+
+\end{DoxyCode}
+\hypertarget{md__d_o_c_k_e_r___s_e_t_u_p_autotoc_md17}{}\doxysubsection{\texorpdfstring{5. Levantar el frontend (en otra terminal)}{5. Levantar el frontend (en otra terminal)}}\label{md__d_o_c_k_e_r___s_e_t_u_p_autotoc_md17}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ ..\(\backslash\)frontend}
+\DoxyCodeLine{npm\ install}
+\DoxyCodeLine{npm\ run\ dev}
+
+\end{DoxyCode}
+\hypertarget{md__d_o_c_k_e_r___s_e_t_u_p_autotoc_md18}{}\doxysection{\texorpdfstring{🎯 ¿\+Todo funcionando?}{🎯 ¿\+Todo funcionando?}}\label{md__d_o_c_k_e_r___s_e_t_u_p_autotoc_md18}
+Deberías ver\+:
+\begin{DoxyItemize}
+\item ✅ Postgre\+SQL\+: {\ttfamily \href{http://localhost:5432}{\texttt{http\+://localhost\+:5432}}}
+\item ✅ Backend\+: {\ttfamily \href{http://localhost:5000}{\texttt{http\+://localhost\+:5000}}} ~\newline
+
+\item ✅ Frontend\+: {\ttfamily \href{http://localhost:8080}{\texttt{http\+://localhost\+:8080}}}
+\end{DoxyItemize}\hypertarget{md__d_o_c_k_e_r___s_e_t_u_p_autotoc_md19}{}\doxysection{\texorpdfstring{🔧 Comandos útiles Docker\+:}{🔧 Comandos útiles Docker\+:}}\label{md__d_o_c_k_e_r___s_e_t_u_p_autotoc_md19}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Ver\ contenedores\ corriendo}
+\DoxyCodeLine{docker\ ps}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Ver\ logs\ de\ PostgreSQL}
+\DoxyCodeLine{docker-\/compose\ logs\ postgres}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Parar\ todo}
+\DoxyCodeLine{docker-\/compose\ down}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Conectar\ a\ la\ base\ de\ datos}
+\DoxyCodeLine{docker\ exec\ -\/it\ chatapp-\/postgres\ psql\ -\/U\ chatapp\ -\/d\ chatapp}
+
+\end{DoxyCode}
+\hypertarget{md__d_o_c_k_e_r___s_e_t_u_p_autotoc_md20}{}\doxysection{\texorpdfstring{🚨 Si algo falla\+:}{🚨 Si algo falla\+:}}\label{md__d_o_c_k_e_r___s_e_t_u_p_autotoc_md20}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Docker no inicia\+:}} Reinicia Docker Desktop
+\item {\bfseries{Puerto ocupado\+:}} Cambia puertos en docker-\/compose.\+yml
+\item {\bfseries{Dependencias Python\+:}} Usa un virtual environment
+\item {\bfseries{Postgre\+SQL no conecta\+:}} Espera 30 segundos más
+\end{DoxyEnumerate}\hypertarget{md__d_o_c_k_e_r___s_e_t_u_p_autotoc_md21}{}\doxysection{\texorpdfstring{📊 Datos de prueba ya incluidos\+:}{📊 Datos de prueba ya incluidos\+:}}\label{md__d_o_c_k_e_r___s_e_t_u_p_autotoc_md21}
+
+\begin{DoxyItemize}
+\item {\bfseries{Usuario\+:}} testuser
+\item {\bfseries{Contraseña\+:}} test123
+\item {\bfseries{Salas\+:}} R1, R2, R3
+\end{DoxyItemize}
+
+¡\+Listo para chatear! 🚀 

@@ -1,0 +1,133 @@
+\doxysection{frontend/node\+\_\+modules/@remix-\/run/router Directory Reference}
+\hypertarget{dir_721759c1b560206623d3e1290c30ed44}{}\label{dir_721759c1b560206623d3e1290c30ed44}\index{frontend/node\_modules/"@remix-\/run/router Directory Reference@{frontend/node\_modules/"@remix-\/run/router Directory Reference}}
+
+
+\doxysubsection{Detailed Description}
+\hypertarget{dir_721759c1b560206623d3e1290c30ed44_autotoc_md690}{}\doxysubsection{\texorpdfstring{Remix Router}{Remix Router}}\label{dir_721759c1b560206623d3e1290c30ed44_autotoc_md690}
+The {\ttfamily @remix-\/run/router} package is a framework-\/agnostic routing package (sometimes referred to as a browser-\/emulator) that serves as the heart of \href{https://reactrouter.com}{\texttt{React Router}} and \href{https://remix.run}{\texttt{Remix}} and provides all the core functionality for routing coupled with data loading and data mutations. It comes with built-\/in handling of errors, race-\/conditions, interruptions, cancellations, lazy-\/loading data, and much, much more.
+
+If you\textquotesingle{}re using React Router, you should never {\ttfamily import} anything directly from the {\ttfamily @remix-\/run/router} -\/ you should have everything you need in {\ttfamily react-\/router-\/dom} (or {\ttfamily react-\/router}/{\ttfamily react-\/router-\/native} if you\textquotesingle{}re not rendering in the browser). All of those packages should re-\/export everything you would otherwise need from {\ttfamily @remix-\/run/router}.
+
+\begin{DoxyWarning}{Warning}
+~\newline
+ This router is a low-\/level package intended to be consumed by UI layer routing libraries. You should very likely not be using this package directly unless you are authoring a routing library such as \href{https://github.com/remix-run/react-router}{\texttt{{\ttfamily react-\/router-\/dom}}} or one of it\textquotesingle{}s other \href{https://github.com/brophdawg11/remix-routers}{\texttt{UI ports}}.
+\end{DoxyWarning}
+\hypertarget{dir_721759c1b560206623d3e1290c30ed44_autotoc_md691}{}\doxysubsection{\texorpdfstring{API}{API}}\label{dir_721759c1b560206623d3e1290c30ed44_autotoc_md691}
+A Router instance can be created using {\ttfamily create\+Router}\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{//\ Create\ and\ initialize\ a\ router.\ \ "{}initialize"{}\ contains\ all\ side\ effects}
+\DoxyCodeLine{//\ including\ history\ listeners\ and\ kicking\ off\ the\ initial\ data\ fetch}
+\DoxyCodeLine{let\ router\ =\ createRouter(\{}
+\DoxyCodeLine{\ \ //\ Required\ properties}
+\DoxyCodeLine{\ \ routes:\ [\{}
+\DoxyCodeLine{\ \ \ \ path:\ '/',}
+\DoxyCodeLine{\ \ \ \ loader:\ (\{\ request,\ params\ \})\ =>\ \{\ /*\ ...\ */\ \},}
+\DoxyCodeLine{\ \ \ \ children:\ [\{}
+\DoxyCodeLine{\ \ \ \ \ \ path:\ 'home',}
+\DoxyCodeLine{\ \ \ \ \ \ loader:\ (\{\ request,\ params\ \})\ =>\ \{\ /*\ ...\ */\ \},}
+\DoxyCodeLine{\ \ \ \ \}]}
+\DoxyCodeLine{\ \ \},}
+\DoxyCodeLine{\ \ history:\ createBrowserHistory(),}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ //\ Optional\ properties}
+\DoxyCodeLine{\ \ basename,\ //\ Base\ path}
+\DoxyCodeLine{\ \ mapRouteProperties,\ //\ Map\ framework-\/agnostic\ routes\ to\ framework-\/aware\ routes}
+\DoxyCodeLine{\ \ future,\ //\ Future\ flags}
+\DoxyCodeLine{\ \ hydrationData,\ //\ Hydration\ data\ if\ using\ server-\/side-\/rendering}
+\DoxyCodeLine{\}).initialize();}
+
+\end{DoxyCode}
+
+
+Internally, the Router represents the state in an object of the following format, which is available through {\ttfamily router.\+state}. You can also register a subscriber of the signature {\ttfamily (state\+: Router\+State) =\texorpdfstring{$>$}{>} void} to execute when the state updates via {\ttfamily router.\+subscribe()};
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{interface\ RouterState\ \{}
+\DoxyCodeLine{\ \ //\ False\ during\ the\ initial\ data\ load,\ true\ once\ we\ have\ our\ initial\ data}
+\DoxyCodeLine{\ \ initialized:\ boolean;}
+\DoxyCodeLine{\ \ //\ The\ \`{}history`\ action\ of\ the\ most\ recently\ completed\ navigation}
+\DoxyCodeLine{\ \ historyAction:\ Action;}
+\DoxyCodeLine{\ \ //\ The\ current\ location\ of\ the\ router.\ \ During\ a\ navigation\ this\ reflects}
+\DoxyCodeLine{\ \ //\ the\ "{}old"{}\ location\ and\ is\ updated\ upon\ completion\ of\ the\ navigation}
+\DoxyCodeLine{\ \ location:\ Location;}
+\DoxyCodeLine{\ \ //\ The\ current\ set\ of\ route\ matches}
+\DoxyCodeLine{\ \ matches:\ DataRouteMatch[];}
+\DoxyCodeLine{\ \ //\ The\ state\ of\ the\ current\ navigation}
+\DoxyCodeLine{\ \ navigation:\ Navigation;}
+\DoxyCodeLine{\ \ //\ The\ state\ of\ any\ in-\/progress\ router.revalidate()\ calls}
+\DoxyCodeLine{\ \ revalidation:\ RevalidationState;}
+\DoxyCodeLine{\ \ //\ Data\ from\ the\ loaders\ for\ the\ current\ matches}
+\DoxyCodeLine{\ \ loaderData:\ RouteData;}
+\DoxyCodeLine{\ \ //\ Data\ from\ the\ action\ for\ the\ current\ matches}
+\DoxyCodeLine{\ \ actionData:\ RouteData\ |\ null;}
+\DoxyCodeLine{\ \ //\ Errors\ thrown\ from\ loaders/actions\ for\ the\ current\ matches}
+\DoxyCodeLine{\ \ errors:\ RouteData\ |\ null;}
+\DoxyCodeLine{\ \ //\ Map\ of\ all\ active\ fetchers}
+\DoxyCodeLine{\ \ fetchers:\ Map<string,\ Fetcher>;}
+\DoxyCodeLine{\ \ //\ Scroll\ position\ to\ restore\ to\ for\ the\ active\ Location,\ false\ if\ we}
+\DoxyCodeLine{\ \ //\ should\ not\ restore,\ or\ null\ if\ we\ don't\ have\ a\ saved\ position}
+\DoxyCodeLine{\ \ //\ Note:\ must\ be\ enabled\ via\ router.enableScrollRestoration()}
+\DoxyCodeLine{\ \ restoreScrollPosition:\ number\ |\ false\ |\ null;}
+\DoxyCodeLine{\ \ //\ Proxied\ \`{}preventScrollReset`\ value\ passed\ to\ router.navigate()}
+\DoxyCodeLine{\ \ preventScrollReset:\ boolean;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{dir_721759c1b560206623d3e1290c30ed44_autotoc_md692}{}\doxysubsubsection{\texorpdfstring{Navigations}{Navigations}}\label{dir_721759c1b560206623d3e1290c30ed44_autotoc_md692}
+All navigations are done through the {\ttfamily router.\+navigate} API which is overloaded to support different types of navigations\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{//\ Link\ navigation\ (pushes\ onto\ the\ history\ stack\ by\ default)}
+\DoxyCodeLine{router.navigate("{}/page"{});}
+\DoxyCodeLine{}
+\DoxyCodeLine{//\ Link\ navigation\ (replacing\ the\ history\ stack)}
+\DoxyCodeLine{router.navigate("{}/page"{},\ \{\ replace:\ true\ \});}
+\DoxyCodeLine{}
+\DoxyCodeLine{//\ Pop\ navigation\ (moving\ backward/forward\ in\ the\ history\ stack)}
+\DoxyCodeLine{router.navigate(-\/1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{//\ Form\ submission\ navigation}
+\DoxyCodeLine{let\ formData\ =\ new\ FormData();}
+\DoxyCodeLine{formData.append(key,\ value);}
+\DoxyCodeLine{router.navigate("{}/page"{},\ \{}
+\DoxyCodeLine{\ \ formMethod:\ "{}post"{},}
+\DoxyCodeLine{\ \ formData,}
+\DoxyCodeLine{\});}
+\DoxyCodeLine{}
+\DoxyCodeLine{//\ Relative\ routing\ from\ a\ source\ routeId}
+\DoxyCodeLine{router.navigate("{}../../somewhere"{},\ \{}
+\DoxyCodeLine{\ \ fromRouteId:\ "{}active-\/route-\/id"{},}
+\DoxyCodeLine{\});}
+
+\end{DoxyCode}
+\hypertarget{dir_721759c1b560206623d3e1290c30ed44_autotoc_md693}{}\doxysubsubsection{\texorpdfstring{Fetchers}{Fetchers}}\label{dir_721759c1b560206623d3e1290c30ed44_autotoc_md693}
+Fetchers are a mechanism to call loaders/actions without triggering a navigation, and are done through the {\ttfamily router.\+fetch()} API. All fetch calls require a unique key to identify the fetcher.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{//\ Execute\ the\ loader\ for\ /page}
+\DoxyCodeLine{router.fetch("{}key"{},\ "{}/page"{});}
+\DoxyCodeLine{}
+\DoxyCodeLine{//\ Submit\ to\ the\ action\ for\ /page}
+\DoxyCodeLine{let\ formData\ =\ new\ FormData();}
+\DoxyCodeLine{formData.append(key,\ value);}
+\DoxyCodeLine{router.fetch("{}key"{},\ "{}/page"{},\ \{}
+\DoxyCodeLine{\ \ formMethod:\ "{}post"{},}
+\DoxyCodeLine{\ \ formData,}
+\DoxyCodeLine{\});}
+
+\end{DoxyCode}
+\hypertarget{dir_721759c1b560206623d3e1290c30ed44_autotoc_md694}{}\doxysubsubsection{\texorpdfstring{Revalidation}{Revalidation}}\label{dir_721759c1b560206623d3e1290c30ed44_autotoc_md694}
+By default, active loaders will revalidate after any navigation or fetcher mutation. If you need to kick off a revalidation for other use-\/cases, you can use {\ttfamily router.\+revalidate()} to re-\/execute all active loaders.\hypertarget{dir_721759c1b560206623d3e1290c30ed44_autotoc_md695}{}\doxysubsubsection{\texorpdfstring{Future Flags}{Future Flags}}\label{dir_721759c1b560206623d3e1290c30ed44_autotoc_md695}
+We use {\itshape Future Flags} in the router to help us introduce breaking changes in an opt-\/in fashion ahead of major releases. Please check out the \href{https://remix.run/blog/future-flags}{\texttt{blog post}} and \href{https://reactrouter.com/v6/guides/api-development-strategy}{\texttt{React Router Docs}} for more information on this process. The currently available future flags in {\ttfamily @remix-\/run/router} are\+:
+
+
+\begin{DoxyTable}{2}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Flag  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Description  \\
+{\ttfamily v7\+\_\+normalize\+Form\+Method}  &Normalize {\ttfamily use\+Navigation().form\+Method} to be an uppercase HTTP Method  \\
+{\ttfamily v7\+\_\+prepend\+Basename}  &Prepend the {\ttfamily basename} to incoming {\ttfamily router.\+navigate}/{\ttfamily router.\+fetch} paths  \\
+\end{DoxyTable}

@@ -1,0 +1,55 @@
+\doxysection{repositories.\+base\+\_\+repository.\+Base\+Repository Class Reference}
+\hypertarget{classrepositories_1_1base__repository_1_1_base_repository}{}\label{classrepositories_1_1base__repository_1_1_base_repository}\index{repositories.base\_repository.BaseRepository@{repositories.base\_repository.BaseRepository}}
+Inheritance diagram for repositories.\+base\+\_\+repository.\+Base\+Repository\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=0.886544cm]{classrepositories_1_1base__repository_1_1_base_repository}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classrepositories_1_1base__repository_1_1_base_repository_a16e5623651b78db1bee905e174076e21}\label{classrepositories_1_1base__repository_1_1_base_repository_a16e5623651b78db1bee905e174076e21} 
+{\bfseries \+\_\+\+\_\+init\+\_\+\+\_\+} (self)
+\item 
+Optional\mbox{[}Any\mbox{]} \mbox{\hyperlink{classrepositories_1_1base__repository_1_1_base_repository_a7c37db02349f466db83c092a4d3243d5}{execute\+\_\+query}} (self, str query, tuple params=None, bool fetch\+\_\+one=False, bool fetch\+\_\+all=False)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classrepositories_1_1base__repository_1_1_base_repository_a054874f9a8839696c97afcfd06f3e061}\label{classrepositories_1_1base__repository_1_1_base_repository_a054874f9a8839696c97afcfd06f3e061} 
+{\bfseries db\+\_\+manager} = db\+\_\+manager
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Clase base para todos los repositorios
+Implementa operaciones CRUD básicas
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classrepositories_1_1base__repository_1_1_base_repository_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classrepositories_1_1base__repository_1_1_base_repository_a7c37db02349f466db83c092a4d3243d5}\index{repositories.base\_repository.BaseRepository@{repositories.base\_repository.BaseRepository}!execute\_query@{execute\_query}}
+\index{execute\_query@{execute\_query}!repositories.base\_repository.BaseRepository@{repositories.base\_repository.BaseRepository}}
+\doxysubsubsection{\texorpdfstring{execute\_query()}{execute\_query()}}
+{\footnotesize\ttfamily \label{classrepositories_1_1base__repository_1_1_base_repository_a7c37db02349f466db83c092a4d3243d5} 
+ Optional\mbox{[}Any\mbox{]} repositories.\+base\+\_\+repository.\+Base\+Repository.\+execute\+\_\+query (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{query}{, }\item[{tuple }]{params}{ = {\ttfamily None}, }\item[{bool }]{fetch\+\_\+one}{ = {\ttfamily False}, }\item[{bool }]{fetch\+\_\+all}{ = {\ttfamily False}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Ejecutar una query con manejo de conexiones del pool
+
+Args:
+    query: SQL query to execute
+    params: Parameters for the query
+    fetch_one: Return single result
+    fetch_all: Return all results
+    
+Returns:
+    Query result or None
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+backend/repositories/base\+\_\+repository.\+py\end{DoxyCompactItemize}

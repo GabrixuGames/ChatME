@@ -1,0 +1,32 @@
+\doxysection{frontend/node\+\_\+modules/shebang-\/command Directory Reference}
+\hypertarget{dir_29cdfac8c0d6bb628cc138bf7ea4ed97}{}\label{dir_29cdfac8c0d6bb628cc138bf7ea4ed97}\index{frontend/node\_modules/shebang-\/command Directory Reference@{frontend/node\_modules/shebang-\/command Directory Reference}}
+
+
+\doxysubsection{Detailed Description}
+\hypertarget{dir_29cdfac8c0d6bb628cc138bf7ea4ed97_autotoc_md6358}{}\doxysubsection{\texorpdfstring{shebang-\/command \mbox{[}!\mbox{[}Build Status\mbox{]}(\href{https://travis-ci.org/kevva/shebang-command.svg?branch=master}{\texttt{https\+://travis-\/ci.\+org/kevva/shebang-\/command.\+svg?branch=master}})\mbox{]}(\href{https://travis-ci.org/kevva/shebang-command}{\texttt{https\+://travis-\/ci.\+org/kevva/shebang-\/command}})}{shebang-\/command \mbox{[}!\mbox{[}Build Status\mbox{]}(\href{https://travis-ci.org/kevva/shebang-command.svg?branch=master}{\texttt{https\+://travis-\/ci.\+org/kevva/shebang-\/command.\+svg?branch=master}})\mbox{]}(\href{https://travis-ci.org/kevva/shebang-command}{\texttt{https\+://travis-\/ci.\+org/kevva/shebang-\/command}})}}\label{dir_29cdfac8c0d6bb628cc138bf7ea4ed97_autotoc_md6358}
+\begin{quote}
+Get the command from a shebang \end{quote}
+\hypertarget{dir_29cdfac8c0d6bb628cc138bf7ea4ed97_autotoc_md6359}{}\doxysubsection{\texorpdfstring{Install}{Install}}\label{dir_29cdfac8c0d6bb628cc138bf7ea4ed97_autotoc_md6359}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\$\ npm\ install\ shebang-\/command}
+
+\end{DoxyCode}
+\hypertarget{dir_29cdfac8c0d6bb628cc138bf7ea4ed97_autotoc_md6360}{}\doxysubsection{\texorpdfstring{Usage}{Usage}}\label{dir_29cdfac8c0d6bb628cc138bf7ea4ed97_autotoc_md6360}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{const\ shebangCommand\ =\ require('shebang-\/command');}
+\DoxyCodeLine{}
+\DoxyCodeLine{shebangCommand('\#!/usr/bin/env\ node');}
+\DoxyCodeLine{//=>\ 'node'}
+\DoxyCodeLine{}
+\DoxyCodeLine{shebangCommand('\#!/bin/bash');}
+\DoxyCodeLine{//=>\ 'bash'}
+
+\end{DoxyCode}
+\hypertarget{dir_29cdfac8c0d6bb628cc138bf7ea4ed97_autotoc_md6361}{}\doxysubsection{\texorpdfstring{API}{API}}\label{dir_29cdfac8c0d6bb628cc138bf7ea4ed97_autotoc_md6361}
+\hypertarget{dir_29cdfac8c0d6bb628cc138bf7ea4ed97_autotoc_md6362}{}\doxysubsubsection{\texorpdfstring{shebang\+Command(string)}{shebang\+Command(string)}}\label{dir_29cdfac8c0d6bb628cc138bf7ea4ed97_autotoc_md6362}
+\hypertarget{dir_29cdfac8c0d6bb628cc138bf7ea4ed97_autotoc_md6363}{}\doxysubsubsubsection{\texorpdfstring{string}{string}}\label{dir_29cdfac8c0d6bb628cc138bf7ea4ed97_autotoc_md6363}
+Type\+: {\ttfamily string}
+
+String containing a shebang. 

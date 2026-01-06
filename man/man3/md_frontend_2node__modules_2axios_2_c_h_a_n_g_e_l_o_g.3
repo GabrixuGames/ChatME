@@ -1,0 +1,1729 @@
+.TH "md_frontend_2node__modules_2axios_2_c_h_a_n_g_e_l_o_g" 3 "Version 0.1" "Chat-ME!" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md_frontend_2node__modules_2axios_2_c_h_a_n_g_e_l_o_g \- Changelog 
+.PP
+
+.SH "\fR1\&.12\&.2\fP (2025-09-14)"
+.PP
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBfetch:\fP use current global fetch instead of cached one when env fetch is not specified to keep MSW support; (\fR#7030\fP) (\fRcf78825\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.IP "\(bu" 2
+ \fRNoritaka Kobayashi\fP
+.PP
+.SH "\fR1\&.12\&.1\fP (2025-09-12)"
+.PP
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBtypes:\fP fixed env config types; (\fR#7020\fP) (\fRb5f26b7\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.PP
+.SH "\fR1\&.12\&.0\fP (2025-09-11)"
+.PP
+.SS "Bug Fixes"
+.IP "\(bu" 2
+adding build artifacts (\fR9ec86de\fP)
+.IP "\(bu" 2
+dont add dist on release (\fRa2edc36\fP)
+.IP "\(bu" 2
+\fBfetch-adapter:\fP set correct Content-Type for Node FormData (\fR#6998\fP) (\fRa9f47af\fP)
+.IP "\(bu" 2
+\fBnode:\fP enforce maxContentLength for data: URLs (\fR#7011\fP) (\fR945435f\fP)
+.IP "\(bu" 2
+package exports (\fR#5627\fP) (\fRaa78ac2\fP)
+.IP "\(bu" 2
+\fBparams:\fP removing '[' and ']' from URL encode exclude characters (\fR#3316\fP) (\fR#5715\fP) (\fR6d84189\fP)
+.IP "\(bu" 2
+release pr run (\fRfd7f404\fP)
+.IP "\(bu" 2
+\fBtypes:\fP change the type guard on isCancel (\fR#5595\fP) (\fR0dbb7fd\fP)
+.PP
+.SS "Features"
+.IP "\(bu" 2
+\fBadapter:\fP surface low‑level network error details; attach original error via cause (\fR#6982\fP) (\fR78b290c\fP)
+.IP "\(bu" 2
+\fBfetch:\fP add fetch, Request, Response env config variables for the adapter; (\fR#7003\fP) (\fRc959ff2\fP)
+.IP "\(bu" 2
+support reviver on JSON\&.parse (\fR#5926\fP) (\fR2a97634\fP), closes \fR#5924\fP
+.IP "\(bu" 2
+\fBtypes:\fP extend AxiosResponse interface to include custom headers type (\fR#6782\fP) (\fR7960d34\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRWillian Agostini\fP
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.IP "\(bu" 2
+ \fRkhani\fP
+.IP "\(bu" 2
+ \fRAmeer Assadi\fP
+.IP "\(bu" 2
+ \fREmiedonmokumo Dick-Boro\fP
+.IP "\(bu" 2
+ \fRZeroday BYTE\fP
+.IP "\(bu" 2
+ \fRJason Saayman\fP
+.IP "\(bu" 2
+ \fR최예찬\fP
+.IP "\(bu" 2
+ \fRGligor Kotushevski\fP
+.IP "\(bu" 2
+ \fRAleksandar Dimitrov\fP
+.PP
+.SH "\fR1\&.11\&.0\fP (2025-07-22)"
+.PP
+.SS "Bug Fixes"
+.IP "\(bu" 2
+form-data npm pakcage (\fR#6970\fP) (\fRe72c193\fP)
+.IP "\(bu" 2
+prevent RangeError when using large Buffers (\fR#6961\fP) (\fRa2214ca\fP)
+.IP "\(bu" 2
+\fBtypes:\fP resolve type discrepancies between ESM and CJS TypeScript declaration files (\fR#6956\fP) (\fR8517aa1\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRizzy goldman\fP
+.IP "\(bu" 2
+ \fRManish Sahani\fP
+.IP "\(bu" 2
+ \fRNoritaka Kobayashi\fP
+.IP "\(bu" 2
+ \fRJames Nail\fP
+.IP "\(bu" 2
+ \fRTejaswi1305\fP
+.PP
+.SH "\fR1\&.10\&.0\fP (2025-06-14)"
+.PP
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBadapter:\fP pass fetchOptions to fetch function (\fR#6883\fP) (\fR0f50af8\fP)
+.IP "\(bu" 2
+\fBform-data:\fP convert boolean values to strings in FormData serialization (\fR#6917\fP) (\fR5064b10\fP)
+.IP "\(bu" 2
+\fBpackage:\fP add module entry point for React Native; (\fR#6933\fP) (\fR3d343b8\fP)
+.PP
+.SS "Features"
+.IP "\(bu" 2
+\fBtypes:\fP improved fetchOptions interface (\fR#6867\fP) (\fR63f1fce\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.IP "\(bu" 2
+ \fRNoritaka Kobayashi\fP
+.IP "\(bu" 2
+ \fRDimitrios Lazanas\fP
+.IP "\(bu" 2
+ \fRAdrian Knapp\fP
+.IP "\(bu" 2
+ \fRHowie Zhao\fP
+.IP "\(bu" 2
+ \fRUhyeon Park\fP
+.IP "\(bu" 2
+ \fRSampo Silvennoinen\fP
+.PP
+.SH "\fR1\&.9\&.0\fP (2025-04-24)"
+.PP
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBcore:\fP fix the Axios constructor implementation to treat the config argument as optional; (\fR#6881\fP) (\fR6c5d4cd\fP)
+.IP "\(bu" 2
+\fBfetch:\fP fixed ERR_NETWORK mapping for Safari browsers; (\fR#6767\fP) (\fRdfe8411\fP)
+.IP "\(bu" 2
+\fBheaders:\fP allow iterable objects to be a data source for the set method; (\fR#6873\fP) (\fR1b1f9cc\fP)
+.IP "\(bu" 2
+\fBheaders:\fP fix \fRgetSetCookie\fP by using 'get' method for caseless access; (\fR#6874\fP) (\fRd4f7df4\fP)
+.IP "\(bu" 2
+\fBheaders:\fP fixed support for setting multiple header values from an iterated source; (\fR#6885\fP) (\fRf7a3b5e\fP)
+.IP "\(bu" 2
+\fBhttp:\fP send minimal end multipart boundary (\fR#6661\fP) (\fR987d2e2\fP)
+.IP "\(bu" 2
+\fBtypes:\fP fix autocomplete for adapter config (\fR#6855\fP) (\fRe61a893\fP)
+.PP
+.SS "Features"
+.IP "\(bu" 2
+\fBAxiosHeaders:\fP add getSetCookie method to retrieve set-cookie headers values (\fR#5707\fP) (\fR80ea756\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.IP "\(bu" 2
+ \fRJay\fP
+.IP "\(bu" 2
+ \fRWillian Agostini\fP
+.IP "\(bu" 2
+ \fRGeorge Cheng\fP
+.IP "\(bu" 2
+ \fRFatahChan\fP
+.IP "\(bu" 2
+ \fRIonuț G\&. Stan\fP
+.PP
+.SS "\fR1\&.8\&.4\fP (2025-03-19)"
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBbuildFullPath:\fP handle \fRallowAbsoluteUrls: false\fP without \fRbaseURL\fP (\fR#6833\fP) (\fRf10c2e0\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRMarc Hassan\fP
+.PP
+.SS "\fR1\&.8\&.3\fP (2025-03-10)"
+.SS "Bug Fixes"
+.IP "\(bu" 2
+add missing type for allowAbsoluteUrls (\fR#6818\fP) (\fR10fa70e\fP)
+.IP "\(bu" 2
+\fBxhr/fetch:\fP pass \fRallowAbsoluteUrls\fP to \fRbuildFullPath\fP in \fRxhr\fP and \fRfetch\fP adapters (\fR#6814\fP) (\fRec159e5\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRAshcon Partovi\fP
+.IP "\(bu" 2
+ \fRStefanBRas\fP
+.IP "\(bu" 2
+ \fRMarc Hassan\fP
+.PP
+.SS "\fR1\&.8\&.2\fP (2025-03-07)"
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBhttp-adapter:\fP add allowAbsoluteUrls to path building (\fR#6810\fP) (\fRfb8eec2\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRFasoro-Joseph Alexander\fP
+.PP
+.SS "\fR1\&.8\&.1\fP (2025-02-26)"
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fButils:\fP move \fRgenerateString\fP to platform utils to avoid importing crypto module into client builds; (\fR#6789\fP) (\fR36a5a62\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.PP
+.SH "\fR1\&.8\&.0\fP (2025-02-25)"
+.PP
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBexamples:\fP application crashed when navigating examples in browser (\fR#5938\fP) (\fR1260ded\fP)
+.IP "\(bu" 2
+missing word in SUPPORT_QUESTION\&.yml (\fR#6757\fP) (\fR1f890b1\fP)
+.IP "\(bu" 2
+\fButils:\fP replace getRandomValues with crypto module (\fR#6788\fP) (\fR23a25af\fP)
+.PP
+.SS "Features"
+.IP "\(bu" 2
+Add config for ignoring absolute URLs (\fR#5902\fP) (\fR#6192\fP) (\fR32c7bcc\fP)
+.PP
+.SS "Reverts"
+.IP "\(bu" 2
+Revert "chore: expose fromDataToStream to be consumable (#6731)" (#6732) (\fR1317261\fP), closes \fR#6731\fP \fR#6732\fP
+.PP
+.SS "BREAKING CHANGES"
+.IP "\(bu" 2
+code relying on the above will now combine the URLs instead of prefer request URL
+.IP "\(bu" 2
+feat: add config option for allowing absolute URLs
+.IP "\(bu" 2
+fix: add default value for allowAbsoluteUrls in buildFullPath
+.IP "\(bu" 2
+fix: typo in flow control when setting allowAbsoluteUrls
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRMichael Toscano\fP
+.IP "\(bu" 2
+ \fRWillian Agostini\fP
+.IP "\(bu" 2
+ \fRNaron\fP
+.IP "\(bu" 2
+ \fRshravan || श्रvan\fP
+.IP "\(bu" 2
+ \fRJustin Dhillon\fP
+.IP "\(bu" 2
+ \fRyionr\fP
+.IP "\(bu" 2
+ \fRShin&#x27;ya Ueoka\fP
+.IP "\(bu" 2
+ \fRDan Dascalescu\fP
+.IP "\(bu" 2
+ \fRNitin Ramnani\fP
+.IP "\(bu" 2
+ \fRShay Molcho\fP
+.IP "\(bu" 2
+ \fRJay\fP
+.IP "\(bu" 2
+fancy45daddy
+.IP "\(bu" 2
+ \fRHabip Akyol\fP
+.IP "\(bu" 2
+ \fRBailey Lissington\fP
+.IP "\(bu" 2
+ \fRBernardo da Eira Duarte\fP
+.IP "\(bu" 2
+ \fRShivam Batham\fP
+.IP "\(bu" 2
+ \fRLipin Kariappa\fP
+.PP
+.SS "\fR1\&.7\&.9\fP (2024-12-04)"
+.SS "Reverts"
+.IP "\(bu" 2
+Revert "fix(types): export CJS types from ESM (#6218)" (#6729) (\fRc44d2f2\fP), closes \fR#6218\fP \fR#6729\fP
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRJay\fP
+.PP
+.SS "\fR1\&.7\&.8\fP (2024-11-25)"
+.SS "Bug Fixes"
+.IP "\(bu" 2
+allow passing a callback as paramsSerializer to buildURL (\fR#6680\fP) (\fReac4619\fP)
+.IP "\(bu" 2
+\fBcore:\fP fixed config merging bug (\fR#6668\fP) (\fR5d99fe4\fP)
+.IP "\(bu" 2
+fixed width form to not shrink after 'Send Request' button is clicked (\fR#6644\fP) (\fR7ccd5fd\fP)
+.IP "\(bu" 2
+\fBhttp:\fP add support for File objects as payload in http adapter (\fR#6588\fP) (\fR#6605\fP) (\fR6841d8d\fP)
+.IP "\(bu" 2
+\fBhttp:\fP fixed proxy-from-env module import (\fR#5222\fP) (\fR12b3295\fP)
+.IP "\(bu" 2
+\fBhttp:\fP use \fRglobalThis\&.TextEncoder\fP when available (\fR#6634\fP) (\fRdf956d1\fP)
+.IP "\(bu" 2
+ios11 breaks when build (\fR#6608\fP) (\fR7638952\fP)
+.IP "\(bu" 2
+\fBtypes:\fP add missing types for mergeConfig function (\fR#6590\fP) (\fR00de614\fP)
+.IP "\(bu" 2
+\fBtypes:\fP export CJS types from ESM (\fR#6218\fP) (\fRc71811b\fP)
+.IP "\(bu" 2
+updated stream aborted error message to be more clear (\fR#6615\fP) (\fRcc3217a\fP)
+.IP "\(bu" 2
+use URL API instead of DOM to fix a potential vulnerability warning; (\fR#6714\fP) (\fR0a8d6e1\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRRemco Haszing\fP
+.IP "\(bu" 2
+ \fRJay\fP
+.IP "\(bu" 2
+ \fRAayush Yadav\fP
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.IP "\(bu" 2
+ \fREll Bradshaw\fP
+.IP "\(bu" 2
+ \fRAmit Saini\fP
+.IP "\(bu" 2
+ \fRTommaso Paulon\fP
+.IP "\(bu" 2
+ \fRAkki\fP
+.IP "\(bu" 2
+ \fRSampo Silvennoinen\fP
+.IP "\(bu" 2
+ \fRKasper Isager Dalsgarð\fP
+.IP "\(bu" 2
+ \fRChristian Clauss\fP
+.IP "\(bu" 2
+ \fRPavan Welihinda\fP
+.IP "\(bu" 2
+ \fRTaylor Flatt\fP
+.IP "\(bu" 2
+ \fRKenzo Wada\fP
+.IP "\(bu" 2
+ \fRNgole Lawson\fP
+.IP "\(bu" 2
+ \fRHaven\fP
+.IP "\(bu" 2
+ \fRShrivali Dutt\fP
+.IP "\(bu" 2
+ \fRHenco Appel\fP
+.PP
+.SS "\fR1\&.7\&.7\fP (2024-08-31)"
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBfetch:\fP fix stream handling in Safari by fallback to using a stream reader instead of an async iterator; (\fR#6584\fP) (\fRd198085\fP)
+.IP "\(bu" 2
+\fBhttp:\fP fixed support for IPv6 literal strings in url (\fR#5731\fP) (\fR364993f\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRRishi556\fP
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.PP
+.SS "\fR1\&.7\&.6\fP (2024-08-30)"
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBfetch:\fP fix content length calculation for FormData payload; (\fR#6524\fP) (\fR085f568\fP)
+.IP "\(bu" 2
+\fBfetch:\fP optimize signals composing logic; (\fR#6582\fP) (\fRdf9889b\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.IP "\(bu" 2
+ \fRJacques Germishuys\fP
+.IP "\(bu" 2
+ \fRkuroino721\fP
+.PP
+.SS "\fR1\&.7\&.5\fP (2024-08-23)"
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBadapter:\fP fix undefined reference to hasBrowserEnv (\fR#6572\fP) (\fR7004707\fP)
+.IP "\(bu" 2
+\fBcore:\fP add the missed implementation of AxiosError#status property; (\fR#6573\fP) (\fR6700a8a\fP)
+.IP "\(bu" 2
+\fBcore:\fP fix \fRReferenceError: navigator is not defined\fP for custom environments; (\fR#6567\fP) (\fRfed1a4b\fP)
+.IP "\(bu" 2
+\fBfetch:\fP fix credentials handling in Cloudflare workers (\fR#6533\fP) (\fR550d885\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.IP "\(bu" 2
+ \fRAntonin Bas\fP
+.IP "\(bu" 2
+ \fRHans Otto Wirtz\fP
+.PP
+.SS "\fR1\&.7\&.4\fP (2024-08-13)"
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBsec:\fP CVE-2024-39338 (\fR#6539\fP) (\fR#6543\fP) (\fR6b6b605\fP)
+.IP "\(bu" 2
+\fBsec:\fP disregard protocol-relative URL to remediate SSRF (\fR#6539\fP) (\fR07a661a\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRLev Pachmanov\fP
+.IP "\(bu" 2
+ \fRĐỗ Trọng Hải\fP
+.PP
+.SS "\fR1\&.7\&.3\fP (2024-08-01)"
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBadapter:\fP fix progress event emitting; (\fR#6518\fP) (\fRe3c76fc\fP)
+.IP "\(bu" 2
+\fBfetch:\fP fix withCredentials request config (\fR#6505\fP) (\fR85d4d0e\fP)
+.IP "\(bu" 2
+\fBxhr:\fP return original config on errors from XHR adapter (\fR#6515\fP) (\fR8966ee7\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.IP "\(bu" 2
+ \fRValerii Sidorenko\fP
+.IP "\(bu" 2
+ \fRprianYu\fP
+.PP
+.SS "\fR1\&.7\&.2\fP (2024-05-21)"
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBfetch:\fP enhance fetch API detection; (\fR#6413\fP) (\fR4f79aef\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.PP
+.SS "\fR1\&.7\&.1\fP (2024-05-20)"
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBfetch:\fP fixed ReferenceError issue when TextEncoder is not available in the environment; (\fR#6410\fP) (\fR733f15f\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.PP
+.SH "\fR1\&.7\&.0\fP (2024-05-19)"
+.PP
+.SS "Features"
+.IP "\(bu" 2
+\fBadapter:\fP add fetch adapter; (\fR#6371\fP) (\fRa3ff99b\fP)
+.PP
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBcore/axios:\fP handle un-writable error stack (\fR#6362\fP) (\fR81e0455\fP) 
+.br
+
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.IP "\(bu" 2
+ \fRJay\fP
+.IP "\(bu" 2
+ \fRAlexandre ABRIOUX\fP
+.PP
+.SH "\fR1\&.7\&.0-beta\&.2\fP (2024-05-19)"
+.PP
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBfetch:\fP capitalize HTTP method names; (\fR#6395\fP) (\fRad3174a\fP)
+.IP "\(bu" 2
+\fBfetch:\fP fix & optimize progress capturing for cases when the request data has a nullish value or zero data length (\fR#6400\fP) (\fR95a3e8e\fP)
+.IP "\(bu" 2
+\fBfetch:\fP fix headers getting from a stream response; (\fR#6401\fP) (\fR870e0a7\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.PP
+.SH "\fR1\&.7\&.0-beta\&.1\fP (2024-05-07)"
+.PP
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBcore/axios:\fP handle un-writable error stack (\fR#6362\fP) (\fR81e0455\fP)
+.IP "\(bu" 2
+\fBfetch:\fP fix cases when ReadableStream or Response\&.body are not available; (\fR#6377\fP) (\fRd1d359d\fP)
+.IP "\(bu" 2
+\fBfetch:\fP treat fetch-related TypeError as an AxiosError\&.ERR_NETWORK error; (\fR#6380\fP) (\fRbb5f9a5\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRAlexandre ABRIOUX\fP
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.PP
+.SH "\fR1\&.7\&.0-beta\&.0\fP (2024-04-28)"
+.PP
+.SS "Features"
+.IP "\(bu" 2
+\fBadapter:\fP add fetch adapter; (\fR#6371\fP) (\fRa3ff99b\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.IP "\(bu" 2
+ \fRJay\fP
+.PP
+.SS "\fR1\&.6\&.8\fP (2024-03-15)"
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBAxiosHeaders:\fP fix AxiosHeaders conversion to an object during config merging (\fR#6243\fP) (\fR2656612\fP)
+.IP "\(bu" 2
+\fBimport:\fP use named export for EventEmitter; (\fR7320430\fP)
+.IP "\(bu" 2
+\fBvulnerability:\fP update follow-redirects to 1\&.15\&.6 (\fR#6300\fP) (\fR8786e0f\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRJay\fP
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.IP "\(bu" 2
+ \fRMitchell\fP
+.IP "\(bu" 2
+ \fREmmanuel\fP
+.IP "\(bu" 2
+ \fRLucas Keller\fP
+.IP "\(bu" 2
+ \fRAditya Mogili\fP
+.IP "\(bu" 2
+ \fRMiroslav Petrov\fP
+.PP
+.SS "\fR1\&.6\&.7\fP (2024-01-25)"
+.SS "Bug Fixes"
+.IP "\(bu" 2
+capture async stack only for rejections with native error objects; (\fR#6203\fP) (\fR1a08f90\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.IP "\(bu" 2
+ \fRzhoulixiang\fP
+.PP
+.SS "\fR1\&.6\&.6\fP (2024-01-24)"
+.SS "Bug Fixes"
+.IP "\(bu" 2
+fixed missed dispatchBeforeRedirect argument (\fR#5778\fP) (\fRa1938ff\fP)
+.IP "\(bu" 2
+wrap errors to improve async stack trace (\fR#5987\fP) (\fR123f354\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRIlya Priven\fP
+.IP "\(bu" 2
+ \fRZao Soula\fP
+.PP
+.SS "\fR1\&.6\&.5\fP (2024-01-05)"
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBci:\fP refactor notify action as a job of publish action; (\fR#6176\fP) (\fR0736f95\fP)
+.IP "\(bu" 2
+\fBdns:\fP fixed lookup error handling; (\fR#6175\fP) (\fRf4f2b03\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.IP "\(bu" 2
+ \fRJay\fP
+.PP
+.SS "\fR1\&.6\&.4\fP (2024-01-03)"
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBsecurity:\fP fixed formToJSON prototype pollution vulnerability; (\fR#6167\fP) (\fR3c0c11c\fP)
+.IP "\(bu" 2
+\fBsecurity:\fP fixed security vulnerability in follow-redirects (\fR#6163\fP) (\fR75af1cd\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRJay\fP
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.IP "\(bu" 2
+ \fRGuy Nesher\fP
+.PP
+.SS "\fR1\&.6\&.3\fP (2023-12-26)"
+.SS "Bug Fixes"
+.IP "\(bu" 2
+Regular Expression Denial of Service (ReDoS) (\fR#6132\fP) (\fR5e7ad38\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRJay\fP
+.IP "\(bu" 2
+ \fRWillian Agostini\fP
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.PP
+.SS "\fR1\&.6\&.2\fP (2023-11-14)"
+.SS "Features"
+.IP "\(bu" 2
+\fBwithXSRFToken:\fP added withXSRFToken option as a workaround to achieve the old \fRwithCredentials\fP behavior; (\fR#6046\fP) (\fRcff9967\fP)
+.PP
+.SS "PRs"
+.IP "\(bu" 2
+feat(withXSRFToken): added withXSRFToken option as a workaround to achieve the old &#x60;withCredentials&#x60; behavior; ( \fR#6046\fP ) 
+.PP
+.nf
+📢 This PR added &#x27;withXSRFToken&#x27; option as a replacement for old withCredentials behaviour\&. 
+You should now use withXSRFToken along with withCredential to get the old behavior\&.
+This functionality is considered as a fix\&.
+
+.fi
+.PP
+
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.IP "\(bu" 2
+ \fRNg Choon Khon (CK)\fP
+.IP "\(bu" 2
+ \fRMuhammad Noman\fP
+.PP
+.SS "\fR1\&.6\&.1\fP (2023-11-08)"
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBformdata:\fP fixed content-type header normalization for non-standard browser environments; (\fR#6056\fP) (\fRdd465ab\fP)
+.IP "\(bu" 2
+\fBplatform:\fP fixed emulated browser detection in node\&.js environment; (\fR#6055\fP) (\fR3dc8369\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.IP "\(bu" 2
+ \fRFabian Meyer\fP
+.PP
+.SS "PRs"
+.IP "\(bu" 2
+feat(withXSRFToken): added withXSRFToken option as a workaround to achieve the old &#x60;withCredentials&#x60; behavior; ( \fR#6046\fP ) 
+.PP
+.nf
+📢 This PR added &#x27;withXSRFToken&#x27; option as a replacement for old withCredentials behaviour\&. 
+You should now use withXSRFToken along with withCredential to get the old behavior\&.
+This functionality is considered as a fix\&.
+
+.fi
+.PP
+
+.PP
+.SH "\fR1\&.6\&.0\fP (2023-10-26)"
+.PP
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBCSRF:\fP fixed CSRF vulnerability CVE-2023-45857 (\fR#6028\fP) (\fR96ee232\fP)
+.IP "\(bu" 2
+\fBdns:\fP fixed lookup function decorator to work properly in node v20; (\fR#6011\fP) (\fR5aaff53\fP)
+.IP "\(bu" 2
+\fBtypes:\fP fix AxiosHeaders types; (\fR#5931\fP) (\fRa1c8ad0\fP)
+.PP
+.SS "PRs"
+.IP "\(bu" 2
+CVE 2023 45857 ( \fR#6028\fP ) 
+.PP
+.nf
+⚠️ Critical vulnerability fix\&. See https://security\&.snyk\&.io/vuln/SNYK\-JS\-AXIOS\-6032459
+
+.fi
+.PP
+
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.IP "\(bu" 2
+ \fRValentin Panov\fP
+.IP "\(bu" 2
+ \fRRinku Chaudhari\fP
+.PP
+.SS "\fR1\&.5\&.1\fP (2023-09-26)"
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBadapters:\fP improved adapters loading logic to have clear error messages; (\fR#5919\fP) (\fRe410779\fP)
+.IP "\(bu" 2
+\fBformdata:\fP fixed automatic addition of the \fRContent-Type\fP header for FormData in non-browser environments; (\fR#5917\fP) (\fRbc9af51\fP)
+.IP "\(bu" 2
+\fBheaders:\fP allow \fRcontent-encoding\fP header to handle case-insensitive values (\fR#5890\fP) (\fR#5892\fP) (\fR4c89f25\fP)
+.IP "\(bu" 2
+\fBtypes:\fP removed duplicated code (\fR9e62056\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.IP "\(bu" 2
+ \fRDavid Dallas\fP
+.IP "\(bu" 2
+ \fRSean Sattler\fP
+.IP "\(bu" 2
+ \fRMustafa Ateş Uzun\fP
+.IP "\(bu" 2
+ \fRPrzemyslaw Motacki\fP
+.IP "\(bu" 2
+ \fRMichael Di Prisco\fP
+.PP
+.SS "PRs"
+.IP "\(bu" 2
+CVE 2023 45857 ( \fR#6028\fP ) 
+.PP
+.nf
+⚠️ Critical vulnerability fix\&. See https://security\&.snyk\&.io/vuln/SNYK\-JS\-AXIOS\-6032459
+
+.fi
+.PP
+
+.PP
+.SH "\fR1\&.5\&.0\fP (2023-08-26)"
+.PP
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBadapter:\fP make adapter loading error more clear by using platform-specific adapters explicitly (\fR#5837\fP) (\fR9a414bb\fP)
+.IP "\(bu" 2
+\fBdns:\fP fixed \fRcacheable-lookup\fP integration; (\fR#5836\fP) (\fRb3e327d\fP)
+.IP "\(bu" 2
+\fBheaders:\fP added support for setting header names that overlap with class methods; (\fR#5831\fP) (\fRd8b4ca0\fP)
+.IP "\(bu" 2
+\fBheaders:\fP fixed common Content-Type header merging; (\fR#5832\fP) (\fR8fda276\fP)
+.PP
+.SS "Features"
+.IP "\(bu" 2
+export getAdapter function (\fR#5324\fP) (\fRca73eb8\fP)
+.IP "\(bu" 2
+\fBexport:\fP export adapters without \fRunsafe\fP prefix (\fR#5839\fP) (\fR1601f4a\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.IP "\(bu" 2
+ \fR夜葬\fP
+.IP "\(bu" 2
+ \fRJonathan Budiman\fP
+.IP "\(bu" 2
+ \fRMichael Di Prisco\fP
+.PP
+.SS "PRs"
+.IP "\(bu" 2
+CVE 2023 45857 ( \fR#6028\fP ) 
+.PP
+.nf
+⚠️ Critical vulnerability fix\&. See https://security\&.snyk\&.io/vuln/SNYK\-JS\-AXIOS\-6032459
+
+.fi
+.PP
+
+.PP
+.SH "\fR1\&.4\&.0\fP (2023-04-27)"
+.PP
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBformdata:\fP add \fRmultipart/form-data\fP content type for FormData payload on custom client environments; (\fR#5678\fP) (\fRbbb61e7\fP)
+.IP "\(bu" 2
+\fBpackage:\fP export package internals with unsafe path prefix; (\fR#5677\fP) (\fRdf38c94\fP)
+.PP
+.SS "Features"
+.IP "\(bu" 2
+\fBdns:\fP added support for a custom lookup function; (\fR#5339\fP) (\fR2701911\fP)
+.IP "\(bu" 2
+\fBtypes:\fP export \fRAxiosHeaderValue\fP type\&. (\fR#5525\fP) (\fR726f1c8\fP)
+.PP
+.SS "Performance Improvements"
+.IP "\(bu" 2
+\fBmerge-config:\fP optimize mergeConfig performance by avoiding duplicate key visits; (\fR#5679\fP) (\fRe6f7053\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.IP "\(bu" 2
+ \fRArthur Fiorette\fP
+.IP "\(bu" 2
+ \fRPIYUSH NEGI\fP
+.PP
+.SS "PRs"
+.IP "\(bu" 2
+CVE 2023 45857 ( \fR#6028\fP ) 
+.PP
+.nf
+⚠️ Critical vulnerability fix\&. See https://security\&.snyk\&.io/vuln/SNYK\-JS\-AXIOS\-6032459
+
+.fi
+.PP
+
+.PP
+.SS "\fR1\&.3\&.6\fP (2023-04-19)"
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBtypes:\fP added transport to RawAxiosRequestConfig (\fR#5445\fP) (\fR6f360a2\fP)
+.IP "\(bu" 2
+\fButils:\fP make isFormData detection logic stricter to avoid unnecessary calling of the \fRtoString\fP method on the target; (\fR#5661\fP) (\fRaa372f7\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.IP "\(bu" 2
+ \fRMichael Di Prisco\fP
+.PP
+.SS "PRs"
+.IP "\(bu" 2
+CVE 2023 45857 ( \fR#6028\fP ) 
+.PP
+.nf
+⚠️ Critical vulnerability fix\&. See https://security\&.snyk\&.io/vuln/SNYK\-JS\-AXIOS\-6032459
+
+.fi
+.PP
+
+.PP
+.SS "\fR1\&.3\&.5\fP (2023-04-05)"
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBheaders:\fP fixed isValidHeaderName to support full list of allowed characters; (\fR#5584\fP) (\fRe7decef\fP)
+.IP "\(bu" 2
+\fBparams:\fP re-added the ability to set the function as \fRparamsSerializer\fP config; (\fR#5633\fP) (\fRa56c866\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.PP
+.SS "PRs"
+.IP "\(bu" 2
+CVE 2023 45857 ( \fR#6028\fP ) 
+.PP
+.nf
+⚠️ Critical vulnerability fix\&. See https://security\&.snyk\&.io/vuln/SNYK\-JS\-AXIOS\-6032459
+
+.fi
+.PP
+
+.PP
+.SS "\fR1\&.3\&.4\fP (2023-02-22)"
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBblob:\fP added a check to make sure the Blob class is available in the browser's global scope; (\fR#5548\fP) (\fR3772c8f\fP)
+.IP "\(bu" 2
+\fBhttp:\fP fixed regression bug when handling synchronous errors inside the adapter; (\fR#5564\fP) (\fRa3b246c\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.IP "\(bu" 2
+ \fRlcysgsg\fP
+.IP "\(bu" 2
+ \fRMichael Di Prisco\fP
+.PP
+.SS "PRs"
+.IP "\(bu" 2
+CVE 2023 45857 ( \fR#6028\fP ) 
+.PP
+.nf
+⚠️ Critical vulnerability fix\&. See https://security\&.snyk\&.io/vuln/SNYK\-JS\-AXIOS\-6032459
+
+.fi
+.PP
+
+.PP
+.SS "\fR1\&.3\&.3\fP (2023-02-13)"
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBformdata:\fP added a check to make sure the FormData class is available in the browser's global scope; (\fR#5545\fP) (\fRa6dfa72\fP)
+.IP "\(bu" 2
+\fBformdata:\fP fixed setting NaN as Content-Length for form payload in some cases; (\fR#5535\fP) (\fRc19f7bf\fP)
+.IP "\(bu" 2
+\fBheaders:\fP fixed the filtering logic of the clear method; (\fR#5542\fP) (\fRea87ebf\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.IP "\(bu" 2
+ \fR陈若枫\fP
+.PP
+.SS "PRs"
+.IP "\(bu" 2
+CVE 2023 45857 ( \fR#6028\fP ) 
+.PP
+.nf
+⚠️ Critical vulnerability fix\&. See https://security\&.snyk\&.io/vuln/SNYK\-JS\-AXIOS\-6032459
+
+.fi
+.PP
+
+.PP
+.SS "\fR1\&.3\&.2\fP (2023-02-03)"
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBhttp:\fP treat http://localhost as base URL for relative paths to avoid \fRERR_INVALID_URL\fP error; (\fR#5528\fP) (\fR128d56f\fP)
+.IP "\(bu" 2
+\fBhttp:\fP use explicit import instead of TextEncoder global; (\fR#5530\fP) (\fR6b3c305\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.PP
+.SS "PRs"
+.IP "\(bu" 2
+CVE 2023 45857 ( \fR#6028\fP ) 
+.PP
+.nf
+⚠️ Critical vulnerability fix\&. See https://security\&.snyk\&.io/vuln/SNYK\-JS\-AXIOS\-6032459
+
+.fi
+.PP
+
+.PP
+.SS "\fR1\&.3\&.1\fP (2023-02-01)"
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBformdata:\fP add hotfix to use the asynchronous API to compute the content-length header value; (\fR#5521\fP) (\fR96d336f\fP)
+.IP "\(bu" 2
+\fBserializer:\fP fixed serialization of array-like objects; (\fR#5518\fP) (\fR08104c0\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.PP
+.SS "PRs"
+.IP "\(bu" 2
+CVE 2023 45857 ( \fR#6028\fP ) 
+.PP
+.nf
+⚠️ Critical vulnerability fix\&. See https://security\&.snyk\&.io/vuln/SNYK\-JS\-AXIOS\-6032459
+
+.fi
+.PP
+
+.PP
+.SH "\fR1\&.3\&.0\fP (2023-01-31)"
+.PP
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBheaders:\fP fixed & optimized clear method; (\fR#5507\fP) (\fR9915635\fP)
+.IP "\(bu" 2
+\fBhttp:\fP add zlib headers if missing (\fR#5497\fP) (\fR65e8d1e\fP)
+.PP
+.SS "Features"
+.IP "\(bu" 2
+\fBfomdata:\fP added support for spec-compliant FormData & Blob types; (\fR#5316\fP) (\fR6ac574e\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.IP "\(bu" 2
+ \fRItsNotGoodName\fP
+.PP
+.SS "PRs"
+.IP "\(bu" 2
+CVE 2023 45857 ( \fR#6028\fP ) 
+.PP
+.nf
+⚠️ Critical vulnerability fix\&. See https://security\&.snyk\&.io/vuln/SNYK\-JS\-AXIOS\-6032459
+
+.fi
+.PP
+
+.PP
+.SS "\fR1\&.2\&.6\fP (2023-01-28)"
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBheaders:\fP added missed Authorization accessor; (\fR#5502\fP) (\fR342c0ba\fP)
+.IP "\(bu" 2
+\fBtypes:\fP fixed \fRCommonRequestHeadersList\fP & \fRCommonResponseHeadersList\fP types to be private in commonJS; (\fR#5503\fP) (\fR5a3d0a3\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.PP
+.SS "PRs"
+.IP "\(bu" 2
+CVE 2023 45857 ( \fR#6028\fP ) 
+.PP
+.nf
+⚠️ Critical vulnerability fix\&. See https://security\&.snyk\&.io/vuln/SNYK\-JS\-AXIOS\-6032459
+
+.fi
+.PP
+
+.PP
+.SS "\fR1\&.2\&.5\fP (2023-01-26)"
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBtypes:\fP fixed AxiosHeaders to handle spread syntax by making all methods non-enumerable; (\fR#5499\fP) (\fR580f1e8\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.IP "\(bu" 2
+ \fRElliot Ford\fP
+.PP
+.SS "PRs"
+.IP "\(bu" 2
+CVE 2023 45857 ( \fR#6028\fP ) 
+.PP
+.nf
+⚠️ Critical vulnerability fix\&. See https://security\&.snyk\&.io/vuln/SNYK\-JS\-AXIOS\-6032459
+
+.fi
+.PP
+
+.PP
+.SS "\fR1\&.2\&.4\fP (2023-01-22)"
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBtypes:\fP renamed \fRRawAxiosRequestConfig\fP back to \fRAxiosRequestConfig\fP; (\fR#5486\fP) (\fR2a71f49\fP)
+.IP "\(bu" 2
+\fBtypes:\fP fix \fRAxiosRequestConfig\fP generic; (\fR#5478\fP) (\fR9bce81b\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.IP "\(bu" 2
+ \fRDaniel Hillmann\fP
+.PP
+.SS "PRs"
+.IP "\(bu" 2
+CVE 2023 45857 ( \fR#6028\fP ) 
+.PP
+.nf
+⚠️ Critical vulnerability fix\&. See https://security\&.snyk\&.io/vuln/SNYK\-JS\-AXIOS\-6032459
+
+.fi
+.PP
+
+.PP
+.SS "\fR1\&.2\&.3\fP (2023-01-10)"
+.SS "Bug Fixes"
+.IP "\(bu" 2
+\fBtypes:\fP fixed AxiosRequestConfig header interface by refactoring it to RawAxiosRequestConfig; (\fR#5420\fP) (\fR0811963\fP)
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.PP
+.SS "PRs"
+.IP "\(bu" 2
+CVE 2023 45857 ( \fR#6028\fP ) 
+.PP
+.nf
+⚠️ Critical vulnerability fix\&. See https://security\&.snyk\&.io/vuln/SNYK\-JS\-AXIOS\-6032459
+
+.fi
+.PP
+
+.PP
+.SS "[1\&.2\&.2] - 2022-12-29"
+.SS "Fixed"
+.IP "\(bu" 2
+fix(ci): fix release script inputs \fR#5392\fP
+.IP "\(bu" 2
+fix(ci): prerelease scipts \fR#5377\fP
+.IP "\(bu" 2
+fix(ci): release scripts \fR#5376\fP
+.IP "\(bu" 2
+fix(ci): typescript tests \fR#5375\fP
+.IP "\(bu" 2
+fix: Brotli decompression \fR#5353\fP
+.IP "\(bu" 2
+fix: add missing HttpStatusCode \fR#5345\fP
+.PP
+.SS "Chores"
+.IP "\(bu" 2
+chore(ci): set conventional-changelog header config \fR#5406\fP
+.IP "\(bu" 2
+chore(ci): fix automatic contributors resolving \fR#5403\fP
+.IP "\(bu" 2
+chore(ci): improved logging for the contributors list generator \fR#5398\fP
+.IP "\(bu" 2
+chore(ci): fix release action \fR#5397\fP
+.IP "\(bu" 2
+chore(ci): fix version bump script by adding bump argument for target version \fR#5393\fP
+.IP "\(bu" 2
+chore(deps): bump decode-uri-component from 0\&.2\&.0 to 0\&.2\&.2 \fR#5342\fP
+.IP "\(bu" 2
+chore(ci): GitHub Actions Release script \fR#5384\fP
+.IP "\(bu" 2
+chore(ci): release scripts \fR#5364\fP
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+ \fRDmitriy Mozgovoy\fP
+.IP "\(bu" 2
+ \fRWinnie\fP
+.PP
+.SS "[1\&.2\&.1] - 2022-12-05"
+.SS "Changed"
+.IP "\(bu" 2
+feat(exports): export mergeConfig \fR#5151\fP
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+fix(CancelledError): include config \fR#4922\fP
+.IP "\(bu" 2
+fix(general): removing multiple/trailing/leading whitespace \fR#5022\fP
+.IP "\(bu" 2
+fix(headers): decompression for responses without Content-Length header \fR#5306\fP
+.IP "\(bu" 2
+fix(webWorker): exception to sending form data in web worker \fR#5139\fP
+.PP
+.SS "Refactors"
+.IP "\(bu" 2
+refactor(types): AxiosProgressEvent\&.event type to any \fR#5308\fP
+.IP "\(bu" 2
+refactor(types): add missing types for static AxiosError\&.from method \fR#4956\fP
+.PP
+.SS "Chores"
+.IP "\(bu" 2
+chore(docs): remove README link to non-existent upgrade guide \fR#5307\fP
+.IP "\(bu" 2
+chore(docs): typo in issue template name \fR#5159\fP
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+\fRDmitriy Mozgovoy\fP
+.IP "\(bu" 2
+\fRZachary Lysobey\fP
+.IP "\(bu" 2
+\fRKevin Ennis\fP
+.IP "\(bu" 2
+\fRPhilipp Loose\fP
+.IP "\(bu" 2
+\fRsecondl1ght\fP
+.IP "\(bu" 2
+\fRwenzheng\fP
+.IP "\(bu" 2
+\fRIvan Barsukov\fP
+.IP "\(bu" 2
+\fRArthur Fiorette\fP
+.PP
+.SS "PRs"
+.IP "\(bu" 2
+CVE 2023 45857 ( \fR#6028\fP ) 
+.PP
+.nf
+⚠️ Critical vulnerability fix\&. See https://security\&.snyk\&.io/vuln/SNYK\-JS\-AXIOS\-6032459
+
+.fi
+.PP
+
+.PP
+.SS "[1\&.2\&.0] - 2022-11-10"
+.SS "Changed"
+.IP "\(bu" 2
+changed: refactored module exports \fR#5162\fP
+.IP "\(bu" 2
+change: re-added support for loading Axios with require('axios')\&.default \fR#5225\fP
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+fix: improve AxiosHeaders class \fR#5224\fP
+.IP "\(bu" 2
+fix: TypeScript type definitions for commonjs \fR#5196\fP
+.IP "\(bu" 2
+fix: type definition of use method on AxiosInterceptorManager to match the the README \fR#5071\fP
+.IP "\(bu" 2
+fix: __dirname is not defined in the sandbox \fR#5269\fP
+.IP "\(bu" 2
+fix: AxiosError\&.toJSON method to avoid circular references \fR#5247\fP
+.IP "\(bu" 2
+fix: Z_BUF_ERROR when content-encoding is set but the response body is empty \fR#5250\fP
+.PP
+.SS "Refactors"
+.IP "\(bu" 2
+refactor: allowing adapters to be loaded by name \fR#5277\fP
+.PP
+.SS "Chores"
+.IP "\(bu" 2
+chore: force CI restart \fR#5243\fP
+.IP "\(bu" 2
+chore: update ECOSYSTEM\&.md \fR#5077\fP
+.IP "\(bu" 2
+chore: update get/index\&.html \fR#5116\fP
+.IP "\(bu" 2
+chore: update Sandbox UI/UX \fR#5205\fP
+.IP "\(bu" 2
+chore:(actions): remove git credentials after checkout \fR#5235\fP
+.IP "\(bu" 2
+chore(actions): bump actions/dependency-review-action from 2 to 3 \fR#5266\fP
+.IP "\(bu" 2
+chore(packages): bump loader-utils from 1\&.4\&.1 to 1\&.4\&.2 \fR#5295\fP
+.IP "\(bu" 2
+chore(packages): bump engine\&.io from 6\&.2\&.0 to 6\&.2\&.1 \fR#5294\fP
+.IP "\(bu" 2
+chore(packages): bump socket\&.io-parser from 4\&.0\&.4 to 4\&.0\&.5 \fR#5241\fP
+.IP "\(bu" 2
+chore(packages): bump loader-utils from 1\&.4\&.0 to 1\&.4\&.1 \fR#5245\fP
+.IP "\(bu" 2
+chore(docs): update Resources links in README \fR#5119\fP
+.IP "\(bu" 2
+chore(docs): update the link for JSON url \fR#5265\fP
+.IP "\(bu" 2
+chore(docs): fix broken links \fR#5218\fP
+.IP "\(bu" 2
+chore(docs): update and rename UPGRADE_GUIDE\&.md to MIGRATION_GUIDE\&.md \fR#5170\fP
+.IP "\(bu" 2
+chore(docs): typo fix line #856 and #920 \fR#5194\fP
+.IP "\(bu" 2
+chore(docs): typo fix #800 \fR#5193\fP
+.IP "\(bu" 2
+chore(docs): fix typos \fR#5184\fP
+.IP "\(bu" 2
+chore(docs): fix punctuation in README\&.md \fR#5197\fP
+.IP "\(bu" 2
+chore(docs): update readme in the Handling Errors section - issue reference #5260 \fR#5261\fP
+.IP "\(bu" 2
+chore: remove \fBfrom\fP filename \fR#5207\fP
+.IP "\(bu" 2
+chore(docs): update CHANGELOG\&.md \fR#5137\fP
+.IP "\(bu" 2
+chore: add sideEffects false to package\&.json \fR#5025\fP
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+\fRMaddy Miller\fP
+.IP "\(bu" 2
+\fRAmit Saini\fP
+.IP "\(bu" 2
+\fRecyrbe\fP
+.IP "\(bu" 2
+\fRIkko Ashimine\fP
+.IP "\(bu" 2
+\fRGeeth Gunnampalli\fP
+.IP "\(bu" 2
+\fRShreem Asati\fP
+.IP "\(bu" 2
+\fRFrieder Bluemle\fP
+.IP "\(bu" 2
+\fR윤세영\fP
+.IP "\(bu" 2
+\fRClaudio Busatto\fP
+.IP "\(bu" 2
+\fRRemco Haszing\fP
+.IP "\(bu" 2
+\fRDmitriy Mozgovoy\fP
+.IP "\(bu" 2
+\fRCsaba Maulis\fP
+.IP "\(bu" 2
+\fRMoPaMo\fP
+.IP "\(bu" 2
+\fRDaniel Fjeldstad\fP
+.IP "\(bu" 2
+\fRAdrien Brunet\fP
+.IP "\(bu" 2
+\fRFrazer Smith\fP
+.IP "\(bu" 2
+\fRHaiTao\fP
+.IP "\(bu" 2
+\fRAZM\fP
+.IP "\(bu" 2
+\fRrelbns\fP
+.PP
+.SS "PRs"
+.IP "\(bu" 2
+CVE 2023 45857 ( \fR#6028\fP ) 
+.PP
+.nf
+⚠️ Critical vulnerability fix\&. See https://security\&.snyk\&.io/vuln/SNYK\-JS\-AXIOS\-6032459
+
+.fi
+.PP
+
+.PP
+.SS "[1\&.1\&.3] - 2022-10-15"
+.SS "Added"
+.IP "\(bu" 2
+Added custom params serializer support \fR#5113\fP
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed top-level export to keep them in-line with static properties \fR#5109\fP
+.IP "\(bu" 2
+Stopped including null values to query string\&. \fR#5108\fP
+.IP "\(bu" 2
+Restored proxy config backwards compatibility with 0\&.x \fR#5097\fP
+.IP "\(bu" 2
+Added back AxiosHeaders in AxiosHeaderValue \fR#5103\fP
+.IP "\(bu" 2
+Pin CDN install instructions to a specific version \fR#5060\fP
+.IP "\(bu" 2
+Handling of array values fixed for AxiosHeaders \fR#5085\fP
+.PP
+.SS "Chores"
+.IP "\(bu" 2
+docs: match badge style, add link to them \fR#5046\fP
+.IP "\(bu" 2
+chore: fixing comments typo \fR#5054\fP
+.IP "\(bu" 2
+chore: update issue template \fR#5061\fP
+.IP "\(bu" 2
+chore: added progress capturing section to the docs; \fR#5084\fP
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+\fRJason Saayman\fP
+.IP "\(bu" 2
+\fRscarf\fP
+.IP "\(bu" 2
+\fRLenz Weber-Tronic\fP
+.IP "\(bu" 2
+\fRArvindh\fP
+.IP "\(bu" 2
+\fRFélix Legrelle\fP
+.IP "\(bu" 2
+\fRPatrick Petrovic\fP
+.IP "\(bu" 2
+\fRDmitriy Mozgovoy\fP
+.IP "\(bu" 2
+\fRlittledian\fP
+.IP "\(bu" 2
+\fRChronosMasterOfAllTime\fP
+.PP
+.SS "PRs"
+.IP "\(bu" 2
+CVE 2023 45857 ( \fR#6028\fP ) 
+.PP
+.nf
+⚠️ Critical vulnerability fix\&. See https://security\&.snyk\&.io/vuln/SNYK\-JS\-AXIOS\-6032459
+
+.fi
+.PP
+
+.PP
+.SS "[1\&.1\&.2] - 2022-10-07"
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed broken exports for UMD builds\&.
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+\fRJason Saayman\fP
+.PP
+.SS "PRs"
+.IP "\(bu" 2
+CVE 2023 45857 ( \fR#6028\fP ) 
+.PP
+.nf
+⚠️ Critical vulnerability fix\&. See https://security\&.snyk\&.io/vuln/SNYK\-JS\-AXIOS\-6032459
+
+.fi
+.PP
+
+.PP
+.SS "[1\&.1\&.1] - 2022-10-07"
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed broken exports for common js\&. This fix breaks a prior fix, I will fix both issues ASAP but the commonJS use is more impactful\&.
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+\fRJason Saayman\fP
+.PP
+.SS "PRs"
+.IP "\(bu" 2
+CVE 2023 45857 ( \fR#6028\fP ) 
+.PP
+.nf
+⚠️ Critical vulnerability fix\&. See https://security\&.snyk\&.io/vuln/SNYK\-JS\-AXIOS\-6032459
+
+.fi
+.PP
+
+.PP
+.SS "[1\&.1\&.0] - 2022-10-06"
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed missing exports in type definition index\&.d\&.ts \fR#5003\fP
+.IP "\(bu" 2
+Fixed query params composing \fR#5018\fP
+.IP "\(bu" 2
+Fixed GenericAbortSignal interface by making it more generic \fR#5021\fP
+.IP "\(bu" 2
+Fixed adding "clear" to AxiosInterceptorManager \fR#5010\fP
+.IP "\(bu" 2
+Fixed commonjs & umd exports \fR#5030\fP
+.IP "\(bu" 2
+Fixed inability to access response headers when using axios 1\&.x with Jest \fR#5036\fP
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+\fRTrim21\fP
+.IP "\(bu" 2
+\fRDmitriy Mozgovoy\fP
+.IP "\(bu" 2
+\fRshingo\&.sasaki\fP
+.IP "\(bu" 2
+\fRIvan Pepelko\fP
+.IP "\(bu" 2
+\fRRichard Kořínek\fP
+.PP
+.SS "PRs"
+.IP "\(bu" 2
+CVE 2023 45857 ( \fR#6028\fP ) 
+.PP
+.nf
+⚠️ Critical vulnerability fix\&. See https://security\&.snyk\&.io/vuln/SNYK\-JS\-AXIOS\-6032459
+
+.fi
+.PP
+
+.PP
+.SS "[1\&.0\&.0] - 2022-10-04"
+.SS "Added"
+.IP "\(bu" 2
+Added stack trace to AxiosError \fR#4624\fP
+.IP "\(bu" 2
+Add AxiosError to AxiosStatic \fR#4654\fP
+.IP "\(bu" 2
+Replaced Rollup as our build runner \fR#4596\fP
+.IP "\(bu" 2
+Added generic TS types for the exposed toFormData helper \fR#4668\fP
+.IP "\(bu" 2
+Added listen callback function \fR#4096\fP
+.IP "\(bu" 2
+Added instructions for installing using PNPM \fR#4207\fP
+.IP "\(bu" 2
+Added generic AxiosAbortSignal TS interface to avoid importing AbortController polyfill \fR#4229\fP
+.IP "\(bu" 2
+Added axios-url-template in ECOSYSTEM\&.md \fR#4238\fP
+.IP "\(bu" 2
+Added a clear() function to the request and response interceptors object so a user can ensure that all interceptors have been removed from an axios instance \fR#4248\fP
+.IP "\(bu" 2
+Added react hook plugin \fR#4319\fP
+.IP "\(bu" 2
+Adding HTTP status code for transformResponse \fR#4580\fP
+.IP "\(bu" 2
+Added blob to the list of protocols supported by the browser \fR#4678\fP
+.IP "\(bu" 2
+Resolving proxy from env on redirect \fR#4436\fP
+.IP "\(bu" 2
+Added enhanced toFormData implementation with additional options \fR4704\fP
+.IP "\(bu" 2
+Adding Canceler parameters config and request \fR#4711\fP
+.IP "\(bu" 2
+Added automatic payload serialization to application/x-www-form-urlencoded \fR#4714\fP
+.IP "\(bu" 2
+Added the ability for webpack users to overwrite built-ins \fR#4715\fP
+.IP "\(bu" 2
+Added string[] to AxiosRequestHeaders type \fR#4322\fP
+.IP "\(bu" 2
+Added the ability for the url-encoded-form serializer to respect the formSerializer config \fR#4721\fP
+.IP "\(bu" 2
+Added isCancel type assert \fR#4293\fP
+.IP "\(bu" 2
+Added data URL support for node\&.js \fR#4725\fP
+.IP "\(bu" 2
+Adding types for progress event callbacks \fR#4675\fP
+.IP "\(bu" 2
+URL params serializer \fR#4734\fP
+.IP "\(bu" 2
+Added axios\&.formToJSON method \fR#4735\fP
+.IP "\(bu" 2
+Bower platform add data protocol \fR#4804\fP
+.IP "\(bu" 2
+Use WHATWG URL API instead of url\&.parse() \fR#4852\fP
+.IP "\(bu" 2
+Add ENUM containing Http Status Codes to typings \fR#4903\fP
+.IP "\(bu" 2
+Improve typing of timeout in index\&.d\&.ts \fR#4934\fP
+.PP
+.SS "Changed"
+.IP "\(bu" 2
+Updated AxiosError\&.config to be optional in the type definition \fR#4665\fP
+.IP "\(bu" 2
+Updated README emphasizing the URLSearchParam built-in interface over other solutions \fR#4590\fP
+.IP "\(bu" 2
+Include request and config when creating a CanceledError instance \fR#4659\fP
+.IP "\(bu" 2
+Changed func-names eslint rule to as-needed \fR#4492\fP
+.IP "\(bu" 2
+Replacing deprecated substr() with slice() as substr() is deprecated \fR#4468\fP
+.IP "\(bu" 2
+Updating HTTP links in README\&.md to use HTTPS \fR#4387\fP
+.IP "\(bu" 2
+Updated to a better trim() polyfill \fR#4072\fP
+.IP "\(bu" 2
+Updated types to allow specifying partial default headers on instance create \fR#4185\fP
+.IP "\(bu" 2
+Expanded isAxiosError types \fR#4344\fP
+.IP "\(bu" 2
+Updated type definition for axios instance methods \fR#4224\fP
+.IP "\(bu" 2
+Updated eslint config \fR#4722\fP
+.IP "\(bu" 2
+Updated Docs \fR#4742\fP
+.IP "\(bu" 2
+Refactored Axios to use ES2017 \fR#4787\fP
+.PP
+.SS "Deprecated"
+.IP "\(bu" 2
+There are multiple deprecations, refactors and fixes provided in this release\&. Please read through the full release notes to see how this may impact your project and use case\&.
+.PP
+.SS "Removed"
+.IP "\(bu" 2
+Removed incorrect argument for NetworkError constructor \fR#4656\fP
+.IP "\(bu" 2
+Removed Webpack \fR#4596\fP
+.IP "\(bu" 2
+Removed function that transform arguments to array \fR#4544\fP
+.PP
+.SS "Fixed"
+.IP "\(bu" 2
+Fixed grammar in README \fR#4649\fP
+.IP "\(bu" 2
+Fixed code error in README \fR#4599\fP
+.IP "\(bu" 2
+Optimized the code that checks cancellation \fR#4587\fP
+.IP "\(bu" 2
+Fix url pointing to defaults\&.js in README \fR#4532\fP
+.IP "\(bu" 2
+Use type alias instead of interface for AxiosPromise \fR#4505\fP
+.IP "\(bu" 2
+Fix some word spelling and lint style in code comments \fR#4500\fP
+.IP "\(bu" 2
+Edited readme with 3 updated browser icons of Chrome, FireFox and Safari \fR#4414\fP
+.IP "\(bu" 2
+Bump follow-redirects from 1\&.14\&.9 to 1\&.15\&.0 \fR#4673\fP
+.IP "\(bu" 2
+Fixing http tests to avoid hanging when assertions fail \fR#4435\fP
+.IP "\(bu" 2
+Fix TS definition for AxiosRequestTransformer \fR#4201\fP
+.IP "\(bu" 2
+Fix grammatical issues in README \fR#4232\fP
+.IP "\(bu" 2
+Fixing instance\&.defaults\&.headers type \fR#4557\fP
+.IP "\(bu" 2
+Fixed race condition on immediate requests cancellation \fR#4261\fP
+.IP "\(bu" 2
+Fixing Z_BUF_ERROR when no content \fR#4701\fP
+.IP "\(bu" 2
+Fixing proxy beforeRedirect regression \fR#4708\fP
+.IP "\(bu" 2
+Fixed AxiosError status code type \fR#4717\fP
+.IP "\(bu" 2
+Fixed AxiosError stack capturing \fR#4718\fP
+.IP "\(bu" 2
+Fixing AxiosRequestHeaders typings \fR#4334\fP
+.IP "\(bu" 2
+Fixed max body length defaults \fR#4731\fP
+.IP "\(bu" 2
+Fixed toFormData Blob issue on node>v17 \fR#4728\fP
+.IP "\(bu" 2
+Bump grunt from 1\&.5\&.2 to 1\&.5\&.3 \fR#4743\fP
+.IP "\(bu" 2
+Fixing content-type header repeated \fR#4745\fP
+.IP "\(bu" 2
+Fixed timeout error message for http \fR4738\fP
+.IP "\(bu" 2
+Request ignores false, 0 and empty string as body values \fR#4785\fP
+.IP "\(bu" 2
+Added back missing minified builds \fR#4805\fP
+.IP "\(bu" 2
+Fixed a type error \fR#4815\fP
+.IP "\(bu" 2
+Fixed a regression bug with unsubscribing from cancel token; \fR#4819\fP
+.IP "\(bu" 2
+Remove repeated compression algorithm \fR#4820\fP
+.IP "\(bu" 2
+The error of calling extend to pass parameters \fR#4857\fP
+.IP "\(bu" 2
+SerializerOptions\&.indexes allows boolean | null | undefined \fR#4862\fP
+.IP "\(bu" 2
+Require interceptors to return values \fR#4874\fP
+.IP "\(bu" 2
+Removed unused imports \fR#4949\fP
+.IP "\(bu" 2
+Allow null indexes on formSerializer and paramsSerializer \fR#4960\fP
+.PP
+.SS "Chores"
+.IP "\(bu" 2
+Set permissions for GitHub actions \fR#4765\fP
+.IP "\(bu" 2
+Included githubactions in the dependabot config \fR#4770\fP
+.IP "\(bu" 2
+Included dependency review \fR#4771\fP
+.IP "\(bu" 2
+Update security\&.md \fR#4784\fP
+.IP "\(bu" 2
+Remove unnecessary spaces \fR#4854\fP
+.IP "\(bu" 2
+Simplify the import path of AxiosError \fR#4875\fP
+.IP "\(bu" 2
+Fix Gitpod dead link \fR#4941\fP
+.IP "\(bu" 2
+Enable syntax highlighting for a code block \fR#4970\fP
+.IP "\(bu" 2
+Using Logo Axios in Readme\&.md \fR#4993\fP
+.IP "\(bu" 2
+Fix markup for note in README \fR#4825\fP
+.IP "\(bu" 2
+Fix typo and formatting, add colons \fR#4853\fP
+.IP "\(bu" 2
+Fix typo in readme \fR#4942\fP
+.PP
+.SS "Security"
+.IP "\(bu" 2
+Update SECURITY\&.md \fR#4687\fP
+.PP
+.SS "Contributors to this release"
+.IP "\(bu" 2
+\fRBertrand Marron\fP
+.IP "\(bu" 2
+\fRDmitriy Mozgovoy\fP
+.IP "\(bu" 2
+\fRDan Mooney\fP
+.IP "\(bu" 2
+\fRMichael Li\fP
+.IP "\(bu" 2
+\fRaong\fP
+.IP "\(bu" 2
+\fRDes Preston\fP
+.IP "\(bu" 2
+\fRTed Robertson\fP
+.IP "\(bu" 2
+\fRzhoulixiang\fP
+.IP "\(bu" 2
+\fRArthur Fiorette\fP
+.IP "\(bu" 2
+\fRKumar Shanu\fP
+.IP "\(bu" 2
+\fRJALAL\fP
+.IP "\(bu" 2
+\fRJingyi Lin\fP
+.IP "\(bu" 2
+\fRPhilipp Loose\fP
+.IP "\(bu" 2
+\fRAlexander Shchukin\fP
+.IP "\(bu" 2
+\fRDave Cardwell\fP
+.IP "\(bu" 2
+\fRCat Scarlet\fP
+.IP "\(bu" 2
+\fRLuca Pizzini\fP
+.IP "\(bu" 2
+\fRKai\fP
+.IP "\(bu" 2
+\fRMaxime Bargiel\fP
+.IP "\(bu" 2
+\fRBrian Helba\fP
+.IP "\(bu" 2
+\fRreslear\fP
+.IP "\(bu" 2
+\fRJamie Slome\fP
+.IP "\(bu" 2
+\fRLandro3\fP
+.IP "\(bu" 2
+\fRrafw87\fP
+.IP "\(bu" 2
+\fRAfzal Sayed\fP
+.IP "\(bu" 2
+\fRKoki Oyatsu\fP
+.IP "\(bu" 2
+\fRDave\fP
+.IP "\(bu" 2
+\fR暴走老七\fP
+.IP "\(bu" 2
+\fRSpencer\fP
+.IP "\(bu" 2
+\fRAdrian Wieprzkowicz\fP
+.IP "\(bu" 2
+\fRJamie Telin\fP
+.IP "\(bu" 2
+\fR毛呆\fP
+.IP "\(bu" 2
+\fRKirill Shakirov\fP
+.IP "\(bu" 2
+\fRRraji Abdelbari\fP
+.IP "\(bu" 2
+\fRJelle Schutter\fP
+.IP "\(bu" 2
+\fRTom Ceuppens\fP
+.IP "\(bu" 2
+\fRJohann Cooper\fP
+.IP "\(bu" 2
+\fRDimitris Halatsis\fP
+.IP "\(bu" 2
+\fRchenjigeng\fP
+.IP "\(bu" 2
+\fRJoão Gabriel Quaresma\fP
+.IP "\(bu" 2
+\fRVictor Augusto\fP
+.IP "\(bu" 2
+\fRneilnaveen\fP
+.IP "\(bu" 2
+\fRPavlos\fP
+.IP "\(bu" 2
+\fRKiryl Valkovich\fP
+.IP "\(bu" 2
+\fRNaveen\fP
+.IP "\(bu" 2
+\fRwenzheng\fP
+.IP "\(bu" 2
+\fRhcwhan\fP
+.IP "\(bu" 2
+\fRBassel Rachid\fP
+.IP "\(bu" 2
+\fRGrégoire Pineau\fP
+.IP "\(bu" 2
+\fRfelipedamin\fP
+.IP "\(bu" 2
+\fRKarl Horky\fP
+.IP "\(bu" 2
+\fRYue JIN\fP
+.IP "\(bu" 2
+\fRUsman Ali Siddiqui\fP
+.IP "\(bu" 2
+\fRWD\fP
+.IP "\(bu" 2
+\fRGünther Foidl\fP
+.IP "\(bu" 2
+\fRStephen Jennings\fP
+.IP "\(bu" 2
+\fRC\&.T\&.Lin\fP
+.IP "\(bu" 2
+\fRmia-z\fP
+.IP "\(bu" 2
+\fRParth Banathia\fP
+.IP "\(bu" 2
+\fRparth0105pluang\fP
+.IP "\(bu" 2
+\fRMarco Weber\fP
+.IP "\(bu" 2
+\fRLuca Pizzini\fP
+.IP "\(bu" 2
+\fRWillian Agostini\fP
+.IP "\(bu" 2
+\fRHuyen Nguyen\fP 
+.PP
+

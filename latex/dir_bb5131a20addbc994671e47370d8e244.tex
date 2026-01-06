@@ -1,0 +1,161 @@
+\doxysection{frontend/node\+\_\+modules/vaul Directory Reference}
+\hypertarget{dir_bb5131a20addbc994671e47370d8e244}{}\label{dir_bb5131a20addbc994671e47370d8e244}\index{frontend/node\_modules/vaul Directory Reference@{frontend/node\_modules/vaul Directory Reference}}
+
+
+\doxysubsection{Detailed Description}
+\href{https://github.com/emilkowalski/vaul/assets/36730035/fdf8c5e8-ade8-433b-8bb0-4ce10e722516}{\texttt{https\+://github.\+com/emilkowalski/vaul/assets/36730035/fdf8c5e8-\/ade8-\/433b-\/8bb0-\/4ce10e722516}}
+
+Vaul is an unstyled drawer component for React that can be used as a Dialog replacement on tablet and mobile devices. You can read about why and how it was built \href{https://emilkowal.ski/ui/building-a-drawer-component}{\texttt{here}}.\hypertarget{dir_bb5131a20addbc994671e47370d8e244_autotoc_md7463}{}\doxysubsubsection{\texorpdfstring{Usage}{Usage}}\label{dir_bb5131a20addbc994671e47370d8e244_autotoc_md7463}
+To start using the library, install it in your project\+:,
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{npm\ install\ vaul}
+
+\end{DoxyCode}
+
+
+Use the drawer in your app.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ \{\ Drawer\ \}\ from\ 'vaul';}
+\DoxyCodeLine{}
+\DoxyCodeLine{function\ MyComponent()\ \{}
+\DoxyCodeLine{\ \ return\ (}
+\DoxyCodeLine{\ \ \ \ <Drawer.Root>}
+\DoxyCodeLine{\ \ \ \ \ \ <Drawer.Trigger>Open</Drawer.Trigger>}
+\DoxyCodeLine{\ \ \ \ \ \ <Drawer.Portal>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <Drawer.Content>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ <p>Content</p>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ </Drawer.Content>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <Drawer.Overlay\ />}
+\DoxyCodeLine{\ \ \ \ \ \ </Drawer.Portal>}
+\DoxyCodeLine{\ \ \ \ </Drawer.Root>}
+\DoxyCodeLine{\ \ );}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{dir_bb5131a20addbc994671e47370d8e244_autotoc_md7464}{}\doxysubsubsection{\texorpdfstring{Examples}{Examples}}\label{dir_bb5131a20addbc994671e47370d8e244_autotoc_md7464}
+Play around with the examples on codesandbox\+:
+
+
+\begin{DoxyItemize}
+\item \href{https://codesandbox.io/p/sandbox/drawer-with-scale-g24vvh?file=\%2Fapp\%2Fmy-drawer.tsx\%3A1\%2C1}{\texttt{With scaled background}}
+\item \href{https://codesandbox.io/p/sandbox/drawer-with-scale-forked-nx2glp?file=\%2Fapp\%2Fmy-drawer.tsx\%3A4\%2C1}{\texttt{Without scaled background}}
+\item \href{https://codesandbox.io/p/sandbox/drawer-non-dismissable-forked-jchtff?file=/app/my-drawer.tsx:1,1}{\texttt{With snap points}}
+\item \href{https://codesandbox.io/p/sandbox/drawer-with-scale-forked-73f8jw?file=\%2Fapp\%2Fmy-drawer.tsx\%3A1\%2C1}{\texttt{Scrollable with inputs}}
+\item \href{https://codesandbox.io/p/devbox/drawer-direction-right-n338ml?file=\%2Fapp\%2Fmy-drawer.tsx\%3A47\%2C2}{\texttt{Drawer from right instead of bottom}}
+\item \href{https://codesandbox.io/p/sandbox/drawer-non-dismissable-forked-5z2r3j?file=\%2Fapp\%2Fmy-drawer.tsx\%3A49\%2C16-49\%2C246}{\texttt{Nested drawers}}
+\item \href{https://codesandbox.io/p/sandbox/drawer-without-scale-forked-kxh9j5?file=\%2Fapp\%2Fmy-drawer.tsx\%3A1\%2C1}{\texttt{Non-\/dismissible}}
+\item \href{https://codesandbox.io/p/devbox/drawer-with-scale-forked-hwtfws?file=\%2Fapp\%2Fmy-drawer.tsx\%3A42\%2C37}{\texttt{Non-\/draggable element}}
+\end{DoxyItemize}\hypertarget{dir_bb5131a20addbc994671e47370d8e244_autotoc_md7465}{}\doxysubsubsection{\texorpdfstring{API Reference}{API Reference}}\label{dir_bb5131a20addbc994671e47370d8e244_autotoc_md7465}
+\hypertarget{dir_bb5131a20addbc994671e47370d8e244_autotoc_md7466}{}\doxysubsubsubsection{\texorpdfstring{Root}{Root}}\label{dir_bb5131a20addbc994671e47370d8e244_autotoc_md7466}
+Contains all parts of a dialog. Use {\ttfamily should\+Scale\+Background} to enable background scaling, it requires an element with {\ttfamily \mbox{[}data-\/vaul-\/drawer-\/wrapper\mbox{]}} data attribute to scale its background. Can be controlled with the {\ttfamily value} and {\ttfamily on\+Open\+Change} props. Can be opened by default via the {\ttfamily open} prop.
+
+Additional props\+:
+
+{\ttfamily close\+Threshold}\+: Number between 0 and 1 that determines when the drawer should be closed. Example\+: threshold of 0.\+5 would close the drawer if the user swiped for 50\% of the height of the drawer or more.
+
+{\ttfamily scroll\+Lock\+Timeout}\+: Duration for which the drawer is not draggable after scrolling content inside of the drawer. Defaults to 500ms.
+
+{\ttfamily snap\+Points}\+: Array of numbers from 0 to 100 that corresponds to \% of the screen a given snap point should take up. Should go from least visible. Example {\ttfamily \mbox{[}0.\+2, 0.\+5, 0.\+8\mbox{]}}. You can also use px values, which doesn\textquotesingle{}t take screen height into account.
+
+{\ttfamily fade\+From\+Index}\+: Index of a {\ttfamily snap\+Point} from which the overlay fade should be applied. Defaults to the last snap point.
+
+{\ttfamily modal}\+: When {\ttfamily false} it allows to interact with elements outside of the drawer without closing it. Defaults to {\ttfamily true}.
+
+{\ttfamily direction}\+: Direction of the drawer. Can be {\ttfamily top} or {\ttfamily bottom}, {\ttfamily left}, {\ttfamily right}. Defaults to {\ttfamily bottom}.
+
+{\ttfamily reposition\+Inputs}\+: When {\ttfamily true} Vaul will reposition inputs rather than scroll then into view if the keyboard is in the way. Setting it to {\ttfamily false} will fall back to the default browser behavior.
+
+{\ttfamily no\+Body\+Styles}\+: When {\ttfamily true} the {\ttfamily body} doesn\textquotesingle{}t get any styles assigned from Vaul.
+
+{\ttfamily handle\+Only}\+: When {\ttfamily true} only allows the drawer to be dragged by the {\ttfamily \texorpdfstring{$<$}{<}Drawer.\+Handle /\texorpdfstring{$>$}{>}} component. Defaults to {\ttfamily false}.
+
+{\ttfamily set\+Background\+Color\+On\+Scale}\+: When {\ttfamily false} we don\textquotesingle{}t change body\textquotesingle{}s background color when the drawer is open. {\ttfamily true} by default.
+
+{\ttfamily default\+Open}\+: Opened by default, still reacts to {\ttfamily open} state changes.
+
+{\ttfamily dismissible}\+: When {\ttfamily false} dragging, clicking outside, pressing esc, etc. will not close the drawer. Use this in comination with the {\ttfamily open} prop, otherwise you won\textquotesingle{}t be able to open/close the drawer.
+
+{\ttfamily snap\+To\+Sequential\+Point}\+: Disabled velocity based swiping for snap points. This means that a snap point won\textquotesingle{}t be skipped even if the velocity is high enough. Useful if each snap point in a drawer is equally important.
+
+{\ttfamily on\+Animation\+End}\+: Gets triggered after the open or close animation ends, it receives an {\ttfamily open} argument with the {\ttfamily open} state of the drawer by the time the function was triggered. Useful to revert any state changes for example.
+
+{\ttfamily \mbox{[}data-\/vaul-\/no-\/drag\mbox{]}}\+: When interacting with an element with this data attribute, the drawer won\textquotesingle{}t be dragged.\hypertarget{dir_bb5131a20addbc994671e47370d8e244_autotoc_md7467}{}\doxysubsubsubsection{\texorpdfstring{Controlled Drawer}{Controlled Drawer}}\label{dir_bb5131a20addbc994671e47370d8e244_autotoc_md7467}
+Drawer can be controlled programmatically by providing the {\ttfamily open} prop. If you want to react to open state changes from within the Drawer use the {\ttfamily on\+Open\+Change} prop, this will allow you to provide your own open state while still closing the drawer when the escape key is pressed for example.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{const\ [open,\ setOpen]\ =\ React.useState(false);}
+\DoxyCodeLine{}
+\DoxyCodeLine{//\ ...}
+\DoxyCodeLine{}
+\DoxyCodeLine{<Drawer.Root\ open=\{open\}\ onOpenChange=\{setOpen\}>}
+\DoxyCodeLine{\ \ //\ ...}
+\DoxyCodeLine{</Drawer.Root>}
+
+\end{DoxyCode}
+\hypertarget{dir_bb5131a20addbc994671e47370d8e244_autotoc_md7468}{}\doxysubsubsubsection{\texorpdfstring{Custom Container}{Custom Container}}\label{dir_bb5131a20addbc994671e47370d8e244_autotoc_md7468}
+Customize the element that your drawer portals into. By default, drawer will be appended to {\ttfamily document.\+body}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ React\ from\ 'react';}
+\DoxyCodeLine{import\ \{\ Drawer\ \}\ from\ 'vaul';}
+\DoxyCodeLine{}
+\DoxyCodeLine{export\ default\ ()\ =>\ \{}
+\DoxyCodeLine{\ \ const\ [container,\ setContainer]\ =\ React.useState(null);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ return\ (}
+\DoxyCodeLine{\ \ \ \ <div>}
+\DoxyCodeLine{\ \ \ \ \ \ <Drawer.Root\ container=\{container\}>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <Drawer.Trigger\ />}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <Drawer.Portal>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ <Drawer.Overlay\ />}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ <Drawer.Content>...</Drawer.Content>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ </Drawer.Portal>}
+\DoxyCodeLine{\ \ \ \ \ \ </Drawer.Root>}
+\DoxyCodeLine{\ \ \ \ \ \ //\ Drawer\ will\ be\ rendered\ inside\ this\ div.}
+\DoxyCodeLine{\ \ \ \ \ \ <div\ ref=\{setContainer\}\ />}
+\DoxyCodeLine{\ \ \ \ </div>}
+\DoxyCodeLine{\ \ );}
+\DoxyCodeLine{\};}
+
+\end{DoxyCode}
+\hypertarget{dir_bb5131a20addbc994671e47370d8e244_autotoc_md7469}{}\doxysubsubsubsection{\texorpdfstring{Handle}{Handle}}\label{dir_bb5131a20addbc994671e47370d8e244_autotoc_md7469}
+A drag hint (also known as grabber). Shows people that they can drag the drawer; they can also tap it to cycle through the snap points, and double tap quickly to close the drawer.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ \{\ Drawer\ \}\ from\ 'vaul';}
+\DoxyCodeLine{}
+\DoxyCodeLine{function\ MyComponent()\ \{}
+\DoxyCodeLine{\ \ return\ (}
+\DoxyCodeLine{\ \ \ \ <Drawer.Root>}
+\DoxyCodeLine{\ \ \ \ \ \ <Drawer.Trigger>Open</Drawer.Trigger>}
+\DoxyCodeLine{\ \ \ \ \ \ <Drawer.Portal>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <Drawer.Content>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ <Drawer.Handle\ />}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ <p>Content</p>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ </Drawer.Content>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <Drawer.Overlay\ />}
+\DoxyCodeLine{\ \ \ \ \ \ </Drawer.Portal>}
+\DoxyCodeLine{\ \ \ \ </Drawer.Root>}
+\DoxyCodeLine{\ \ );}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{dir_bb5131a20addbc994671e47370d8e244_autotoc_md7470}{}\doxysubsubsubsection{\texorpdfstring{Trigger}{Trigger}}\label{dir_bb5131a20addbc994671e47370d8e244_autotoc_md7470}
+The button that opens the dialog. \href{https://www.radix-ui.com/docs/primitives/components/dialog\#trigger}{\texttt{Props}}.\hypertarget{dir_bb5131a20addbc994671e47370d8e244_autotoc_md7471}{}\doxysubsubsubsection{\texorpdfstring{Content}{Content}}\label{dir_bb5131a20addbc994671e47370d8e244_autotoc_md7471}
+Content that should be rendered in the drawer. \href{https://www.radix-ui.com/docs/primitives/components/dialog\#content}{\texttt{Props}}.\hypertarget{dir_bb5131a20addbc994671e47370d8e244_autotoc_md7472}{}\doxysubsubsubsection{\texorpdfstring{Overlay}{Overlay}}\label{dir_bb5131a20addbc994671e47370d8e244_autotoc_md7472}
+A layer that covers the inert portion of the view when the dialog is open. \href{https://www.radix-ui.com/docs/primitives/components/dialog\#overlay}{\texttt{Props}}.\hypertarget{dir_bb5131a20addbc994671e47370d8e244_autotoc_md7473}{}\doxysubsubsubsection{\texorpdfstring{Title}{Title}}\label{dir_bb5131a20addbc994671e47370d8e244_autotoc_md7473}
+An accessible title to be announced when the dialog is opened. \href{https://www.radix-ui.com/docs/primitives/components/dialog\#title}{\texttt{Props}}.\hypertarget{dir_bb5131a20addbc994671e47370d8e244_autotoc_md7474}{}\doxysubsubsubsection{\texorpdfstring{Description}{Description}}\label{dir_bb5131a20addbc994671e47370d8e244_autotoc_md7474}
+An optional accessible description to be announced when the dialog is opened. \href{https://www.radix-ui.com/docs/primitives/components/dialog\#description}{\texttt{Props}}.\hypertarget{dir_bb5131a20addbc994671e47370d8e244_autotoc_md7475}{}\doxysubsubsubsection{\texorpdfstring{Close}{Close}}\label{dir_bb5131a20addbc994671e47370d8e244_autotoc_md7475}
+The button that closes the dialog. \href{https://www.radix-ui.com/docs/primitives/components/dialog\#close}{\texttt{Props}}.\hypertarget{dir_bb5131a20addbc994671e47370d8e244_autotoc_md7476}{}\doxysubsubsubsection{\texorpdfstring{Portal}{Portal}}\label{dir_bb5131a20addbc994671e47370d8e244_autotoc_md7476}
+Portals your drawer into the body.\hypertarget{dir_bb5131a20addbc994671e47370d8e244_autotoc_md7477}{}\doxysubsubsubsection{\texorpdfstring{CSS File}{CSS File}}\label{dir_bb5131a20addbc994671e47370d8e244_autotoc_md7477}
+CSS in this library is inserted by Java\+Script into {\ttfamily \texorpdfstring{$<$}{<}head\texorpdfstring{$>$}{>}} element by default. If you\textquotesingle{}re having issue with it such as \href{https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/style-src}{\texttt{CSP restriction}}, you can use {\ttfamily vaul/style.\+css} CSS as a workaround to apply the styles.
+
+\begin{quote}
+Note\+: You don\textquotesingle{}t need to import it unless the default inline styles is blocked by CSP. \end{quote}

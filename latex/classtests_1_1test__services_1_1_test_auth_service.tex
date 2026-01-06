@@ -1,0 +1,73 @@
+\doxysection{tests.\+test\+\_\+services.\+Test\+Auth\+Service Class Reference}
+\hypertarget{classtests_1_1test__services_1_1_test_auth_service}{}\label{classtests_1_1test__services_1_1_test_auth_service}\index{tests.test\_services.TestAuthService@{tests.test\_services.TestAuthService}}
+Inheritance diagram for tests.\+test\+\_\+services.\+Test\+Auth\+Service\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classtests_1_1test__services_1_1_test_auth_service}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtests_1_1test__services_1_1_test_auth_service_a5e0378001ed1626284e363447db5d6b9}{set\+Up}} (self)
+\item 
+\mbox{\hyperlink{classtests_1_1test__services_1_1_test_auth_service_ada074ad7b5efaa503f364e9dc0b55fd4}{test\+\_\+authenticate\+\_\+user\+\_\+success}} (self)
+\item 
+\mbox{\hyperlink{classtests_1_1test__services_1_1_test_auth_service_a9b0efe6b62ea79a6028f02319380a497}{test\+\_\+authenticate\+\_\+user\+\_\+not\+\_\+found}} (self)
+\item 
+\mbox{\hyperlink{classtests_1_1test__services_1_1_test_auth_service_a138bdc618e4d7d395a22eacb5eb30915}{test\+\_\+authenticate\+\_\+user\+\_\+wrong\+\_\+password}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classtests_1_1test__services_1_1_test_auth_service_a3401c352aba07aeed9cc34d457e85049}\label{classtests_1_1test__services_1_1_test_auth_service_a3401c352aba07aeed9cc34d457e85049} 
+{\bfseries mock\+\_\+user\+\_\+repo} = Mock()
+\item 
+\Hypertarget{classtests_1_1test__services_1_1_test_auth_service_a96dc764a8aa8233a70ff145aaa1fe40b}\label{classtests_1_1test__services_1_1_test_auth_service_a96dc764a8aa8233a70ff145aaa1fe40b} 
+{\bfseries mock\+\_\+repo\+\_\+class} = patcher.\+start()
+\item 
+\Hypertarget{classtests_1_1test__services_1_1_test_auth_service_a96c009747bd9130b77b7c1493e407a32}\label{classtests_1_1test__services_1_1_test_auth_service_a96c009747bd9130b77b7c1493e407a32} 
+{\bfseries auth\+\_\+service} = Auth\+Service()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Tests para AuthService\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classtests_1_1test__services_1_1_test_auth_service_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classtests_1_1test__services_1_1_test_auth_service_a5e0378001ed1626284e363447db5d6b9}\index{tests.test\_services.TestAuthService@{tests.test\_services.TestAuthService}!setUp@{setUp}}
+\index{setUp@{setUp}!tests.test\_services.TestAuthService@{tests.test\_services.TestAuthService}}
+\doxysubsubsection{\texorpdfstring{setUp()}{setUp()}}
+{\footnotesize\ttfamily \label{classtests_1_1test__services_1_1_test_auth_service_a5e0378001ed1626284e363447db5d6b9} 
+tests.\+test\+\_\+services.\+Test\+Auth\+Service.\+set\+Up (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Configurar mocks para cada test\end{DoxyVerb}
+ \Hypertarget{classtests_1_1test__services_1_1_test_auth_service_a9b0efe6b62ea79a6028f02319380a497}\index{tests.test\_services.TestAuthService@{tests.test\_services.TestAuthService}!test\_authenticate\_user\_not\_found@{test\_authenticate\_user\_not\_found}}
+\index{test\_authenticate\_user\_not\_found@{test\_authenticate\_user\_not\_found}!tests.test\_services.TestAuthService@{tests.test\_services.TestAuthService}}
+\doxysubsubsection{\texorpdfstring{test\_authenticate\_user\_not\_found()}{test\_authenticate\_user\_not\_found()}}
+{\footnotesize\ttfamily \label{classtests_1_1test__services_1_1_test_auth_service_a9b0efe6b62ea79a6028f02319380a497} 
+tests.\+test\+\_\+services.\+Test\+Auth\+Service.\+test\+\_\+authenticate\+\_\+user\+\_\+not\+\_\+found (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test con usuario no encontrado\end{DoxyVerb}
+ \Hypertarget{classtests_1_1test__services_1_1_test_auth_service_ada074ad7b5efaa503f364e9dc0b55fd4}\index{tests.test\_services.TestAuthService@{tests.test\_services.TestAuthService}!test\_authenticate\_user\_success@{test\_authenticate\_user\_success}}
+\index{test\_authenticate\_user\_success@{test\_authenticate\_user\_success}!tests.test\_services.TestAuthService@{tests.test\_services.TestAuthService}}
+\doxysubsubsection{\texorpdfstring{test\_authenticate\_user\_success()}{test\_authenticate\_user\_success()}}
+{\footnotesize\ttfamily \label{classtests_1_1test__services_1_1_test_auth_service_ada074ad7b5efaa503f364e9dc0b55fd4} 
+tests.\+test\+\_\+services.\+Test\+Auth\+Service.\+test\+\_\+authenticate\+\_\+user\+\_\+success (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test de autenticación exitosa\end{DoxyVerb}
+ \Hypertarget{classtests_1_1test__services_1_1_test_auth_service_a138bdc618e4d7d395a22eacb5eb30915}\index{tests.test\_services.TestAuthService@{tests.test\_services.TestAuthService}!test\_authenticate\_user\_wrong\_password@{test\_authenticate\_user\_wrong\_password}}
+\index{test\_authenticate\_user\_wrong\_password@{test\_authenticate\_user\_wrong\_password}!tests.test\_services.TestAuthService@{tests.test\_services.TestAuthService}}
+\doxysubsubsection{\texorpdfstring{test\_authenticate\_user\_wrong\_password()}{test\_authenticate\_user\_wrong\_password()}}
+{\footnotesize\ttfamily \label{classtests_1_1test__services_1_1_test_auth_service_a138bdc618e4d7d395a22eacb5eb30915} 
+tests.\+test\+\_\+services.\+Test\+Auth\+Service.\+test\+\_\+authenticate\+\_\+user\+\_\+wrong\+\_\+password (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test con password incorrecto\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+backend/tests/test\+\_\+services.\+py\end{DoxyCompactItemize}

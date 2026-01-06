@@ -4,6 +4,7 @@ import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, Dialog
 import { Button } from "@/components/ui/button";
 import { UserPlus, Search } from "lucide-react";
 import { useFriends } from "@/contexts/FriendsContext";
+import { useAuth } from "@/contexts/AuthContext";
 
 export const AddFriendDialog: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -12,6 +13,7 @@ export const AddFriendDialog: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const { sendRequest } = useFriends();
+  const { token } = useAuth();
   const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
   useEffect(() => {
@@ -24,15 +26,22 @@ export const AddFriendDialog: React.FC = () => {
     setError("");
     const timeout = setTimeout(async () => {
       try {
-        const token = sessionStorage.getItem("jwt_token");
+        console.log('🔍 Buscando usuarios con query:', search);
+        console.log('🔑 Token disponible:', !!token);
         const res = await axios.get(`${API_URL}/friends/search?query=${encodeURIComponent(search)}`, {
           headers: token ? { Authorization: `Bearer ${token}` } : {}
         });
+        console.log('✅ Resultados de búsqueda:', res.data);
         setResults(res.data.users || []);
-        setError("");
+        if (!res.data.users || res.data.users.length === 0) {
+          setError("No se encontraron usuarios con ese nombre.");
+        } else {
+          setError("");
+        }
       } catch (err: any) {
+        console.error('❌ Error en búsqueda:', err.response?.data || err.message);
         setResults([]);
-        setError("No se encontraron usuarios.");
+        setError(err.response?.data?.error || "Error al buscar usuarios. Verifica tu conexión.");
       } finally {
         setLoading(false);
       }
@@ -66,7 +75,7 @@ export const AddFriendDialog: React.FC = () => {
         <div className="flex items-center gap-2 mt-2">
           <input
             type="text"
-            className="border px-2 py-1 flex-1 rounded"
+            className="border px-2 py-1 flex-1 rounded bg-background text-foreground placeholder:text-muted-foreground"
             value={search}
             onChange={e => setSearch(e.target.value)}
             placeholder="Buscar usuario..."
@@ -89,7 +98,7 @@ export const AddFriendDialog: React.FC = () => {
                         {user.username.charAt(0).toUpperCase()}
                       </div>
                     )}
-                    <span className="truncate text-black text-left font-semibold">{user.username}</span>
+                    <span className="truncate text-foreground text-left font-semibold">{user.username}</span>
                   </div>
                   <Button
                     size="sm"

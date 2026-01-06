@@ -1,0 +1,90 @@
+.TH "md_frontend_2node__modules_2date-fns_2docs_2fp" 3 "Version 0.1" "Chat-ME!" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md_frontend_2node__modules_2date-fns_2docs_2fp \- FP Guide 
+.PP
+
+
+.PP
+\fBdate-fns\fP v2\&.x provides \fRfunctional programming\fP (FP) friendly functions, like those in \fRlodash\fP, that support \fRcurrying\fP\&.
+.SH "Table of Contents"
+.PP
+.IP "\(bu" 2
+\fBUsage\fP
+.IP "\(bu" 2
+\fBUsing Function Composition\fP
+.PP
+.SH "Usage"
+.PP
+FP functions are provided via \fR'date-fns/fp'\fP submodule\&.
+
+.PP
+Functions with options (\fRformat\fP, \fRparse\fP, etc\&.) have two FP counterparts: one that has the options object as its first argument and one that hasn't\&. The name of the former has \fRWithOptions\fP added to the end of its name\&.
+
+.PP
+In \fBdate-fns'\fP FP functions, the order of arguments is reversed\&.
+
+.PP
+.PP
+.nf
+import { addYears, formatWithOptions } from "date\-fns/fp";
+import { eo } from "date\-fns/locale";
+import toUpper from "lodash/fp/toUpper"; // 'date\-fns/fp' is compatible with 'lodash/fp'!
+
+// If FP function has not received enough arguments, it returns another function
+const addFiveYears = addYears(5);
+
+// Several arguments can be curried at once
+const dateToString = formatWithOptions({ locale: eo }, "d MMMM yyyy");
+
+const dates = [
+  new Date(2017, 0 /* Jan */, 1),
+  new Date(2017, 1 /* Feb */, 11),
+  new Date(2017, 6 /* Jul */, 2),
+];
+
+const formattedDates = dates\&.map(addFiveYears)\&.map(dateToString)\&.map(toUpper);
+//=> ['1 JANUARO 2022', '11 FEBRUARO 2022', '2 JULIO 2022']
+.fi
+.PP
+.SH "Using Function Composition"
+.PP
+The main advantage of FP functions is support of functional-style \fRfunction composing\fP\&.
+
+.PP
+In the example above, you can compose \fRaddFiveYears\fP, \fRdateToString\fP and \fRtoUpper\fP into a single function:
+
+.PP
+.PP
+.nf
+const formattedDates = dates\&.map((date) =>
+  toUpper(dateToString(addFiveYears(date))),
+);
+.fi
+.PP
+
+.PP
+Or you can use \fRcompose\fP function provided by \fRlodash\fP to do the same in more idiomatic way:
+
+.PP
+.PP
+.nf
+import { compose } from "lodash/fp/compose";
+
+const formattedDates = dates\&.map(compose(toUpper, dateToString, addFiveYears));
+.fi
+.PP
+
+.PP
+Or if you prefer natural direction of composing (as opposed to the computationally correct order), you can use lodash' \fRflow\fP instead:
+
+.PP
+.PP
+.nf
+import flow from "lodash/fp/flow";
+
+const formattedDates = dates\&.map(flow(addFiveYears, dateToString, toUpper));
+.fi
+.PP
+ 

@@ -1,0 +1,829 @@
+.TH "md_frontend_2node__modules_2acorn_2_c_h_a_n_g_e_l_o_g" 3 "Version 0.1" "Chat-ME!" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md_frontend_2node__modules_2acorn_2_c_h_a_n_g_e_l_o_g \- 8\&.15\&.0 (2025-06-08) 
+.PP
+
+.SS "New features"
+Support \fRusing\fP and \fRawait using\fP syntax\&.
+
+.PP
+The \fRAnyNode\fP type is now defined in such a way that plugins can extend it\&.
+.SS "Bug fixes"
+Fix an issue where the \fRbigint\fP property of literal nodes for non-decimal bigints had the wrong format\&.
+
+.PP
+The \fRacorn\fP CLI tool no longer crashes when emitting a tree that contains a bigint\&.
+.SH "8\&.14\&.1 (2025-03-05)"
+.PP
+.SS "Bug fixes"
+Fix an issue where \fRawait\fP expressions in class field initializers were inappropriately allowed\&.
+
+.PP
+Properly allow await inside an async arrow function inside a class field initializer\&.
+
+.PP
+Mention the source file name in syntax error messages when given\&.
+
+.PP
+Properly add an empty \fRattributes\fP property to every form of \fRExportNamedDeclaration\fP\&.
+.SH "8\&.14\&.0 (2024-10-27)"
+.PP
+.SS "New features"
+Support ES2025 import attributes\&.
+
+.PP
+Support ES2025 RegExp modifiers\&.
+.SS "Bug fixes"
+Support some missing Unicode properties\&.
+.SH "8\&.13\&.0 (2024-10-16)"
+.PP
+.SS "New features"
+Upgrade to Unicode 16\&.0\&.
+.SH "8\&.12\&.1 (2024-07-03)"
+.PP
+.SS "Bug fixes"
+Fix a regression that caused Acorn to no longer run on Node versions <8\&.10\&.
+.SH "8\&.12\&.0 (2024-06-14)"
+.PP
+.SS "New features"
+Support ES2025 duplicate capture group names in regular expressions\&.
+.SS "Bug fixes"
+Include \fRVariableDeclarator\fP in the \fRAnyNode\fP type so that walker objects can refer to it without getting a type error\&.
+
+.PP
+Properly raise a parse error for invalid \fRfor\fP/\fRof\fP statements using \fRasync\fP as binding name\&.
+
+.PP
+Properly recognize "use strict" when preceded by a string with an escaped newline\&.
+
+.PP
+Mark the \fRParser\fP constructor as protected, not private, so plugins can extend it without type errors\&.
+
+.PP
+Fix a bug where some invalid \fRdelete\fP expressions were let through when the operand was parenthesized and \fRpreserveParens\fP was enabled\&.
+
+.PP
+Properly normalize line endings in raw strings of invalid template tokens\&.
+
+.PP
+Properly track line numbers for escaped newlines in strings\&.
+
+.PP
+Fix a bug that broke line number accounting after a template literal with invalid escape sequences\&.
+.SH "8\&.11\&.3 (2023-12-29)"
+.PP
+.SS "Bug fixes"
+Add \fRFunction\fP and \fRClass\fP to the \fRAggregateType\fP type, so that they can be used in walkers without raising a type error\&.
+
+.PP
+Make sure \fRonToken\fP get an \fRimport\fP keyword token when parsing \fRimport\&.meta\fP\&.
+
+.PP
+Fix a bug where \fR\&.loc\&.start\fP could be undefined for \fRnew\&.target\fP \fRmeta\fP nodes\&.
+.SH "8\&.11\&.2 (2023-10-27)"
+.PP
+.SS "Bug fixes"
+Fix a bug that caused regular expressions after colon tokens to not be properly tokenized in some circumstances\&.
+.SH "8\&.11\&.1 (2023-10-26)"
+.PP
+.SS "Bug fixes"
+Fix a regression where \fRonToken\fP would receive 'name' tokens for 'new' keyword tokens\&.
+.SH "8\&.11\&.0 (2023-10-26)"
+.PP
+.SS "Bug fixes"
+Fix an issue where tokenizing (without parsing) an object literal with a property named \fRclass\fP or \fRfunction\fP could, in some circumstance, put the tokenizer into an invalid state\&.
+
+.PP
+Fix an issue where a slash after a call to a propery named the same as some keywords would be tokenized as a regular expression\&.
+.SS "New features"
+Upgrade to Unicode 15\&.1\&.
+
+.PP
+Use a set of new, much more precise, TypeScript types\&.
+.SH "8\&.10\&.0 (2023-07-05)"
+.PP
+.SS "New features"
+Add a \fRcheckPrivateFields\fP option that disables strict checking of private property use\&.
+.SH "8\&.9\&.0 (2023-06-16)"
+.PP
+.SS "Bug fixes"
+Forbid dynamic import after \fRnew\fP, even when part of a member expression\&.
+.SS "New features"
+Add Unicode properties for ES2023\&.
+
+.PP
+Add support for the \fRv\fP flag to regular expressions\&.
+.SH "8\&.8\&.2 (2023-01-23)"
+.PP
+.SS "Bug fixes"
+Fix a bug that caused \fRallowHashBang\fP to be set to false when not provided, even with \fRecmaVersion >= 14\fP\&.
+
+.PP
+Fix an exception when passing no option object to \fRparse\fP or \fRnew Parser\fP\&.
+
+.PP
+Fix incorrect parse error on \fRif (0) let\\n[astral identifier char]\fP\&.
+.SH "8\&.8\&.1 (2022-10-24)"
+.PP
+.SS "Bug fixes"
+Make type for \fRComment\fP compatible with estree types\&.
+.SH "8\&.8\&.0 (2022-07-21)"
+.PP
+.SS "Bug fixes"
+Allow parentheses around spread args in destructuring object assignment\&.
+
+.PP
+Fix an issue where the tree contained \fRdirective\fP properties in when parsing with a language version that doesn't support them\&.
+.SS "New features"
+Support hashbang comments by default in ECMAScript 2023 and later\&.
+.SH "8\&.7\&.1 (2021-04-26)"
+.PP
+.SS "Bug fixes"
+Stop handling \fR"use strict"\fP directives in ECMAScript versions before 5\&.
+
+.PP
+Fix an issue where duplicate quoted export names in \fRexport *\fP syntax were incorrectly checked\&.
+
+.PP
+Add missing type for \fRtokTypes\fP\&.
+.SH "8\&.7\&.0 (2021-12-27)"
+.PP
+.SS "New features"
+Support quoted export names\&.
+
+.PP
+Upgrade to Unicode 14\&.
+
+.PP
+Add support for Unicode 13 properties in regular expressions\&.
+.SS "Bug fixes"
+Use a loop to find line breaks, because the existing regexp search would overrun the end of the searched range and waste a lot of time in minified code\&.
+.SH "8\&.6\&.0 (2021-11-18)"
+.PP
+.SS "Bug fixes"
+Fix a bug where an object literal with multiple \fR__proto__\fP properties would incorrectly be accepted if a later property value held an assigment\&.
+.SS "New features"
+Support class private fields with the \fRin\fP operator\&.
+.SH "8\&.5\&.0 (2021-09-06)"
+.PP
+.SS "Bug fixes"
+Improve context-dependent tokenization in a number of corner cases\&.
+
+.PP
+Fix location tracking after a 0x2028 or 0x2029 character in a string literal (which before did not increase the line number)\&.
+
+.PP
+Fix an issue where arrow function bodies in for loop context would inappropriately consume \fRin\fP operators\&.
+
+.PP
+Fix wrong end locations stored on SequenceExpression nodes\&.
+
+.PP
+Implement restriction that \fRfor\fP/\fRof\fP loop LHS can't start with \fRlet\fP\&.
+.SS "New features"
+Add support for ES2022 class static blocks\&.
+
+.PP
+Allow multiple input files to be passed to the CLI tool\&.
+.SH "8\&.4\&.1 (2021-06-24)"
+.PP
+.SS "Bug fixes"
+Fix a bug where \fRallowAwaitOutsideFunction\fP would allow \fRawait\fP in class field initializers, and setting \fRecmaVersion\fP to 13 or higher would allow top-level await in non-module sources\&.
+.SH "8\&.4\&.0 (2021-06-11)"
+.PP
+.SS "New features"
+A new option, \fRallowSuperOutsideMethod\fP, can be used to suppress the error when \fRsuper\fP is used in the wrong context\&.
+.SH "8\&.3\&.0 (2021-05-31)"
+.PP
+.SS "New features"
+Default \fRallowAwaitOutsideFunction\fP to true for ECMAScript 2022 an higher\&.
+
+.PP
+Add support for the \fRd\fP (\fRindices\fP) regexp flag\&.
+.SH "8\&.2\&.4 (2021-05-04)"
+.PP
+.SS "Bug fixes"
+Fix spec conformity in corner case 'for await (async of \&.\&.\&.)'\&.
+.SH "8\&.2\&.3 (2021-05-04)"
+.PP
+.SS "Bug fixes"
+Fix an issue where the library couldn't parse 'for (async of \&.\&.\&.)'\&.
+
+.PP
+Fix a bug in UTF-16 decoding that would read characters incorrectly in some circumstances\&.
+.SH "8\&.2\&.2 (2021-04-29)"
+.PP
+.SS "Bug fixes"
+Fix a bug where a class field initialized to an async arrow function wouldn't allow await inside it\&. Same issue existed for generator arrow functions with yield\&.
+.SH "8\&.2\&.1 (2021-04-24)"
+.PP
+.SS "Bug fixes"
+Fix a regression introduced in 8\&.2\&.0 where static or async class methods with keyword names fail to parse\&.
+.SH "8\&.2\&.0 (2021-04-24)"
+.PP
+.SS "New features"
+Add support for ES2022 class fields and private methods\&.
+.SH "8\&.1\&.1 (2021-04-12)"
+.PP
+.SS "Various"
+Stop shipping source maps in the NPM package\&.
+.SH "8\&.1\&.0 (2021-03-09)"
+.PP
+.SS "Bug fixes"
+Fix a spurious error in nested destructuring arrays\&.
+.SS "New features"
+Expose \fRallowAwaitOutsideFunction\fP in CLI interface\&.
+
+.PP
+Make \fRallowImportExportAnywhere\fP also apply to \fRimport\&.meta\fP\&.
+.SH "8\&.0\&.5 (2021-01-25)"
+.PP
+.SS "Bug fixes"
+Adjust package\&.json to work with Node 12\&.16\&.0 and 13\&.0-13\&.6\&.
+.SH "8\&.0\&.4 (2020-10-05)"
+.PP
+.SS "Bug fixes"
+Make \fRawait x ** y\fP an error, following the spec\&.
+
+.PP
+Fix potentially exponential regular expression\&.
+.SH "8\&.0\&.3 (2020-10-02)"
+.PP
+.SS "Bug fixes"
+Fix a wasteful loop during \fRParser\fP creation when setting \fRecmaVersion\fP to \fR"latest"\fP\&.
+.SH "8\&.0\&.2 (2020-09-30)"
+.PP
+.SS "Bug fixes"
+Make the TypeScript types reflect the current allowed values for \fRecmaVersion\fP\&.
+
+.PP
+Fix another regexp/division tokenizer issue\&.
+.SH "8\&.0\&.1 (2020-08-12)"
+.PP
+.SS "Bug fixes"
+Provide the correct value in the \fRversion\fP export\&.
+.SH "8\&.0\&.0 (2020-08-12)"
+.PP
+.SS "Bug fixes"
+Disallow expressions like \fR(a = b) = c\fP\&.
+
+.PP
+Make non-octal escape sequences a syntax error in strict mode\&.
+.SS "New features"
+The package can now be loaded directly as an ECMAScript module in node 13+\&.
+
+.PP
+Update to the set of Unicode properties from ES2021\&.
+.SS "Breaking changes"
+The \fRecmaVersion\fP option is now required\&. For the moment, omitting it will still work with a warning, but that will change in a future release\&.
+
+.PP
+Some changes to method signatures that may be used by plugins\&.
+.SH "7\&.4\&.0 (2020-08-03)"
+.PP
+.SS "New features"
+Add support for logical assignment operators\&.
+
+.PP
+Add support for numeric separators\&.
+.SH "7\&.3\&.1 (2020-06-11)"
+.PP
+.SS "Bug fixes"
+Make the string in the \fRversion\fP export match the actual library version\&.
+.SH "7\&.3\&.0 (2020-06-11)"
+.PP
+.SS "Bug fixes"
+Fix a bug that caused parsing of object patterns with a property named \fRset\fP that had a default value to fail\&.
+.SS "New features"
+Add support for optional chaining (\fR?\&.\fP)\&.
+.SH "7\&.2\&.0 (2020-05-09)"
+.PP
+.SS "Bug fixes"
+Fix precedence issue in parsing of async arrow functions\&.
+.SS "New features"
+Add support for nullish coalescing\&.
+
+.PP
+Add support for \fRimport\&.meta\fP\&.
+
+.PP
+Support \fRexport * as \&.\&.\&.\fP syntax\&.
+
+.PP
+Upgrade to Unicode 13\&.
+.SH "6\&.4\&.1 (2020-03-09)"
+.PP
+.SS "Bug fixes"
+More carefully check for valid UTF16 surrogate pairs in regexp validator\&.
+.SH "7\&.1\&.1 (2020-03-01)"
+.PP
+.SS "Bug fixes"
+Treat \fR\\8\fP and \fR\\9\fP as invalid escapes in template strings\&.
+
+.PP
+Allow unicode escapes in property names that are keywords\&.
+
+.PP
+Don't error on an exponential operator expression as argument to \fRawait\fP\&.
+
+.PP
+More carefully check for valid UTF16 surrogate pairs in regexp validator\&.
+.SH "7\&.1\&.0 (2019-09-24)"
+.PP
+.SS "Bug fixes"
+Disallow trailing object literal commas when ecmaVersion is less than 5\&.
+.SS "New features"
+Add a static \fRacorn\fP property to the \fRParser\fP class that contains the entire module interface, to allow plugins to access the instance of the library that they are acting on\&.
+.SH "7\&.0\&.0 (2019-08-13)"
+.PP
+.SS "Breaking changes"
+Changes the node format for dynamic imports to use the \fRImportExpression\fP node type, as defined in \fRESTree\fP\&.
+
+.PP
+Makes 10 (ES2019) the default value for the \fRecmaVersion\fP option\&.
+.SH "6\&.3\&.0 (2019-08-12)"
+.PP
+.SS "New features"
+\fRsourceType: "module"\fP can now be used even when \fRecmaVersion\fP is less than 6, to parse module-style code that otherwise conforms to an older standard\&.
+.SH "6\&.2\&.1 (2019-07-21)"
+.PP
+.SS "Bug fixes"
+Fix bug causing Acorn to treat some characters as identifier characters that shouldn't be treated as such\&.
+
+.PP
+Fix issue where setting the \fRallowReserved\fP option to \fR"never"\fP allowed reserved words in some circumstances\&.
+.SH "6\&.2\&.0 (2019-07-04)"
+.PP
+.SS "Bug fixes"
+Improve valid assignment checking in \fRfor\fP/\fRin\fP and \fRfor\fP/\fRof\fP loops\&.
+
+.PP
+Disallow binding \fRlet\fP in patterns\&.
+.SS "New features"
+Support bigint syntax with \fRecmaVersion\fP >= 11\&.
+
+.PP
+Support dynamic \fRimport\fP syntax with \fRecmaVersion\fP >= 11\&.
+
+.PP
+Upgrade to Unicode version 12\&.
+.SH "6\&.1\&.1 (2019-02-27)"
+.PP
+.SS "Bug fixes"
+Fix bug that caused parsing default exports of with names to fail\&.
+.SH "6\&.1\&.0 (2019-02-08)"
+.PP
+.SS "Bug fixes"
+Fix scope checking when redefining a \fRvar\fP as a lexical binding\&.
+.SS "New features"
+Split up \fRparseSubscripts\fP to use an internal \fRparseSubscript\fP method to make it easier to extend with plugins\&.
+.SH "6\&.0\&.7 (2019-02-04)"
+.PP
+.SS "Bug fixes"
+Check that exported bindings are defined\&.
+
+.PP
+Don't treat \fR\\u180e\fP as a whitespace character\&.
+
+.PP
+Check for duplicate parameter names in methods\&.
+
+.PP
+Don't allow shorthand properties when they are generators or async methods\&.
+
+.PP
+Forbid binding \fRawait\fP in async arrow function's parameter list\&.
+.SH "6\&.0\&.6 (2019-01-30)"
+.PP
+.SS "Bug fixes"
+The content of class declarations and expressions is now always parsed in strict mode\&.
+
+.PP
+Don't allow \fRlet\fP or \fRconst\fP to bind the variable name \fRlet\fP\&.
+
+.PP
+Treat class declarations as lexical\&.
+
+.PP
+Don't allow a generator function declaration as the sole body of an \fRif\fP or \fRelse\fP\&.
+
+.PP
+Ignore \fR"use strict"\fP when after an empty statement\&.
+
+.PP
+Allow string line continuations with special line terminator characters\&.
+
+.PP
+Treat \fRfor\fP bodies as part of the \fRfor\fP scope when checking for conflicting bindings\&.
+
+.PP
+Fix bug with parsing \fRyield\fP in a \fRfor\fP loop initializer\&.
+
+.PP
+Implement special cases around scope checking for functions\&.
+.SH "6\&.0\&.5 (2019-01-02)"
+.PP
+.SS "Bug fixes"
+Fix TypeScript type for \fRParser\&.extend\fP and add \fRallowAwaitOutsideFunction\fP to options type\&.
+
+.PP
+Don't treat \fRlet\fP as a keyword when the next token is \fR{\fP on the next line\&.
+
+.PP
+Fix bug that broke checking for parentheses around an object pattern in a destructuring assignment when \fRpreserveParens\fP was on\&.
+.SH "6\&.0\&.4 (2018-11-05)"
+.PP
+.SS "Bug fixes"
+Further improvements to tokenizing regular expressions in corner cases\&.
+.SH "6\&.0\&.3 (2018-11-04)"
+.PP
+.SS "Bug fixes"
+Fix bug in tokenizing an expression-less return followed by a function followed by a regular expression\&.
+
+.PP
+Remove stray symlink in the package tarball\&.
+.SH "6\&.0\&.2 (2018-09-26)"
+.PP
+.SS "Bug fixes"
+Fix bug where default expressions could fail to parse inside an object destructuring assignment expression\&.
+.SH "6\&.0\&.1 (2018-09-14)"
+.PP
+.SS "Bug fixes"
+Fix wrong value in \fRversion\fP export\&.
+.SH "6\&.0\&.0 (2018-09-14)"
+.PP
+.SS "Bug fixes"
+Better handle variable-redefinition checks for catch bindings and functions directly under if statements\&.
+
+.PP
+Forbid \fRnew\&.target\fP in top-level arrow functions\&.
+
+.PP
+Fix issue with parsing a regexp after \fRyield\fP in some contexts\&.
+.SS "New features"
+The package now comes with TypeScript definitions\&.
+.SS "Breaking changes"
+The default value of the \fRecmaVersion\fP option is now 9 (2018)\&.
+
+.PP
+Plugins work differently, and will have to be rewritten to work with this version\&.
+
+.PP
+The loose parser and walker have been moved into separate packages (\fRacorn-loose\fP and \fRacorn-walk\fP)\&.
+.SH "5\&.7\&.3 (2018-09-10)"
+.PP
+.SS "Bug fixes"
+Fix failure to tokenize regexps after expressions like \fRx\&.of\fP\&.
+
+.PP
+Better error message for unterminated template literals\&.
+.SH "5\&.7\&.2 (2018-08-24)"
+.PP
+.SS "Bug fixes"
+Properly handle \fRallowAwaitOutsideFunction\fP in for statements\&.
+
+.PP
+Treat function declarations at the top level of modules like let bindings\&.
+
+.PP
+Don't allow async function declarations as the only statement under a label\&.
+.SH "5\&.7\&.0 (2018-06-15)"
+.PP
+.SS "New features"
+Upgraded to Unicode 11\&.
+.SH "5\&.6\&.0 (2018-05-31)"
+.PP
+.SS "New features"
+Allow U+2028 and U+2029 in string when ECMAVersion >= 10\&.
+
+.PP
+Allow binding-less catch statements when ECMAVersion >= 10\&.
+
+.PP
+Add \fRallowAwaitOutsideFunction\fP option for parsing top-level \fRawait\fP\&.
+.SH "5\&.5\&.3 (2018-03-08)"
+.PP
+.SS "Bug fixes"
+A \fIsecond\fP republish of the code in 5\&.5\&.1, this time with yarn, to hopefully get valid timestamps\&.
+.SH "5\&.5\&.2 (2018-03-08)"
+.PP
+.SS "Bug fixes"
+A republish of the code in 5\&.5\&.1 in an attempt to solve an issue with the file timestamps in the npm package being 0\&.
+.SH "5\&.5\&.1 (2018-03-06)"
+.PP
+.SS "Bug fixes"
+Fix misleading error message for octal escapes in template strings\&.
+.SH "5\&.5\&.0 (2018-02-27)"
+.PP
+.SS "New features"
+The identifier character categorization is now based on Unicode version 10\&.
+
+.PP
+Acorn will now validate the content of regular expressions, including new ES9 features\&.
+.SH "5\&.4\&.0 (2018-02-01)"
+.PP
+.SS "Bug fixes"
+Disallow duplicate or escaped flags on regular expressions\&.
+
+.PP
+Disallow octal escapes in strings in strict mode\&.
+.SS "New features"
+Add support for async iteration\&.
+
+.PP
+Add support for object spread and rest\&.
+.SH "5\&.3\&.0 (2017-12-28)"
+.PP
+.SS "Bug fixes"
+Fix parsing of floating point literals with leading zeroes in loose mode\&.
+
+.PP
+Allow duplicate property names in object patterns\&.
+
+.PP
+Don't allow static class methods named \fRprototype\fP\&.
+
+.PP
+Disallow async functions directly under \fRif\fP or \fRelse\fP\&.
+
+.PP
+Parse right-hand-side of \fRfor\fP/\fRof\fP as an assignment expression\&.
+
+.PP
+Stricter parsing of \fRfor\fP/\fRin\fP\&.
+
+.PP
+Don't allow unicode escapes in contextual keywords\&.
+.SS "New features"
+Parsing class members was factored into smaller methods to allow plugins to hook into it\&.
+.SH "5\&.2\&.1 (2017-10-30)"
+.PP
+.SS "Bug fixes"
+Fix a token context corruption bug\&.
+.SH "5\&.2\&.0 (2017-10-30)"
+.PP
+.SS "Bug fixes"
+Fix token context tracking for \fRclass\fP and \fRfunction\fP in property-name position\&.
+
+.PP
+Make sure \fR%*\fP isn't parsed as a valid operator\&.
+
+.PP
+Allow shorthand properties \fRget\fP and \fRset\fP to be followed by default values\&.
+
+.PP
+Disallow \fRsuper\fP when not in callee or object position\&.
+.SS "New features"
+Support \fR\fRdirective\fP property\fP on directive expression statements\&.
+.SH "5\&.1\&.2 (2017-09-04)"
+.PP
+.SS "Bug fixes"
+Disable parsing of legacy HTML-style comments in modules\&.
+
+.PP
+Fix parsing of async methods whose names are keywords\&.
+.SH "5\&.1\&.1 (2017-07-06)"
+.PP
+.SS "Bug fixes"
+Fix problem with disambiguating regexp and division after a class\&.
+.SH "5\&.1\&.0 (2017-07-05)"
+.PP
+.SS "Bug fixes"
+Fix tokenizing of regexps in an object-desctructuring \fRfor\fP/\fRof\fP loop and after \fRyield\fP\&.
+
+.PP
+Parse zero-prefixed numbers with non-octal digits as decimal\&.
+
+.PP
+Allow object/array patterns in rest parameters\&.
+
+.PP
+Don't error when \fRyield\fP is used as a property name\&.
+
+.PP
+Allow \fRasync\fP as a shorthand object property\&.
+.SS "New features"
+Implement the \fRtemplate literal revision proposal\fP for ES9\&.
+.SH "5\&.0\&.3 (2017-04-01)"
+.PP
+.SS "Bug fixes"
+Fix spurious duplicate variable definition errors for named functions\&.
+.SH "5\&.0\&.2 (2017-03-30)"
+.PP
+.SS "Bug fixes"
+A binary operator after a parenthesized arrow expression is no longer incorrectly treated as an error\&.
+.SH "5\&.0\&.0 (2017-03-28)"
+.PP
+.SS "Bug fixes"
+Raise an error for duplicated lexical bindings\&.
+
+.PP
+Fix spurious error when an assignement expression occurred after a spread expression\&.
+
+.PP
+Accept regular expressions after \fRof\fP (in \fRfor\fP/\fRof\fP), \fRyield\fP (in a generator), and braced arrow functions\&.
+
+.PP
+Allow labels in front or \fRvar\fP declarations, even in strict mode\&.
+.SS "Breaking changes"
+Parse declarations following \fRexport default\fP as declaration nodes, not expressions\&. This means that class and function declarations nodes can now have \fRnull\fP as their \fRid\fP\&.
+.SH "4\&.0\&.11 (2017-02-07)"
+.PP
+.SS "Bug fixes"
+Allow all forms of member expressions to be parenthesized as lvalue\&.
+.SH "4\&.0\&.10 (2017-02-07)"
+.PP
+.SS "Bug fixes"
+Don't expect semicolons after default-exported functions or classes, even when they are expressions\&.
+
+.PP
+Check for use of \fR'use strict'\fP directives in non-simple parameter functions, even when already in strict mode\&.
+.SH "4\&.0\&.9 (2017-02-06)"
+.PP
+.SS "Bug fixes"
+Fix incorrect error raised for parenthesized simple assignment targets, so that \fR(x) = 1\fP parses again\&.
+.SH "4\&.0\&.8 (2017-02-03)"
+.PP
+.SS "Bug fixes"
+Solve spurious parenthesized pattern errors by temporarily erring on the side of accepting programs that our delayed errors don't handle correctly yet\&.
+.SH "4\&.0\&.7 (2017-02-02)"
+.PP
+.SS "Bug fixes"
+Accept invalidly rejected code like \fR(x)\&.y = 2\fP again\&.
+
+.PP
+Don't raise an error when a function \fIinside\fP strict code has a non-simple parameter list\&.
+.SH "4\&.0\&.6 (2017-02-02)"
+.PP
+.SS "Bug fixes"
+Fix exponential behavior (manifesting itself as a complete hang for even relatively small source files) introduced by the new 'use strict' check\&.
+.SH "4\&.0\&.5 (2017-02-02)"
+.PP
+.SS "Bug fixes"
+Disallow parenthesized pattern expressions\&.
+
+.PP
+Allow keywords as export names\&.
+
+.PP
+Don't allow the \fRasync\fP keyword to be parenthesized\&.
+
+.PP
+Properly raise an error when a keyword contains a character escape\&.
+
+.PP
+Allow \fR"use strict"\fP to appear after other string literal expressions\&.
+
+.PP
+Disallow labeled declarations\&.
+.SH "4\&.0\&.4 (2016-12-19)"
+.PP
+.SS "Bug fixes"
+Fix crash when \fRexport\fP was followed by a keyword that can't be exported\&.
+.SH "4\&.0\&.3 (2016-08-16)"
+.PP
+.SS "Bug fixes"
+Allow regular function declarations inside single-statement \fRif\fP branches in loose mode\&. Forbid them entirely in strict mode\&.
+
+.PP
+Properly parse properties named \fRasync\fP in ES2017 mode\&.
+
+.PP
+Fix bug where reserved words were broken in ES2017 mode\&.
+.SH "4\&.0\&.2 (2016-08-11)"
+.PP
+.SS "Bug fixes"
+Don't ignore period or 'e' characters after octal numbers\&.
+
+.PP
+Fix broken parsing for call expressions in default parameter values of arrow functions\&.
+.SH "4\&.0\&.1 (2016-08-08)"
+.PP
+.SS "Bug fixes"
+Fix false positives in duplicated export name errors\&.
+.SH "4\&.0\&.0 (2016-08-07)"
+.PP
+.SS "Breaking changes"
+The default \fRecmaVersion\fP option value is now 7\&.
+
+.PP
+A number of internal method signatures changed, so plugins might need to be updated\&.
+.SS "Bug fixes"
+The parser now raises errors on duplicated export names\&.
+
+.PP
+\fRarguments\fP and \fReval\fP can now be used in shorthand properties\&.
+
+.PP
+Duplicate parameter names in non-simple argument lists now always produce an error\&.
+.SS "New features"
+The \fRecmaVersion\fP option now also accepts year-style version numbers (2015, etc)\&.
+
+.PP
+Support for \fRasync\fP/\fRawait\fP syntax when \fRecmaVersion\fP is >= 8\&.
+
+.PP
+Support for trailing commas in call expressions when \fRecmaVersion\fP is >= 8\&.
+.SH "3\&.3\&.0 (2016-07-25)"
+.PP
+.SS "Bug fixes"
+Fix bug in tokenizing of regexp operator after a function declaration\&.
+
+.PP
+Fix parser crash when parsing an array pattern with a hole\&.
+.SS "New features"
+Implement check against complex argument lists in functions that enable strict mode in ES7\&.
+.SH "3\&.2\&.0 (2016-06-07)"
+.PP
+.SS "Bug fixes"
+Improve handling of lack of unicode regexp support in host environment\&.
+
+.PP
+Properly reject shorthand properties whose name is a keyword\&.
+.SS "New features"
+Visitors created with \fRvisit\&.make\fP now have their base as \fIprototype\fP, rather than copying properties into a fresh object\&.
+.SH "3\&.1\&.0 (2016-04-18)"
+.PP
+.SS "Bug fixes"
+Properly tokenize the division operator directly after a function expression\&.
+
+.PP
+Allow trailing comma in destructuring arrays\&.
+.SH "3\&.0\&.4 (2016-02-25)"
+.PP
+.SS "Fixes"
+Allow update expressions as left-hand-side of the ES7 exponential operator\&.
+.SH "3\&.0\&.2 (2016-02-10)"
+.PP
+.SS "Fixes"
+Fix bug that accidentally made \fRundefined\fP a reserved word when parsing ES7\&.
+.SH "3\&.0\&.0 (2016-02-10)"
+.PP
+.SS "Breaking changes"
+The default value of the \fRecmaVersion\fP option is now 6 (used to be 5)\&.
+
+.PP
+Support for comprehension syntax (which was dropped from the draft spec) has been removed\&.
+.SS "Fixes"
+\fRlet\fP and \fRyield\fP are now “contextual keywords”, meaning you can mostly use them as identifiers in ES5 non-strict code\&.
+
+.PP
+A parenthesized class or function expression after \fRexport default\fP is now parsed correctly\&.
+.SS "New features"
+When \fRecmaVersion\fP is set to 7, Acorn will parse the exponentiation operator (\fR**\fP)\&.
+
+.PP
+The identifier character ranges are now based on Unicode 8\&.0\&.0\&.
+
+.PP
+Plugins can now override the \fRraiseRecoverable\fP method to override the way non-critical errors are handled\&.
+.SH "2\&.7\&.0 (2016-01-04)"
+.PP
+.SS "Fixes"
+Stop allowing rest parameters in setters\&.
+
+.PP
+Disallow \fRy\fP rexexp flag in ES5\&.
+
+.PP
+Disallow \fR\\00\fP and \fR\\000\fP escapes in strict mode\&.
+
+.PP
+Raise an error when an import name is a reserved word\&.
+.SH "2\&.6\&.2 (2015-11-10)"
+.PP
+.SS "Fixes"
+Don't crash when no options object is passed\&.
+.SH "2\&.6\&.0 (2015-11-09)"
+.PP
+.SS "Fixes"
+Add \fRawait\fP as a reserved word in module sources\&.
+
+.PP
+Disallow \fRyield\fP in a parameter default value for a generator\&.
+
+.PP
+Forbid using a comma after a rest pattern in an array destructuring\&.
+.SS "New features"
+Support parsing stdin in command-line tool\&.
+.SH "2\&.5\&.0 (2015-10-27)"
+.PP
+.SS "Fixes"
+Fix tokenizer support in the command-line tool\&.
+
+.PP
+Stop allowing \fRnew\&.target\fP outside of functions\&.
+
+.PP
+Remove legacy \fRguard\fP and \fRguardedHandler\fP properties from try nodes\&.
+
+.PP
+Stop allowing multiple \fR__proto__\fP properties on an object literal in strict mode\&.
+
+.PP
+Don't allow rest parameters to be non-identifier patterns\&.
+
+.PP
+Check for duplicate paramter names in arrow functions\&. 

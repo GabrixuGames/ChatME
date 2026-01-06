@@ -1,0 +1,155 @@
+.TH "tests.test_api_integration.TestAPIIntegration" 3 "Version 0.1" "Chat-ME!" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+tests.test_api_integration.TestAPIIntegration
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits unittest\&.TestCase\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBsetUp\fP (self)"
+.br
+.ti -1c
+.RI "\fBtearDown\fP (self)"
+.br
+.ti -1c
+.RI "\fBtest_home_endpoint\fP (self)"
+.br
+.ti -1c
+.RI "\fBtest_login_success\fP (self)"
+.br
+.ti -1c
+.RI "\fBtest_login_invalid_credentials\fP (self)"
+.br
+.ti -1c
+.RI "\fBtest_login_missing_data\fP (self)"
+.br
+.ti -1c
+.RI "\fBtest_login_invalid_json\fP (self)"
+.br
+.ti -1c
+.RI "\fBtest_logout\fP (self)"
+.br
+.ti -1c
+.RI "\fBtest_verificar_sesion_authenticated\fP (self)"
+.br
+.ti -1c
+.RI "\fBtest_verificar_sesion_not_authenticated\fP (self)"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBmock_auth_service\fP = Mock()"
+.br
+.ti -1c
+.RI "\fBmock_chat_service\fP = Mock()"
+.br
+.ti -1c
+.RI "\fBclient\fP = app\&.test_client()"
+.br
+.ti -1c
+.RI "\fBapp_context\fP = app\&.app_context()"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+.nf
+Tests de integración para la API
+.fi
+.PP
+ 
+.SH "Member Function Documentation"
+.PP 
+.SS "tests\&.test_api_integration\&.TestAPIIntegration\&.setUp ( self)"
+
+.PP
+.nf
+Configurar la aplicación de test
+.fi
+.PP
+ 
+.SS "tests\&.test_api_integration\&.TestAPIIntegration\&.tearDown ( self)"
+
+.PP
+.nf
+Limpiar después de cada test
+.fi
+.PP
+ 
+.SS "tests\&.test_api_integration\&.TestAPIIntegration\&.test_home_endpoint ( self)"
+
+.PP
+.nf
+Test del endpoint principal
+.fi
+.PP
+ 
+.SS "tests\&.test_api_integration\&.TestAPIIntegration\&.test_login_invalid_credentials ( self)"
+
+.PP
+.nf
+Test de login con credenciales inválidas
+.fi
+.PP
+ 
+.SS "tests\&.test_api_integration\&.TestAPIIntegration\&.test_login_invalid_json ( self)"
+
+.PP
+.nf
+Test de login con JSON inválido
+.fi
+.PP
+ 
+.SS "tests\&.test_api_integration\&.TestAPIIntegration\&.test_login_missing_data ( self)"
+
+.PP
+.nf
+Test de login con datos faltantes
+.fi
+.PP
+ 
+.SS "tests\&.test_api_integration\&.TestAPIIntegration\&.test_login_success ( self)"
+
+.PP
+.nf
+Test de login exitoso
+.fi
+.PP
+ 
+.SS "tests\&.test_api_integration\&.TestAPIIntegration\&.test_logout ( self)"
+
+.PP
+.nf
+Test de logout
+.fi
+.PP
+ 
+.SS "tests\&.test_api_integration\&.TestAPIIntegration\&.test_verificar_sesion_authenticated ( self)"
+
+.PP
+.nf
+Test de verificación de sesión con usuario autenticado
+.fi
+.PP
+ 
+.SS "tests\&.test_api_integration\&.TestAPIIntegration\&.test_verificar_sesion_not_authenticated ( self)"
+
+.PP
+.nf
+Test de verificación de sesión sin autenticar
+.fi
+.PP
+ 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Chat-ME! from the source code\&.

@@ -1,0 +1,34 @@
+\doxysection{frontend/node\+\_\+modules/eastasianwidth Directory Reference}
+\hypertarget{dir_77312d3ac62f8e50e284e5c92a55f9c7}{}\label{dir_77312d3ac62f8e50e284e5c92a55f9c7}\index{frontend/node\_modules/eastasianwidth Directory Reference@{frontend/node\_modules/eastasianwidth Directory Reference}}
+
+
+\doxysubsection{Detailed Description}
+\hypertarget{dir_77312d3ac62f8e50e284e5c92a55f9c7_autotoc_md2548}{}\doxysubsection{\texorpdfstring{East Asian Width}{East Asian Width}}\label{dir_77312d3ac62f8e50e284e5c92a55f9c7_autotoc_md2548}
+Get \href{http://www.unicode.org/reports/tr11/}{\texttt{East Asian Width}} from a character.
+
+\textquotesingle{}F\textquotesingle{}(Fullwidth), \textquotesingle{}H\textquotesingle{}(Halfwidth), \textquotesingle{}W\textquotesingle{}(Wide), \textquotesingle{}Na\textquotesingle{}(Narrow), \textquotesingle{}A\textquotesingle{}(Ambiguous) or \textquotesingle{}N\textquotesingle{}(Natural).
+
+Original Code is \href{http://d.hatena.ne.jp/takenspc/20111126\#1322252878}{\texttt{東アジアの文字幅 (East Asian Width) の判定 -\/ 中途}}.\hypertarget{dir_77312d3ac62f8e50e284e5c92a55f9c7_autotoc_md2549}{}\doxysubsection{\texorpdfstring{Install}{Install}}\label{dir_77312d3ac62f8e50e284e5c92a55f9c7_autotoc_md2549}
+\begin{DoxyVerb}$ npm install eastasianwidth
+\end{DoxyVerb}
+\hypertarget{dir_77312d3ac62f8e50e284e5c92a55f9c7_autotoc_md2550}{}\doxysubsection{\texorpdfstring{Usage}{Usage}}\label{dir_77312d3ac62f8e50e284e5c92a55f9c7_autotoc_md2550}
+\begin{DoxyVerb}var eaw = require('eastasianwidth');
+console.log(eaw.eastAsianWidth('￦')) // 'F'
+console.log(eaw.eastAsianWidth('｡')) // 'H'
+console.log(eaw.eastAsianWidth('뀀')) // 'W'
+console.log(eaw.eastAsianWidth('a')) // 'Na'
+console.log(eaw.eastAsianWidth('①')) // 'A'
+console.log(eaw.eastAsianWidth('ف')) // 'N'
+
+console.log(eaw.characterLength('￦')) // 2
+console.log(eaw.characterLength('｡')) // 1
+console.log(eaw.characterLength('뀀')) // 2
+console.log(eaw.characterLength('a')) // 1
+console.log(eaw.characterLength('①')) // 2
+console.log(eaw.characterLength('ف')) // 1
+
+console.log(eaw.length('あいうえお')) // 10
+console.log(eaw.length('abcdefg')) // 7
+console.log(eaw.length('￠￦｡ￜㄅ뀀¢⟭a⊙①بف')) // 19
+\end{DoxyVerb}
+ 

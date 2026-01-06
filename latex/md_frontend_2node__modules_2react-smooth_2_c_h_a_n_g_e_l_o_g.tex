@@ -1,0 +1,226 @@
+\chapter{3.\+0.\+0 / 2023-\/10-\/18 }
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g}{}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g}\index{3.0.0 / 2023-\/10-\/18@{3.0.0 / 2023-\/10-\/18}}
+\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5598}%
+\Hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5598}%
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5599}{}\doxysubsection{\texorpdfstring{refactor / chore}{refactor / chore}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5599}
+
+\begin{DoxyItemize}
+\item upgrade dependencies
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5600}{}\doxysection{\texorpdfstring{BREAKING CHANGE}{BREAKING CHANGE}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5600}
+Remove some unused/unneeded code which drops support for older browser versions. Results in slightly decreased bundle size.
+
+
+\begin{DoxyItemize}
+\item remove unneeded polyfill for translate\+Style -\/ \href{https://caniuse.com/?search=transforms}{\texttt{browser support since 2017}}
+\item remove unneeded polyfill for {\ttfamily Number.\+is\+Finite} -\/ \href{https://caniuse.com/?search=Number.isFinite}{\texttt{browser support since 2015}} AND polyfilled by babel/core-\/js
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5601}{}\doxysubsection{\texorpdfstring{2.\+0.\+5 / 2023-\/10-\/10}{2.\+0.\+5 / 2023-\/10-\/10}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5601}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5602}{}\doxysubsubsection{\texorpdfstring{fix}{fix}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5602}
+
+\begin{DoxyItemize}
+\item Check if {\ttfamily request\+Animation\+Frame} is defined in should\+Update
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5603}{}\doxysubsection{\texorpdfstring{2.\+0.\+4 / 2023-\/09-\/12}{2.\+0.\+4 / 2023-\/09-\/12}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5603}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5604}{}\doxysubsubsection{\texorpdfstring{fix}{fix}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5604}
+
+\begin{DoxyItemize}
+\item call {\ttfamily on\+Animation\+End} on unmount
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5605}{}\doxysubsection{\texorpdfstring{2.\+0.\+3 / 2023-\/05-\/08}{2.\+0.\+3 / 2023-\/05-\/08}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5605}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5606}{}\doxysubsubsection{\texorpdfstring{fix}{fix}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5606}
+
+\begin{DoxyItemize}
+\item treat {\ttfamily duration=\{0\}} as if animation is not active by doing a check and returning early. This fixes a bug where NaN can cause a crash in the browser.
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5607}{}\doxysubsection{\texorpdfstring{2.\+0.\+2 / 2023-\/02-\/23}{2.\+0.\+2 / 2023-\/02-\/23}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5607}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5608}{}\doxysubsubsection{\texorpdfstring{chore}{chore}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5608}
+
+\begin{DoxyItemize}
+\item upgrade {\ttfamily fast-\/equals} to latest. No breaking changes -\/ see \href{https://github.com/planttheidea/fast-equals/blob/master/CHANGELOG.md}{\texttt{https\+://github.\+com/planttheidea/fast-\/equals/blob/master/\+CHANGELOG.\+md}}
+\item don\textquotesingle{}t upgrade {\ttfamily react-\/transition-\/group} in minor release as this requires dropping support for react \texorpdfstring{$<$}{<}16.\+6
+\item upgrade dev\+Dependencies
+\item update babel config
+\item update deprecated eslint parser
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5609}{}\doxysubsection{\texorpdfstring{2.\+0.\+1 / 2022-\/06-\/27}{2.\+0.\+1 / 2022-\/06-\/27}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5609}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5610}{}\doxysubsubsection{\texorpdfstring{feat}{feat}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5610}
+
+\begin{DoxyItemize}
+\item feat\+: allow React 18
+\item Remove raf polyfill for IE9
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5611}{}\doxysubsection{\texorpdfstring{2.\+0.\+0 / 2021-\/03-\/21}{2.\+0.\+0 / 2021-\/03-\/21}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5611}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5612}{}\doxysubsubsection{\texorpdfstring{chore (\#48)}{chore (\#48)}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5612}
+
+\begin{DoxyItemize}
+\item Changed peer\+Deps to react 15,16,17
+\item Removed karma,chai,enzyme blablabla... and used only Jest and Testing-\/\+Library.
+\item Updated dev\+Dependencies and cleared some.
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5613}{}\doxysubsection{\texorpdfstring{1.\+0.\+2 / 2018-\/10-\/02}{1.\+0.\+2 / 2018-\/10-\/02}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5613}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5614}{}\doxysubsubsection{\texorpdfstring{fix}{fix}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5614}
+
+\begin{DoxyItemize}
+\item fix babelrc
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5615}{}\doxysubsection{\texorpdfstring{1.\+0.\+1 / 2018-\/10-\/02}{1.\+0.\+1 / 2018-\/10-\/02}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5615}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5616}{}\doxysubsubsection{\texorpdfstring{fix}{fix}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5616}
+
+\begin{DoxyItemize}
+\item update babel, webpack, karma, etc.
+\item fix import error
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5617}{}\doxysubsection{\texorpdfstring{1.\+0.\+0 / 2017-\/11-\/06}{1.\+0.\+0 / 2017-\/11-\/06}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5617}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5618}{}\doxysubsubsection{\texorpdfstring{feat}{feat}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5618}
+
+\begin{DoxyItemize}
+\item Support React 16
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5619}{}\doxysubsection{\texorpdfstring{0.\+1.\+17 / 2016-\/12-\/02}{0.\+1.\+17 / 2016-\/12-\/02}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5619}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5620}{}\doxysubsubsection{\texorpdfstring{fix}{fix}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5620}
+
+\begin{DoxyItemize}
+\item change scripts
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5621}{}\doxysubsection{\texorpdfstring{0.\+1.\+16 / 2016-\/11-\/25}{0.\+1.\+16 / 2016-\/11-\/25}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5621}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5622}{}\doxysubsubsection{\texorpdfstring{fix}{fix}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5622}
+
+\begin{DoxyItemize}
+\item update lodash
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5623}{}\doxysubsection{\texorpdfstring{0.\+1.\+15 / 2016-\/10-\/31}{0.\+1.\+15 / 2016-\/10-\/31}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5623}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5624}{}\doxysubsubsection{\texorpdfstring{fix}{fix}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5624}
+
+\begin{DoxyItemize}
+\item fix is\+Mounted to mounted
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5625}{}\doxysubsection{\texorpdfstring{0.\+1.\+14 / 2016-\/10-\/28}{0.\+1.\+14 / 2016-\/10-\/28}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5625}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5626}{}\doxysubsubsection{\texorpdfstring{fix}{fix}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5626}
+
+\begin{DoxyItemize}
+\item fix\+: judge is\+Mounted
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5627}{}\doxysubsection{\texorpdfstring{0.\+1.\+12-\/0.\+1.\+13 / 2016-\/10-\/27}{0.\+1.\+12-\/0.\+1.\+13 / 2016-\/10-\/27}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5627}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5628}{}\doxysubsubsection{\texorpdfstring{fix}{fix}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5628}
+
+\begin{DoxyItemize}
+\item fix script
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5629}{}\doxysubsection{\texorpdfstring{0.\+1.\+10 / 2016-\/07-\/07}{0.\+1.\+10 / 2016-\/07-\/07}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5629}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5630}{}\doxysubsubsection{\texorpdfstring{fix}{fix}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5630}
+
+\begin{DoxyItemize}
+\item add on\+Animation\+Re\+Start validation
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5631}{}\doxysubsection{\texorpdfstring{0.\+1.\+8-\/0.\+1.\+9 / 2016-\/05-\/05}{0.\+1.\+8-\/0.\+1.\+9 / 2016-\/05-\/05}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5631}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5632}{}\doxysubsubsection{\texorpdfstring{feat}{feat}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5632}
+
+\begin{DoxyItemize}
+\item add on\+Aniamtion\+Start prop
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5633}{}\doxysubsection{\texorpdfstring{0.\+1.\+7 / 2016-\/04-\/21}{0.\+1.\+7 / 2016-\/04-\/21}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5633}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5634}{}\doxysubsubsection{\texorpdfstring{fix}{fix}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5634}
+
+\begin{DoxyItemize}
+\item fix Animate trigger animate when is\+Active is false
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5635}{}\doxysubsection{\texorpdfstring{0.\+1.\+6 / 2016-\/04-\/15}{0.\+1.\+6 / 2016-\/04-\/15}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5635}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5636}{}\doxysubsubsection{\texorpdfstring{fix}{fix}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5636}
+
+\begin{DoxyItemize}
+\item fix Animate not pipe props when Animate not active
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5637}{}\doxysubsection{\texorpdfstring{0.\+1.\+5 / 2016-\/04-\/13}{0.\+1.\+5 / 2016-\/04-\/13}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5637}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5638}{}\doxysubsubsection{\texorpdfstring{fix}{fix}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5638}
+
+\begin{DoxyItemize}
+\item remove pure-\/render-\/decorator
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5639}{}\doxysubsection{\texorpdfstring{0.\+1.\+4 / 2016-\/04-\/12}{0.\+1.\+4 / 2016-\/04-\/12}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5639}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5640}{}\doxysubsubsection{\texorpdfstring{fix}{fix}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5640}
+
+\begin{DoxyItemize}
+\item change transition-\/group addons to dependencies
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5641}{}\doxysubsection{\texorpdfstring{0.\+1.\+3 / 2016-\/04-\/12}{0.\+1.\+3 / 2016-\/04-\/12}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5641}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5642}{}\doxysubsubsection{\texorpdfstring{refactor}{refactor}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5642}
+
+\begin{DoxyItemize}
+\item refactor Animate\+Manager
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5643}{}\doxysubsection{\texorpdfstring{0.\+1.\+2 / 2016-\/04-\/12}{0.\+1.\+2 / 2016-\/04-\/12}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5643}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5644}{}\doxysubsubsection{\texorpdfstring{feat}{feat}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5644}
+
+\begin{DoxyItemize}
+\item use owe Pure\+Render util
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5645}{}\doxysubsubsection{\texorpdfstring{fix}{fix}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5645}
+
+\begin{DoxyItemize}
+\item update react to 15.\+0.\+0
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5646}{}\doxysubsection{\texorpdfstring{0.\+1.\+1 / 2016-\/04-\/05}{0.\+1.\+1 / 2016-\/04-\/05}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5646}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5647}{}\doxysubsubsection{\texorpdfstring{feat}{feat}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5647}
+
+\begin{DoxyItemize}
+\item add should\+Re\+Animate prop
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5648}{}\doxysubsection{\texorpdfstring{0.\+1.\+0 / 2016-\/03-\/16}{0.\+1.\+0 / 2016-\/03-\/16}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5648}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5649}{}\doxysubsubsection{\texorpdfstring{feat}{feat}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5649}
+
+\begin{DoxyItemize}
+\item use webpack 2
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5650}{}\doxysubsection{\texorpdfstring{0.\+0.\+13-\/0.\+0.\+15 / 2016-\/03-\/15}{0.\+0.\+13-\/0.\+0.\+15 / 2016-\/03-\/15}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5650}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5651}{}\doxysubsubsection{\texorpdfstring{fix}{fix}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5651}
+
+\begin{DoxyItemize}
+\item using is\+Equal in lodash and remove is\+Equal in utils
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5652}{}\doxysubsection{\texorpdfstring{0.\+0.\+13-\/0.\+0.\+14 / 2016-\/03-\/15}{0.\+0.\+13-\/0.\+0.\+14 / 2016-\/03-\/15}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5652}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5653}{}\doxysubsubsection{\texorpdfstring{fix}{fix}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5653}
+
+\begin{DoxyItemize}
+\item fix update animation judgement
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5654}{}\doxysubsection{\texorpdfstring{0.\+0.\+12 / 2016-\/03-\/15}{0.\+0.\+12 / 2016-\/03-\/15}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5654}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5655}{}\doxysubsubsection{\texorpdfstring{fix}{fix}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5655}
+
+\begin{DoxyItemize}
+\item fix compatable prefix in transition property
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5656}{}\doxysubsubsection{\texorpdfstring{refactor}{refactor}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5656}
+
+\begin{DoxyItemize}
+\item refactor some function in utils
+\item using JSX instead of create\+Element
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5657}{}\doxysubsection{\texorpdfstring{0.\+0.\+11 / 2016-\/03-\/01}{0.\+0.\+11 / 2016-\/03-\/01}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5657}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5658}{}\doxysubsubsection{\texorpdfstring{fix}{fix}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5658}
+
+\begin{DoxyItemize}
+\item fix haven\textquotesingle{}t unsubscribe handle\+Style\+Change
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5659}{}\doxysubsection{\texorpdfstring{0.\+0.\+10 / 2016-\/02-\/17}{0.\+0.\+10 / 2016-\/02-\/17}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5659}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5660}{}\doxysubsubsection{\texorpdfstring{refactor}{refactor}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5660}
+
+\begin{DoxyItemize}
+\item remove lodash compose method
+\item refactor config\+Update.\+js
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5661}{}\doxysubsection{\texorpdfstring{0.\+0.\+9 / 2016-\/02-\/05}{0.\+0.\+9 / 2016-\/02-\/05}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5661}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5662}{}\doxysubsubsection{\texorpdfstring{fix}{fix}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5662}
+
+\begin{DoxyItemize}
+\item fix don\textquotesingle{}t build on npm publish
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5663}{}\doxysubsection{\texorpdfstring{0.\+0.\+8 / 2016-\/02-\/05}{0.\+0.\+8 / 2016-\/02-\/05}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5663}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5664}{}\doxysubsubsection{\texorpdfstring{fix}{fix}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5664}
+
+\begin{DoxyItemize}
+\item fix lodash minify problem
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5665}{}\doxysubsection{\texorpdfstring{0.\+0.\+7 / 2016-\/02-\/04}{0.\+0.\+7 / 2016-\/02-\/04}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5665}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5666}{}\doxysubsubsection{\texorpdfstring{fix}{fix}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5666}
+
+\begin{DoxyItemize}
+\item optimize npm script commands
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5667}{}\doxysubsection{\texorpdfstring{0.\+0.\+6 / 2016-\/02-\/04}{0.\+0.\+6 / 2016-\/02-\/04}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5667}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5668}{}\doxysubsubsection{\texorpdfstring{fix}{fix}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5668}
+
+\begin{DoxyItemize}
+\item set min time longer
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5669}{}\doxysubsection{\texorpdfstring{0.\+0.\+5 / 2016-\/02-\/04}{0.\+0.\+5 / 2016-\/02-\/04}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5669}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5670}{}\doxysubsubsection{\texorpdfstring{fix}{fix}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5670}
+
+\begin{DoxyItemize}
+\item fix animation not valid for set css styles too quick.
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5671}{}\doxysubsection{\texorpdfstring{0.\+0.\+4 / 2016-\/02-\/02}{0.\+0.\+4 / 2016-\/02-\/02}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5671}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5672}{}\doxysubsubsection{\texorpdfstring{fix}{fix}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5672}
+
+\begin{DoxyItemize}
+\item support on\+Animation\+End in js animation
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5673}{}\doxysubsection{\texorpdfstring{0.\+0.\+3 / 2016-\/02-\/02}{0.\+0.\+3 / 2016-\/02-\/02}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5673}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5674}{}\doxysubsubsection{\texorpdfstring{refactor}{refactor}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5674}
+
+\begin{DoxyItemize}
+\item refactor the import path of lodash function
+\item update webpack.\+config.\+js
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5675}{}\doxysubsection{\texorpdfstring{0.\+0.\+2 / 2016-\/02-\/02}{0.\+0.\+2 / 2016-\/02-\/02}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5675}
+\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5676}{}\doxysubsubsection{\texorpdfstring{feat}{feat}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5676}
+
+\begin{DoxyItemize}
+\item support js animation
+\item support bezier and spring timing function
+\item support group animation
+\end{DoxyItemize}\hypertarget{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5677}{}\doxysubsection{\texorpdfstring{0.\+0.\+1 / 2016-\/01-\/21}{0.\+0.\+1 / 2016-\/01-\/21}}\label{md_frontend_2node__modules_2react-smooth_2_c_h_a_n_g_e_l_o_g_autotoc_md5677}
+
+\begin{DoxyItemize}
+\item Init the project 
+\end{DoxyItemize}

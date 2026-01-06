@@ -1,0 +1,163 @@
+.TH "md_frontend_2node__modules_2json-stable-stringify-without-jsonify_2readme" 3 "Version 0.1" "Chat-ME!" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md_frontend_2node__modules_2json-stable-stringify-without-jsonify_2readme \- json-stable-stringify 
+.PP
+
+
+.PP
+This is the same as https://github.com/substack/json-stable-stringify but it doesn't depend on libraries without licenses (jsonify)\&.
+
+.PP
+deterministic version of \fRJSON\&.stringify()\fP so you can get a consistent hash from stringified results
+
+.PP
+You can also pass in a custom comparison function\&.
+
+.PP
+\fR\fP
+.PP
+\fR\fP.SH "example"
+.PP
+.PP
+.nf
+ js
+var stringify = require('json\-stable\-stringify');
+var obj = { c: 8, b: [{z:6,y:5,x:4},7], a: 3 };
+console\&.log(stringify(obj));
+.fi
+.PP
+
+.PP
+output:
+
+.PP
+.PP
+.nf
+{"a":3,"b":[{"x":4,"y":5,"z":6},7],"c":8}
+.fi
+.PP
+.SH "methods"
+.PP
+.PP
+.nf
+ js
+var stringify = require('json\-stable\-stringify')
+.fi
+.PP
+.SS "var str = stringify(obj, opts)"
+Return a deterministic stringified string \fRstr\fP from the object \fRobj\fP\&.
+.SS "options"
+.SS "cmp"
+If \fRopts\fP is given, you can supply an \fRopts\&.cmp\fP to have a custom comparison function for object keys\&. Your function \fRopts\&.cmp\fP is called with these parameters:
+
+.PP
+.PP
+.nf
+ js
+opts\&.cmp({ key: akey, value: avalue }, { key: bkey, value: bvalue })
+.fi
+.PP
+
+.PP
+For example, to sort on the object key names in reverse order you could write:
+
+.PP
+.PP
+.nf
+ js
+var stringify = require('json\-stable\-stringify');
+
+var obj = { c: 8, b: [{z:6,y:5,x:4},7], a: 3 };
+var s = stringify(obj, function (a, b) {
+    return a\&.key < b\&.key ? 1 : \-1;
+});
+console\&.log(s);
+.fi
+.PP
+
+.PP
+which results in the output string:
+
+.PP
+.PP
+.nf
+{"c":8,"b":[{"z":6,"y":5,"x":4},7],"a":3}
+.fi
+.PP
+
+.PP
+Or if you wanted to sort on the object values in reverse order, you could write:
+
+.PP
+.PP
+.nf
+var stringify = require('json\-stable\-stringify');
+
+var obj = { d: 6, c: 5, b: [{z:3,y:2,x:1},9], a: 10 };
+var s = stringify(obj, function (a, b) {
+    return a\&.value < b\&.value ? 1 : \-1;
+});
+console\&.log(s);
+.fi
+.PP
+
+.PP
+which outputs:
+
+.PP
+.PP
+.nf
+{"d":6,"c":5,"b":[{"z":3,"y":2,"x":1},9],"a":10}
+.fi
+.PP
+.SS "space"
+If you specify \fRopts\&.space\fP, it will indent the output for pretty-printing\&. Valid values are strings (e\&.g\&. \fR{space: \\t}\fP) or a number of spaces (\fR{space: 3}\fP)\&.
+
+.PP
+For example:
+
+.PP
+.PP
+.nf
+var obj = { b: 1, a: { foo: 'bar', and: [1, 2, 3] } };
+var s = stringify(obj, { space: '  ' });
+console\&.log(s);
+.fi
+.PP
+
+.PP
+which outputs:
+
+.PP
+.PP
+.nf
+{
+  "a": {
+    "and": [
+      1,
+      2,
+      3
+    ],
+    "foo": "bar"
+  },
+  "b": 1
+}
+.fi
+.PP
+.SS "replacer"
+The replacer parameter is a function \fRopts\&.replacer(key, value)\fP that behaves the same as the replacer \fRfrom the core JSON object\fP\&.
+.SH "install"
+.PP
+With \fRnpm\fP do:
+
+.PP
+.PP
+.nf
+npm install json\-stable\-stringify
+.fi
+.PP
+.SH "license"
+.PP
+MIT 

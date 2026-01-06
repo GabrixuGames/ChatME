@@ -1,0 +1,53 @@
+\doxysection{frontend/node\+\_\+modules/react-\/dom Directory Reference}
+\hypertarget{dir_6e72f6c1ad41c31d4d2f14450863709c}{}\label{dir_6e72f6c1ad41c31d4d2f14450863709c}\index{frontend/node\_modules/react-\/dom Directory Reference@{frontend/node\_modules/react-\/dom Directory Reference}}
+
+
+\doxysubsection{Detailed Description}
+\hypertarget{dir_6e72f6c1ad41c31d4d2f14450863709c_autotoc_md5267}{}\doxysubsection{\texorpdfstring{\`{}react-\/dom\`{}}{\`{}react-\/dom\`{}}}\label{dir_6e72f6c1ad41c31d4d2f14450863709c_autotoc_md5267}
+This package serves as the entry point to the DOM and server renderers for React. It is intended to be paired with the generic React package, which is shipped as {\ttfamily react} to npm.\hypertarget{dir_6e72f6c1ad41c31d4d2f14450863709c_autotoc_md5268}{}\doxysubsection{\texorpdfstring{Installation}{Installation}}\label{dir_6e72f6c1ad41c31d4d2f14450863709c_autotoc_md5268}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{npm\ install\ react\ react-\/dom}
+
+\end{DoxyCode}
+\hypertarget{dir_6e72f6c1ad41c31d4d2f14450863709c_autotoc_md5269}{}\doxysubsection{\texorpdfstring{Usage}{Usage}}\label{dir_6e72f6c1ad41c31d4d2f14450863709c_autotoc_md5269}
+\hypertarget{dir_6e72f6c1ad41c31d4d2f14450863709c_autotoc_md5270}{}\doxysubsubsection{\texorpdfstring{In the browser}{In the browser}}\label{dir_6e72f6c1ad41c31d4d2f14450863709c_autotoc_md5270}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ \{\ createRoot\ \}\ from\ 'react-\/dom/client';}
+\DoxyCodeLine{}
+\DoxyCodeLine{function\ App()\ \{}
+\DoxyCodeLine{\ \ return\ <div>Hello\ World</div>;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{const\ root\ =\ createRoot(document.getElementById('root'));}
+\DoxyCodeLine{root.render(<App\ />);}
+
+\end{DoxyCode}
+\hypertarget{dir_6e72f6c1ad41c31d4d2f14450863709c_autotoc_md5271}{}\doxysubsubsection{\texorpdfstring{On the server}{On the server}}\label{dir_6e72f6c1ad41c31d4d2f14450863709c_autotoc_md5271}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ \{\ renderToPipeableStream\ \}\ from\ 'react-\/dom/server';}
+\DoxyCodeLine{}
+\DoxyCodeLine{function\ App()\ \{}
+\DoxyCodeLine{\ \ return\ <div>Hello\ World</div>;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{function\ handleRequest(res)\ \{}
+\DoxyCodeLine{\ \ //\ ...\ in\ your\ server\ handler\ ...}
+\DoxyCodeLine{\ \ const\ stream\ =\ renderToPipeableStream(<App\ />,\ \{}
+\DoxyCodeLine{\ \ \ \ onShellReady()\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ res.statusCode\ =\ 200;}
+\DoxyCodeLine{\ \ \ \ \ \ res.setHeader('Content-\/type',\ 'text/html');}
+\DoxyCodeLine{\ \ \ \ \ \ stream.pipe(res);}
+\DoxyCodeLine{\ \ \ \ \},}
+\DoxyCodeLine{\ \ \ \ //\ ...}
+\DoxyCodeLine{\ \ \});}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{dir_6e72f6c1ad41c31d4d2f14450863709c_autotoc_md5272}{}\doxysubsection{\texorpdfstring{API}{API}}\label{dir_6e72f6c1ad41c31d4d2f14450863709c_autotoc_md5272}
+\hypertarget{dir_6e72f6c1ad41c31d4d2f14450863709c_autotoc_md5273}{}\doxysubsubsection{\texorpdfstring{{\ttfamily react-\/dom}}{{\ttfamily react-\/dom}}}\label{dir_6e72f6c1ad41c31d4d2f14450863709c_autotoc_md5273}
+See \href{https://reactjs.org/docs/react-dom.html}{\texttt{https\+://reactjs.\+org/docs/react-\/dom.\+html}}\hypertarget{dir_6e72f6c1ad41c31d4d2f14450863709c_autotoc_md5274}{}\doxysubsubsection{\texorpdfstring{{\ttfamily react-\/dom/client}}{{\ttfamily react-\/dom/client}}}\label{dir_6e72f6c1ad41c31d4d2f14450863709c_autotoc_md5274}
+See \href{https://reactjs.org/docs/react-dom-client.html}{\texttt{https\+://reactjs.\+org/docs/react-\/dom-\/client.\+html}}\hypertarget{dir_6e72f6c1ad41c31d4d2f14450863709c_autotoc_md5275}{}\doxysubsubsection{\texorpdfstring{{\ttfamily react-\/dom/server}}{{\ttfamily react-\/dom/server}}}\label{dir_6e72f6c1ad41c31d4d2f14450863709c_autotoc_md5275}
+See \href{https://reactjs.org/docs/react-dom-server.html}{\texttt{https\+://reactjs.\+org/docs/react-\/dom-\/server.\+html}} 

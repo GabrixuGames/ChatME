@@ -1,0 +1,252 @@
+\doxysection{frontend/node\+\_\+modules/react-\/resizable-\/panels Directory Reference}
+\hypertarget{dir_4663926ab448c02f1eaed0c111f2baae}{}\label{dir_4663926ab448c02f1eaed0c111f2baae}\index{frontend/node\_modules/react-\/resizable-\/panels Directory Reference@{frontend/node\_modules/react-\/resizable-\/panels Directory Reference}}
+
+
+\doxysubsection{Detailed Description}
+\hypertarget{dir_4663926ab448c02f1eaed0c111f2baae_autotoc_md5312}{}\doxysubsection{\texorpdfstring{react-\/resizable-\/panels}{react-\/resizable-\/panels}}\label{dir_4663926ab448c02f1eaed0c111f2baae_autotoc_md5312}
+React components for resizable panel groups/layouts
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ \{\ Panel,\ PanelGroup,\ PanelResizeHandle\ \}\ from\ "{}react-\/resizable-\/panels"{};}
+\DoxyCodeLine{}
+\DoxyCodeLine{<PanelGroup\ autoSaveId="{}example"{}\ direction="{}horizontal"{}>}
+\DoxyCodeLine{\ \ <Panel\ defaultSize=\{25\}>}
+\DoxyCodeLine{\ \ \ \ <SourcesExplorer\ />}
+\DoxyCodeLine{\ \ </Panel>}
+\DoxyCodeLine{\ \ <PanelResizeHandle\ />}
+\DoxyCodeLine{\ \ <Panel>}
+\DoxyCodeLine{\ \ \ \ <SourceViewer\ />}
+\DoxyCodeLine{\ \ </Panel>}
+\DoxyCodeLine{\ \ <PanelResizeHandle\ />}
+\DoxyCodeLine{\ \ <Panel\ defaultSize=\{25\}>}
+\DoxyCodeLine{\ \ \ \ <Console\ />}
+\DoxyCodeLine{\ \ </Panel>}
+\DoxyCodeLine{</PanelGroup>;}
+
+\end{DoxyCode}
+\hypertarget{dir_4663926ab448c02f1eaed0c111f2baae_autotoc_md5313}{}\doxysubsection{\texorpdfstring{If you like this project, 🎉 \href{https://github.com/sponsors/bvaughn/}{\texttt{become a sponsor}} or ☕ \href{http://givebrian.coffee/}{\texttt{buy me a coffee}}}{If you like this project, 🎉 \href{https://github.com/sponsors/bvaughn/}{\texttt{become a sponsor}} or ☕ \href{http://givebrian.coffee/}{\texttt{buy me a coffee}}}}\label{dir_4663926ab448c02f1eaed0c111f2baae_autotoc_md5313}
+\hypertarget{dir_4663926ab448c02f1eaed0c111f2baae_autotoc_md5314}{}\doxysubsection{\texorpdfstring{Props}{Props}}\label{dir_4663926ab448c02f1eaed0c111f2baae_autotoc_md5314}
+\hypertarget{dir_4663926ab448c02f1eaed0c111f2baae_autotoc_md5315}{}\doxysubsubsection{\texorpdfstring{{\ttfamily Panel\+Group}}{{\ttfamily Panel\+Group}}}\label{dir_4663926ab448c02f1eaed0c111f2baae_autotoc_md5315}
+
+\begin{DoxyTable}{3}{}{}{1}
+\SetCell{bg=\tableheadbgcolor,font=\bfseries}prop  &\SetCell{bg=\tableheadbgcolor,font=\bfseries}type  &\SetCell{bg=\tableheadbgcolor,font=\bfseries}description  \\
+{\ttfamily auto\+Save\+Id}  &{\ttfamily ?string}  &Unique id used to auto-\/save group arrangement via {\ttfamily local\+Storage}  \\
+{\ttfamily children}  &{\ttfamily React\+Node}  &Arbitrary React element(s)  \\
+{\ttfamily class\+Name}  &{\ttfamily ?string}  &Class name to attach to root element  \\
+{\ttfamily direction}  &{\ttfamily "{}horizontal"{} \textbackslash{}\texorpdfstring{$\vert$}{|} "{}vertical"{}}  &Group orientation  \\
+{\ttfamily id}  &{\ttfamily ?string}  &Group id; falls back to {\ttfamily use\+Id} when not provided  \\
+{\ttfamily on\+Layout}  &{\ttfamily ?(sizes\+: number\mbox{[}\mbox{]}) =\texorpdfstring{$>$}{>} void}  &Called when group layout changes  \\
+{\ttfamily storage}  &{\ttfamily ?Panel\+Group\+Storage}  &Custom storage API; defaults to {\ttfamily local\+Storage} \textsuperscript{1}  \\
+{\ttfamily style}  &{\ttfamily ?CSSProperties}  &CSS style to attach to root element  \\
+{\ttfamily tag\+Name}  &{\ttfamily ?string = "{}div"{}}  &HTML element tag name for root element  \\
+\end{DoxyTable}
+
+
+\textsuperscript{1}\+: Storage API must define the following {\itshape synchronous} methods\+:
+
+
+\begin{DoxyItemize}
+\item {\ttfamily get\+Item\+: (name\+:string) =\texorpdfstring{$>$}{>} string}
+\item {\ttfamily set\+Item\+: (name\+: string, value\+: string) =\texorpdfstring{$>$}{>} void}
+\end{DoxyItemize}
+
+{\ttfamily Panel\+Group} components also expose an imperative API for manual resizing\+: 
+\begin{DoxyTable}{2}{}{}{1}
+\SetCell{bg=\tableheadbgcolor,font=\bfseries}method  &\SetCell{bg=\tableheadbgcolor,font=\bfseries}description  \\
+{\ttfamily get\+Id()\+: string}  &Gets the panel group\textquotesingle{}s ID.  \\
+{\ttfamily get\+Layout()\+: number\mbox{[}\mbox{]}}  &Gets the panel group\textquotesingle{}s current {\itshape layout} ({\ttfamily \mbox{[}1 -\/ 100, ...\mbox{]}}).  \\
+{\ttfamily set\+Layout(layout\+: number\mbox{[}$\,$\mbox{]})}  &Resize panel group to the specified {\itshape layout} ({\ttfamily \mbox{[}1 -\/ 100, ...\mbox{]}}).  \\
+\end{DoxyTable}
+\hypertarget{dir_4663926ab448c02f1eaed0c111f2baae_autotoc_md5316}{}\doxysubsubsection{\texorpdfstring{{\ttfamily Panel}}{{\ttfamily Panel}}}\label{dir_4663926ab448c02f1eaed0c111f2baae_autotoc_md5316}
+
+\begin{DoxyTable}{3}{}{}{1}
+\SetCell{bg=\tableheadbgcolor,font=\bfseries}prop  &\SetCell{bg=\tableheadbgcolor,font=\bfseries}type  &\SetCell{bg=\tableheadbgcolor,font=\bfseries}description  \\
+{\ttfamily children}  &{\ttfamily React\+Node}  &Arbitrary React element(s)  \\
+{\ttfamily class\+Name}  &{\ttfamily ?string}  &Class name to attach to root element  \\
+{\ttfamily collapsed\+Size}  &{\ttfamily ?number=0}  &Panel should collapse to this size  \\
+{\ttfamily collapsible}  &{\ttfamily ?boolean=false}  &Panel should collapse when resized beyond its {\ttfamily min\+Size}  \\
+{\ttfamily default\+Size}  &{\ttfamily ?number}  &Initial size of panel (numeric value between 1-\/100)  \\
+{\ttfamily id}  &{\ttfamily ?string}  &Panel id (unique within group); falls back to {\ttfamily use\+Id} when not provided  \\
+{\ttfamily max\+Size}  &{\ttfamily ?number = 100}  &Maximum allowable size of panel (numeric value between 1-\/100); defaults to {\ttfamily 100}  \\
+{\ttfamily min\+Size}  &{\ttfamily ?number = 10}  &Minimum allowable size of panel (numeric value between 1-\/100); defaults to {\ttfamily 10}  \\
+{\ttfamily on\+Collapse}  &{\ttfamily ?() =\texorpdfstring{$>$}{>} void}  &Called when panel is collapsed  \\
+{\ttfamily on\+Expand}  &{\ttfamily ?() =\texorpdfstring{$>$}{>} void}  &Called when panel is expanded  \\
+{\ttfamily on\+Resize}  &{\ttfamily ?(size\+: number) =\texorpdfstring{$>$}{>} void}  &Called when panel is resized; {\ttfamily size} parameter is a numeric value between 1-\/100. \textsuperscript{1}  \\
+{\ttfamily order}  &{\ttfamily ?number}  &Order of panel within group; required for groups with conditionally rendered panels  \\
+{\ttfamily style}  &{\ttfamily ?CSSProperties}  &CSS style to attach to root element  \\
+{\ttfamily tag\+Name}  &{\ttfamily ?string = "{}div"{}}  &HTML element tag name for root element  \\
+\end{DoxyTable}
+
+
+\textsuperscript{1}\+: If any {\ttfamily Panel} has an {\ttfamily on\+Resize} callback, the {\ttfamily order} prop should be provided for all {\ttfamily Panel}s.
+
+{\ttfamily Panel} components also expose an imperative API for manual resizing\+: 
+\begin{DoxyTable}{2}{}{}{1}
+\SetCell{bg=\tableheadbgcolor,font=\bfseries}method  &\SetCell{bg=\tableheadbgcolor,font=\bfseries}description  \\
+{\ttfamily collapse()}  &If panel is {\ttfamily collapsible}, collapse it fully.  \\
+{\ttfamily expand()}  &If panel is currently {\itshape collapsed}, expand it to its most recent size.  \\
+{\ttfamily get\+Id()\+: string}  &Gets the ID of the panel.  \\
+{\ttfamily get\+Size()\+: number}  &Gets the current size of the panel as a percentage ({\ttfamily 1 -\/ 100}).  \\
+{\ttfamily is\+Collapsed()\+: boolean}  &Returns {\ttfamily true} if the panel is currently {\itshape collapsed} ({\ttfamily size === 0}).  \\
+{\ttfamily is\+Expanded()\+: boolean}  &Returns {\ttfamily true} if the panel is currently {\itshape not collapsed} ({\ttfamily !is\+Collapsed()}).  \\
+{\ttfamily get\+Size()\+: number}  &Returns the most recently committed size of the panel as a percentage ({\ttfamily 1 -\/ 100}).  \\
+{\ttfamily resize(size\+: number)}  &Resize panel to the specified {\itshape percentage} ({\ttfamily 1 -\/ 100}).  \\
+\end{DoxyTable}
+\hypertarget{dir_4663926ab448c02f1eaed0c111f2baae_autotoc_md5317}{}\doxysubsubsection{\texorpdfstring{{\ttfamily Panel\+Resize\+Handle}}{{\ttfamily Panel\+Resize\+Handle}}}\label{dir_4663926ab448c02f1eaed0c111f2baae_autotoc_md5317}
+
+\begin{DoxyTable}{3}{}{}{1}
+\SetCell{bg=\tableheadbgcolor,font=\bfseries}prop  &\SetCell{bg=\tableheadbgcolor,font=\bfseries}type  &\SetCell{bg=\tableheadbgcolor,font=\bfseries}description  \\
+{\ttfamily children}  &{\ttfamily ?React\+Node}  &Custom drag UI; can be any arbitrary React element(s)  \\
+{\ttfamily class\+Name}  &{\ttfamily ?string}  &Class name to attach to root element  \\
+{\ttfamily hit\+Area\+Margins}  &{\ttfamily ?\{ coarse\+: number = 15; fine\+: number = 5; \}}  &Allow this much margin when determining resizable handle hit detection  \\
+{\ttfamily disabled}  &{\ttfamily ?boolean}  &Disable drag handle  \\
+{\ttfamily id}  &{\ttfamily ?string}  &Resize handle id (unique within group); falls back to {\ttfamily use\+Id} when not provided  \\
+{\ttfamily on\+Dragging}  &{\ttfamily ?(is\+Dragging\+: boolean) =\texorpdfstring{$>$}{>} void}  &Called when group layout changes  \\
+{\ttfamily style}  &{\ttfamily ?CSSProperties}  &CSS style to attach to root element  \\
+{\ttfamily tag\+Name}  &{\ttfamily ?string = "{}div"{}}  &HTML element tag name for root element  \\
+\end{DoxyTable}
+
+
+\DoxyHorRuler{0}
+\hypertarget{dir_4663926ab448c02f1eaed0c111f2baae_autotoc_md5319}{}\doxysubsection{\texorpdfstring{FAQ}{FAQ}}\label{dir_4663926ab448c02f1eaed0c111f2baae_autotoc_md5319}
+\hypertarget{dir_4663926ab448c02f1eaed0c111f2baae_autotoc_md5320}{}\doxysubsubsection{\texorpdfstring{Can panel sizes be specified in pixels?}{Can panel sizes be specified in pixels?}}\label{dir_4663926ab448c02f1eaed0c111f2baae_autotoc_md5320}
+No. Pixel-\/based constraints \href{https://github.com/bvaughn/react-resizable-panels/pull/176}{\texttt{added significant complexity}} to the initialization and validation logic and so I\textquotesingle{}ve decided not to support them. You may be able to implement a version of this yourself following \href{https://github.com/bvaughn/react-resizable-panels/issues/46\#issuecomment-1368108416}{\texttt{a pattern like this}} but it is not officially supported by this library.\hypertarget{dir_4663926ab448c02f1eaed0c111f2baae_autotoc_md5321}{}\doxysubsubsection{\texorpdfstring{How can I fix layout/sizing problems with conditionally rendered panels?}{How can I fix layout/sizing problems with conditionally rendered panels?}}\label{dir_4663926ab448c02f1eaed0c111f2baae_autotoc_md5321}
+The {\ttfamily Panel} API doesn\textquotesingle{}t {\itshape require} {\ttfamily id} and {\ttfamily order} props because they aren\textquotesingle{}t necessary for static layouts. When panels are conditionally rendered though, it\textquotesingle{}s best to supply these values.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<PanelGroup\ direction="{}horizontal"{}>}
+\DoxyCodeLine{\ \ \{renderSideBar\ \&\&\ (}
+\DoxyCodeLine{\ \ \ \ <>}
+\DoxyCodeLine{\ \ \ \ \ \ <Panel\ id="{}sidebar"{}\ minSize=\{25\}\ order=\{1\}>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <Sidebar\ />}
+\DoxyCodeLine{\ \ \ \ \ \ </Panel>}
+\DoxyCodeLine{\ \ \ \ \ \ <PanelResizeHandle\ />}
+\DoxyCodeLine{\ \ \ \ </>}
+\DoxyCodeLine{\ \ )\}}
+\DoxyCodeLine{\ \ <Panel\ minSize=\{25\}\ order=\{2\}>}
+\DoxyCodeLine{\ \ \ \ <Main\ />}
+\DoxyCodeLine{\ \ </Panel>}
+\DoxyCodeLine{</PanelGroup>}
+
+\end{DoxyCode}
+\hypertarget{dir_4663926ab448c02f1eaed0c111f2baae_autotoc_md5322}{}\doxysubsubsection{\texorpdfstring{Can a attach a ref to the DOM elements?}{Can a attach a ref to the DOM elements?}}\label{dir_4663926ab448c02f1eaed0c111f2baae_autotoc_md5322}
+No. I think exposing two refs (one for the component\textquotesingle{}s imperative API and one for a DOM element) would be awkward. This library does export several utility methods for accessing the underlying DOM elements though. For example\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ \{}
+\DoxyCodeLine{\ \ getPanelElement,}
+\DoxyCodeLine{\ \ getPanelGroupElement,}
+\DoxyCodeLine{\ \ getResizeHandleElement,}
+\DoxyCodeLine{\ \ Panel,}
+\DoxyCodeLine{\ \ PanelGroup,}
+\DoxyCodeLine{\ \ PanelResizeHandle,}
+\DoxyCodeLine{\}\ from\ "{}react-\/resizable-\/panels"{};}
+\DoxyCodeLine{}
+\DoxyCodeLine{export\ function\ Example()\ \{}
+\DoxyCodeLine{\ \ const\ refs\ =\ useRef();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ useEffect(()\ =>\ \{}
+\DoxyCodeLine{\ \ \ \ const\ groupElement\ =\ getPanelGroupElement("{}group"{});}
+\DoxyCodeLine{\ \ \ \ const\ leftPanelElement\ =\ getPanelElement("{}left-\/panel"{});}
+\DoxyCodeLine{\ \ \ \ const\ rightPanelElement\ =\ getPanelElement("{}right-\/panel"{});}
+\DoxyCodeLine{\ \ \ \ const\ resizeHandleElement\ =\ getResizeHandleElement("{}resize-\/handle"{});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ //\ If\ you\ want\ to,\ you\ can\ store\ them\ in\ a\ ref\ to\ pass\ around}
+\DoxyCodeLine{\ \ \ \ refs.current\ =\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ groupElement,}
+\DoxyCodeLine{\ \ \ \ \ \ leftPanelElement,}
+\DoxyCodeLine{\ \ \ \ \ \ rightPanelElement,}
+\DoxyCodeLine{\ \ \ \ \ \ resizeHandleElement,}
+\DoxyCodeLine{\ \ \ \ \};}
+\DoxyCodeLine{\ \ \},\ []);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ return\ (}
+\DoxyCodeLine{\ \ \ \ <PanelGroup\ direction="{}horizontal"{}\ id="{}group"{}>}
+\DoxyCodeLine{\ \ \ \ \ \ <Panel\ id="{}left-\/panel"{}>\{/*\ ...\ */\}</Panel>}
+\DoxyCodeLine{\ \ \ \ \ \ <PanelResizeHandle\ id="{}resize-\/handle"{}\ />}
+\DoxyCodeLine{\ \ \ \ \ \ <Panel\ id="{}right-\/panel"{}>\{/*\ ...\ */\}</Panel>}
+\DoxyCodeLine{\ \ \ \ </PanelGroup>}
+\DoxyCodeLine{\ \ );}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{dir_4663926ab448c02f1eaed0c111f2baae_autotoc_md5323}{}\doxysubsubsection{\texorpdfstring{Why don\textquotesingle{}t I see any resize UI?}{Why don\textquotesingle{}t I see any resize UI?}}\label{dir_4663926ab448c02f1eaed0c111f2baae_autotoc_md5323}
+This likely means that you haven\textquotesingle{}t applied any CSS to style the resize handles. By default, a resize handle is just an empty DOM element. To add styling, use the {\ttfamily class\+Name} or {\ttfamily style} props\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{//\ Tailwind\ example}
+\DoxyCodeLine{<PanelResizeHandle\ className="{}w-\/2\ bg-\/blue-\/800"{}\ />}
+
+\end{DoxyCode}
+\hypertarget{dir_4663926ab448c02f1eaed0c111f2baae_autotoc_md5324}{}\doxysubsubsection{\texorpdfstring{Can panel sizes be persistent?}{Can panel sizes be persistent?}}\label{dir_4663926ab448c02f1eaed0c111f2baae_autotoc_md5324}
+Yes. Panel groups with an {\ttfamily auto\+Save\+Id} prop will automatically save and restore their layouts on mount.\hypertarget{dir_4663926ab448c02f1eaed0c111f2baae_autotoc_md5325}{}\doxysubsubsection{\texorpdfstring{How can I use persistent layouts with SSR?}{How can I use persistent layouts with SSR?}}\label{dir_4663926ab448c02f1eaed0c111f2baae_autotoc_md5325}
+By default, this library uses {\ttfamily local\+Storage} to persist layouts. With server rendering, this can cause a flicker when the default layout (rendered on the server) is replaced with the persisted layout (in {\ttfamily local\+Storage}). The way to avoid this flicker is to also persist the layout with a cookie like so\+:\hypertarget{dir_4663926ab448c02f1eaed0c111f2baae_autotoc_md5326}{}\doxysubsubsubsection{\texorpdfstring{Server component}{Server component}}\label{dir_4663926ab448c02f1eaed0c111f2baae_autotoc_md5326}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ ResizablePanels\ from\ "{}@/app/ResizablePanels"{};}
+\DoxyCodeLine{import\ \{\ cookies\ \}\ from\ "{}next/headers"{};}
+\DoxyCodeLine{}
+\DoxyCodeLine{export\ function\ ServerComponent()\ \{}
+\DoxyCodeLine{\ \ const\ layout\ =\ cookies().get("{}react-\/resizable-\/panels:layout"{});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ let\ defaultLayout;}
+\DoxyCodeLine{\ \ if\ (layout)\ \{}
+\DoxyCodeLine{\ \ \ \ defaultLayout\ =\ JSON.parse(layout.value);}
+\DoxyCodeLine{\ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ return\ <ClientComponent\ defaultLayout=\{defaultLayout\}\ />;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{dir_4663926ab448c02f1eaed0c111f2baae_autotoc_md5327}{}\doxysubsubsubsection{\texorpdfstring{Client component}{Client component}}\label{dir_4663926ab448c02f1eaed0c111f2baae_autotoc_md5327}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{"{}use\ client"{};}
+\DoxyCodeLine{}
+\DoxyCodeLine{import\ \{\ Panel,\ PanelGroup,\ PanelResizeHandle\ \}\ from\ "{}react-\/resizable-\/panels"{};}
+\DoxyCodeLine{}
+\DoxyCodeLine{export\ function\ ClientComponent(\{}
+\DoxyCodeLine{\ \ defaultLayout\ =\ [33,\ 67],}
+\DoxyCodeLine{\}:\ \{}
+\DoxyCodeLine{\ \ defaultLayout:\ number[]\ |\ undefined;}
+\DoxyCodeLine{\})\ \{}
+\DoxyCodeLine{\ \ const\ onLayout\ =\ (sizes:\ number[])\ =>\ \{}
+\DoxyCodeLine{\ \ \ \ document.cookie\ =\ \`{}react-\/resizable-\/panels:layout=\$\{JSON.stringify(sizes)\}`;}
+\DoxyCodeLine{\ \ \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ return\ (}
+\DoxyCodeLine{\ \ \ \ <PanelGroup\ direction="{}horizontal"{}\ onLayout=\{onLayout\}>}
+\DoxyCodeLine{\ \ \ \ \ \ <Panel\ defaultSize=\{defaultLayout[0]\}>\{/*\ ...\ */\}</Panel>}
+\DoxyCodeLine{\ \ \ \ \ \ <PanelResizeHandle\ className="{}w-\/2\ bg-\/blue-\/800"{}\ />}
+\DoxyCodeLine{\ \ \ \ \ \ <Panel\ defaultSize=\{defaultLayout[1]\}>\{/*\ ...\ */\}</Panel>}
+\DoxyCodeLine{\ \ \ \ </PanelGroup>}
+\DoxyCodeLine{\ \ );}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+\begin{DoxyNote}{Note}
+Be sure to specify a {\ttfamily default\+Size} prop for {\bfseries{every}} {\ttfamily Panel} component to avoid layout flicker.
+\end{DoxyNote}
+A demo of this is available \href{https://github.com/bvaughn/react-resizable-panels-demo-ssr}{\texttt{here}}.\hypertarget{dir_4663926ab448c02f1eaed0c111f2baae_autotoc_md5328}{}\doxysubsubsubsection{\texorpdfstring{How can I set the \href{https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/nonce}{\texttt{CSP {\ttfamily "{}nonce"{}}}} attribute?}{How can I set the \href{https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/nonce}{\texttt{CSP {\ttfamily "{}nonce"{}}}} attribute?}}\label{dir_4663926ab448c02f1eaed0c111f2baae_autotoc_md5328}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ \{\ setNonce\ \}\ from\ "{}react-\/resizable-\/panels"{};}
+\DoxyCodeLine{}
+\DoxyCodeLine{setNonce("{}your-\/nonce-\/value-\/here"{});}
+
+\end{DoxyCode}
+\hypertarget{dir_4663926ab448c02f1eaed0c111f2baae_autotoc_md5329}{}\doxysubsubsubsection{\texorpdfstring{How can I disable global cursor styles?}{How can I disable global cursor styles?}}\label{dir_4663926ab448c02f1eaed0c111f2baae_autotoc_md5329}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{import\ \{\ disableGlobalCursorStyles\ \}\ from\ "{}react-\/resizable-\/panels"{};}
+\DoxyCodeLine{}
+\DoxyCodeLine{disableGlobalCursorStyles();}
+
+\end{DoxyCode}
+ 

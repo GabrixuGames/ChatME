@@ -1,0 +1,56 @@
+\doxysection{utils.\+validators.\+Message\+Validator Class Reference}
+\hypertarget{classutils_1_1validators_1_1_message_validator}{}\label{classutils_1_1validators_1_1_message_validator}\index{utils.validators.MessageValidator@{utils.validators.MessageValidator}}
+Inheritance diagram for utils.\+validators.\+Message\+Validator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classutils_1_1validators_1_1_message_validator}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Dict\mbox{[}str, str\mbox{]} \mbox{\hyperlink{classutils_1_1validators_1_1_message_validator_a7b08131a18b0ca32aaca33ab7317f397}{validate}} (cls, Dict data)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classutils_1_1validators_1_1_base_validator}{utils.\+validators.\+Base\+Validator}}}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{classutils_1_1validators_1_1_base_validator_aa9e94fdbd239b142b88945fb59ff3135}{validate\+\_\+string}} (Any value, str field\+\_\+name, int min\+\_\+length=1, int max\+\_\+length=255, bool required=True)
+\item 
+str \mbox{\hyperlink{classutils_1_1validators_1_1_base_validator_a875f4d87f1518d753e7044b9f3bded46}{validate\+\_\+username}} (Any username)
+\item 
+str \mbox{\hyperlink{classutils_1_1validators_1_1_base_validator_aa01a8ebef228aab2b6952c91012b2b3f}{validate\+\_\+room\+\_\+id}} (Any room\+\_\+id)
+\item 
+str \mbox{\hyperlink{classutils_1_1validators_1_1_base_validator_aebc081bb0825cb8e59a940918ccbfa67}{validate\+\_\+message\+\_\+content}} (Any content)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Validador para datos de mensaje\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classutils_1_1validators_1_1_message_validator_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classutils_1_1validators_1_1_message_validator_a7b08131a18b0ca32aaca33ab7317f397}\index{utils.validators.MessageValidator@{utils.validators.MessageValidator}!validate@{validate}}
+\index{validate@{validate}!utils.validators.MessageValidator@{utils.validators.MessageValidator}}
+\doxysubsubsection{\texorpdfstring{validate()}{validate()}}
+{\footnotesize\ttfamily \label{classutils_1_1validators_1_1_message_validator_a7b08131a18b0ca32aaca33ab7317f397} 
+ Dict\mbox{[}str, str\mbox{]} utils.\+validators.\+Message\+Validator.\+validate (\begin{DoxyParamCaption}\item[{}]{cls}{, }\item[{Dict}]{data}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Validar datos de mensaje
+
+Args:
+    data: Diccionario con username, room y message
+    
+Returns:
+    Diccionario con datos validados
+    
+Raises:
+    ValidationError: Si hay errores de validación
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+backend/utils/validators.\+py\end{DoxyCompactItemize}

@@ -96,21 +96,34 @@ class FriendRepository:
         return results
 
     def search_users(self, query_str: str, exclude_ids: List[str], limit: int = 10) -> List[Dict]:
+        """Buscar usuarios por username, excluyendo IDs específicos"""
         # Si exclude_ids está vacío, poner un valor imposible
         if not exclude_ids:
-            exclude_ids = ['0']
+            exclude_ids = ['00000000-0000-0000-0000-000000000000']
+        
+        # Construir query con placeholders seguros
+        placeholders = ','.join(['%s'] * len(exclude_ids))
         query = f"""
-            SELECT id, username FROM users
+            SELECT id, username, email FROM users
             WHERE (
-                username ILIKE %s OR id::text ILIKE %s
-            ) AND id NOT IN ({','.join(['%s']*len(exclude_ids))})
+                username ILIKE %s OR email ILIKE %s
+            ) AND id::text NOT IN ({placeholders})
+            ORDER BY username
             LIMIT %s
         """
         like_str = f"%{query_str}%"
         connection = self.db_manager.get_connection()
         cursor = connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+        
+        # Parámetros: like_str (2 veces), exclude_ids expandido, limit
         params = [like_str, like_str] + list(exclude_ids) + [limit]
-        cursor.execute(query, params)
-        results = cursor.fetchall()
-        self.db_manager.return_connection(connection)
-        return results
+        
+        try:
+            cursor.execute(query, params)
+            results = cursor.fetchall()
+            return [dict(row) for row in results]
+        except Exception as e:
+            print(f"❌ Error en search_users: {e}")
+            return []
+        finally:
+            self.db_manager.return_connection(connection)

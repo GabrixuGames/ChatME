@@ -1,0 +1,1481 @@
+.TH "md_frontend_2node__modules_2react-router-dom_2_c_h_a_n_g_e_l_o_g" 3 "Version 0.1" "Chat-ME!" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md_frontend_2node__modules_2react-router-dom_2_c_h_a_n_g_e_l_o_g \- \fRreact-router-dom\fP 
+.PP
+
+.SH "6\&.30\&.1"
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fRreact-router@6\&.30\&.1\fP
+.PP
+
+.PP
+.SH "6\&.30\&.0"
+.PP
+.SS "Minor Changes"
+.IP "\(bu" 2
+Add \fRfetcherKey\fP as a parameter to \fRpatchRoutesOnNavigation\fP (\fR#13109\fP)
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.23\&.0\fP
+.IP "  \(bu" 4
+\fRreact-router@6\&.30\&.0\fP
+.PP
+
+.PP
+.SH "6\&.29\&.0"
+.PP
+.SS "Minor Changes"
+.IP "\(bu" 2
+Provide the request \fRsignal\fP as a parameter to \fRpatchRoutesOnNavigation\fP (\fR#12900\fP)
+.IP "  \(bu" 4
+This can be used to abort any manifest fetches if the in-flight navigation/fetcher is aborted
+.PP
+
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Do not log v7 deprecation warnings in production builds (\fR#12794\fP)
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fRreact-router@6\&.29\&.0\fP
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.22\&.0\fP
+.PP
+
+.PP
+.SH "6\&.28\&.2"
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.21\&.1\fP
+.IP "  \(bu" 4
+\fRreact-router@6\&.28\&.2\fP
+.PP
+
+.PP
+.SH "6\&.28\&.1"
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fRreact-router@6\&.28\&.1\fP
+.PP
+
+.PP
+.SH "6\&.28\&.0"
+.PP
+.SS "Minor Changes"
+.IP "\(bu" 2
+Log deprecation warnings for v7 flags (\fR#11750\fP)
+.IP "  \(bu" 4
+Add deprecation warnings to \fRjson\fP/\fRdefer\fP in favor of returning raw objects
+.IP "    \(bu" 6
+These methods will be removed in React Router v7
+.PP
+
+.PP
+
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Update JSDoc URLs for new website structure (add /v6/ segment) (\fR#12141\fP)
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fRreact-router@6\&.28\&.0\fP
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.21\&.0\fP
+.PP
+
+.PP
+.SH "6\&.27\&.0"
+.PP
+.SS "Minor Changes"
+.IP "\(bu" 2
+Stabilize \fRunstable_patchRoutesOnNavigation\fP (\fR#11973\fP)
+.IP "  \(bu" 4
+Add new \fRPatchRoutesOnNavigationFunctionArgs\fP type for convenience (\fR#11967\fP)
+.PP
+
+.IP "\(bu" 2
+Stabilize \fRunstable_dataStrategy\fP (\fR#11974\fP)
+.IP "\(bu" 2
+Stabilize the \fRunstable_flushSync\fP option for navigations and fetchers (\fR#11989\fP)
+.IP "\(bu" 2
+Stabilize the \fRunstable_viewTransition\fP option for navigations and the corresponding \fRunstable_useViewTransitionState\fP hook (\fR#11989\fP)
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Fix bug when submitting to the current contextual route (parent route with an index child) when an \fR?index\fP param already exists from a prior submission (\fR#12003\fP)
+.IP "\(bu" 2
+Fix \fRuseFormAction\fP bug - when removing \fR?index\fP param it would not keep other non-Remix \fRindex\fP params (\fR#12003\fP)
+.IP "\(bu" 2
+Fix types for \fRRouteObject\fP within \fRPatchRoutesOnNavigationFunction\fP's \fRpatch\fP method so it doesn't expect agnostic route objects passed to \fRpatch\fP (\fR#11967\fP)
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fRreact-router@6\&.27\&.0\fP
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.20\&.0\fP
+.PP
+
+.PP
+.SH "6\&.26\&.2"
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.19\&.2\fP
+.IP "  \(bu" 4
+\fRreact-router@6\&.26\&.2\fP
+.PP
+
+.PP
+.SH "6\&.26\&.1"
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Rename \fRunstable_patchRoutesOnMiss\fP to \fRunstable_patchRoutesOnNavigation\fP to match new behavior (\fR#11888\fP)
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.19\&.1\fP
+.IP "  \(bu" 4
+\fRreact-router@6\&.26\&.1\fP
+.PP
+
+.PP
+.SH "6\&.26\&.0"
+.PP
+.SS "Minor Changes"
+.IP "\(bu" 2
+Add a new \fRreplace(url, init?)\fP alternative to \fRredirect(url, init?)\fP that performs a \fRhistory\&.replaceState\fP instead of a \fRhistory\&.pushState\fP on client-side navigation redirects (\fR#11811\fP)
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Fix initial hydration behavior when using \fRfuture\&.v7_partialHydration\fP along with \fRunstable_patchRoutesOnMiss\fP (\fR#11838\fP)
+.IP "  \(bu" 4
+During initial hydration, \fRrouter\&.state\&.matches\fP will now include any partial matches so that we can render ancestor \fRHydrateFallback\fP components
+.PP
+
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.19\&.0\fP
+.IP "  \(bu" 4
+\fRreact-router@6\&.26\&.0\fP
+.PP
+
+.PP
+.SH "6\&.25\&.1"
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Memoize some \fRRouterProvider\fP internals to reduce unnecessary re-renders (\fR#11803\fP)
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fRreact-router@6\&.25\&.1\fP
+.PP
+
+.PP
+.SH "6\&.25\&.0"
+.PP
+.SS "Minor Changes"
+.IP "\(bu" 2
+Stabilize \fRfuture\&.unstable_skipActionErrorRevalidation\fP as \fRfuture\&.v7_skipActionErrorRevalidation\fP (\fR#11769\fP)
+.IP "  \(bu" 4
+When this flag is enabled, actions will not automatically trigger a revalidation if they return/throw a \fRResponse\fP with a \fR4xx\fP/\fR5xx\fP status code
+.IP "  \(bu" 4
+You may still opt-into revalidation via \fRshouldRevalidate\fP
+.IP "  \(bu" 4
+This also changes \fRshouldRevalidate\fP's \fRunstable_actionStatus\fP parameter to \fRactionStatus\fP
+.PP
+
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fRreact-router@6\&.25\&.0\fP
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.18\&.0\fP
+.PP
+
+.PP
+.SH "6\&.24\&.1"
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Remove \fRpolyfill\&.io\fP reference from warning message because the domain was sold and has since been determined to serve malware (\fR#11741\fP)
+.IP "  \(bu" 4
+See https://sansec.io/research/polyfill-supply-chain-attack
+.PP
+
+.IP "\(bu" 2
+Export \fRNavLinkRenderProps\fP type for easier typing of custom \fRNavLink\fP callback (\fR#11553\fP)
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.17\&.1\fP
+.IP "  \(bu" 4
+\fRreact-router@6\&.24\&.1\fP
+.PP
+
+.PP
+.SH "6\&.24\&.0"
+.PP
+.SS "Minor Changes"
+.IP "\(bu" 2
+Add support for Lazy Route Discovery (a\&.k\&.a\&. Fog of War) (\fR#11626\fP)
+.IP "  \(bu" 4
+RFC: https://github.com/remix-run/react-router/discussions/11113
+.IP "  \(bu" 4
+\fRunstable_patchRoutesOnMiss\fP docs: https://reactrouter.com/v6/routers/create-browser-router
+.PP
+
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Fix \fRfetcher\&.submit\fP types - remove incorrect \fRnavigate\fP/\fRfetcherKey\fP/\fRunstable_viewTransition\fP options because they are only relevant for \fRuseSubmit\fP (\fR#11631\fP)
+.IP "\(bu" 2
+Allow falsy \fRlocation\&.state\fP values passed to \fR<StaticRouter>\fP (\fR#11495\fP)
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fRreact-router@6\&.24\&.0\fP
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.17\&.0\fP
+.PP
+
+.PP
+.SH "6\&.23\&.1"
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Check for \fRdocument\fP existence when checking \fRstartViewTransition\fP (\fR#11544\fP)
+.IP "\(bu" 2
+Change the \fRreact-router-dom/server\fP import back to \fRreact-router-dom\fP instead of \fRindex\&.ts\fP (\fR#11514\fP)
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.16\&.1\fP
+.IP "  \(bu" 4
+\fRreact-router@6\&.23\&.1\fP
+.PP
+
+.PP
+.SH "6\&.23\&.0"
+.PP
+.SS "Minor Changes"
+.IP "\(bu" 2
+Add a new \fRunstable_dataStrategy\fP configuration option (\fR#11098\fP)
+.IP "  \(bu" 4
+This option allows Data Router applications to take control over the approach for executing route loaders and actions
+.IP "  \(bu" 4
+The default implementation is today's behavior, to fetch all loaders in parallel, but this option allows users to implement more advanced data flows including Remix single-fetch, middleware/context APIs, automatic loader caching, and more
+.PP
+
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.16\&.0\fP
+.IP "  \(bu" 4
+\fRreact-router@6\&.23\&.0\fP
+.PP
+
+.PP
+.SH "6\&.22\&.3"
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.15\&.3\fP
+.IP "  \(bu" 4
+\fRreact-router@6\&.22\&.3\fP
+.PP
+
+.PP
+.SH "6\&.22\&.2"
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.15\&.2\fP
+.IP "  \(bu" 4
+\fRreact-router@6\&.22\&.2\fP
+.PP
+
+.PP
+.SH "6\&.22\&.1"
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fRreact-router@6\&.22\&.1\fP
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.15\&.1\fP
+.PP
+
+.PP
+.SH "6\&.22\&.0"
+.PP
+.SS "Minor Changes"
+.IP "\(bu" 2
+Include a \fRwindow__reactRouterVersion\fP tag for CWV Report detection (\fR#11222\fP)
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.15\&.0\fP
+.IP "  \(bu" 4
+\fRreact-router@6\&.22\&.0\fP
+.PP
+
+.PP
+.SH "6\&.21\&.3"
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Fix \fRNavLink\fP \fRisPending\fP when a \fRbasename\fP is used (\fR#11195\fP)
+.IP "\(bu" 2
+Remove leftover \fRunstable_\fP prefix from \fRBlocker\fP/\fRBlockerFunction\fP types (\fR#11187\fP)
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fRreact-router@6\&.21\&.3\fP
+.PP
+
+.PP
+.SH "6\&.21\&.2"
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Leverage \fRuseId\fP for internal fetcher keys when available (\fR#11166\fP)
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.14\&.2\fP
+.IP "  \(bu" 4
+\fRreact-router@6\&.21\&.2\fP
+.PP
+
+.PP
+.SH "6\&.21\&.1"
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fRreact-router@6\&.21\&.1\fP
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.14\&.1\fP
+.PP
+
+.PP
+.SH "6\&.21\&.0"
+.PP
+.SS "Minor Changes"
+.IP "\(bu" 2
+Add a new \fRfuture\&.v7_relativeSplatPath\fP flag to implement a breaking bug fix to relative routing when inside a splat route\&. (\fR#11087\fP)
+
+.PP
+This fix was originally added in \fR#10983\fP and was later reverted in \fR#11078\fP because it was determined that a large number of existing applications were relying on the buggy behavior (see \fR#11052\fP)
+
+.PP
+\fBThe Bug\fP The buggy behavior is that without this flag, the default behavior when resolving relative paths is to \fIignore\fP any splat (\fR*\fP) portion of the current route path\&.
+
+.PP
+\fBThe Background\fP This decision was originally made thinking that it would make the concept of nested different sections of your apps in \fR<Routes>\fP easier if relative routing would \fIreplace\fP the current splat:
+
+.PP
+.PP
+.nf
+<BrowserRouter>
+  <Routes>
+    <Route path="/" element={<Home />} />
+    <Route path="dashboard/*" element={<Dashboard />} />
+  </Routes>
+</BrowserRouter>
+.fi
+.PP
+
+.PP
+Any paths like \fR/dashboard\fP, \fR/dashboard/team\fP, \fR/dashboard/projects\fP will match the \fRDashboard\fP route\&. The dashboard component itself can then render nested \fR<Routes>\fP:
+
+.PP
+.PP
+.nf
+function Dashboard() {
+  return (
+    <div>
+      <h2>Dashboard</h2>
+      <nav>
+        <Link to="/">Dashboard Home</Link>
+        <Link to="team">Team</Link>
+        <Link to="projects">Projects</Link>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<DashboardHome />} />
+        <Route path="team" element={<DashboardTeam />} />
+        <Route path="projects" element={<DashboardProjects />} />
+      </Routes>
+    </div>
+  );
+}
+.fi
+.PP
+
+.PP
+Now, all links and route paths are relative to the router above them\&. This makes code splitting and compartmentalizing your app really easy\&. You could render the \fRDashboard\fP as its own independent app, or embed it into your large app without making any changes to it\&.
+
+.PP
+\fBThe Problem\fP
+
+.PP
+The problem is that this concept of ignoring part of a path breaks a lot of other assumptions in React Router - namely that \fR"\&."\fP always means the current location pathname for that route\&. When we ignore the splat portion, we start getting invalid paths when using \fR"\&."\fP:
+
+.PP
+.PP
+.nf
+// If we are on URL /dashboard/team, and we want to link to /dashboard/team:
+function DashboardTeam() {
+  // ❌ This is broken and results in <a href="/dashboard">
+  return <Link to="\&.">A broken link to the Current URL</Link>;
+
+  // ✅ This is fixed but super unintuitive since we're already at /dashboard/team!
+  return <Link to="\&./team">A broken link to the Current URL</Link>;
+}
+.fi
+.PP
+
+.PP
+We've also introduced an issue that we can no longer move our \fRDashboardTeam\fP component around our route hierarchy easily - since it behaves differently if we're underneath a non-splat route, such as \fR/dashboard/:widget\fP\&. Now, our \fR"\&."\fP links will, properly point to ourself \fIinclusive of the dynamic param value\fP so behavior will break from it's corresponding usage in a \fR/dashboard/*\fP route\&.
+
+.PP
+Even worse, consider a nested splat route configuration:
+
+.PP
+.PP
+.nf
+<BrowserRouter>
+  <Routes>
+    <Route path="dashboard">
+      <Route path="*" element={<Dashboard />} />
+    </Route>
+  </Routes>
+</BrowserRouter>
+.fi
+.PP
+
+.PP
+Now, a \fR<Link to="\&.">\fP and a \fR<Link to="\&.\&.">\fP inside the \fRDashboard\fP component go to the same place! That is definitely not correct!
+
+.PP
+Another common issue arose in Data Routers (and Remix) where any \fR<Form>\fP should post to it's own route \fRaction\fP if you the user doesn't specify a form action:
+
+.PP
+.PP
+.nf
+let router = createBrowserRouter({
+  path: "/dashboard",
+  children: [
+    {
+      path: "*",
+      action: dashboardAction,
+      Component() {
+        // ❌ This form is broken!  It throws a 405 error when it submits because
+        // it tries to submit to /dashboard (without the splat value) and the parent
+        // `/dashboard` route doesn't have an action
+        return <Form method="post">\&.\&.\&.</Form>;
+      },
+    },
+  ],
+});
+.fi
+.PP
+
+.PP
+This is just a compounded issue from the above because the default location for a \fRForm\fP to submit to is itself (\fR"\&."\fP) - and if we ignore the splat portion, that now resolves to the parent route\&.
+
+.PP
+\fBThe Solution\fP If you are leveraging this behavior, it's recommended to enable the future flag, move your splat to it's own route, and leverage \fR\&.\&./\fP for any links to "sibling" pages:
+
+.PP
+.PP
+.nf
+<BrowserRouter>
+  <Routes>
+    <Route path="dashboard">
+      <Route index path="*" element={<Dashboard />} />
+    </Route>
+  </Routes>
+</BrowserRouter>
+
+function Dashboard() {
+  return (
+    <div>
+      <h2>Dashboard</h2>
+      <nav>
+        <Link to="\&.\&.">Dashboard Home</Link>
+        <Link to="\&.\&./team">Team</Link>
+        <Link to="\&.\&./projects">Projects</Link>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<DashboardHome />} />
+        <Route path="team" element={<DashboardTeam />} />
+        <Route path="projects" element={<DashboardProjects />} />
+      </Router>
+    </div>
+  );
+}
+.fi
+.PP
+
+.PP
+This way, \fR\&.\fP means "the full current pathname for my route" in all cases (including static, dynamic, and splat routes) and \fR\&.\&.\fP always means "my parents pathname"\&.
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.14\&.0\fP
+.IP "  \(bu" 4
+\fRreact-router@6\&.21\&.0\fP
+.PP
+
+.PP
+.SH "6\&.20\&.1"
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Revert the \fRuseResolvedPath\fP fix for splat routes due to a large number of applications that were relying on the buggy behavior (see https://github.com/remix-run/react-router/issues/11052#issuecomment-1836589329)\&. We plan to re-introduce this fix behind a future flag in the next minor version\&. (\fR#11078\fP)
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fRreact-router@6\&.20\&.1\fP
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.13\&.1\fP
+.PP
+
+.PP
+.SH "6\&.20\&.0"
+.PP
+.SS "Minor Changes"
+.IP "\(bu" 2
+Export the \fRPathParam\fP type from the public API (\fR#10719\fP)
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fRreact-router@6\&.20\&.0\fP
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.13\&.0\fP
+.PP
+
+.PP
+.SH "6\&.19\&.0"
+.PP
+.SS "Minor Changes"
+.IP "\(bu" 2
+Add \fRunstable_flushSync\fP option to \fRuseNavigate\fP/\fRuseSumbit\fP/\fRfetcher\&.load\fP/\fRfetcher\&.submit\fP to opt-out of \fRReact\&.startTransition\fP and into \fRReactDOM\&.flushSync\fP for state updates (\fR#11005\fP)
+.IP "\(bu" 2
+Allow \fRunstable_usePrompt\fP to accept a \fRBlockerFunction\fP in addition to a \fRboolean\fP (\fR#10991\fP)
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Fix issue where a changing fetcher \fRkey\fP in a \fRuseFetcher\fP that remains mounted wasn't getting picked up (\fR#11009\fP)
+.IP "\(bu" 2
+Fix \fRuseFormAction\fP which was incorrectly inheriting the \fR?index\fP query param from child route \fRaction\fP submissions (\fR#11025\fP)
+.IP "\(bu" 2
+Fix \fRNavLink\fP \fRactive\fP logic when \fRto\fP location has a trailing slash (\fR#10734\fP)
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fRreact-router@6\&.19\&.0\fP
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.12\&.0\fP
+.PP
+
+.PP
+.SH "6\&.18\&.0"
+.PP
+.SS "Minor Changes"
+.IP "\(bu" 2
+Add support for manual fetcher key specification via \fRuseFetcher({ key: string })\fP so you can access the same fetcher instance from different components in your application without prop-drilling (\fRRFC\fP) (\fR#10960\fP)
+.IP "  \(bu" 4
+Fetcher keys are now also exposed on the fetchers returned from \fRuseFetchers\fP so that they can be looked up by \fRkey\fP
+.PP
+
+.IP "\(bu" 2
+Add \fRnavigate\fP/\fRfetcherKey\fP params/props to \fRuseSumbit\fP/\fRForm\fP to support kicking off a fetcher submission under the hood with an optionally user-specified \fRkey\fP (\fR#10960\fP)
+.IP "  \(bu" 4
+Invoking a fetcher in this way is ephemeral and stateless
+.IP "  \(bu" 4
+If you need to access the state of one of these fetchers, you will need to leverage \fRuseFetcher({ key })\fP to look it up elsewhere
+.PP
+
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Adds a fetcher context to \fRRouterProvider\fP that holds completed fetcher data, in preparation for the upcoming future flag that will change the fetcher persistence/cleanup behavior (\fR#10961\fP)
+.IP "\(bu" 2
+Fix the \fRfuture\fP prop on \fRBrowserRouter\fP, \fRHashRouter\fP and \fRMemoryRouter\fP so that it accepts a \fRPartial<FutureConfig>\fP instead of requiring all flags to be included\&. (\fR#10962\fP)
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.11\&.0\fP
+.IP "  \(bu" 4
+\fRreact-router@6\&.18\&.0\fP
+.PP
+
+.PP
+.SH "6\&.17\&.0"
+.PP
+.SS "Minor Changes"
+.IP "\(bu" 2
+Add experimental support for the \fRView Transitions API\fP via \fRdocument\&.startViewTransition\fP to enable CSS animated transitions on SPA navigations in your application\&. (\fR#10916\fP)
+
+.PP
+The simplest approach to enabling a View Transition in your React Router app is via the new \fR<Link unstable_viewTransition>\fP prop\&. This will cause the navigation DOM update to be wrapped in \fRdocument\&.startViewTransition\fP which will enable transitions for the DOM update\&. Without any additional CSS styles, you'll get a basic cross-fade animation for your page\&.
+
+.PP
+If you need to apply more fine-grained styles for your animations, you can leverage the \fRunstable_useViewTransitionState\fP hook which will tell you when a transition is in progress and you can use that to apply classes or styles:
+
+.PP
+.PP
+.nf
+function ImageLink(to, src, alt) {
+  let isTransitioning = unstable_useViewTransitionState(to);
+  return (
+    <Link to={to} unstable_viewTransition>
+      <img
+        src={src}
+        alt={alt}
+        style={{
+          viewTransitionName: isTransitioning ? "image\-expand" : "",
+        }}
+      />
+    </Link>
+  );
+}
+.fi
+.PP
+
+.PP
+You can also use the \fR<NavLink unstable_viewTransition>\fP shorthand which will manage the hook usage for you and automatically add a \fRtransitioning\fP class to the \fR<a>\fP during the transition:
+
+.PP
+.PP
+.nf
+a\&.transitioning img {
+  view\-transition\-name: "image\-expand";
+}
+.fi
+.PP
+
+.PP
+.PP
+.nf
+<NavLink to={to} unstable_viewTransition>
+  <img src={src} alt={alt} />
+</NavLink>
+.fi
+.PP
+
+.PP
+For an example usage of View Transitions with React Router, check out \fRour fork\fP of the \fRAstro Records\fP demo\&.
+
+.PP
+For more information on using the View Transitions API, please refer to the \fRSmooth and simple transitions with the View Transitions API\fP guide from the Google Chrome team\&.
+
+.PP
+Please note, that because the \fRViewTransition\fP API is a DOM API, we now export a specific \fRRouterProvider\fP from \fRreact-router-dom\fP with this functionality\&. If you are importing \fRRouterProvider\fP from \fRreact-router\fP, then it will not support view transitions\&. (\fR#10928\fP
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Log a warning and fail gracefully in \fRScrollRestoration\fP when \fRsessionStorage\fP is unavailable (\fR#10848\fP)
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.10\&.0\fP
+.IP "  \(bu" 4
+\fRreact-router@6\&.17\&.0\fP
+.PP
+
+.PP
+.SH "6\&.16\&.0"
+.PP
+.SS "Minor Changes"
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.9\&.0\fP
+.IP "  \(bu" 4
+\fRreact-router@6\&.16\&.0\fP
+.PP
+
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Properly encode rendered URIs in server rendering to avoid hydration errors (\fR#10769\fP)
+.PP
+.SH "6\&.15\&.0"
+.PP
+.SS "Minor Changes"
+.IP "\(bu" 2
+Add's a new \fRredirectDocument()\fP function which allows users to specify that a redirect from a \fRloader\fP/\fRaction\fP should trigger a document reload (via \fRwindow\&.location\fP) instead of attempting to navigate to the redirected location via React Router (\fR#10705\fP)
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Fixes an edge-case affecting web extensions in Firefox that use \fRURLSearchParams\fP and the \fRuseSearchParams\fP hook\&. (\fR#10620\fP)
+.IP "\(bu" 2
+Do not include hash in \fRuseFormAction()\fP for unspecified actions since it cannot be determined on the server and causes hydration issues (\fR#10758\fP)
+.IP "\(bu" 2
+Reorder effects in \fRunstable_usePrompt\fP to avoid throwing an exception if the prompt is unblocked and a navigation is performed synchronously (\fR#10687\fP, \fR#10718\fP)
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.8\&.0\fP
+.IP "  \(bu" 4
+\fRreact-router@6\&.15\&.0\fP
+.PP
+
+.PP
+.SH "6\&.14\&.2"
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Properly decode element id when emulating hash scrolling via \fR<ScrollRestoration>\fP (\fR#10682\fP)
+.IP "\(bu" 2
+Add missing \fR<Form state>\fP prop to populate \fRhistory\&.state\fP on submission navigations (\fR#10630\fP)
+.IP "\(bu" 2
+Support proper hydration of \fRError\fP subclasses such as \fRReferenceError\fP/\fRTypeError\fP (\fR#10633\fP)
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.7\&.2\fP
+.IP "  \(bu" 4
+\fRreact-router@6\&.14\&.2\fP
+.PP
+
+.PP
+.SH "6\&.14\&.1"
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fRreact-router@6\&.14\&.1\fP
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.7\&.1\fP
+.PP
+
+.PP
+.SH "6\&.14\&.0"
+.PP
+.SS "Minor Changes"
+.IP "\(bu" 2
+Add support for \fRapplication/json\fP and \fRtext/plain\fP encodings for \fRuseSubmit\fP/\fRfetcher\&.submit\fP\&. To reflect these additional types, \fRuseNavigation\fP/\fRuseFetcher\fP now also contain \fRnavigation\&.json\fP/\fRnavigation\&.text\fP and \fRfetcher\&.json\fP/\fRfetcher\&.text\fP which include the json/text submission if applicable (\fR#10413\fP)
+
+.PP
+.PP
+.nf
+// The default behavior will still serialize as FormData
+function Component() {
+  let navigation = useNavigation();
+  let submit = useSubmit();
+  submit({ key: "value" }, { method: "post" });
+  // navigation\&.formEncType => "application/x\-www\-form\-urlencoded"
+  // navigation\&.formData    => FormData instance
+}
+
+async function action({ request }) {
+  // request\&.headers\&.get("Content\-Type") => "application/x\-www\-form\-urlencoded"
+  // await request\&.formData()            => FormData instance
+}
+.fi
+.PP
+
+.PP
+.PP
+.nf
+// Opt\-into JSON encoding with `encType: "application/json"`
+function Component() {
+  let navigation = useNavigation();
+  let submit = useSubmit();
+  submit({ key: "value" }, { method: "post", encType: "application/json" });
+  // navigation\&.formEncType => "application/json"
+  // navigation\&.json        => { key: "value" }
+}
+
+async function action({ request }) {
+  // request\&.headers\&.get("Content\-Type") => "application/json"
+  // await request\&.json()                => { key: "value" }
+}
+.fi
+.PP
+
+.PP
+.PP
+.nf
+// Opt\-into text encoding with `encType: "text/plain"`
+function Component() {
+  let navigation = useNavigation();
+  let submit = useSubmit();
+  submit("Text submission", { method: "post", encType: "text/plain" });
+  // navigation\&.formEncType => "text/plain"
+  // navigation\&.text        => "Text submission"
+}
+
+async function action({ request }) {
+  // request\&.headers\&.get("Content\-Type") => "text/plain"
+  // await request\&.text()                => "Text submission"
+}
+.fi
+.PP
+
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+When submitting a form from a \fRsubmitter\fP element, prefer the built-in \fRnew FormData(form, submitter)\fP instead of the previous manual approach in modern browsers (those that support the new \fRsubmitter\fP parameter) (\fR#9865\fP, \fR#10627\fP)
+.IP "  \(bu" 4
+For browsers that don't support it, we continue to just append the submit button's entry to the end, and we also add rudimentary support for \fRtype="image"\fP buttons
+.IP "  \(bu" 4
+If developers want full spec-compliant support for legacy browsers, they can use the \fRformdata-submitter-polyfill\fP
+.PP
+
+.IP "\(bu" 2
+Call \fRwindow\&.history\&.pushState/replaceState\fP before updating React Router state (instead of after) so that \fRwindow\&.location\fP matches \fRuseLocation\fP during synchronous React 17 rendering (\fR#10448\fP)
+.IP "  \(bu" 4
+⚠️ However, generally apps should not be relying on \fRwindow\&.location\fP and should always reference \fRuseLocation\fP when possible, as \fRwindow\&.location\fP will not be in sync 100% of the time (due to \fRpopstate\fP events, concurrent mode, etc\&.)
+.PP
+
+.IP "\(bu" 2
+Fix \fRtsc --skipLibCheck:false\fP issues on React 17 (\fR#10622\fP)
+.IP "\(bu" 2
+Upgrade \fRtypescript\fP to 5\&.1 (\fR#10581\fP)
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fRreact-router@6\&.14\&.0\fP
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.7\&.0\fP
+.PP
+
+.PP
+.SH "6\&.13\&.0"
+.PP
+.SS "Minor Changes"
+.IP "\(bu" 2
+Move \fR\fRReact\&.startTransition\fP\fP usage behind a \fRfuture flag\fP to avoid issues with existing incompatible \fRSuspense\fP usages\&. We recommend folks adopting this flag to be better compatible with React concurrent mode, but if you run into issues you can continue without the use of \fRstartTransition\fP until v7\&. Issues usually boils down to creating net-new promises during the render cycle, so if you run into issues you should either lift your promise creation out of the render cycle or put it behind a \fRuseMemo\fP\&. (\fR#10596\fP)
+
+.PP
+Existing behavior will no longer include \fRReact\&.startTransition\fP:
+
+.PP
+.PP
+.nf
+<BrowserRouter>
+  <Routes>{/*\&.\&.\&.*/}</Routes>
+</BrowserRouter>
+
+<RouterProvider router={router} />
+.fi
+.PP
+
+.PP
+If you wish to enable \fRReact\&.startTransition\fP, pass the future flag to your component:
+
+.PP
+.PP
+.nf
+<BrowserRouter future={{ v7_startTransition: true }}>
+  <Routes>{/*\&.\&.\&.*/}</Routes>
+</BrowserRouter>
+
+<RouterProvider router={router} future={{ v7_startTransition: true }}/>
+.fi
+.PP
+
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Work around webpack/terser \fRReact\&.startTransition\fP minification bug in production mode (\fR#10588\fP)
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fRreact-router@6\&.13\&.0\fP
+.PP
+
+.PP
+.SH "6\&.12\&.1"
+.PP
+.RS 4
+[!WARNING] Please use version \fR6\&.13\&.0\fP or later instead of \fR6\&.12\&.1\fP\&. This version suffers from a \fRwebpack\fP/\fRterser\fP minification issue resulting in invalid minified code in your resulting production bundles which can cause issues in your application\&. See \fR#10579\fP for more details\&. 
+.RE
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Adjust feature detection of \fRReact\&.startTransition\fP to fix webpack + react 17 compilation error (\fR#10569\fP)
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fRreact-router@6\&.12\&.1\fP
+.PP
+
+.PP
+.SH "6\&.12\&.0"
+.PP
+.SS "Minor Changes"
+.IP "\(bu" 2
+Wrap internal router state updates with \fRReact\&.startTransition\fP if it exists (\fR#10438\fP)
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Re-throw \fRDOMException\fP (\fRDataCloneError\fP) when attempting to perform a \fRPUSH\fP navigation with non-serializable state\&. (\fR#10427\fP)
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.6\&.3\fP
+.IP "  \(bu" 4
+\fRreact-router@6\&.12\&.0\fP
+.PP
+
+.PP
+.SH "6\&.11\&.2"
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Export \fRSetURLSearchParams\fP type (\fR#10444\fP)
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fRreact-router@6\&.11\&.2\fP
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.6\&.2\fP
+.PP
+
+.PP
+.SH "6\&.11\&.1"
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fRreact-router@6\&.11\&.1\fP
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.6\&.1\fP
+.PP
+
+.PP
+.SH "6\&.11\&.0"
+.PP
+.SS "Minor Changes"
+.IP "\(bu" 2
+Enable \fRbasename\fP support in \fRuseFetcher\fP (\fR#10336\fP)
+.IP "  \(bu" 4
+If you were previously working around this issue by manually prepending the \fRbasename\fP then you will need to remove the manually prepended \fRbasename\fP from your \fRfetcher\fP calls (\fRfetcher\&.load('/basename/route') -> fetcher\&.load('/route')\fP)
+.PP
+
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Fix inadvertent re-renders when using \fRComponent\fP instead of \fRelement\fP on a route definition (\fR#10287\fP)
+.IP "\(bu" 2
+Fail gracefully on \fR<Link to="//">\fP and other invalid URL values (\fR#10367\fP)
+.IP "\(bu" 2
+Switched from \fRuseSyncExternalStore\fP to \fRuseState\fP for internal \fR@remix-run/router\fP router state syncing in \fR<RouterProvider>\fP\&. We found some \fRsubtle bugs\fP where router state updates got propagated \fIbefore\fP other normal \fRuseState\fP updates, which could lead to footguns in \fRuseEffect\fP calls\&. (\fR#10377\fP, \fR#10409\fP)
+.IP "\(bu" 2
+Add static prop to \fRStaticRouterProvider\fP's internal \fRRouter\fP component (\fR#10401\fP)
+.IP "\(bu" 2
+When using a \fRRouterProvider\fP, \fRuseNavigate\fP/\fRuseSubmit\fP/\fRfetcher\&.submit\fP are now stable across location changes, since we can handle relative routing via the \fR@remix-run/router\fP instance and get rid of our dependence on \fRuseLocation()\fP\&. When using \fRBrowserRouter\fP, these hooks remain unstable across location changes because they still rely on \fRuseLocation()\fP\&. (\fR#10336\fP)
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fRreact-router@6\&.11\&.0\fP
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.6\&.0\fP
+.PP
+
+.PP
+.SH "6\&.10\&.0"
+.PP
+.SS "Minor Changes"
+.IP "\(bu" 2
+Added support for \fR\fBFuture Flags\fP\fP in React Router\&. The first flag being introduced is \fRfuture\&.v7_normalizeFormMethod\fP which will normalize the exposed \fRuseNavigation()/useFetcher()\fP \fRformMethod\fP fields as uppercase HTTP methods to align with the \fRfetch()\fP behavior\&. (\fR#10207\fP)
+.IP "  \(bu" 4
+When \fRfuture\&.v7_normalizeFormMethod === false\fP (default v6 behavior),
+.IP "    \(bu" 6
+\fRuseNavigation()\&.formMethod\fP is lowercase
+.IP "    \(bu" 6
+\fRuseFetcher()\&.formMethod\fP is lowercase
+.PP
+
+.IP "  \(bu" 4
+When \fRfuture\&.v7_normalizeFormMethod === true\fP:
+.IP "    \(bu" 6
+\fRuseNavigation()\&.formMethod\fP is uppercase
+.IP "    \(bu" 6
+\fRuseFetcher()\&.formMethod\fP is uppercase
+.PP
+
+.PP
+
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Fix \fRcreateStaticHandler\fP to also check for \fRErrorBoundary\fP on routes in addition to \fRerrorElement\fP (\fR#10190\fP)
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.5\&.0\fP
+.IP "  \(bu" 4
+\fRreact-router@6\&.10\&.0\fP
+.PP
+
+.PP
+.SH "6\&.9\&.0"
+.PP
+.SS "Minor Changes"
+.IP "\(bu" 2
+React Router now supports an alternative way to define your route \fRelement\fP and \fRerrorElement\fP fields as React Components instead of React Elements\&. You can instead pass a React Component to the new \fRComponent\fP and \fRErrorBoundary\fP fields if you choose\&. There is no functional difference between the two, so use whichever approach you prefer 😀\&. You shouldn't be defining both, but if you do \fRComponent\fP/\fRErrorBoundary\fP will "win"\&. (\fR#10045\fP)
+
+.PP
+\fBExample JSON Syntax\fP
+
+.PP
+.PP
+.nf
+// Both of these work the same:
+const elementRoutes = [{
+  path: '/',
+  element: <Home />,
+  errorElement: <HomeError />,
+}]
+
+const componentRoutes = [{
+  path: '/',
+  Component: Home,
+  ErrorBoundary: HomeError,
+}]
+
+function Home() { \&.\&.\&. }
+function HomeError() { \&.\&.\&. }
+.fi
+.PP
+
+.PP
+\fBExample JSX Syntax\fP
+
+.PP
+.PP
+.nf
+// Both of these work the same:
+const elementRoutes = createRoutesFromElements(
+  <Route path='/' element={<Home />} errorElement={<HomeError /> } />
+);
+
+const componentRoutes = createRoutesFromElements(
+  <Route path='/' Component={Home} ErrorBoundary={HomeError} />
+);
+
+function Home() { \&.\&.\&. }
+function HomeError() { \&.\&.\&. }
+.fi
+.PP
+
+.IP "\(bu" 2
+\fBIntroducing Lazy Route Modules!\fP (\fR#10045\fP)
+
+.PP
+In order to keep your application bundles small and support code-splitting of your routes, we've introduced a new \fRlazy()\fP route property\&. This is an async function that resolves the non-route-matching portions of your route definition (\fRloader\fP, \fRaction\fP, \fRelement\fP/\fRComponent\fP, \fRerrorElement\fP/\fRErrorBoundary\fP, \fRshouldRevalidate\fP, \fRhandle\fP)\&.
+
+.PP
+Lazy routes are resolved on initial load and during the \fRloading\fP or \fRsubmitting\fP phase of a navigation or fetcher call\&. You cannot lazily define route-matching properties (\fRpath\fP, \fRindex\fP, \fRchildren\fP) since we only execute your lazy route functions after we've matched known routes\&.
+
+.PP
+Your \fRlazy\fP functions will typically return the result of a dynamic import\&.
+
+.PP
+.PP
+.nf
+// In this example, we assume most folks land on the homepage so we include that
+// in our critical\-path bundle, but then we lazily load modules for /a and /b so
+// they don't load until the user navigates to those routes
+let routes = createRoutesFromElements(
+  <Route path="/" element={<Layout />}>
+    <Route index element={<Home />} />
+    <Route path="a" lazy={() => import("\&./a")} />
+    <Route path="b" lazy={() => import("\&./b")} />
+  </Route>
+);
+.fi
+.PP
+
+.PP
+Then in your lazy route modules, export the properties you want defined for the route:
+
+.PP
+.PP
+.nf
+export async function loader({ request }) {
+  let data = await fetchData(request);
+  return json(data);
+}
+
+// Export a `Component` directly instead of needing to create a React Element from it
+export function Component() {
+  let data = useLoaderData();
+
+  return (
+    <>
+      <h1>You made it!</h1>
+      <p>{data}</p>
+    </>
+  );
+}
+
+// Export an `ErrorBoundary` directly instead of needing to create a React Element from it
+export function ErrorBoundary() {
+  let error = useRouteError();
+  return isRouteErrorResponse(error) ? (
+    <h1>
+      {error\&.status} {error\&.statusText}
+    </h1>
+  ) : (
+    <h1>{error\&.message || error}</h1>
+  );
+}
+.fi
+.PP
+
+.PP
+An example of this in action can be found in the \fR\fRexamples/lazy-loading-router-provider\fP\fP directory of the repository\&.
+
+.PP
+🙌 Huge thanks to @rossipedia for the \fRInitial Proposal\fP and \fRPOC Implementation\fP\&.
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fRreact-router@6\&.9\&.0\fP
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.4\&.0\fP
+.PP
+
+.PP
+.SH "6\&.8\&.2"
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Treat same-origin absolute URLs in \fR<Link to>\fP as external if they are outside of the router \fRbasename\fP (\fR#10135\fP)
+.IP "\(bu" 2
+Fix \fRuseBlocker\fP to return \fRIDLE_BLOCKER\fP during SSR (\fR#10046\fP)
+.IP "\(bu" 2
+Fix SSR of absolute \fR<Link to>\fP urls (\fR#10112\fP)
+.IP "\(bu" 2
+Properly escape HTML characters in \fRStaticRouterProvider\fP serialized hydration data (\fR#10068\fP)
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.3\&.3\fP
+.IP "  \(bu" 4
+\fRreact-router@6\&.8\&.2\fP
+.PP
+
+.PP
+.SH "6\&.8\&.1"
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Improved absolute url detection in \fRLink\fP component (now also supports \fRmailto:\fP urls) (\fR#9994\fP)
+.IP "\(bu" 2
+Fix partial object (search or hash only) pathnames losing current path value (\fR#10029\fP)
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fRreact-router@6\&.8\&.1\fP
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.3\&.2\fP
+.PP
+
+.PP
+.SH "6\&.8\&.0"
+.PP
+.SS "Minor Changes"
+.IP "\(bu" 2
+Support absolute URLs in \fR<Link to>\fP\&. If the URL is for the current origin, it will still do a client-side navigation\&. If the URL is for a different origin then it will do a fresh document request for the new origin\&. (\fR#9900\fP)
+
+.PP
+.PP
+.nf
+<Link to="https://neworigin\&.com/some/path">    {/* Document request */}
+<Link to="//neworigin\&.com/some/path">          {/* Document request */}
+<Link to="https://www\&.currentorigin\&.com/path"> {/* Client\-side navigation */}
+.fi
+.PP
+
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Fix bug with search params removal via \fRuseSearchParams\fP (\fR#9969\fP)
+.IP "\(bu" 2
+Respect \fRpreventScrollReset\fP on \fR<fetcher\&.Form>\fP (\fR#9963\fP)
+.IP "\(bu" 2
+Fix navigation for hash routers on manual URL changes (\fR#9980\fP)
+.IP "\(bu" 2
+Use \fRpagehide\fP instead of \fRbeforeunload\fP for \fR<ScrollRestoration>\fP\&. This has better cross-browser support, specifically on Mobile Safari\&. (\fR#9945\fP)
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.3\&.1\fP
+.IP "  \(bu" 4
+\fRreact-router@6\&.8\&.0\fP
+.PP
+
+.PP
+.SH "6\&.7\&.0"
+.PP
+.SS "Minor Changes"
+.IP "\(bu" 2
+Add \fRunstable_useBlocker\fP hook for blocking navigations within the app's location origin (\fR#9709\fP)
+.IP "\(bu" 2
+Add \fRunstable_usePrompt\fP hook for blocking navigations within the app's location origin (\fR#9932\fP)
+.IP "\(bu" 2
+Add \fRpreventScrollReset\fP prop to \fR<Form>\fP (\fR#9886\fP)
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Added pass-through event listener options argument to \fRuseBeforeUnload\fP (\fR#9709\fP)
+.IP "\(bu" 2
+Streamline jsdom bug workaround in tests (\fR#9824\fP)
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.3\&.0\fP
+.IP "  \(bu" 4
+\fRreact-router@6\&.7\&.0\fP
+.PP
+
+.PP
+.SH "6\&.6\&.2"
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Ensure \fRuseId\fP consistency during SSR (\fR#9805\fP)
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fRreact-router@6\&.6\&.2\fP
+.PP
+
+.PP
+.SH "6\&.6\&.1"
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.2\&.1\fP
+.IP "  \(bu" 4
+\fRreact-router@6\&.6\&.1\fP
+.PP
+
+.PP
+.SH "6\&.6\&.0"
+.PP
+.SS "Minor Changes"
+.IP "\(bu" 2
+Add \fRuseBeforeUnload()\fP hook (\fR#9664\fP)
+.IP "\(bu" 2
+Remove \fRunstable_\fP prefix from \fRcreateStaticHandler\fP/\fRcreateStaticRouter\fP/\fRStaticRouterProvider\fP (\fR#9738\fP)
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Proper hydration of \fRError\fP objects from \fRStaticRouterProvider\fP (\fR#9664\fP)
+.IP "\(bu" 2
+Support uppercase \fR<Form method>\fP and \fRuseSubmit\fP method values (\fR#9664\fP)
+.IP "\(bu" 2
+Skip initial scroll restoration for SSR apps with \fRhydrationData\fP (\fR#9664\fP)
+.IP "\(bu" 2
+Fix \fR<button formmethod>\fP form submission overriddes (\fR#9664\fP)
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.2\&.0\fP
+.IP "  \(bu" 4
+\fRreact-router@6\&.6\&.0\fP
+.PP
+
+.PP
+.SH "6\&.5\&.0"
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fRreact-router@6\&.5\&.0\fP
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.1\&.0\fP
+.PP
+
+.PP
+.SH "6\&.4\&.5"
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.0\&.5\fP
+.IP "  \(bu" 4
+\fRreact-router@6\&.4\&.5\fP
+.PP
+
+.PP
+.SH "6\&.4\&.4"
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Fix issues with encoded characters in \fRNavLink\fP and descendant \fR<Routes>\fP (\fR#9589\fP, \fR#9647\fP)
+.IP "\(bu" 2
+Properly serialize/deserialize \fRErrorResponse\fP instances when using built-in hydration (\fR#9593\fP)
+.IP "\(bu" 2
+Support \fRbasename\fP in static data routers (\fR#9591\fP)
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.0\&.4\fP
+.IP "  \(bu" 4
+\fRreact-router@6\&.4\&.4\fP
+.PP
+
+.PP
+.SH "6\&.4\&.3"
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Fix hrefs generated for \fRcreateHashRouter\fP (\fR#9409\fP)
+.IP "\(bu" 2
+fix encoding/matching issues with special chars (\fR#9477\fP, \fR#9496\fP)
+.IP "\(bu" 2
+Properly support \fRindex\fP routes with a \fRpath\fP in \fRuseResolvedPath\fP (\fR#9486\fP)
+.IP "\(bu" 2
+Respect \fRrelative=path\fP prop on \fRNavLink\fP (\fR#9453\fP)
+.IP "\(bu" 2
+Fix \fRNavLink\fP behavior for root urls (\fR#9497\fP)
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.0\&.3\fP
+.IP "  \(bu" 4
+\fRreact-router@6\&.4\&.3\fP
+.PP
+
+.PP
+.SH "6\&.4\&.2"
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Respect \fRbasename\fP in \fRuseFormAction\fP (\fR#9352\fP)
+.IP "\(bu" 2
+Enhance console error messages for invalid usage of data router hooks (\fR#9311\fP)
+.IP "\(bu" 2
+If an index route has children, it will result in a runtime error\&. We have strengthened our \fRRouteObject\fP/\fRRouteProps\fP types to surface the error in TypeScript\&. (\fR#9366\fP)
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fRreact-router@6\&.4\&.2\fP
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.0\&.2\fP
+.PP
+
+.PP
+.SH "6\&.4\&.1"
+.PP
+.SS "Patch Changes"
+.IP "\(bu" 2
+Updated dependencies:
+.IP "  \(bu" 4
+\fRreact-router@6\&.4\&.1\fP
+.IP "  \(bu" 4
+\fR@remix-run/router@1\&.0\&.1\fP
+.PP
+
+.PP
+.SH "6\&.4\&.0"
+.PP
+Whoa this is a big one! \fR6\&.4\&.0\fP brings all the data loading and mutation APIs over from Remix\&. Here's a quick high level overview, but it's recommended you go check out the \fRdocs\fP, especially the \fRfeature overview\fP and the \fRtutorial\fP\&.
+
+.PP
+\fBNew APIs\fP
+
+.PP
+.IP "\(bu" 2
+Create your router with \fRcreateMemoryRouter\fP/\fRcreateBrowserRouter\fP/\fRcreateHashRouter\fP
+.IP "\(bu" 2
+Render your router with \fR<RouterProvider>\fP
+.IP "\(bu" 2
+Load data with a Route \fRloader\fP and mutate with a Route \fRaction\fP
+.IP "\(bu" 2
+Handle errors with Route \fRerrorElement\fP
+.IP "\(bu" 2
+Submit data with the new \fR<Form>\fP component
+.IP "\(bu" 2
+Perform in-page data loads and mutations with \fRuseFetcher()\fP
+.IP "\(bu" 2
+Defer non-critical data with \fRdefer\fP and \fRAwait\fP
+.IP "\(bu" 2
+Manage scroll position with \fR<ScrollRestoration>\fP
+.PP
+
+.PP
+\fBNew Features\fP
+
+.PP
+.IP "\(bu" 2
+Perform path-relative navigations with \fR<Link relative="path">\fP (#9160)
+.PP
+
+.PP
+\fBBug Fixes\fP
+
+.PP
+.IP "\(bu" 2
+Path resolution is now trailing slash agnostic (#8861)
+.IP "\(bu" 2
+\fRuseLocation\fP returns the scoped location inside a \fR<Routes location>\fP component (#9094)
+.IP "\(bu" 2
+respect the \fR<Link replace>\fP prop if it is defined (#8779)
+.PP
+
+.PP
+\fBUpdated Dependencies\fP
+
+.PP
+.IP "\(bu" 2
+\fRreact-router@6\&.4\&.0\fP 
+.PP
+

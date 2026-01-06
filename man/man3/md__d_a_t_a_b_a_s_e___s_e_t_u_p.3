@@ -1,0 +1,124 @@
+.TH "md__d_a_t_a_b_a_s_e___s_e_t_u_p" 3 "Version 0.1" "Chat-ME!" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md__d_a_t_a_b_a_s_e___s_e_t_u_p \- 🐳 Setup de Base de Datos - ChatApp 
+.PP
+
+.SH "Opción 1: Docker Compose (Recomendado)"
+.PP
+.SS "Prerrequisitos"
+.IP "\(bu" 2
+Docker Desktop instalado
+.IP "\(bu" 2
+Git
+.PP
+.SS "Setup rápido"
+.PP
+.nf
+# 1\&. Clonar el proyecto
+git clone <tu\-repo>
+cd chatapp\-main
+
+# 2\&. Levantar base de datos
+docker\-compose up \-d
+
+# 3\&. Verificar que funciona
+docker\-compose ps
+.fi
+.PP
+.SS "Comandos útiles"
+.PP
+.nf
+# Ver logs
+docker\-compose logs postgres
+
+# Parar servicios
+docker\-compose down
+
+# Reiniciar con datos limpios
+docker\-compose down \-v
+docker\-compose up \-d
+
+# Conectar a PostgreSQL
+docker exec \-it chatapp\-postgres psql \-U chatapp \-d chatapp
+.fi
+.PP
+.SH "Opción 2: PostgreSQL Local"
+.PP
+.SS "Windows"
+.PP
+.nf
+# Instalar PostgreSQL
+winget install PostgreSQL\&.PostgreSQL
+
+# Crear base de datos
+createdb \-U postgres chatapp
+psql \-U postgres \-d chatapp \-f database/init\&.sql
+.fi
+.PP
+.SS "Linux/Mac"
+.PP
+.nf
+# Ubuntu/Debian
+sudo apt install postgresql postgresql\-contrib
+
+# macOS
+brew install postgresql
+
+# Crear DB
+createdb chatapp
+psql \-d chatapp \-f database/init\&.sql
+.fi
+.PP
+.SH "🔧 Configuración Backend"
+.PP
+Actualizar \fRbackend/app\&.py\fP: 
+.PP
+.nf
+# PostgreSQL
+db_config = {
+    'host': 'localhost',
+    'user': 'chatapp',
+    'password': 'chatapp123',
+    'database': 'chatapp',
+    'port': 5432
+}
+
+.fi
+.PP
+.SH "📊 Datos de Prueba"
+.PP
+Usuario por defecto:
+.IP "\(bu" 2
+\fBUsername:\fP testuser
+.IP "\(bu" 2
+\fBPassword:\fP test123
+.PP
+
+.PP
+Salas disponibles:
+.IP "\(bu" 2
+R1: Sala General
+.IP "\(bu" 2
+R2: Sala Desarrollo 
+.br
+
+.IP "\(bu" 2
+R3: Sala Random
+.PP
+.SH "🚀 Migración desde MySQL"
+.PP
+Si tienes datos en MySQL: 
+.PP
+.nf
+# Exportar datos MySQL
+mysqldump \-u root \-p chatapp > chatapp_backup\&.sql
+
+# Convertir a PostgreSQL (manual o con herramientas)
+# Importar a PostgreSQL
+psql \-U chatapp \-d chatapp \-f chatapp_converted\&.sql
+
+.fi
+.PP
+ 
