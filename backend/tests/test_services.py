@@ -6,70 +6,79 @@ import unittest
 from unittest.mock import Mock, patch, MagicMock
 import sys
 import os
+import bcrypt
 
 # Añadir path para importar módulos
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 class TestAuthService(unittest.TestCase):
     """Tests para AuthService"""
-    
+
     def setUp(self):
         """Configurar mocks para cada test"""
         # Mock del user repository
         self.mock_user_repo = Mock()
-        
+
         # Patch del UserRepository para usar nuestro mock
         patcher = patch('services.auth_service.UserRepository')
         self.mock_repo_class = patcher.start()
         self.mock_repo_class.return_value = self.mock_user_repo
         self.addCleanup(patcher.stop)
-        
+
         # Importar AuthService después del patch
         from services.auth_service import AuthService
         self.auth_service = AuthService()
-    
+
     def test_authenticate_user_success(self):
         """Test de autenticación exitosa"""
-        # Configurar mock para retornar usuario válido
+        # Generar hash bcrypt real para el test
+        test_password = 'testpassword'
+        password_hash = bcrypt.hashpw(test_password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+
+        # Configurar mock para retornar usuario válido con hash bcrypt real
         self.mock_user_repo.find_by_username.return_value = {
             'id': 'test-id-123',
             'username': 'testuser',
             'email': 'test@example.com',
-            'password_hash': 'testpassword',
+            'password_hash': password_hash,
             'last_login': None
         }
-        
-        result = self.auth_service.authenticate_user('testuser', 'testpassword')
-        
+
+        result = self.auth_service.authenticate_user('testuser', test_password)
+
         # Verificar que se llamó al método correcto
         self.mock_user_repo.find_by_username.assert_called_once_with('testuser')
         self.mock_user_repo.update_last_login.assert_called_once_with('test-id-123')
-        
+
         # Verificar resultado
         self.assertIsNotNone(result)
         self.assertEqual(result['username'], 'testuser')
         self.assertEqual(result['id'], 'test-id-123')
-    
+
     def test_authenticate_user_not_found(self):
         """Test con usuario no encontrado"""
         self.mock_user_repo.find_by_username.return_value = None
-        
+
         result = self.auth_service.authenticate_user('noexiste', 'password')
-        
+
         self.assertIsNone(result)
         self.mock_user_repo.find_by_username.assert_called_once_with('noexiste')
         self.mock_user_repo.update_last_login.assert_not_called()
-    
+
     def test_authenticate_user_wrong_password(self):
         """Test con password incorrecto"""
+        # Generar hash bcrypt para un password diferente
+        correct_password = 'correctpassword'
+        password_hash = bcrypt.hashpw(correct_password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+
         self.mock_user_repo.find_by_username.return_value = {
             'id': 'test-id-123',
             'username': 'testuser',
-            'password_hash': 'correctpassword'
+            'password_hash': password_hash
         }
-        
+
         result = self.auth_service.authenticate_user('testuser', 'wrongpassword')
-        
+
         self.assertIsNone(result)
         self.mock_user_repo.update_last_login.assert_not_called()
 

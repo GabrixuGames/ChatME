@@ -2,7 +2,7 @@
 Base Repository Class
 Implementa el patrón Repository para abstracción de acceso a datos
 """
-from abc import ABC, abstractmethod
+from abc import ABC
 from typing import List, Optional, Any, Dict
 from utils.database import db_manager
 import psycopg2.extras
@@ -36,22 +36,24 @@ class BaseRepository(ABC):
         try:
             connection = self.db_manager.get_connection()
             cursor = connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
-            
-            cursor.execute(query, params)
-            
-            # Siempre hacer commit para operaciones de escritura (INSERT, UPDATE, DELETE)
-            if query.strip().upper().startswith(('INSERT', 'UPDATE', 'DELETE')):
-                connection.commit()
-                
-            if fetch_one:
-                result = cursor.fetchone()
-            elif fetch_all:
-                result = cursor.fetchall()
-            else:
-                result = cursor.rowcount
-                
-            logger.debug(f"✅ Query executed successfully: {query[:50]}...")
-            return result
+            try:
+                cursor.execute(query, params)
+
+                # Siempre hacer commit para operaciones de escritura (INSERT, UPDATE, DELETE)
+                if query.strip().upper().startswith(('INSERT', 'UPDATE', 'DELETE')):
+                    connection.commit()
+
+                if fetch_one:
+                    result = cursor.fetchone()
+                elif fetch_all:
+                    result = cursor.fetchall()
+                else:
+                    result = cursor.rowcount
+
+                logger.debug(f"✅ Query executed successfully: {query[:50]}...")
+                return result
+            finally:
+                cursor.close()
             
         except Exception as e:
             if connection:
@@ -93,6 +95,40 @@ class UserRepository(BaseRepository):
         """Actualizar último login"""
         query = "UPDATE users SET last_login = NOW() WHERE id = %s"
         self.execute_query(query, (user_id,))
+    
+    def update_user_password(self, user_id: str, password_hash: str) -> bool:
+        """
+        Actualizar password de usuario
+        
+        Args:
+            user_id: ID del usuario
+            password_hash: Nuevo hash del password
+            
+        Returns:
+            True si se actualizó correctamente, False si no
+        """
+        query = "UPDATE users SET password_hash = %s WHERE id = %s"
+        try:
+            self.execute_query(query, (password_hash, user_id))
+            return True
+        except Exception as e:
+            logger.error(f"Error updating password for user {user_id}: {e}")
+            return False
+    
+    def get_all_users(self) -> List[Dict]:
+        """
+        Obtener todos los usuarios activos
+        
+        Returns:
+            Lista de usuarios activos
+        """
+        query = """
+            SELECT id, username, email, password_hash, last_login, created_at 
+            FROM users 
+            WHERE is_active = true 
+            ORDER BY created_at
+        """
+        return self.execute_query(query, fetch_all=True)
 
 class MessageRepository(BaseRepository):
     """
@@ -121,24 +157,11 @@ class MessageRepository(BaseRepository):
         """
         messages = self.execute_query(query, (room_id, limit, offset), fetch_all=True)
         return list(reversed(messages)) if messages else []  # Reverse para orden cronológico
-    
-    def get_message_count_by_room(self, room_id: str) -> int:
-        """Contar mensajes en una sala"""
-        query = "SELECT COUNT(*) as count FROM messages WHERE room_id = %s AND is_deleted = false"
-        result = self.execute_query(query, (room_id,), fetch_one=True)
-        return result['count'] if result else 0
-    
-    def delete_message(self, message_id: str, user_id: str) -> bool:
-        """Soft delete de mensaje (solo el autor puede borrar)"""
-        query = """
-            UPDATE messages 
-            SET is_deleted = true, edited_at = NOW() 
-            WHERE id = %s AND user_id = %s
-        """
-        affected_rows = self.execute_query(query, (message_id, user_id))
-        return affected_rows > 0
 
 class RoomRepository(BaseRepository):
+    """
+    Repository para operaciones de salas
+    """
     def get_rooms_for_user(self, user_id):
         """
         Devuelve todas las salas (rooms) en las que el usuario participa, públicas e individuales.
@@ -162,9 +185,6 @@ class RoomRepository(BaseRepository):
             ORDER BY r.created_at DESC
         '''
         return self.execute_query(query, (user_id, user_id, user_id), fetch_all=True) or []
-    """
-    Repository para operaciones de salas
-    """
     
     def get_all_active_rooms(self) -> List[Dict]:
         """Obtener todas las salas activas"""

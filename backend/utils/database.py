@@ -3,7 +3,6 @@ Database Connection Pool Manager
 Implements connection pooling for PostgreSQL to improve performance
 """
 import psycopg2.pool
-import psycopg2.extras
 import os
 from dotenv import load_dotenv
 import logging

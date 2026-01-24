@@ -1,5 +1,4 @@
 from repositories.friend_repository import FriendRepository
-from flask import session
 
 class FriendService:
     def remove_friend(self, user_id: str, friend_id: str) -> bool:

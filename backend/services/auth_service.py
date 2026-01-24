@@ -5,6 +5,7 @@ Maneja toda la lógica de negocio relacionada con autenticación
 from typing import Optional, Dict
 from repositories.base_repository import UserRepository
 import logging
+import bcrypt
 
 logger = logging.getLogger(__name__)
 
@@ -14,19 +15,49 @@ class AuthService:
     Encapsula la lógica de negocio para login, logout, etc.
     """
 
+    @staticmethod
+    def _hash_password(password: str) -> str:
+        """
+        Hashear password usando bcrypt
+        
+        Args:
+            password: Password en texto plano
+            
+        Returns:
+            Password hasheado como string
+        """
+        salt = bcrypt.gensalt()
+        return bcrypt.hashpw(password.encode('utf-8'), salt).decode('utf-8')
+    
+    @staticmethod
+    def _verify_password(password: str, hashed_password: str) -> bool:
+        """
+        Verificar password contra hash
+        
+        Args:
+            password: Password en texto plano
+            hashed_password: Hash almacenado en base de datos
+            
+        Returns:
+            True si el password es correcto, False si no
+        """
+        return bcrypt.checkpw(password.encode('utf-8'), hashed_password.encode('utf-8'))
+
     def register_user(self, username: str, email: str, password: str) -> Optional[str]:
         """
-        Registrar usuario nuevo
+        Registrar usuario nuevo con password hasheado de forma segura
+        
         Args:
             username: Username del usuario
             email: Email del usuario
             password: Password en texto plano
+            
         Returns:
             ID del usuario creado o None
         """
         try:
-            # TODO: Usar bcrypt en producción
-            password_hash = password
+            # Hashear password de forma segura con bcrypt
+            password_hash = self._hash_password(password)
             user_id = self.user_repository.create_user(username, email, password_hash)
             if user_id:
                 logger.info(f"✅ Usuario registrado: {username}")
@@ -43,7 +74,7 @@ class AuthService:
     
     def authenticate_user(self, username: str, password: str) -> Optional[Dict]:
         """
-        Autenticar usuario con username y password
+        Autenticar usuario con username y password verificando hash
         
         Args:
             username: Username del usuario
@@ -60,9 +91,8 @@ class AuthService:
                 logger.warning(f"🔍 Usuario no encontrado: {username}")
                 return None
             
-            # Verificar password (por ahora comparación directa)
-            # TODO: Implementar bcrypt para producción
-            if user['password_hash'] != password:
+            # Verificar password usando bcrypt
+            if not self._verify_password(password, user['password_hash']):
                 logger.warning(f"🔐 Password incorrecto para usuario: {username}")
                 return None
             
