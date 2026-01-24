@@ -120,15 +120,3 @@ Documentacion completa:
 Activo y en evolucion. Refactorizaciones recientes mejoraron la arquitectura, la UI y la documentacion.
 
 ---
-
-## 🤝 Contribuir
-
-1) Crea una rama: `feature/nombre`
-2) Commits con conventional commits
-3) Abre un Pull Request
-
----
-
-## 📄 Licencia
-
-Sin licencia declarada por ahora.
