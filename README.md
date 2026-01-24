@@ -1,20 +1,54 @@
 # ChatME
 
-Real-time chat with public rooms and private conversations, built with React + TypeScript and Flask + Socket.IO, backed by PostgreSQL.
+Aplicacion de chat en tiempo real con salas publicas y conversaciones privadas, construida con React + TypeScript y Flask + Socket.IO, respaldada por PostgreSQL.
 
-## Highlights
-- Real-time messaging with Socket.IO
-- Public rooms + private chats
-- Dual chat windows (drag & drop to open in parallel)
-- Responsive UI for mobile, tablet, and desktop
-- JWT auth + bcrypt password hashing
+---
 
-## Screenshots
-Add project screenshots in `docs/assets/` and update this section (suggested files: `profile-desktop.png`, `profile-mobile.png`, `dual-chat.png`).
+## 📌 Tabla de contenidos
+- [Descripción](#-descripción)
+- [Características](#-características)
+- [Instalación](#-instalación)
+- [Uso](#-uso)
+- [Configuración](#-configuración)
+- [Estado del proyecto](#-estado-del-proyecto)
+- [Contribuir](#-contribuir)
+- [Licencia](#-licencia)
 
-## Quick Start
+---
+
+## 📖 Descripción
+
+ChatME permite crear salas publicas y chats privados con mensajeria en tiempo real.
+Pensado para equipos o comunidades que necesitan comunicacion rapida con una interfaz sencilla, responsive y multiplataforma.
+El proyecto existe para ofrecer una base limpia y extensible con foco en seguridad y mantenibilidad.
+
+---
+
+## ✨ Características
+
+- ✔️ Mensajeria en tiempo real con Socket.IO
+- ✔️ Salas publicas y chats privados
+- ✔️ Doble ventana de chat (drag & drop)
+- ✔️ UI responsive para movil, tablet y desktop
+- ✔️ Autenticacion con JWT y passwords hasheadas con bcrypt
+- ✔️ Codigo claro y documentacion centralizada
+
+---
+
+## 🚀 Instalación
+
+### Requisitos previos
+- Python 3.10+
+- Node.js 18+
+- Docker (para PostgreSQL)
+
+### Pasos
+
 ```bash
-# Database
+git clone https://github.com/GabrixuGames/ChatME.git
+cd ChatME
+
+# Base de datos
 docker-compose up -d
 
 # Backend
@@ -32,22 +66,55 @@ cp .env.example .env
 npm run dev
 ```
 
-## Architecture
-- `frontend/`: React UI (Vite), real-time UI via Socket.IO client
-- `backend/`: Flask API + Socket.IO, services/repositories layered
-- `database/`: schema, migrations, and indexes
+---
 
-## Documentation
-- `docs/DEVELOPMENT.md` - setup, env vars, workflow, and standards
-- `docs/SECURITY.md` - auth, data handling, and security guarantees
-- `docs/CHANGELOG.md` - notable changes by date
+## 🧪 Uso
 
-## Tech Stack
-- Backend: Python, Flask, Flask-SocketIO, PostgreSQL
-- Frontend: React, TypeScript, Vite, TailwindCSS
+- Frontend: `http://localhost:8080`
+- Backend: `http://localhost:5000`
 
-## Tests
-```bash
-cd backend
-python tests/run_tests.py
-```
+Flujo basico:
+1) Inicia sesion o registrate.
+2) Selecciona una sala publica o un amigo.
+3) Arrastra una sala o amigo para abrir un chat paralelo.
+
+---
+
+## ⚙️ Configuración
+
+### Backend (`backend/.env`)
+- `JWT_SECRET` (min 32 caracteres)
+- `FLASK_SECRET_KEY` (min 32 caracteres)
+- `ENVIRONMENT` / `FLASK_ENV` (`development` | `production`)
+- `DB_HOST`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`, `DB_PORT`
+- `CORS_ALLOWED_ORIGINS` (separado por comas)
+- `RATE_LIMITS` (opcional, separado por comas)
+
+### Frontend (`frontend/.env`)
+- `VITE_API_URL` (ej: `http://localhost:5000`)
+- `VITE_SOCKET_URL` (ej: `http://localhost:5000`)
+
+Documentacion completa:
+- `docs/DEVELOPMENT.md`
+- `docs/SECURITY.md`
+- `docs/CHANGELOG.md`
+
+---
+
+## 🚧 Estado del proyecto
+
+Activo y en evolucion. Refactorizaciones recientes mejoraron la arquitectura, la UI y la documentacion.
+
+---
+
+## 🤝 Contribuir
+
+1) Crea una rama: `feature/nombre`
+2) Commits con conventional commits
+3) Abre un Pull Request
+
+---
+
+## 📄 Licencia
+
+Sin licencia declarada por ahora.
