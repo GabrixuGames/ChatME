@@ -1,21 +1,28 @@
 # Development Guide
 
 ## Overview
-ChatME is a real-time chat app with a React + TypeScript frontend and a Flask + Socket.IO backend. PostgreSQL is used for persistence.
+ChatME is a real-time chat app with a React + TypeScript frontend and a Flask + Socket.IO backend. PostgreSQL stores users, rooms, and messages.
 
-## Project Structure (High Level)
+## Project Layout
 ```
 backend/   # Flask app, routes, services, repositories, tests
-frontend/  # React app
+frontend/  # React app (Vite)
 database/  # SQL schema + migrations + indexes
-docs/      # Project documentation
+docs/      # Central documentation
 ```
 
 ## Environment Configuration
-Backend uses environment variables from `backend/.env` (copy from `backend/.env.example`).
-Required secrets:
+Backend uses `backend/.env` (copy from `backend/.env.example`).
+
+Required:
 - `JWT_SECRET` (min 32 chars)
 - `FLASK_SECRET_KEY` (min 32 chars)
+
+Common:
+- `ENVIRONMENT` / `FLASK_ENV` (`development` | `production`)
+- `DB_HOST`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`, `DB_PORT`
+- `CORS_ALLOWED_ORIGINS` or `CORS_ORIGINS` (comma-separated)
+- `RATE_LIMITS` (comma-separated, optional)
 
 Generate secure secrets:
 ```bash
@@ -23,10 +30,12 @@ openssl rand -base64 32
 python -c "import secrets; print(secrets.token_urlsafe(32))"
 ```
 
-Frontend uses `frontend/.env` (copy from `frontend/.env.example`).
+Frontend uses `frontend/.env` (copy from `frontend/.env.example`):
+- `VITE_API_URL`
+- `VITE_SOCKET_URL`
 
 ## Database (Docker)
-Docker Compose is defined in `docker-compose.yml` at the repo root.
+`docker-compose.yml` is at repo root.
 ```bash
 docker-compose up -d
 docker ps
@@ -57,6 +66,20 @@ cp .env.example .env
 npm run dev
 ```
 
+## Local Network Access
+To access from another device:
+1) Start Vite with `npm run dev -- --host 0.0.0.0`
+2) Set `VITE_API_URL` and `VITE_SOCKET_URL` to your LAN IP (e.g. `http://192.168.1.50:5000`)
+3) Add that IP to `CORS_ALLOWED_ORIGINS` on the backend
+
+## API Endpoints (Summary)
+- Auth: `POST /register`, `POST /procesar_login`, `POST /logout`
+- Rooms: `GET /chat/rooms`, `POST /chat/mark_read`, `POST /chat/hide_room`
+- Private chat: `POST /chat/individual/create`, `POST /chat/individual/delete`, `POST /chat/individual/cleanup_temporary`
+- Friends: `GET /friends/list`, `GET /friends/pending`, `GET /friends/sent`
+- Requests: `POST /friends/send_request`, `POST /friends/respond_request`, `POST /friends/remove`
+- Search: `GET /friends/search?query=...`
+
 ## Tests
 Backend tests require a running Postgres instance.
 ```bash
@@ -65,13 +88,13 @@ python tests/run_tests.py
 ```
 
 ## Team Workflow (Condensed)
-- Use clear, concise communication; mention the role when requesting input.
+- Communicate clearly, and mention the role when requesting input.
 - Priorities: correctness, security, performance, maintainability.
 - Seniors review junior code before merge.
 
 ## Coding Standards (Condensed)
 - Naming: snake_case (Python), camelCase (JS/TS), PascalCase (classes/components).
-- Keep functions focused; avoid overly long methods.
+- Keep functions focused and avoid overly long methods.
 - Use parameterized SQL, sanitize inputs, and log errors responsibly.
 
 ## Git Conventions

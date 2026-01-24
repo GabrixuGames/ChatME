@@ -16,3 +16,10 @@
 - Simplified client auth routing and updated build/lint tooling.
 - Removed unused frontend components, legacy private chat files, and unused UI modules.
 - Added code-splitting in Vite build configuration.
+
+## 2026-01-26
+- Centralized backend configuration (security, CORS, rate limits) for clarity.
+- Simplified profile rendering in the chat page and reduced UI duplication.
+- Removed generated docs/artifacts and unused frontend pages/assets.
+- Migrated friend APIs to `fetch` and removed Axios dependency.
+- Refreshed development documentation and environment examples.

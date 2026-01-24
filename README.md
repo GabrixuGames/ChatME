@@ -1,6 +1,16 @@
-# ChatME - Real-Time Chat Application
+# ChatME
 
-A real-time chat application with a React + TypeScript frontend and a Flask + Socket.IO backend, backed by PostgreSQL.
+Real-time chat with public rooms and private conversations, built with React + TypeScript and Flask + Socket.IO, backed by PostgreSQL.
+
+## Highlights
+- Real-time messaging with Socket.IO
+- Public rooms + private chats
+- Dual chat windows (drag & drop to open in parallel)
+- Responsive UI for mobile, tablet, and desktop
+- JWT auth + bcrypt password hashing
+
+## Screenshots
+Add project screenshots in `docs/assets/` and update this section (suggested files: `profile-desktop.png`, `profile-mobile.png`, `dual-chat.png`).
 
 ## Quick Start
 ```bash
@@ -22,11 +32,22 @@ cp .env.example .env
 npm run dev
 ```
 
+## Architecture
+- `frontend/`: React UI (Vite), real-time UI via Socket.IO client
+- `backend/`: Flask API + Socket.IO, services/repositories layered
+- `database/`: schema, migrations, and indexes
+
 ## Documentation
-- `docs/DEVELOPMENT.md` - setup, workflow, and coding standards
-- `docs/SECURITY.md` - security guarantees and references
-- `docs/CHANGELOG.md` - recent refactors
+- `docs/DEVELOPMENT.md` - setup, env vars, workflow, and standards
+- `docs/SECURITY.md` - auth, data handling, and security guarantees
+- `docs/CHANGELOG.md` - notable changes by date
 
 ## Tech Stack
 - Backend: Python, Flask, Flask-SocketIO, PostgreSQL
-- Frontend: React, TypeScript, Vite
+- Frontend: React, TypeScript, Vite, TailwindCSS
+
+## Tests
+```bash
+cd backend
+python tests/run_tests.py
+```

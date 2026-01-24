@@ -35,3 +35,11 @@ Relevant code:
 Relevant code:
 - `backend/app.py`
 - `backend/tests/test_jwt_security.py`
+
+## CORS + Rate Limits
+- CORS is allowlist-based and supports custom origins via env vars.
+- API rate limits are enabled to reduce abuse and brute-force attempts.
+
+Relevant code:
+- `backend/config.py`
+- `backend/app.py`
