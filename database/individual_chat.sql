@@ -1,15 +1,5 @@
 CREATE TABLE IF NOT EXISTS private_chats (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    user1_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    user2_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    is_temporary BOOLEAN DEFAULT TRUE,
-    created_at TIMESTAMP DEFAULT NOW()
-);
-
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-
-CREATE TABLE IF NOT EXISTS private_chats (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     user1_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     user2_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     is_temporary BOOLEAN DEFAULT TRUE,
@@ -17,7 +7,7 @@ CREATE TABLE IF NOT EXISTS private_chats (
 );
 
 CREATE TABLE IF NOT EXISTS private_messages (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     private_chat_id UUID NOT NULL REFERENCES private_chats(id) ON DELETE CASCADE,
     sender_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     content TEXT NOT NULL,

@@ -7,10 +7,7 @@ ALTER TABLE rooms ALTER COLUMN id TYPE VARCHAR(50);
 -- 2. Modificar tabla messages para reflejar el cambio
 ALTER TABLE messages ALTER COLUMN room_id TYPE VARCHAR(50);
 
--- 3. Si existe la tabla message_reads (de upgrade_individual_chat.sql)
-ALTER TABLE message_reads ALTER COLUMN room_id TYPE VARCHAR(50);
-
--- 4. Si existe la tabla user_room_visibility
+-- 3. Si existe la tabla user_room_visibility
 ALTER TABLE user_room_visibility ALTER COLUMN room_id TYPE VARCHAR(50);
 
 -- Verificar cambios

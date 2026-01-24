@@ -29,7 +29,7 @@ CREATE INDEX IF NOT EXISTS idx_message_reads_message ON message_reads(message_id
 -- PASO 5: Tabla para visibilidad y estado de salas por usuario
 CREATE TABLE IF NOT EXISTS user_room_visibility (
     user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    room_id VARCHAR(100) NOT NULL REFERENCES rooms(id) ON DELETE CASCADE,
+    room_id VARCHAR(50) NOT NULL REFERENCES rooms(id) ON DELETE CASCADE,
     is_hidden BOOLEAN DEFAULT FALSE,
     last_read_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),

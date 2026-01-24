@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS users (
 
 -- Rooms table
 CREATE TABLE IF NOT EXISTS rooms (
-    id VARCHAR(10) PRIMARY KEY,
+    id VARCHAR(50) PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     description TEXT,
     created_by UUID REFERENCES users(id),
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS rooms (
 CREATE TABLE IF NOT EXISTS messages (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     user_id UUID NOT NULL REFERENCES users(id),
-    room_id VARCHAR(10) NOT NULL REFERENCES rooms(id),
+    room_id VARCHAR(50) NOT NULL REFERENCES rooms(id),
     content TEXT NOT NULL,
     message_type VARCHAR(20) DEFAULT 'text',
     metadata JSONB DEFAULT '{}',
