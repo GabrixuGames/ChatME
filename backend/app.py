@@ -8,10 +8,8 @@ from flask_socketio import SocketIO
 from flask_cors import CORS
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
-import os
 import jwt
 from functools import wraps
-from dotenv import load_dotenv
 
 # Importar nuestros servicios y middleware
 from services.auth_service import AuthService
@@ -19,70 +17,25 @@ from services.chat_service import ChatService
 from services.friend_service import FriendService
 from middleware.logging_middleware import setup_logging, log_request_middleware, socketio_logger
 from utils.database import db_manager
+from config import load_security_config, get_allowed_origins, get_rate_limits
 from routes.chat_routes import register_chat_routes
 from routes.friend_routes import register_friend_routes
 from routes.auth_routes import register_auth_routes
 from routes.system_routes import register_system_routes
 from socket_handlers import register_socket_handlers
 
-# Cargar variables de entorno
-load_dotenv()
-
 # Configurar logging
 logger = setup_logging()
-
-# Validar configuración crítica de seguridad
-def validate_security_config():
-    """Validar que las configuraciones críticas estén presentes"""
-    
-    # Validar JWT Secret - requerido sin defaults
-    jwt_secret = os.getenv('JWT_SECRET')
-    if not jwt_secret:
-        raise ValueError(
-            "❌ CRITICAL ERROR: JWT_SECRET environment variable is required!\n"
-            "Set JWT_SECRET with a strong, random secret (min 32 characters):\n"
-            "export JWT_SECRET='your-super-secure-random-jwt-secret-key-here'"
-        )
-    
-    if len(jwt_secret) < 32:
-        raise ValueError(
-            "❌ CRITICAL ERROR: JWT_SECRET must be at least 32 characters long!\n"
-            f"Current length: {len(jwt_secret)} characters"
-        )
-    
-    # Validar Flask Secret Key - requerido sin defaults
-    flask_secret = os.getenv('FLASK_SECRET_KEY')
-    if not flask_secret:
-        raise ValueError(
-            "❌ CRITICAL ERROR: FLASK_SECRET_KEY environment variable is required!\n"
-            "Set FLASK_SECRET_KEY with a strong, random secret (min 32 characters):\n"
-            "export FLASK_SECRET_KEY='your-super-secure-flask-secret-key-here'"
-        )
-    
-    if len(flask_secret) < 32:
-        raise ValueError(
-            "❌ CRITICAL ERROR: FLASK_SECRET_KEY must be at least 32 characters long!\n"
-            f"Current length: {len(flask_secret)} characters"
-        )
-    
-    # Validar configuración de entorno
-    environment = os.getenv('ENVIRONMENT', 'development').lower()
-    
-    return {
-        'jwt_secret': jwt_secret,
-        'flask_secret': flask_secret,
-        'environment': environment
-    }
 
 app = Flask(__name__)
 
 # Validar y obtener configuración segura
 try:
-    security_config = validate_security_config()
-    jwt_secret = security_config['jwt_secret']
-    environment = security_config['environment']
+    security_config = load_security_config()
+    jwt_secret = security_config.jwt_secret
+    environment = security_config.environment
     
-    app.secret_key = security_config['flask_secret']
+    app.secret_key = security_config.flask_secret
     
     # Configuración de cookies según entorno
     if environment == 'production':
@@ -109,18 +62,12 @@ except ValueError as e:
 limiter = Limiter(
     key_func=get_remote_address,
     app=app,
-    default_limits=["200 per day", "50 per hour"],
+    default_limits=get_rate_limits(),
     storage_uri="memory://"
 )
 
 # Configurar CORS - permitir credenciales y configurar orígenes específicos
-allowed_origins = [
-    "http://localhost:8080",
-    "http://127.0.0.1:8080",
-    "http://172.20.10.10:8080",
-    "http://192.168.56.1:8080",
-    "http://172.24.144.1:8080"
-]
+allowed_origins = get_allowed_origins()
 
 CORS(app, 
      origins=allowed_origins, 
