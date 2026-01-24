@@ -35,6 +35,20 @@ El proyecto existe para ofrecer una base limpia y extensible con foco en segurid
 
 ---
 
+## 📸 Capturas
+
+| Perfil (desktop) | Perfil (mobile) |
+| --- | --- |
+| ![Perfil desktop](docs/assets/Captura%20desde%202026-01-24%2015-05-09.png) | ![Perfil mobile](docs/assets/Captura%20desde%202026-01-24%2015-05-17.png) |
+
+| Chat dual | Sidebar mobile |
+| --- | --- |
+| ![Chat dual](docs/assets/Captura%20desde%202026-01-24%2015-05-28.png) | ![Sidebar mobile](docs/assets/Captura%20desde%202026-01-24%2015-09-50.png) |
+
+![Vista extra](docs/assets/Captura%20desde%202026-01-24%2015-09-57.png)
+
+---
+
 ## 🚀 Instalación
 
 ### Requisitos previos
