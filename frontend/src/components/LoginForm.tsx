@@ -18,7 +18,7 @@ export default function LoginForm({ onSubmit, error, isLoading, onBack }: LoginF
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(username, password); // Llamar a la función onSubmit que viene de Login.tsx
+    onSubmit(username, password);
   };
 
   return (

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogClose } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { UserPlus, Search } from "lucide-react";
@@ -32,25 +31,24 @@ export const AddFriendDialog: React.FC = () => {
     setError("");
     const timeout = setTimeout(async () => {
       try {
-        const res = await axios.get(`${API_URL}/friends/search?query=${encodeURIComponent(search)}`, {
-          headers: token ? { Authorization: `Bearer ${token}` } : {}
+        const authHeader = token ? { Authorization: `Bearer ${token}` } : {};
+        const res = await fetch(`${API_URL}/friends/search?query=${encodeURIComponent(search)}`, {
+          headers: authHeader
         });
-        setResults(res.data.users || []);
-        if (!res.data.users || res.data.users.length === 0) {
+        const data = await res.json();
+        if (!res.ok) {
+          throw new Error(data?.error || "Error al buscar usuarios. Verifica tu conexión.");
+        }
+        setResults(data.users || []);
+        if (!data.users || data.users.length === 0) {
           setError("No se encontraron usuarios con ese nombre.");
         } else {
           setError("");
         }
       } catch (err: unknown) {
-        if (axios.isAxiosError(err)) {
-          console.error('❌ Error en búsqueda:', err.response?.data || err.message);
-          setResults([]);
-          setError(err.response?.data?.error || "Error al buscar usuarios. Verifica tu conexión.");
-        } else {
-          console.error('❌ Error en búsqueda:', err);
-          setResults([]);
-          setError("Error al buscar usuarios. Verifica tu conexión.");
-        }
+        console.error('❌ Error en búsqueda:', err);
+        setResults([]);
+        setError(err instanceof Error ? err.message : "Error al buscar usuarios. Verifica tu conexión.");
       } finally {
         setLoading(false);
       }
