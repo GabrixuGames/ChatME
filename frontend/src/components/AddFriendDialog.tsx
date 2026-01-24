@@ -7,9 +7,15 @@ import { useFriends } from "@/contexts/FriendsContext";
 import { useAuth } from "@/contexts/AuthContext";
 
 export const AddFriendDialog: React.FC = () => {
+  type SearchUser = {
+    id: string;
+    username: string;
+    profile_pic?: string;
+  };
+
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
-  const [results, setResults] = useState<any[]>([]);
+  const [results, setResults] = useState<SearchUser[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const { sendRequest } = useFriends();
@@ -26,28 +32,31 @@ export const AddFriendDialog: React.FC = () => {
     setError("");
     const timeout = setTimeout(async () => {
       try {
-        console.log('🔍 Buscando usuarios con query:', search);
-        console.log('🔑 Token disponible:', !!token);
         const res = await axios.get(`${API_URL}/friends/search?query=${encodeURIComponent(search)}`, {
           headers: token ? { Authorization: `Bearer ${token}` } : {}
         });
-        console.log('✅ Resultados de búsqueda:', res.data);
         setResults(res.data.users || []);
         if (!res.data.users || res.data.users.length === 0) {
           setError("No se encontraron usuarios con ese nombre.");
         } else {
           setError("");
         }
-      } catch (err: any) {
-        console.error('❌ Error en búsqueda:', err.response?.data || err.message);
-        setResults([]);
-        setError(err.response?.data?.error || "Error al buscar usuarios. Verifica tu conexión.");
+      } catch (err: unknown) {
+        if (axios.isAxiosError(err)) {
+          console.error('❌ Error en búsqueda:', err.response?.data || err.message);
+          setResults([]);
+          setError(err.response?.data?.error || "Error al buscar usuarios. Verifica tu conexión.");
+        } else {
+          console.error('❌ Error en búsqueda:', err);
+          setResults([]);
+          setError("Error al buscar usuarios. Verifica tu conexión.");
+        }
       } finally {
         setLoading(false);
       }
     }, 400);
     return () => clearTimeout(timeout);
-  }, [search, API_URL]);
+  }, [search, API_URL, token]);
 
   const handleSendRequest = async (userId: string) => {
     await sendRequest(userId);

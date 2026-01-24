@@ -14,7 +14,6 @@ const queryClient = new QueryClient();
 
 import { FriendsProvider } from "./contexts/FriendsContext";
 
-import { useState } from "react";
 import { DarkModeProvider } from "./hooks/useDarkMode.tsx";
 
 function AppContent() {

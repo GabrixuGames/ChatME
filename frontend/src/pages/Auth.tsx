@@ -14,6 +14,7 @@ export default function AuthPage() {
   const [registerError, setRegisterError] = useState("");
   const [registerLoading, setRegisterLoading] = useState(false);
   const navigate = useNavigate();
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
   return (
   <div className="min-h-screen flex flex-col items-center justify-center bg-background relative overflow-hidden px-2 sm:px-0">
@@ -71,7 +72,7 @@ export default function AuthPage() {
                       setLoginLoading(true);
                       setLoginError("");
                       try {
-                        const res = await fetch("/procesar_login", {
+                        const res = await fetch(`${API_URL}/procesar_login`, {
                           method: "POST",
                           headers: { "Content-Type": "application/json" },
                           body: JSON.stringify({ username, password })
@@ -105,7 +106,7 @@ export default function AuthPage() {
                       setRegisterLoading(true);
                       setRegisterError("");
                       try {
-                        const res = await fetch("/register", {
+                        const res = await fetch(`${API_URL}/register`, {
                           method: "POST",
                           headers: { "Content-Type": "application/json" },
                           body: JSON.stringify({ username, email, password })
@@ -113,7 +114,7 @@ export default function AuthPage() {
                         const data = await res.json();
                         if (res.ok && data.user_id) {
                           // Registro exitoso, loguear automáticamente
-                          const loginRes = await fetch("/procesar_login", {
+                          const loginRes = await fetch(`${API_URL}/procesar_login`, {
                             method: "POST",
                             headers: { "Content-Type": "application/json" },
                             body: JSON.stringify({ username, password })

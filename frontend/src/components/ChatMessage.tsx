@@ -2,6 +2,7 @@ import { Message } from "@/contexts/ChatContext";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { User } from "lucide-react";
+import DOMPurify from 'dompurify';
 
 interface ChatMessageProps {
   message: Message;
@@ -15,13 +16,20 @@ export function ChatMessage({ message, isCurrentUser }: ChatMessageProps) {
   const formattedDate = format(new Date(timestamp), 'MMM d');
   
   const isSystem = message.username === "system";  // Comprobación para mensaje del sistema
+  
+  // Sanitizar contenido HTML para prevenir XSS
+  const sanitizedContent = DOMPurify.sanitize(content, {
+    ALLOWED_TAGS: ['b', 'i', 'em', 'strong', 'a', 'br', 'p'],
+    ALLOWED_ATTR: ['href', 'target'],
+    ALLOW_DATA_ATTR: false
+  });
 
   // Estilo para el mensaje del sistema
   if (isSystem) {
     return (
       <div className="flex justify-center my-4">
         <div className="bg-muted rounded-md py-2 px-4 text-sm text-muted-foreground max-w-md">
-          {content}
+          <span dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
         </div>
       </div>
     );
@@ -53,7 +61,10 @@ export function ChatMessage({ message, isCurrentUser }: ChatMessageProps) {
               : "bg-accent bg-opacity-20 text-foreground rounded-tl-none"
           )}
         >
-          <p className="text-sm">{content}</p>
+          <p 
+            className="text-sm whitespace-pre-wrap break-words"
+            dangerouslySetInnerHTML={{ __html: sanitizedContent }}
+          />
         </div>
         
         <span className="text-xs text-muted-foreground mt-1 opacity-70">

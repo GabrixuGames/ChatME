@@ -6,7 +6,7 @@ import { componentTagger } from "lovable-tagger";
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
-    host: true, // Permite conexiones externas
+    host: "127.0.0.1",
     port: 8080,
     proxy: {
       '/procesar_login': {
@@ -29,6 +29,21 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+    },
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes("node_modules")) return;
+          if (id.includes("react")) return "react";
+          if (id.includes("@radix-ui")) return "radix";
+          if (id.includes("lucide-react")) return "icons";
+          if (id.includes("recharts")) return "charts";
+          if (id.includes("@tanstack")) return "tanstack";
+          return "vendor";
+        },
+      },
     },
   },
 }));

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useChat } from "../contexts/ChatContext";
 import { useAuth } from "../contexts/AuthContext";
 import { useIsMobile } from "../hooks/use-mobile";
-import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/ui/tooltip";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -202,6 +202,10 @@ export function ChatSidebar({ showMobileMenu = false, setShowMobileMenu = () => 
                             currentRoom?.id === room.id && "bg-sidebar-accent text-sidebar-accent-foreground",
                             hasUnread && "font-semibold"
                           )}
+                          draggable
+                          onDragStart={e => {
+                            e.dataTransfer.setData('roomId', room.id);
+                          }}
                           onClick={() => setCurrentRoom(room.id)}
                         >
                           <div className="flex items-center gap-2 w-full">

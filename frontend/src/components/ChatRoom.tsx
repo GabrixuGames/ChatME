@@ -6,16 +6,25 @@ import { TypingIndicator } from "@/components/TypingIndicator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 import { MessageCircle, X } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 type ChatRoomProps = {
   openSidebar?: () => void;
   roomId?: string | null;
+  autoSelect?: boolean;
+  onCloseWindow?: () => void;
 };
 
-export function ChatRoom({ openSidebar = () => {}, roomId }: ChatRoomProps) {
+export function ChatRoom({ openSidebar = () => {}, roomId, autoSelect = true, onCloseWindow }: ChatRoomProps) {
   const { user } = useAuth();
   const { messages, currentRoom, setCurrentRoom, rooms, typingUsers, hideRoom } = useChat();
-  const room = roomId ? rooms.find(r => r.id === roomId) : null;
+  const isMobile = useIsMobile();
+  
+  // Usar currentRoom si coincide con roomId, sino buscar en rooms
+  const room = roomId 
+    ? (currentRoom?.id === roomId ? currentRoom : rooms.find(r => r.id === roomId))
+    : null;
+  
   const messagesEndRef = useRef<HTMLDivElement>(null);
   
   // Get typing users for current room (exclude current user)
@@ -40,11 +49,11 @@ export function ChatRoom({ openSidebar = () => {}, roomId }: ChatRoomProps) {
   
   // Join room when roomId changes
   useEffect(() => {
+    if (!autoSelect) return;
     if (roomId && currentRoom?.id !== roomId) {
-      console.log("🔄 ChatRoom: Cambiando a room", roomId);
       setCurrentRoom(roomId);
     }
-  }, [roomId]); // Solo depende de roomId, no de setCurrentRoom
+  }, [roomId, currentRoom?.id, setCurrentRoom, autoSelect]);
 
   if (!room) {
     return (
@@ -88,7 +97,7 @@ export function ChatRoom({ openSidebar = () => {}, roomId }: ChatRoomProps) {
       <div className="border-b p-2 sm:p-4 sticky top-0 bg-white dark:bg-background z-10 flex items-center justify-between">
         <div className="flex items-center gap-2">
           {/* Botón menú flotante solo en móvil/tablet */}
-          {typeof window !== "undefined" && window.innerWidth < 640 && (
+          {isMobile && (
             <button
               className="bg-purple-600 text-white rounded-full p-2 shadow-lg"
               onClick={openSidebar}
@@ -103,21 +112,34 @@ export function ChatRoom({ openSidebar = () => {}, roomId }: ChatRoomProps) {
           </div>
         </div>
         
-        {/* Botón ocultar chat (solo para chats individuales) */}
-        {room.room_type === 'individual' && (
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => {
-              if (window.confirm('¿Ocultar este chat? Podrás volver a abrirlo desde tu lista de amigos.')) {
-                hideRoom(room.id);
-              }
-            }}
-            className="text-muted-foreground hover:text-foreground"
-          >
-            <X className="h-5 w-5" />
-          </Button>
-        )}
+        <div className="flex items-center gap-2">
+          {/* Botón ocultar chat (solo para chats individuales) */}
+          {room.room_type === 'individual' && (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => {
+                if (window.confirm('¿Ocultar este chat? Podrás volver a abrirlo desde tu lista de amigos.')) {
+                  hideRoom(room.id);
+                }
+              }}
+              className="text-muted-foreground hover:text-foreground"
+            >
+              <X className="h-5 w-5" />
+            </Button>
+          )}
+          {onCloseWindow && (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={onCloseWindow}
+              className="text-muted-foreground hover:text-foreground"
+              aria-label="Cerrar ventana"
+            >
+              <X className="h-5 w-5" />
+            </Button>
+          )}
+        </div>
       </div>
 
       {/* Mensajes scrollables, usando ScrollArea para compatibilidad móvil/tablet */}

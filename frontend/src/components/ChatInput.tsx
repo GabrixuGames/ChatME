@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useAuth } from "@/contexts/AuthContext";
 import { useChat } from "@/contexts/ChatContext";
 import { MessageCircle } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 type ChatInputProps = {
   roomId?: string | null;
@@ -13,10 +14,14 @@ type ChatInputProps = {
 export function ChatInput({ roomId }: ChatInputProps) {
   const [message, setMessage] = useState("");
   const { user } = useAuth();
-  const { sendMessage, currentRoom, rooms, sendTyping, sendStopTyping } = useChat();
+  const { sendMessage, currentRoom, rooms, sendTyping, sendStopTyping, inactiveFriendships, hideRoom } = useChat();
   const room = roomId ? rooms.find(r => r.id === roomId) : currentRoom;
   const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const isTypingRef = useRef(false);
+  const isMobile = useIsMobile();
+
+  // Detectar si esta sala tiene una amistad inactiva
+  const isInactive = room && inactiveFriendships.has(room.id);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -86,9 +91,6 @@ export function ChatInput({ roomId }: ChatInputProps) {
     };
   }, [room, user, sendStopTyping]);
   
-  // Detectar si es móvil
-  const isMobile = window.innerWidth < 640;
-
   // Auto-expand textarea hasta 3 líneas
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   useEffect(() => {
@@ -97,6 +99,30 @@ export function ChatInput({ roomId }: ChatInputProps) {
       textareaRef.current.style.height = `${Math.min(textareaRef.current.scrollHeight, 3 * 24)}px`;
     }
   }, [message]);
+
+  // Si la amistad está inactiva y es un chat individual, mostrar mensaje especial
+  if (isInactive && room?.room_type === 'individual') {
+    return (
+      <div className={isMobile ? "border-t p-2 bg-background w-full sticky bottom-0 z-20" : "border-t p-2 sm:p-4 bg-background"}>
+        <div className="flex flex-col items-center gap-3 p-4 bg-muted rounded-lg">
+          <p className="text-sm text-muted-foreground text-center">
+            Ya no sois amigos
+          </p>
+          <Button 
+            variant="destructive" 
+            size="sm"
+            onClick={() => {
+              if (room) {
+                hideRoom(room.id);
+              }
+            }}
+          >
+            Eliminar chat
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <form
@@ -120,7 +146,7 @@ export function ChatInput({ roomId }: ChatInputProps) {
           type="submit"
           size="icon"
           className={isMobile ? "h-9 w-9 rounded-full" : "h-10 w-10 sm:h-12 sm:w-12 rounded-full"}
-          disabled={!message.trim() || !currentRoom}
+          disabled={!message.trim() || !room}
         >
           <MessageCircle className="h-5 w-5 sm:h-6 sm:w-6" />
         </Button>

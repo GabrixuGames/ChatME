@@ -36,7 +36,6 @@ interface ChatContextType {
   sendMessage: (content: string, username: string, roomId?: string) => void;
   setCurrentRoom: (roomId: string) => void;
   goToWelcome: () => void;
-  currentUserId: string;
   openIndividualChat: (friendUsername: string, isTemporary?: boolean) => Promise<string | undefined>;
   markRoomAsRead: (roomId: string) => Promise<void>;
   hideRoom: (roomId: string) => Promise<void>;
@@ -44,6 +43,8 @@ interface ChatContextType {
   sendTyping: (roomId: string, username: string) => void;
   sendStopTyping: (roomId: string, username: string) => void;
   refreshRooms: () => Promise<void>;
+  joinRoom: (roomId: string) => void;
+  inactiveFriendships: Set<string>; // Set de room_ids con amistades inactivas
 }
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined);
@@ -56,10 +57,34 @@ export function ChatProvider({ children }: { children: ReactNode }) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [rooms, setRooms] = useState<Room[]>([]);
   const [currentRoom, setCurrentRoomState] = useState<Room | null>(null);
-  const [currentUserId] = useState<string>(sessionStorage.getItem("userId") || "defaultUserId");
   const [typingUsers, setTypingUsers] = useState<Record<string, string[]>>({});
+  const [inactiveFriendships, setInactiveFriendships] = useState<Set<string>>(new Set());
   const { user, token } = useAuth();
   const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
+  const refreshRooms = useCallback(async () => {
+    if (!token) return;
+    
+    try {
+      const res = await fetch(`${API_URL}/chat/rooms`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+      });
+      const data = await res.json();
+      setRooms(data.rooms || []);
+    } catch (err) {
+      console.error("Error al cargar rooms:", err);
+    }
+  }, [token, API_URL]);
+
+  const joinRoom = useCallback((roomId: string) => {
+    if (socket && user) {
+      socket.emit("join", { room: roomId, username: user });
+    }
+  }, [user]);
 
   // Conectar Socket.IO cuando el usuario está autenticado
   useEffect(() => {
@@ -70,17 +95,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
         query: { username: user }
       });
 
-      socket.on("connect", () => {
-        console.log("Conexión establecida con el servidor Socket.IO");
-      });
-
-      socket.on("connected", (data) => {
-        console.log("Server response:", data);
-      });
-
       socket.on("message", (message) => {
-        console.log("=== MENSAJE RECIBIDO ===", message);
-        
         // Convertir timestamp si viene como string
         if (typeof message.timestamp === 'string') {
           message.timestamp = new Date(message.timestamp);
@@ -93,21 +108,25 @@ export function ChatProvider({ children }: { children: ReactNode }) {
       });
 
       socket.on("previous_messages", (msgs) => {
-        console.log(`📚 Recibidos ${msgs.length} mensajes históricos`);
         const formattedMsgs = msgs.map((msg: Message) => ({
           ...msg,
           timestamp: typeof msg.timestamp === 'string' ? new Date(msg.timestamp) : msg.timestamp
         }));
-        setMessages(formattedMsgs);
-      });
-
-      socket.on("user_joined", (data) => {
-        console.log(`👋 ${data.username} se unió a la sala`);
+        const roomId = formattedMsgs[0]?.roomId || formattedMsgs[0]?.room;
+        if (!roomId) {
+          setMessages(formattedMsgs);
+          return;
+        }
+        setMessages((prev) => {
+          const filtered = prev.filter(
+            (message) => message.roomId !== roomId && message.room !== roomId
+          );
+          return [...filtered, ...formattedMsgs];
+        });
       });
 
       // Nuevo evento: cuando se crea un chat individual
       socket.on("new_individual_chat", (data) => {
-        console.log("💬 Nuevo chat individual recibido:", data);
         if (data.room) {
           setRooms((prevRooms) => {
             const exists = prevRooms.some(r => r.id === data.room.id);
@@ -118,9 +137,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
           });
           
           // Auto-join a la sala
-          if (socket) {
-            socket.emit('join', { room: data.room.id, username: user });
-          }
+          joinRoom(data.room.id);
         }
       });
 
@@ -146,15 +163,24 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 
       // Eventos de solicitudes de amistad
       socket.on("friend_request_received", (data) => {
-        console.log("📬 [ChatContext] Nueva solicitud de amistad recibida:", data);
         // Disparar evento personalizado para que FriendsContext lo escuche
         window.dispatchEvent(new CustomEvent('friendRequestReceived', { detail: data }));
       });
 
       socket.on("friend_request_accepted", (data) => {
-        console.log("🎉 [ChatContext] Solicitud de amistad aceptada:", data);
         // Disparar evento personalizado para que FriendsContext lo escuche
         window.dispatchEvent(new CustomEvent('friendRequestAccepted', { detail: data }));
+      });
+
+      socket.on("friendship_ended", (data) => {
+        // Marcar este room como con amistad inactiva
+        if (data.room_id) {
+          setInactiveFriendships(prev => {
+            const newSet = new Set(prev);
+            newSet.add(data.room_id);
+            return newSet;
+          });
+        }
       });
 
       socket.on("error", (error) => {
@@ -168,43 +194,21 @@ export function ChatProvider({ children }: { children: ReactNode }) {
         socket = null;
       }
     };
-  }, [user]);
+  }, [user, refreshRooms, joinRoom]);
 
   // Cargar rooms al iniciar
   useEffect(() => {
     if (user && token) {
       refreshRooms();
     }
-  }, [user, token]);
-
-  const refreshRooms = useCallback(async () => {
-    if (!token) return;
-    
-    try {
-      const res = await fetch(`${API_URL}/chat/rooms`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
-        },
-      });
-      const data = await res.json();
-      console.log("🔄 Rooms actualizados:", data.rooms);
-      setRooms(data.rooms || []);
-    } catch (err) {
-      console.error("Error al cargar rooms:", err);
-    }
-  }, [token, API_URL]);
+  }, [user, token, refreshRooms]);
 
   const switchRoom = (roomId: string) => {
     const room = rooms.find((r) => r.id === roomId);
     if (room) {
       setCurrentRoomState(room);
-      setMessages([]); // Limpiar mensajes anteriores
 
-      if (socket && user) {
-        socket.emit("join", { room: roomId, username: user });
-      }
+      joinRoom(roomId);
       
       // Marcar como leído
       markRoomAsRead(roomId);
@@ -290,7 +294,6 @@ export function ChatProvider({ children }: { children: ReactNode }) {
       setRooms(prev => prev.map(r => 
         r.id === roomId ? { ...r, unread_count: 0 } : r
       ));
-      console.log("✅ Sala marcada como leída:", roomId);
     } catch (err) {
       console.error("❌ Error marcando como leído:", err);
       // No relanzar el error para evitar romper el flujo
@@ -316,6 +319,9 @@ export function ChatProvider({ children }: { children: ReactNode }) {
       if (currentRoom?.id === roomId) {
         setCurrentRoomState(null);
       }
+      
+      // Refrescar rooms para asegurar sincronización con backend
+      await refreshRooms();
     } catch (err) {
       console.error("Error ocultando sala:", err);
     }
@@ -339,14 +345,15 @@ export function ChatProvider({ children }: { children: ReactNode }) {
         sendMessage,
         setCurrentRoom,
         goToWelcome,
-        currentUserId,
         openIndividualChat,
         markRoomAsRead,
         hideRoom,
         typingUsers,
         sendTyping,
         sendStopTyping,
-        refreshRooms
+        refreshRooms,
+        joinRoom,
+        inactiveFriendships
       }}
     >
       {children}

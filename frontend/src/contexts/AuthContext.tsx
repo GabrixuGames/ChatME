@@ -1,5 +1,4 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import axios from "axios";
 import React from "react";
 
 // Tipo para los datos del usuario
@@ -23,7 +22,6 @@ export type AuthContextType = {
 const AuthContext = React.createContext<AuthContextType | undefined>(undefined);
 
 // Hook personalizado
-// eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) throw new Error("useAuth must be used within an AuthProvider");

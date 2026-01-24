@@ -33,32 +33,34 @@ export const FriendsPanel: React.FC<FriendsPanelProps & { onRoomSelect?: (roomId
             style={{ backdropFilter: 'blur(2px)', WebkitBackdropFilter: 'blur(2px)' }}
             title={`Abrir chat con ${f.username}`}
             tabIndex={0}
+            draggable
+            onDragStart={(e) => {
+              if (friendRoom) {
+                e.dataTransfer.setData('roomId', friendRoom.id);
+              } else {
+                e.dataTransfer.setData('friendUsername', f.username);
+              }
+              e.dataTransfer.effectAllowed = 'copy';
+            }}
             onClick={async e => {
               if ((e.target as HTMLElement).closest('.delete-friend-btn')) return;
               
-              console.log("🟢 Click en amigo:", f.username);
-              console.log("🟢 friendRoom encontrado:", friendRoom);
-              console.log("🟢 onRoomSelect existe:", !!onRoomSelect);
-              
               // Si ya existe el room, abrirlo directamente
               if (friendRoom) {
-                console.log("🟢 Abriendo room existente:", friendRoom.id);
                 setCurrentRoom(friendRoom.id);
                 if (onRoomSelect) {
-                  console.log("🟢 Llamando a onRoomSelect con:", friendRoom.id);
                   onRoomSelect(friendRoom.id);
                 }
                 return;
               }
               
               // Si no existe, crearlo
-              console.log("🟢 Room no existe, creando...");
               const roomId = await openIndividualChat(f.username);
-              console.log("🟢 Room creado con ID:", roomId);
               if (roomId) {
+                // Esperar un poco para asegurar que el estado se actualice
+                await new Promise(resolve => setTimeout(resolve, 100));
                 setCurrentRoom(roomId);
                 if (onRoomSelect) {
-                  console.log("🟢 Llamando a onRoomSelect con nuevo room:", roomId);
                   onRoomSelect(roomId);
                 }
               }
