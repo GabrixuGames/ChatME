@@ -10,12 +10,22 @@ export default defineConfig(({ mode }) => ({
     port: 8080,
     proxy: {
       '/procesar_login': {
-        target: 'http://172.20.10.10:5000',
+        target: 'http://localhost:5000',
         changeOrigin: true,
         secure: false,
       },
       '/register': {
-        target: 'http://172.20.10.10:5000',
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+        secure: false,
+      },
+      '/chat': {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+        secure: false,
+      },
+      '/friends': {
+        target: 'http://localhost:5000',
         changeOrigin: true,
         secure: false,
       },

@@ -50,7 +50,7 @@ interface ChatContextType {
 const ChatContext = createContext<ChatContextType | undefined>(undefined);
 
 // Configura la conexión con Socket.IO usando variables de entorno
-const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || "http://localhost:5000";
+const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || "";
 let socket: Socket | null = null;
 
 export function ChatProvider({ children }: { children: ReactNode }) {
@@ -60,7 +60,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
   const [typingUsers, setTypingUsers] = useState<Record<string, string[]>>({});
   const [inactiveFriendships, setInactiveFriendships] = useState<Set<string>>(new Set());
   const { user, token } = useAuth();
-  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+  const API_URL = import.meta.env.VITE_API_URL ?? "";
 
   const refreshRooms = useCallback(async () => {
     if (!token) return;

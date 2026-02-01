@@ -33,7 +33,7 @@ export const FriendsProvider = ({ children }: { children: React.ReactNode }) => 
   const [friends, setFriends] = useState<Friend[]>([]);
   const [pendingRequests, setPendingRequests] = useState<FriendRequest[]>([]);
   const [sentRequests, setSentRequests] = useState<FriendRequest[]>([]);
-  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+  const API_URL = import.meta.env.VITE_API_URL ?? "";
   const { token } = useAuth();
 
   const fetchWithAuth = useCallback(
