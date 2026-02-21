@@ -3,7 +3,7 @@
 Refactored Main Application
 Implementa arquitectura en capas con patrones profesionales
 """
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_socketio import SocketIO
 from flask_cors import CORS
 from flask_limiter import Limiter
@@ -78,7 +78,7 @@ CORS(app,
 
 # Configurar Socket.IO
 socketio = SocketIO(app, 
-                   cors_allowed_origins=allowed_origins,
+                   cors_allowed_origins="*",  # Temporal para desarrollo
                    cors_credentials=True)
 
 # Configurar middleware de logging
@@ -170,6 +170,15 @@ register_friend_routes(app, require_jwt, socketio, logger, limiter)
 register_auth_routes(app, limiter, jwt_secret, logger)
 register_system_routes(app, require_jwt, logger)
 register_socket_handlers(socketio, auth_service, chat_service, socketio_logger, logger)
+
+# Catch-all route for SPA
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def catch_all(path):
+    # Skip API routes and static files
+    if path.startswith(('api/', 'static/', 'favicon.ico')):
+        return jsonify({"error": "Not found"}), 404
+    return render_template('index.html')
 
 # ============================================================================
 # UTILIDADES

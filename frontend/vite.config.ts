@@ -8,6 +8,8 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "127.0.0.1",
     port: 8080,
+    strictPort: true,
+    historyApiFallback: true,
     proxy: {
       '/procesar_login': {
         target: 'http://localhost:5000',
@@ -15,6 +17,16 @@ export default defineConfig(({ mode }) => ({
         secure: false,
       },
       '/register': {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+        secure: false,
+      },
+      '/logout': {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+        secure: false,
+      },
+      '/verificar_sesion': {
         target: 'http://localhost:5000',
         changeOrigin: true,
         secure: false,
@@ -28,6 +40,12 @@ export default defineConfig(({ mode }) => ({
         target: 'http://localhost:5000',
         changeOrigin: true,
         secure: false,
+      },
+      '/socket.io': {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+        secure: false,
+        ws: true,
       },
     },
   },
