@@ -5,30 +5,83 @@ services:
     image: postgres:15-alpine
     container_name: chatapp-postgres
     restart: unless-stopped
+    env_file:
+      - .env
     environment:
-      POSTGRES_DB: chatapp
-      POSTGRES_USER: chatapp
-      POSTGRES_PASSWORD: chatapp123
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
-      - "5432:5432"
+      - "${DB_PORT:-5432}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./database:/docker-entrypoint-initdb.d:Z
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U chatapp -d chatapp"]
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
       interval: 10s
       timeout: 5s
       retries: 5
     networks:
       - chatapp-network
 
-  # Opcional: Redis para cache/sessiones
   redis:
     image: redis:7-alpine
     container_name: chatapp-redis
     restart: unless-stopped
+    command: redis-server --appendonly yes
     ports:
       - "6379:6379"
+    networks:
+      - chatapp-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: chatapp-backend
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - FLASK_ENV=production
+    ports:
+      - "5000:5000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    networks:
+      - chatapp-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: chatapp-frontend
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    networks:
+      - chatapp-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: chatapp-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - backend
+      - frontend
     networks:
       - chatapp-network
 

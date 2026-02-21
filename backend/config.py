@@ -44,12 +44,6 @@ def get_allowed_origins() -> list[str]:
     return [
         "http://localhost:8080",
         "http://127.0.0.1:8080",
-        "http://localhost:8081",
-        "http://127.0.0.1:8081",
-        "http://localhost:8082",
-        "http://127.0.0.1:8082",
-        "http://localhost:8083",
-        "http://127.0.0.1:8083",
         "http://172.20.10.10:8080",
         "http://192.168.56.1:8080",
         "http://172.24.144.1:8080",
