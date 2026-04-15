@@ -1,177 +1,206 @@
 # ChatME
 
-Aplicacion de chat en tiempo real con salas publicas y conversaciones privadas, construida con React + TypeScript y Flask + Socket.IO, respaldada por PostgreSQL.
+ChatME is a real-time chat application built with React, TypeScript, Flask, Socket.IO, and PostgreSQL. It supports public rooms and private conversations, with a strong focus on responsiveness, real-time communication, clean architecture, and maintainability.
 
----
+The project is designed as a scalable foundation for modern chat systems, combining a reactive frontend, a Python backend, persistent data storage, and real-time bidirectional communication.
 
-## 📌 Tabla de contenidos
-- [Descripción](#-descripción)
-- [Características](#-características)
-- [Instalación](#-instalación)
-- [Uso](#-uso)
-- [Configuración](#-configuración)
-- [Estado del proyecto](#-estado-del-proyecto)
-- [Contribuir](#-contribuir)
-- [Licencia](#-licencia)
+<p align="center">
+  <img src="./.github/assets/chatme-bienvenida.png" alt="ChatME welcome screen" width="1000">
+</p>
 
----
+## Screenshots
 
-## 📖 Descripción
+<p align="center">
+  <img src="./.github/assets/chatme-iniciar-sesion.png" alt="ChatME login screen" width="32%">
+  <img src="./.github/assets/chatme-chat-paralelo.png" alt="ChatME parallel chat view" width="32%">
+  <img src="./.github/assets/chatme-sala-chat.png" alt="ChatME public room chat" width="32%">
+</p>
 
-ChatME permite crear salas publicas y chats privados con mensajeria en tiempo real.
-Pensado para equipos o comunidades que necesitan comunicacion rapida con una interfaz sencilla, responsive y multiplataforma.
-El proyecto existe para ofrecer una base limpia y extensible con foco en seguridad y mantenibilidad.
+## Overview
 
----
+ChatME is a full-stack chat platform that allows users to communicate through public rooms and private conversations in real time. It is built to provide a responsive and intuitive user experience across desktop, tablet, and mobile devices.
 
-## ✨ Características
+The project also serves as a solid base for experimenting with scalable messaging architecture, real-time event handling, authentication flows, and modern frontend-backend integration.
 
-- ✔️ Mensajeria en tiempo real con Socket.IO
-- ✔️ Salas publicas y chats privados
-- ✔️ Doble ventana de chat (drag & drop)
-- ✔️ UI responsive para movil, tablet y desktop
-- ✔️ Autenticacion con JWT y passwords hasheadas con bcrypt
-- ✔️ Codigo claro y documentacion centralizada
+## Current Status
 
----
+The project is in active development and already includes a functional real-time chat experience with a structured full-stack architecture.
 
-## 📸 Capturas
+At its current stage, ChatME includes:
+- Real-time messaging with Socket.IO
+- Public rooms and private chats
+- Parallel chat windows with drag-and-drop interaction
+- JWT-based authentication
+- Password hashing with bcrypt
+- Responsive UI across multiple device sizes
+- Docker-based local and production-ready setup
+- Project documentation for development and security workflows
 
-| Index | Login |
-| --- | --- |
-| ![Perfil desktop](docs/assets/Captura%20desde%202026-01-24%2015-05-09.png) | ![Perfil mobile](docs/assets/Captura%20desde%202026-01-24%2015-05-17.png) |
+The current focus is on refining the user experience, improving internal architecture, and continuing to strengthen deployment and maintainability.
 
-| Profile | Parallel chat |
-| --- | --- |
-| ![Chat dual](docs/assets/Captura%20desde%202026-01-24%2015-05-28.png) | ![Sidebar mobile](docs/assets/Captura%20desde%202026-01-24%2015-09-50.png) |
+## Features
 
-![Vista extra](docs/assets/Captura%20desde%202026-01-24%2015-09-57.png)
+- Real-time communication with Socket.IO
+- Public chat rooms and private messaging
+- Parallel chat windows with drag-and-drop support
+- Responsive interface for desktop, tablet, and mobile
+- JWT authentication and secure password storage
+- Flask backend with PostgreSQL persistence
+- Docker Compose setup for local development and deployment
+- Clear project structure and supporting documentation
 
----
+## Tech Stack
 
-## 🚀 Instalación
+**Frontend**
+- React
+- TypeScript
+- Vite
 
-### Desarrollo Local
+**Backend**
+- Flask
+- Flask-SocketIO
+- Python
 
-#### Requisitos previos
-- Python 3.10+
-- Node.js 18+
-- Docker (para PostgreSQL)
+**Database and Services**
+- PostgreSQL
+- Redis
 
-#### Pasos
+**Infrastructure**
+- Docker
+- Docker Compose
+- Nginx
+
+## Project Structure
+
+```plaintext
+ChatME/
+├── .github/
+│   ├── assets/
+│   │   ├── chatme-bienvenida.png
+│   │   ├── chatme-chat-paralelo.png
+│   │   ├── chatme-iniciar-sesion.png
+│   │   ├── chatme-perfil.png
+│   │   └── chatme-sala-chat.png
+│   ├── CHANGELOG.md
+│   ├── DEVELOPMENT.md
+│   └── SECURITY.md
+├── backend/
+├── database/
+├── frontend/
+├── .env.example
+├── .gitignore
+├── docker-compose.yml
+├── nginx.conf
+├── README.md
+├── RULES.md
+├── setup-db.ps1
+├── setup-db.sh
+└── STANDARDS.md
+```
+
+## Getting Started
+
+Clone the repository:
 
 ```bash
 git clone https://github.com/GabrixuGames/ChatME.git
 cd ChatME
+```
 
-# Configurar variables de entorno
+Create and configure your environment file:
+
+```bash
 cp .env.example .env
-# Editar .env con tus valores seguros
+```
 
-# Base de datos
+Update `.env` with your local or production values before starting the services.
+
+### Local Development
+
+Start the required services:
+
+```bash
 docker-compose up -d postgres redis
+```
 
-# Backend
+Run the backend:
+
+```bash
 cd backend
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+python -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 python app.py
+```
 
-# Frontend (en otra terminal)
-cd ../frontend
+Run the frontend in a separate terminal:
+
+```bash
+cd frontend
 npm install
 npm run dev
 ```
 
-### Producción con Docker
+### Full Docker Setup
+
+To run the full application stack with Docker:
 
 ```bash
-git clone https://github.com/GabrixuGames/ChatME.git
-cd ChatME
-
-# Configurar variables de entorno
-cp .env.example .env
-# Editar .env con valores de producción
-
-# Construir y levantar todos los servicios
 docker-compose up --build -d
-
-# Acceder a la aplicación en http://localhost
 ```
 
-#### Servicios incluidos:
-- **PostgreSQL**: Base de datos
-- **Redis**: Cache y sesiones
-- **Backend**: API Flask
-- **Frontend**: Aplicación React
-- **Nginx**: Reverse proxy
+## Usage
 
----
-
-## 🧪 Uso
-
-### Desarrollo Local
+### Local development
 - Frontend: `http://localhost:8080`
 - Backend: `http://localhost:5000`
 
-### Producción
-- Aplicación completa: `http://localhost` (puerto 80)
-- API directa: `http://localhost/api`
+### Docker deployment
+- Application: `http://localhost`
+- API: `http://localhost/api`
 
-Flujo basico:
-1) Inicia sesion o registrate.
-2) Selecciona una sala publica o un amigo.
-3) Arrastra una sala o amigo para abrir un chat paralelo.
+Basic flow:
+1. Sign in or create an account.
+2. Join a public room or open a private conversation.
+3. Drag a room or contact into a parallel chat window.
+4. Exchange messages in real time.
 
----
+## Configuration
 
-## ⚙️ Configuración
+### Backend
+- `JWT_SECRET`
+- `FLASK_SECRET_KEY`
+- `FLASK_ENV`
+- `DB_HOST`
+- `DB_USER`
+- `DB_PASSWORD`
+- `DB_NAME`
+- `DB_PORT`
+- `CORS_ORIGINS`
+- `REDIS_URL`
 
-### Variables de Entorno (.env)
+### Frontend
+- `VITE_API_URL`
+- `VITE_SOCKET_URL`
 
-#### Backend
-- `JWT_SECRET` (min 32 caracteres)
-- `FLASK_SECRET_KEY` (min 32 caracteres)
-- `FLASK_ENV` (`development` | `production`)
-- `DB_HOST`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`, `DB_PORT`
-- `CORS_ORIGINS` (URLs permitidas, separado por comas)
-- `REDIS_URL` (opcional, para cache)
+## Documentation
 
-#### Frontend
-- `VITE_API_URL` (ej: `http://localhost/api` para prod, `http://localhost:5000` para dev)
-- `VITE_SOCKET_URL` (ej: `http://localhost` para prod, `http://localhost:5000` para dev)
+Additional project documentation is available in:
+- `.github/DEVELOPMENT.md`
+- `.github/SECURITY.md`
+- `.github/CHANGELOG.md`
+- `RULES.md`
+- `STANDARDS.md`
 
-### Producción Adicional
-- Configurar SSL en nginx para HTTPS
-- Usar secrets de Docker en lugar de variables de entorno para passwords
-- Configurar logging y monitoreo
-- Backup de base de datos
+## Deployment Notes
 
-## 🚀 Deployment
+For production environments, consider:
+- Configuring HTTPS in `nginx.conf`
+- Using strong secrets and secure environment management
+- Enabling logging and monitoring
+- Automating database backups
+- Reviewing scaling strategies for Redis and backend services
 
-### Con Docker Compose (Recomendado)
-1. Configurar `.env` con valores de producción
-2. Ejecutar `docker-compose up --build -d`
-3. La aplicación estará disponible en `http://your-domain`
+## Author
 
-### Configuración SSL
-Para HTTPS, actualizar `nginx.conf` y agregar certificados SSL en `./ssl/`
-
-### Escalado
-- Usar Docker Swarm o Kubernetes para múltiples instancias
-- Configurar load balancer para backend
-- Usar Redis Cluster para alta disponibilidad
-
-Documentacion completa:
-- `docs/DEVELOPMENT.md`
-- `docs/SECURITY.md`
-- `docs/CHANGELOG.md`
-
----
-
-## 🚧 Estado del proyecto
-
-Activo y en evolucion. Refactorizaciones recientes mejoraron la arquitectura, la UI y la documentacion.
-
----
+Developed by **GabrixuGames**.
